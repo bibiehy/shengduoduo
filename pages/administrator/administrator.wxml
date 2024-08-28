@@ -1,0 +1,103 @@
+<view class="admin-wrapper" style="background: url('../../assets/bg05.jpg') no-repeat center 0;">
+	<navigation-bar showBack="{{false}}" background="url('../../assets/bg05.jpg') no-repeat center 0;" boxShadow="none">
+		<view class="global-navigation-bar">
+			<view class="main-searchbox">
+				<t-search disabled="{{true}}" t-class="tschbox" shape="round" placeholder="订单查询" />
+			</view>
+		</view>
+	</navigation-bar>
+	<view class="main-summary">
+		<view class="sumbox">
+			<view class="sumname">本月总收益</view>
+			<view class="sumnumber">125898.50</view>
+		</view>
+		<view class="sumbox">
+			<view class="sumname">本月总任务数</view>
+			<view class="sumnumber">6200</view>
+		</view>
+	</view>	
+	<view class="main-modules">
+		<view class="moditem">
+			<view class="modimg"><image mode="widthFix" src="../../assets/user.png" /></view>
+			<view class="modname">人员管理</view>
+		</view>
+		<view class="moditem" bind:tap="onPageJump" data-name="guige">
+			<view class="modimg"><image mode="widthFix" src="../../assets/guige.png" /></view>
+			<view class="modname">规格管理</view>
+		</view>			
+		<view class="moditem" bind:tap="onPageJump" data-name="store_center">
+			<view class="modimg"><image mode="widthFix" src="../../assets/store_center.png" /></view>
+			<view class="modname">集货中心</view>
+		</view>
+		<view class="moditem" bind:tap="onPageJump" data-name="pickup_point">
+			<view class="modimg"><image mode="widthFix" src="../../assets/pickup_point.png" /></view>
+			<view class="modname">提货点</view>
+		</view>
+		<view class="moditem">
+			<view class="modimg"><image mode="widthFix" src="../../assets/drivers.png" /></view>
+			<view class="modname">司机调度</view>
+		</view>
+		<view class="moditem">
+			<view class="modimg"><image mode="widthFix" src="../../assets/error_order.png" /></view>
+			<view class="modname">异常订单</view>
+		</view>
+		<view class="moditem">
+			<view class="modimg"><image mode="widthFix" src="../../assets/audit.png" /></view>
+			<view class="modname">信息审核</view>
+		</view>
+		<view class="moditem">
+			<view class="modimg"><image mode="widthFix" src="../../assets/finance.png" /></view>
+			<view class="modname">财务管理</view>
+		</view>
+	</view>
+	<view class="main-message">
+		<view class="header">
+			<view class="msgtitle">最新信息提醒</view>
+			<view class="msgright">
+				<view class="msgcount">99</view>
+				<t-icon name="chevron-right" size="26px" />
+			</view>
+		</view>
+		<!-- <view class="nodata">
+			<empty />
+		</view> -->
+		<view class="msgitem">
+			<t-icon name="user" size="18px" color="#1677ff" />
+			<view class="msgtime">2024-08-15 16:45</view>
+			<view class="msgdesc">朱小明(180****6666)申请了干线司机权限。</view>
+		</view>
+		<view class="msgitem">
+			<t-icon name="user" size="18px" color="#1677ff" />
+			<view class="msgtime">2024-08-15 16:45</view>
+			<view class="msgdesc">朱小明(180****6666)申请了干线司机权限。</view>
+		</view>
+		<view class="msgitem">
+			<t-icon name="error-triangle" size="18px" color="#f00" />
+			<view class="msgtime">2024-08-15 16:45</view>
+			<view class="msgdesc">分拣员朱小明对任务《创建的任务名字》进行了上报。</view>
+		</view>
+		<view class="msgitem">
+			<t-icon name="error-triangle" size="18px" color="#ff3b30" />
+			<view class="msgtime">2024-08-15 16:45</view>
+			<view class="msgdesc">系统自动对任务《创建的任务名字》进行了上报。</view>
+		</view>
+	</view>
+	<view class="main-global">
+		<view class="gbtitle">全局信息设置</view>
+		<view class="gbcontent">
+			<view class="gbitem">
+				<view class="gbname">BANNER设置</view>
+				<image mode="widthFix" src="../../assets/global_img01.png" />
+			</view>
+			<view class="gbitem">
+				<view class="gbname">订单处罚设置</view>
+				<image mode="widthFix" src="../../assets/global_img02.png" />
+			</view>
+		</view>
+	</view>
+	<t-tab-bar value="{{tabbarActive}}" bind:change="onTabbar" fixed="{{true}}" theme="normal" split="{{false}}">
+		<t-tab-bar-item wx:for="{{tabbarList}}" wx:key="value" value="{{item.value}}" icon="{{item.icon}}">
+			{{item.label}}
+		</t-tab-bar-item>
+	</t-tab-bar>
+</view>

@@ -1,0 +1,19 @@
+<view class="myFormVertical myFormUpload">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}</view>
+    <view class="myFormBox">
+        <t-upload
+			disabled="{{disabled}}"
+			mediaType="{{mediaType}}"
+			max="{{max}}"
+			size-limit="{{limit}}"
+			draggable="{{draggable}}"
+			files="{{fileList}}"
+			bind:add="handleAdd"
+			bind:remove="handleRemove"
+			bind:drop="handleDrop"
+		>
+		</t-upload>
+		<view class="myUploadTips" wx:if="{{remark}}">{{remark}}</view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>

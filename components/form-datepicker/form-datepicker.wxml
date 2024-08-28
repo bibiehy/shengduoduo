@@ -1,0 +1,26 @@
+<view class="myFormVertical myFormDatepicker">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}" bind:tap="onShowPicker">
+        <view class="myFormItem">
+            <view class="myItemName" wx:if="{{showTime}}">{{showTime}}</view>
+            <view class="myItemPlaceholder" wx:else>{{placeholder || ('请选择' + label)}}</view>
+            <t-icon name="chevron-right" size="24px" />
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>
+<t-date-time-picker
+    title="{{title}}"
+    visible="{{visible}}"
+    value="{{formValue}}"
+    mode="{{mode}}"
+    format="{{format}}"
+    start="{{start}}"
+    end="{{end}}"
+    show-week="{{showWeek}}"
+    steps="{{steps}}"
+    cancel-btn="{{cancelBtn}}"
+    confirm-btn="{{confirmBtn}}"
+    bind:confirm="onSure"
+    bind:cancel="onHidePicker"
+/>

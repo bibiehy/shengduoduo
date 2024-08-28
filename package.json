@@ -1,0 +1,16 @@
+{
+  "name": "shengduoduo",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "antd-mini": "^2.35.3",
+    "tdesign-miniprogram": "^1.5.0"
+  }
+}

@@ -1,0 +1,29 @@
+<view class="myFormVertical myFormMulselect">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}" bind:tap="onShowPopup">
+        <view class="myFormItem">
+            <view class="myItemName" wx:if="{{formNames}}">{{formNames}}</view>
+            <view class="myItemPlaceholder" wx:else>{{placeholder || ('请选择' + label)}}</view>
+            <t-icon name="chevron-right" size="24px" />
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>
+<t-popup bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
+    <view class="myPopupFormMulselect">
+        <view class="myMulHeader">
+            <view class="myMulCancelbtn" bind:tap="onHidePopup">取消</view>
+            <view class="myMulTitle">{{title || ('请选择' + label)}}</view>
+            <view class="myMulSurebtn" bind:tap="onSure">确定</view>
+        </view>
+        <view class="myMulSearch">
+            <t-search bind:blur="onSearch" placeholder="请输入搜索关键字" clearable="{{false}}" />
+        </view>
+        <view class="myMulScrollBox">
+            <empty wx:if="{{formOptions.length <= 0}}" />
+            <t-checkbox-group wx:else value="{{formValues}}" bind:change="onCheckboxChange">
+                <t-checkbox wx:for="{{formOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" icon="rectangle" />
+            </t-checkbox-group>
+        </view>        
+    </view>
+</t-popup>

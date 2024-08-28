@@ -1,0 +1,4 @@
+<view class="myEmpty">
+    <image class="myImgEmpimg" src="../../assets/empty.png" />
+    <view wx:if="{{showDesc}}" class="myDescription">{{description}}</view>
+</view>

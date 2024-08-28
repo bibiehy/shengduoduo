@@ -1,0 +1,11 @@
+{
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "t-popup": "tdesign-miniprogram/popup/popup",
+        "t-search": "tdesign-miniprogram/search/search",
+        "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+        "t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
+        "empty": "../empty/empty"
+    }
+}

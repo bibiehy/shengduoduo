@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"t-search": "tdesign-miniprogram/search/search",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-dialog": "tdesign-miniprogram/dialog/dialog"
+	}
+}

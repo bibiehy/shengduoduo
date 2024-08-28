@@ -1,0 +1,22 @@
+<view class="{{layout == 'vertical' ? 'myFormVertical myFormInput' : 'myFormHorizontal myFormInput'}}">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}">
+        <view class="myFormItem">
+			<t-input
+				name="{{name}}"
+				value="{{formValue}}"
+				placeholder="{{placeholder || ('请输入' + label)}}"
+				suffix="{{suffix}}"
+				suffix-icon="{{suffixicon}}"
+				type="{{(type == 'phone' || type == 'bankcard') ? 'number' : type}}"
+				borderless="{{true}}"
+				align="{{placement}}"
+				bind:change="onChange"
+				bind:focus="onFocus"
+				bind:blur="onBlur"
+				bind:click="onClick"
+			/>
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>

@@ -1,0 +1,23 @@
+<view class="myFormVertical myFormProvincecity">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}" bind:tap="onShowPicker">
+        <view class="myFormItem">
+            <view class="myItemName" wx:if="{{showNames}}">{{showNames}}</view>
+            <view class="myItemPlaceholder" wx:else>{{placeholder || ('请选择' + label)}}</view>
+            <t-icon name="chevron-right" size="24px" />
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>
+<block wx:if="{{selectedId || visible}}">
+	<t-cascader
+		title="{{title}}"
+		visible="{{visible}}"
+		value="{{selectedId}}"
+		options="{{options}}"
+		sub-titles="{{subTitles}}"
+		theme="step"
+		bind:change="onChange"
+	>
+	</t-cascader>
+</block>

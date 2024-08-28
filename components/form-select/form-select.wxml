@@ -1,0 +1,29 @@
+<view class="myFormVertical myFormSelect">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}" bind:tap="onShowPopup">
+        <view class="myFormItem">
+            <view class="myItemName" wx:if="{{formName}}">{{formName}}</view>
+            <view class="myItemPlaceholder" wx:else>{{placeholder || ('请选择' + label)}}</view>
+            <t-icon name="chevron-right" size="24px" />
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>
+<t-popup bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
+    <view class="myPopupFormselect">
+        <view class="myPopupHeader">
+            <view class="myPopupCancelbtn" bind:tap="onHidePopup">取消</view>
+            <view class="myPopupTitle">{{title || ('请选择' + label)}}</view>
+            <view class="mySurebtn" bind:tap="onSure">确定</view>
+        </view>
+        <view class="myPopupSearch">
+            <t-search bind:blur="onSearch" placeholder="请输入搜索关键字" clearable="{{false}}" />
+        </view>
+        <view class="myPopupScrollbox">
+            <empty wx:if="{{formOptions.length <= 0}}" />
+            <t-radio-group wx:else value="{{formValue}}" bind:change="onRadioChange">
+                <t-radio wx:for="{{formOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" disabled="{{item['disabled'] || false}}" />
+            </t-radio-group>
+        </view>        
+    </view>
+</t-popup>

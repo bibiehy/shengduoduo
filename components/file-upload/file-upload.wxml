@@ -1,0 +1,16 @@
+<view class="myFileUploadBox">
+	<view class="myUploadImage" wx:for="{{fileList}}">
+		<image class="myViewImage" mode="aspectFill" src="{{item['tempFilePath']}}" />
+		<t-loading wx:if="{{item['status'] == 'loading'}}" class="myUploadStatus" text="上传中..." layout="vertical" />
+		<block wx:else>
+			<t-icon class="myUploadCloseBtn" name="close" bind:tap="handleRemove" data-index="{{index}}" />
+			<t-loading wx:if="{{item['status'] == 'failed'}}" class="myUploadStatus" theme="custom" text="上传失败" layout="vertical" pause="{{true}}">
+				<t-icon name="close-circle" slot="indicator" size="22px" />
+			</t-loading>
+		</block>		
+	</view>	
+	<view wx:if="{{fileList.length < count}}" class="{{disabled ? 'myUploadBtn myUploadDisabled' : 'myUploadBtn'}}" bind:tap="handleAdd">
+		<t-icon class="myUploadIconAdd" name="add" />
+		<view class="myUploadBtnTips">点击上传</view>
+	</view>
+</view>

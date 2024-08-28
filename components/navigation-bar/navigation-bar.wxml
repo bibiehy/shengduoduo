@@ -1,0 +1,46 @@
+<view class="my-navigation-bar {{extClass}}">
+	<!-- 空层撑起 navigation-bar -->
+    <view style="width: 100%; {{safeAreaTop}}"></view>
+	<!-- fixed -->
+	<view class="mybar-mainbox {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; box-shadow: {{boxShadow}}; {{innerPaddingRight}}; {{safeAreaTop}}">
+		<view wx:if="{{showBack}}" class="goback" bind:tap="onBack" style="background-color: {{color}};"></view>
+		<block wx:if="{{placement == 'center'}}">
+			<view class="mybar-centertitle" style="padding-left: calc({{leftWidth}} - {{showBack ? '30px' : '0px'}})">{{title}}</view>
+		</block>
+		<block wx:elif="{{placement == 'left'}}">
+			<view class="mybar-lefttitle" style="padding-left: {{showBack ? '10px' : '20px'}}">{{title}}</view>
+		</block>
+		<block wx:else>
+			<slot></slot>
+		</block>
+	</view>
+</view>
+
+
+<!-- 
+<view class="weui-navigation-bar {{extClass}}">
+    <view style="width: 100%; {{safeAreaTop}}"></view>
+    <view class="weui-navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; {{innerPaddingRight}}; {{safeAreaTop}}">
+        <view wx:if="{{showLeft}}" class="weui-navigation-bar__left" style="{{leftWidth}}">
+            <view wx:if="{{showBack}}" class="weui-navigation-bar__buttons weui-navigation-bar__buttons_goback">
+                <view bind:tap="onBack" class="weui-navigation-bar__btn_goback_wrapper" hover-class="weui-active" hover-stay-time="100" aria-role="button" aria-label="返回">
+                    <view class="weui-navigation-bar__button weui-navigation-bar__btn_goback"></view>
+                </view>
+            </view>
+        </view>
+        <view class='weui-navigation-bar__center'>
+            <view wx:if="{{loading}}" class="weui-navigation-bar__loading" aria-role="alert">
+                <view class="weui-loading" aria-role="img" aria-label="加载中"></view>
+            </view>
+            <block wx:if="{{title}}">
+                <text>{{title}}</text>
+            </block>
+            <block wx:else>
+                <slot name="center"></slot>
+            </block>
+        </view>
+        <view class='weui-navigation-bar__right'>
+            <slot name="right"></slot>
+        </view>
+    </view>    
+</view> -->

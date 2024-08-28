@@ -1,0 +1,14 @@
+.myFixedBottomButton { 
+	z-index:50; position:fixed; left:0; bottom:0; width:100%; background-color:#fff; box-shadow:5px 0 10px #e2e1e1; 
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
+}
+.myFixedBottomButton .myFixedInner { width:100%; padding:12px 16px; --td-button-large-font-size:20px; }
+
+
+
+
+
+
+
+

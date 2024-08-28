@@ -1,0 +1,16 @@
+.guige-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
+.page-scroll { flex:1; padding:10px 10px 80px; overflow-y:auto; }
+.page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
+.page-scroll .listitem .psheader { display:flex; align-items:center; }
+.page-scroll .listitem .psheader .psname { font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; }
+.page-scroll .listitem .psheader .pstime { font-size:13px; color:rgba(0, 0, 0, 0.45); padding-left:10px; }
+.page-scroll .listitem .psbody { padding:5px 5px 0; }
+.page-scroll .listitem .psbody .psitem { display:flex; align-items:center; font-size:15px; border-bottom:solid 1px #f3f3f3; padding:8px 0; }
+.page-scroll .listitem .psbody .psitem .yuguweight { flex:1; color:rgba(0, 0, 0, 0.75); }
+.page-scroll .listitem .psbody .psitem .yunfeibase { flex:1; color:rgba(0, 0, 0, 0.75); }
+.page-scroll .listitem .psbody .psitem:last-child { border:none; }
+.page-scroll .listitem .psbtns { padding-top:5px; }
+.page-scroll .listitem .psbtns .t-tag { min-width:70px; text-align:center; }
+.page-scroll .listitem .psbtns .t-tag .t-tag__text { width:100%; }
+.page-scroll .nodata { height:500px; }

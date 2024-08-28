@@ -1,0 +1,9 @@
+<view class="{{layout == 'vertical' ? 'myFormVertical myFormRadio' : 'myFormHorizontal myFormRadio'}}">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="myFormItem">
+        <t-radio-group bind:change="onChange" name="{{name}}" value="{{formValue}}" borderless disabled="{{disabled}}" placement="{{placement}}">
+            <t-radio wx:for="{{options}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" block="{{false}}" />
+        </t-radio-group>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>    
+</view>

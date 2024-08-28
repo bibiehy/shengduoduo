@@ -1,0 +1,19 @@
+<view class="{{layout == 'vertical' ? 'myFormVertical myFormInput' : 'myFormHorizontal myFormInput'}}">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}">
+        <view class="myFormItem" bind:tap="onCarNumber">
+			<t-input
+				disabled="{{platform !== 'devtools'}}"
+				name="{{name}}"
+				value="{{formValue}}"
+				placeholder="{{placeholder || ('请输入' + label)}}"
+				type="{{type}}"
+				borderless="{{true}}"
+				align="{{placement}}"
+				bind:change="onChange"
+				bind:blur="onBlur"
+			/>
+        </view>
+        <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
+    </view>
+</view>

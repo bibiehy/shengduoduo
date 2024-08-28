@@ -1,0 +1,41 @@
+.storecenter-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
+.storecenter-create-box .mainbox { flex:1; padding:10px 10px 180px; overflow-y:auto; }
+.storecenter-create-box .mainbox .innerbox { background-color:#fff; border-radius:8px; padding:10px 10px 0; overflow:hidden; }
+
+.zhuguan-listbox { background-color:#fff; border-radius:8px; padding:0 10px 10px; margin-top:10px; }
+.zhuguan-listbox .listtitle { font-size:17px; color:rgba(0, 0, 0, 0.45); padding:15px 12px; }
+.zhuguan-listbox .listitem { border:solid 1px #f3f3f3; margin-bottom:10px; }
+.zhuguan-listbox .listitem .subheader { display:flex; align-items:center; justify-content:space-between; height:42px; background-color:#f0f0f0; padding-left:15px; }
+.zhuguan-listbox .listitem .subheader .subtitle { flex:1; font-size:17px; color:rgba(0, 0, 0, 0.9); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-right:12px; }
+.zhuguan-listbox .listitem .subheader .delbtn { color:#ff3b30; font-size:16px; padding:10px 15px; }
+.zhuguan-listbox .listitem .subbody { padding:0 12px; }
+.zhuguan-listbox .addbtn { display:flex; align-items:center; justify-content:center; color:#1677ff; font-size:18px; font-weight:600; padding:20px 0; }
+.zhuguan-listbox .addbtn .t-icon { font-size:22px; }
+
+.tihuodian-listbox { background-color:#fff; border-radius:8px; padding:0 10px 10px; margin-top:10px; }
+.tihuodian-listbox .listtitle { font-size:17px; color:rgba(0, 0, 0, 0.45); padding:15px 12px; }
+.tihuodian-listbox .nodata { padding:50px 0; }
+.tihuodian-listbox .listitem { border:solid 1px #f3f3f3; margin-bottom:10px; }
+.tihuodian-listbox .listitem .subheader { display:flex; align-items:center; justify-content:space-between; height:42px; background-color:#f0f0f0; padding-left:15px; }
+.tihuodian-listbox .listitem .subheader .subtitle { flex:1; font-size:17px; color:rgba(0, 0, 0, 0.9); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-right:12px; }
+.tihuodian-listbox .listitem .subheader .editbtn { color:#1677ff; font-size:16px; padding:10px 15px; }
+.tihuodian-listbox .listitem .subheader .line { width:1px; height:15px; background-color:#ccc; }
+.tihuodian-listbox .listitem .subheader .delbtn { color:#ff3b30; font-size:16px; padding:10px 15px; }
+.tihuodian-listbox .listitem .subbody { padding:10px 15px; }
+.tihuodian-listbox .listitem .subbody .subitem { display:flex; align-items:center; padding:7px 0; }
+.tihuodian-listbox .listitem .subbody .subitem .subname { font-size:16px; color:rgba(0, 0, 0, 0.7); }
+.tihuodian-listbox .listitem .subbody .subitem .subvalue { font-size:16px; color:rgba(0, 0, 0, 0.45); }
+.tihuodian-listbox .addbtn { display:flex; align-items:center; justify-content:center; color:#1677ff; font-size:18px; font-weight:600; padding:20px 0; }
+.tihuodian-listbox .addbtn .t-icon { font-size:22px; }
+
+/* 弹窗 */
+.popup-tihuodian-create { height:70vh; padding:10px 10px 30px; overflow-y:auto; }
+.popup-tihuodian-create .popupinner { background-color:#fff; padding:5px 10px 10px; }
+.popup-tihuodian-create .popupinner .popsubbox { border:solid 1px #f3f3f3; margin-top:2px; }
+.popup-tihuodian-create .popupinner .popsubbox .psbtitle { height:42px; line-height:42px; background-color:#f0f0f0; font-size:17px; color:rgba(0, 0, 0, 0.9); padding:0 15px; }
+.popup-tihuodian-create .popupinner .popsubbox .psbbody { position:relative; border-top:solid 1px #f3f3f3; padding:30px 15px 0; }
+.popup-tihuodian-create .popupinner .popsubbox .psbbody .psbtips { position:absolute; left:0; top:0; width:100%; line-height:30px; font-size:13px; color:rgba(0, 0, 0, 0.65); background-color:#fffbe6; padding-left:24px; }
+
+
+
+

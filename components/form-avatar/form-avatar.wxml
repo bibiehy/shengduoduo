@@ -1,0 +1,10 @@
+<view class="myFormAvatar">
+    <view class="{{required ? 'myAvatarBox required' : 'myAvatarBox'}}">
+        <button class="myAvatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <image class="myImage" mode="aspectFill" src="{{formValue || '../../assets/default_avatar.png'}}"></image>
+            <text class="myAvatxt">上传头像</text>
+        </button>
+    </view>
+    <view class="myAvatarRemark">注：推荐使用微信头像或使用正方形照片。</view>
+    <view class="myAvatarMessage" wx:if="{{errTips}}">{{errTips}}</view>
+</view>

@@ -1,0 +1,46 @@
+<view class="guige-create-box">
+	<navigation-bar title="{{type == 'create' ? '添加规格信息' : '编辑规格信息'}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="innerbox">
+			<form-input id="formInputCategory" label="类别名称" name="category" placeholder="请输入类别名称" required="{{true}}" />
+			<view class="main-listbox">
+				<view class="listtitle">规格列表</view>
+				<view wx:if="{{guigeList.length <= 0}}" class="nodata"><empty showDesc="{{false}}" /></view>
+				<block wx:else>
+					<view class="listitem" wx:for="{{guigeList}}" wx:key="id">
+						<view class="subheader">
+							<view class="subtitle">{{item['name']}}</view>
+							<view class="editbtn" bind:tap="onEdit" data-item="{{item}}">编辑</view>
+							<view class="line"></view>
+							<view class="delbtn" bind:tap="onDelete" data-id="{{item['id']}}">删除</view>
+						</view>
+						<view class="subbody">
+							<view class="subitem">
+								<view class="subname">基础运费：</view>
+								<view class="subvalue">￥{{item['freight']}}</view>
+							</view>
+							<view class="subitem">
+								<view class="subname">预估重量：</view>
+								<view class="subvalue">{{item['weight']}}斤</view>
+							</view>
+						</view>					
+					</view>
+				</block>				
+				<view class="addbtn" bind:tap="onPopupShow">
+					<t-icon name="add" />
+					<text>添加规格</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+</view>
+<popup title="规格信息设置" visible="{{visible}}" bind:callback="onPopupSure" close-on-overlay-click="{{false}}">
+	<view class="popup-guige-create">
+		<view class="popupinner">
+			<form-input id="formInputName" label="规格名称" name="name" value="{{listItem['name']}}" remark="如：1~10斤" placeholder="请输入规格名字" required="{{true}}" />
+			<form-input id="formInputFreight" label="基础运费" name="freight" value="{{listItem['freight']}}" remark="如：6、6.5、6.58" suffix="元(￥)" type="digit" placeholder="请输入基础运费" required="{{true}}" />
+			<form-input id="formInputWeight" label="预估重量" name="weight" value="{{listItem['weight']}}" remark="如：8、16 的整数" suffix="斤" type="number" placeholder="请输入预估重量" required="{{true}}" />
+		</view>
+	</view>
+</popup>

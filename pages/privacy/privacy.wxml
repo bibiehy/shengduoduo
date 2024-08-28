@@ -1,0 +1,8 @@
+<navigation-bar title="用户协议" back="{{true}}" color="#000" background="#fff"></navigation-bar>
+<view class="container page-privacy">
+	<view class="profile">用户协议</view>
+	<view class="profile">用户协议</view>
+	<view class="profile">用户协议</view>
+	<view class="profile">用户协议</view>
+	<view class="profile">用户协议</view>
+</view>

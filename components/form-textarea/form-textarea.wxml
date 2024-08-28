@@ -1,0 +1,26 @@
+<view class="myFormVertical myFormTextarea">
+    <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
+    <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}">
+        <view class="myFormItem">
+            <textarea
+                class="myFromtextarea"
+                placeholder-class="myFormplaceholder"
+                bind:focus="onFocus"
+                bind:blur="onBlur"
+                bind:input="onChange"
+                name="{{name}}" 
+                value="{{formValue}}"
+                placeholder="{{placeholder || ('请输入' + label)}}"
+                disable-default-padding="{{true}}"
+                maxlength="{{maxlength}}"
+                autosize="{{false}}"
+                style="height: {{height}}px"
+            >
+            </textarea>
+        </view>
+        <view class="myNoteTips" wx:if="{{errTips || maxlength > 0}}">
+            <view class="myErrtips">{{errTips}}</view>
+            <view class="myCounter" wx:if="{{maxlength > 0}}">{{counter}} / {{maxlength}}</view>
+        </view>
+    </view>
+</view>

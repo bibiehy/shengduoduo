@@ -1,0 +1,20 @@
+<view class="pickuppoint-create-box">
+	<navigation-bar title="{{type == 'create' ? '添加提货点信息' : '编辑提货点信息'}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="innerbox">
+			<form-upload class="FORM_UPLOAD" label="门头照" remark="注：请上传10M以内的正方形" name="head_pic" value="{{defaultValues['head_pic']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传门头照" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="提货点名称" name="name" value="{{defaultValues['name']}}" placeholder="请输入提货点名称" required="{{true}}" />
+			<form-provincecity class="FORM_PROVINCECITY" label="所在地区" name="address" value="{{defaultValues['address']}}" placeholder="请选择所在地区" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="详细地址" name="region" value="{{defaultValues['region']}}" placeholder="请输入详细地址" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="负责人姓名" name="head_user" value="{{defaultValues['head_user']}}" placeholder="请输入负责人姓名" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="负责人联系电话" name="head_phone" value="{{defaultValues['head_phone']}}" type="phone" placeholder="请输入负责人联系电话" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="紧急联系人姓名" name="urgent_user" value="{{defaultValues['urgent_user']}}" placeholder="请输入紧急联系人姓名" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="紧急联系人电话" name="urgent_phone" value="{{defaultValues['urgent_phone']}}" type="phone" placeholder="请输入紧急联系人电话" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="分成比例" name="divide_rate" value="{{defaultValues['divide_rate']}}" remark="如：30.5、30.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入分成比例" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="所属银行" name="bank" value="{{defaultValues['bank']}}" remark="如：中国农业银行" placeholder="请输入银行名字" />
+			<form-input class="FORM_INPUT" label="银行卡号" name="card_no" value="{{defaultValues['card_no']}}" type="bankcard" placeholder="请输入银行卡号" />
+			<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
+		</view>
+	</view>
+	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+</view>

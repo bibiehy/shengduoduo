@@ -1,0 +1,9 @@
+{
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "t-popup": "tdesign-miniprogram/popup/popup",
+        "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
+        "t-radio": "tdesign-miniprogram/radio/radio"
+    }
+}

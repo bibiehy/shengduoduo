@@ -1,0 +1,6 @@
+/* components/empty/empty.wxss */
+.myEmpty { display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; }
+.myEmpty .myImgEmpimg { display:block; width:80px; height:80px; }
+.myEmpty .myDescription { text-align:center; color:#e8e6e6; font-size:17px; padding-top:15px; }
+
+

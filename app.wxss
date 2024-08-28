@@ -1,0 +1,157 @@
+page, view, image, text, textarea, swiper, swiper-item { margin:0; padding:0; height:auto; box-sizing:border-box; -webkit-text-size-adjust:100%; }
+page { 
+	--td-brand-color: #1677ff; /* 主题色 */
+	--td-success-color: #00b578; /* 成功 */
+	--td-warning-color: #ff8f1f; /* 警告 */
+	--td-error-color: #ff3b30; /* 失败 */
+	width:100vw;
+	height:100vh;
+	background-color:#f3f3f3; 
+	font-size:16px; 
+	color:#000; 
+}
+
+.ml8 { margin-left:8px; }
+.ml16 { margin-left:16px; }
+.ml24 { margin-left:24px; }
+.mr8 { margin-right:8px; }
+.mr16 { margin-right:16px; }
+.mr24 { margin-right:24px; }
+
+
+/* 底部 TabBar */
+.t-tab-bar--fixed { z-index:100 !important; position:fixed !important; }
+.t-tab-bar-item { --td-tab-bar-height:52px; }
+.t-tab-bar-item .t-icon { font-size:22px !important; }
+.t-tab-bar-item .t-tab-bar-item__text { font-size:13px !important; line-height:30px !important; }
+
+/* 自定义表单 横排 white-space:nowrap; text-overflow:ellipsis; overflow:hidden; */
+.myFormHorizontal { position:relative; display:flex; align-items:center; width:100%; background-color:#fff; padding:12px 16px 12px 20px; border-bottom:solid 1rpx #f0f0f0; }
+.myFormHorizontal .myLabel { position:relative; width:102px; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.9); margin-right:16px; word-wrap:break-word; }
+.myFormHorizontal .myLabel.required::before { position:absolute; left:-12px; top:-2px; font-size:17px; color:#d54941; content:"*"; font-family:SimSun,sans-serif; }
+.myFormHorizontal .myFormBox { flex:1; }
+.myFormHorizontal .myFormBox.disabled { opacity:0.6; }
+.myFormHorizontal .myFormBox .myFormItem { display:flex; align-items:center; width:100%; }
+.myFormHorizontal .myFormBox .myFormItem .myItemPlaceholder { flex:1; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.4); text-align:right; }
+.myFormHorizontal .myFormBox .myFormItem .myItemName { flex:1; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.7); text-align:right; }
+.myFormHorizontal .myFormBox .myFormItem .t-icon { color:rgba(0, 0, 0, 0.3); margin-right:-5px; }
+.myFormHorizontal .myFormBox .myFormMessage { color:#d54941; font-size:12px; line-height:20px; padding-top:4px; }
+
+/* 竖排 */
+.myFormVertical { position:relative; width:100%; background-color:#fff; padding:12px 16px 12px 20px; border-bottom:solid 1rpx #f0f0f0; }
+.myFormVertical .myLabel { position:relative; width:100%; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.9); }
+.myFormVertical .myLabel .myLabelText { font-size:14px; color:rgba(0, 0, 0, 0.4); padding-left:12px; }
+.myFormVertical .myLabel.required::before { position:absolute; left:-12px; top:-2px; font-size:17px; color:#d54941; content:"*"; font-family:SimSun,sans-serif; }
+.myFormVertical .myFormBox { width:100%; margin-top:8px; }
+.myFormVertical .myFormBox.disabled { opacity:0.6; }
+.myFormVertical .myFormBox .myFormItem { display:flex; align-items:center; width:100%; }
+.myFormVertical .myFormBox .myFormItem .myItemPlaceholder { flex:1; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.4); }
+.myFormVertical .myFormBox .myFormItem .myItemName { flex:1; font-size:17px; line-height:24px; color:rgba(0, 0, 0, 0.7); }
+.myFormVertical .myFormBox .myFormItem .t-icon { color:rgba(0, 0, 0, 0.3); margin-right:-5px; }
+.myFormVertical .myFormBox .myFormMessage { color:#d54941; font-size:12px; line-height:20px; padding-top:4px; }
+
+/* form-input */
+.myFormInput .t-input { flex:1; padding:0; }
+.myFormInput .t-input input { width:100% !important; font-size:17px !important; line-height:24px !important; color:rgba(0, 0, 0, 0.7) !important; }
+.myFormInput .t-input .t-input__placeholder { font-size:17px !important; line-height:24px !important; }
+.myFormInput .t-input .t-input__wrap--suffix { font-size:16px; color:rgba(0, 0, 0, 0.8) !important; }
+
+/* form-radio */
+/* .myFormRadio.myFormHorizontal { display:flex; align-items:center; justify-content:space-between; } */
+.myFormRadio .t-radio-group { width:100%; }
+.myFormRadio .t-radio-group .t-radio { margin-right:10px; }
+.myFormRadio .t-radio-group .t-radio .t-radio__title { font-size:17px !important; line-height:24px !important; color:rgba(0, 0, 0, 0.7) !important; }
+
+/* form-datepicker 日期字号小一点 */
+.myFormDatepicker .myFormBox .myFormItem .myItemName { font-size:15px; }
+
+/* form-rangepicker */
+.myFormRangepicker .myFormBox .myFormItem .myItemName { font-size:15px; }
+.myRangepickerHeader { display:flex; align-items:center; justify-content:space-between; background-color:#fff; padding:5px 15px; }
+.myRangepickerHeader .myRangeSelector { display:flex; align-items:center; justify-content:space-between; width:160px; height:36px; font-size:14px; border:solid 1rpx #ccc; color:rgba(0, 0, 0, 0.7); border-radius:5px; padding:0 8px; }
+.myRangepickerHeader .myRangeSelector.start { border:solid 1rpx #1677ff; color:#1677ff; }
+.myRangepickerHeader .myRangeSelector.end { border:solid 1rpx #1677ff; color:#1677ff; }
+.myRangepickerHeader .myRangeSelector .placeholder { color:rgba(0, 0, 0, 0.4); }
+.myRangepickerHeader .myRangeSelector .myRangeline { color:rgba(0, 0, 0, 0.4); }
+
+/* form-actionsheet */
+.myPopupActionsheet { width:100%; background-color:#fff; border-top-left-radius:12px; border-top-right-radius:12px; }
+.myPopupActionsheet .myPopuptitle { text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); padding:21px 16px 6px; }
+.myPopupActionsheet .t-radio-group { padding-right:20px; }
+.myPopupActionsheet .t-radio-group .t-radio { --td-radio-icon-size:22px; }
+.myPopupActionsheet .myPopoupCancle { border-top:solid 6px #e7e7e7; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.9); padding:16px 0 36px; }
+
+/* form-select */
+.myPopupFormselect { display:flex; flex-direction:column; width:100%; height:60vh; background-color:#fff; border-top-left-radius:12px; border-top-right-radius:12px; }
+.myPopupFormselect .myPopupHeader { display:flex; align-items:center; height:50px; }
+.myPopupFormselect .myPopupHeader .myPopupCancelbtn { font-size:16px; color:rgba(0, 0, 0, 0.7); padding:10px 16px; }
+.myPopupFormselect .myPopupHeader .mySurebtn { font-size:16px; color:#1677ff; padding:10px 16px; }
+.myPopupFormselect .myPopupHeader .myPopupTitle { flex:1; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); }
+.myPopupFormselect .myPopupSearch { z-index:10; position:relative; box-shadow:2px 2px 10px #ececec; padding:5px 12px; }
+.myPopupFormselect .myPopupScrollbox { flex:1; padding:5px 15px 25px 5px; overflow-y:auto; }
+.myPopupFormselect .myPopupScrollbox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:24px 16px; }
+
+/* form-mulselect */
+.myPopupFormMulselect { display:flex; flex-direction:column; width:100%; height:60vh; background-color:#fff; border-top-left-radius:12px; border-top-right-radius:12px; }
+.myPopupFormMulselect .myMulHeader { display:flex; align-items:center; height:50px; }
+.myPopupFormMulselect .myMulHeader .myMulCancelbtn { font-size:16px; color:rgba(0, 0, 0, 0.7); padding:10px 16px; }
+.myPopupFormMulselect .myMulHeader .myMulSurebtn { font-size:16px; color:#1677ff; padding:10px 16px; }
+.myPopupFormMulselect .myMulHeader .myMulTitle { flex:1; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); }
+.myPopupFormMulselect .myMulSearch { z-index:10; position:relative; box-shadow:2px 2px 10px #ececec; padding:5px 12px; }
+.myPopupFormMulselect .myMulScrollBox { flex:1; padding:5px 15px 25px 5px; overflow-y:auto; }
+.myPopupFormMulselect .myMulScrollBox .t-checkbox-group .t-checkbox { --td-radio-icon-size:22px; padding:24px 16px; }
+
+/* form-textarea */
+.myFormTextarea { position:relative; }
+.myFormTextarea .myFromtextarea { width:100% !important; line-height:24px; font-size:17px; color:rgba(0, 0, 0, 0.7); margin-top:6px; }
+.myFormTextarea .myFormplaceholder { line-height:24px; font-size:17px; color:rgba(0, 0, 0, 0.4); }
+.myFormTextarea .myNoteTips { display:flex; align-items:center; justify-content:space-between; width:100%; line-height:20px; padding-top:4px; }
+.myFormTextarea .myNoteTips .myErrtips { color:#d54941; font-size:12px; }
+.myFormTextarea .myNoteTips .myCounter { color:rgba(0, 0, 0, 0.4); font-size:24px; }
+
+/* form-avatar */
+.myFormAvatar { width:100%; background-color:#fff; padding:12px 16px 12px 20px; border-bottom:solid 1rpx #f0f0f0; }
+.myFormAvatar .myAvatarBox { position:relative; width:100%; }
+.myFormAvatar .myAvatarBox.required::before { position:absolute; left:-12px; top:-2px; font-size:17px; color:#d54941; content:"*"; font-family:SimSun,sans-serif; }
+.myFormAvatar .myAvatarBox .myAvatar { position:relative; display:flex; align-items:center; justify-content:center; width:100px; height:100px; border-radius:8px; padding:0; margin:0; overflow:hidden; }
+.myFormAvatar .myAvatarBox .myAvatar .myImage { display:block; width:100%; height:100%; }
+.myFormAvatar .myAvatarBox .myAvatar .myAvatxt { position:absolute; left:0; bottom:0; width:100%; line-height:16px; background-color:rgba(0, 0, 0, 0.6); color:rgba(255, 255, 255, 0.7); font-size:12px; text-align:center; padding-bottom:2px; }
+.myFormAvatar .myAvatarRemark { font-size:13px; color:rgba(0, 0, 0, 0.4); margin-top:5px; }
+.myFormAvatar .myAvatarMessage { color:#d54941; font-size:12px; line-height:20px; padding-top:4px; }
+
+/* popup-select */
+.myPopupSelectbox { width:100%; height:100%; min-height:40px; }
+.myPopupSelectbox .myInputBox { display:flex; align-items:center; height:100%; border:solid 1rpx #f0f0f0; border-radius:6px; background-color:#fff; padding-left:10px; padding-right:5px; }
+.myPopupSelectbox .myInputBox .myName { flex:1; font-size:17px; color:rgba(0, 0, 0, 0.7); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.myPopupSelectbox .myInputBox .myPlaceholder { flex:1; font-size:17px; color:rgba(0, 0, 0, 0.4); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.myPopupSelectbox .myInputBox .t-icon { color:rgba(0, 0, 0, 0.3); }
+.myPopupSingleselect { display:flex; flex-direction:column; width:100%; height:60vh; background-color:#fff; border-top-left-radius:12px; border-top-right-radius:12px; }
+.myPopupSingleselect .myHeader { display:flex; align-items:center; height:50px; }
+.myPopupSingleselect .myHeader .myCancelBtn { font-size:16px; color:rgba(0, 0, 0, 0.7); padding:10px 16px; }
+.myPopupSingleselect .myHeader .mySureBtn { font-size:16px; color:#1677ff; padding:10px 16px; }
+.myPopupSingleselect .myHeader .myTitle { flex:1; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); }
+.myPopupSingleselect .mySearch { z-index:10; position:relative; box-shadow:2px 2px 10px #ececec; padding:5px 12px; }
+.myPopupSingleselect .myScrollBox { flex:1; padding:5px 15px 25px 5px; overflow-y:auto; }
+.myPopupSingleselect .myScrollBox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:24px 16px; }
+
+/* 省市县级联 */
+.t-cascader__close-btn { z-index:100 !important; }
+
+/* 上传 */
+.myFormUpload { box-sizing:content-box !important; }
+.myUploadTips { font-size:14px; color:rgba(0, 0, 0, 0.4); padding-left:4px; margin-top:5px; }
+
+
+/* 顶部搜索样式 navigation-bar */
+.global-navigation-bar { width:100%; padding-left:15px; }
+.global-navigation-bar .main-searchbox { width:70%; height:100%; }
+.global-navigation-bar .main-searchbox .tschbox { --td-search-height:30px; --td-search-bg-color:#fcf9f9; --td-search-font-size:16px; --td-search-padding:0 12px 2px; }
+.global-navigation-bar .main-searchbox .tschbox .t-icon-search { font-size:20px; margin-top:2px; }
+
+/* navigation-bar下面的搜索框 */
+.global-page-search { display:flex; align-items:center; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
+.global-page-search .pagesearch { flex:1; --td-search-height:36px; }
+.global-page-search .pageline { width:1px; height:18px; background-color:#ccc; margin:0 15px; }
+.global-page-search .pageaddbtn { display:flex; align-items:center; font-size:18px; color:#1677ff; font-weight:600; line-height:36px; }
+
+

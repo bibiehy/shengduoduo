@@ -1,0 +1,3 @@
+<!--pages/page403/page403.wxml-->
+<navigation-bar title="403" back="{{false}}" color="#000" background="#fff"></navigation-bar>
+<t-result style="padding-top:150rpx;" theme="warning" title="抱歉，您没有访问权限" description="请确认该账号是否被禁用" />

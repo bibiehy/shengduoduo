@@ -1,0 +1,4 @@
+.page-index-box { display:flex; flex-direction:column; height:100%; }
+.page-index-box .mainbox { flex:1; }
+.page-index-box .mainbox .loading-box { display:flex; flex-direction:column; align-items:center; justify-content:center; height:80%; }
+

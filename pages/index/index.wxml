@@ -1,0 +1,8 @@
+<view class="page-index-box">
+	<!-- <navigation-bar title="省多多物流" placement="center" showBack="{{false}}" background="#fff"></navigation-bar> -->
+	<view class="mainbox">
+		<view class="loading-box">
+			<t-loading layout="vertical" text="loading..." theme="circular" size="42px" />
+		</view>
+	</view>
+</view>

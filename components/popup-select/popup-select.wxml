@@ -1,0 +1,29 @@
+<view wx:if="{{showInput}}" class="myPopupSelectbox" bind:tap="onShowPopup" style="width: {{width}};">
+    <view class="myInputBox">
+        <view class="myName" wx:if="{{selectLabel}}">{{selectLabel}}</view>
+        <view class="myPlaceholder" wx:else>{{placeholder || '请选择'}}</view>
+        <t-icon name="chevron-right" size="24px" />
+    </view>    
+</view>
+<view wx:else style="position: relative; display: {{display}};">
+    <view bind:tap="onShowPopup" style="z-index: 20; position: absolute; left: 0; top: 0; width: 100%; height: 100%; "></view>
+    <slot></slot>
+</view>
+<t-popup bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
+    <view class="myPopupSingleselect">
+        <view class="myHeader">
+            <view class="myCancelBtn" bind:tap="onHidePopup">取消</view>
+            <view class="myTitle">{{placeholder || '请选择'}}</view>
+            <view class="mySureBtn" bind:tap="onSure">确定</view>
+        </view>
+        <view class="mySearch">
+            <t-search bind:blur="onSearch" placeholder="请输入搜索关键字" clearable="{{false}}" />
+        </view>
+        <view class="myScrollBox">
+            <empty wx:if="{{searchOptions.length <= 0}}" />
+            <t-radio-group wx:else value="{{selectValue}}" bind:change="onRadioChange">
+                <t-radio wx:for="{{searchOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" />
+            </t-radio-group>
+        </view>        
+    </view>
+</t-popup>

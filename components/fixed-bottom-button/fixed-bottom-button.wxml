@@ -1,0 +1,8 @@
+<view class="myFixedBottomButton">
+	<view class="myFixedInner">
+		<t-button wx:if="{{title}}" bind:tap="onSure" loading="{{loading}}" theme="{{theme}}" size="{{size}}" block>{{title}}</t-button>
+		<block wx:else>
+			<slot></slot>
+		</block>
+	</view>
+</view>	
