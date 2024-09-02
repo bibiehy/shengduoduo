@@ -1,0 +1,13 @@
+{
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+		"form-avatar": "/components/form-avatar/form-avatar",
+        "form-input": "/components/form-input/form-input",
+		"form-picker": "/components/form-picker/form-picker",
+		"form-select": "/components/form-select/form-select",
+		"form-carnumber": "/components/form-carnumber/form-carnumber",
+		"popup-select": "/components/popup-select/popup-select",
+		"form-provincecity": "/components/form-provincecity/form-provincecity"
+    }
+}

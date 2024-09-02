@@ -24,11 +24,12 @@ Component({
         errTips: '',
     },
     observers: {
-        value: function(newValue=[]) { // 监听外部传递的 value = selectedOptions
-            const labelArray = newValue.map((item) => item['label']);
+		value: function(newValue=[]) { // 监听外部传递的 value = selectedOptions
+			const thisValue = Object.prototype.toString.call(newValue) == '[object String]' ? JSON.parse(newValue) : newValue;
+            const labelArray = thisValue.map((item) => item['label']);
             const showNames = labelArray.join('/');
-			const selectedId = newValue.length > 0 ? newValue[2]['value'] : '';
-			this.setData({ formValue: newValue, showNames, selectedId });
+			const selectedId = thisValue.length > 0 ? thisValue[2]['value'] : '';
+			this.setData({ formValue: thisValue, showNames, selectedId });
         }
     },
     methods: {

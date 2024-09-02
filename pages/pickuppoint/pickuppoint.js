@@ -49,7 +49,7 @@ Page({
 		}else if(type == 'edit') { // 编辑
 			const { dataList } = this.data;
 			const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
-			if(findIndex) {
+			if(findIndex >= 0) {
 				formValues['address'] = JSON.parse(formValues['address']);
 				formValues['addressStr'] = (formValues['address'].map((adItem) => adItem['label'])).join('、');
 				dataList.splice(findIndex, 1, formValues);

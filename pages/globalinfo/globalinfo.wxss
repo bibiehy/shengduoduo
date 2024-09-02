@@ -1,0 +1,19 @@
+.golbal-infobox { display:flex; flex-direction:column; width:100vw; height:100vh; }
+.golbal-infobox .mainbox { flex:1; padding:10px; }
+.golbal-infobox .mainbox .scrollbox { width:100%; height:100%; padding-bottom:150px; overflow-y:auto; }
+.golbal-infobox .mainbox .moduleinfo { width:100%; background-color:#fff; border-radius:8px; padding:10px; margin-bottom:10px; overflow:hidden; }
+.golbal-infobox .mainbox .moduleinfo .bannertitle { font-weight:600; font-size:18px; color:rgba(0, 0, 0, 0.85); padding:10px 5px; }
+
+.golbal-infobox .mainbox .moduleinfo .bannerimgs { padding-bottom:10px; }
+.golbal-infobox .mainbox .moduleinfo .bannerimgs .t-grid__content { display:flex; flex-wrap:wrap; margin:0 !important; }
+.golbal-infobox .mainbox .moduleinfo .bannerimgs .t-grid__content .t-grid-item { flex-shrink:0; width:115px !important; height:115px !important; margin:5px !important; }
+.golbal-infobox .mainbox .moduleinfo .bannerimgs .t-grid__content .t-grid-item .t-grid-item__wrapper { padding:0 !important }
+.golbal-infobox .mainbox .moduleinfo .bannerimgs .t-grid__content .t-grid-item .t-upload__wrapper { width:115px !important; height:115px !important; }
+
+.golbal-infobox .mainbox .moduleinfo .bannerbtips { line-height:20px; font-size:14px; color:rgba(0, 0, 0, 0.65); background-color:#fffbe6; padding:15px; margin:5px; }
+.golbal-infobox .mainbox .moduleinfo .bannerbtips .strong { font-weight:600; }
+.golbal-infobox .mainbox .moduleinfo .bannerbtips .itemtips { padding:2px 0; }
+
+
+
+

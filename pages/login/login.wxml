@@ -7,60 +7,20 @@
 		</view>
 	</navigation-bar>
 	<navigation-bar wx:else title="{{roleState == 3 ? '请选择登录角色' : '登录'}}" placement="center" showBack="{{false}}" boxShadow="none" background="#fff"></navigation-bar>
+
 	<!-- 无账号，注册成为发货人或干线司机 -->
 	<view wx:if="{{roleState == 1}}" class="page-signup">
-		<view class="tips">该手机号 {{phoneNumberAsterisk}} 尚未注册任何角色，请选择注册成为发货人或干线司机。</view>
+		<view class="tips">该手机号 {{phoneNumber}} 尚未注册任何角色，请选择注册成为发货人或干线司机。</view>
 		<view class="mainbox">
-			<!-- <t-tabs class="tabs" bind:change="onTabsChange" value="{{tabsValue}}" theme="card">
-				<t-tab-panel label="发货人" value="consignor" />
-				<t-tab-panel label="干线司机" value="drivers" />
-			</t-tabs> -->
-			<form-avatar class="FORM_AVATAR" name="avator" />
-			<form-input class="FORM_INPUT" label="用户昵称" name="nickname" type="nickname" placeholder="请输入昵称" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="用户姓名" name="username" placeholder="请输入用户姓名" required="{{true}}" />
 			<block wx:if="{{tabsValue == 'consignor'}}">
-				<form-input class="FORM_INPUT" label="店铺名称" name="shop_name" placeholder="请输入店铺名称" required="{{true}}" />
-				<form-input class="FORM_INPUT" label="店铺地址" name="address" placeholder="请输入店铺地址" required="{{true}}" />
-				<form-select class="FORM_SELECT" label="集货中心" name="center_id" options="{{jihuoCenterOptions}}" placeholder="请选择集货中心" required="{{true}}" />
-				<form-select class="FORM_SELECT" label="发货商品类别" name="goods_type" options="{{goodsOptions}}" placeholder="请选择发货商品类别" required="{{true}}" />
-				<form-input class="FORM_INPUT" label="月均发货件数" remark="如：2000" name="average_num" suffix="件" type="number" placeholder="请输入月均发货件数" required="{{true}}" />
+				<tmpl-fahuoren id="signupConsignor" actionType="signup" phone="{{phoneNumber}}"  />
 			</block>
 			<block wx:else>
-				<form-picker class="FORM_PICKER" label="车辆型号" name="car_type" placeholder="请选择车辆型号" required="{{true}}" options="{{carOptions}}" cancelBtn="取消" confirmBtn="确定" />
-				<form-input class="FORM_INPUT" label="最大载重" name="max_number" placeholder="请输入车辆最大载重" type="number" remark="如：1150" suffix="千克(kg)" required="{{true}}" />
-				<form-input class="FORM_INPUT" label="可装卡板数量" name="can_card_num" placeholder="请输入可装卡板数量" type="number" remark="如：12" suffix="个" required="{{true}}" />
-				<form-carnumber class="FORM_CARNUMBER" label="车牌号码" name="car_no" placeholder="请添加车牌号码" required="{{true}}" />
-				<!-- <form-input class="FORM_INPUT" label="车牌号码" name="car_no" placeholder="请输入车牌号码" remark="如：粤K G5555" required="{{true}}" /> -->
-				<view class="tripbox">
-					<view class="header">请添加您想跑的路线信息</view>
-					<view class="tripselect">
-						<popup-select options="{{jihuoCenterOptions}}" width="300px" showInput="{{true}}" placeholder="请选择所属集货中心" />
-					</view>
-					<view class="tripitem">
-						<view class="subheader">
-							<view class="subname">1. 四方仓库吉祥提货点四方仓库吉祥提货点</view>
-							<t-icon name="delete" />
-						</view>
-						<form-input label="期望单趟费用" layout="horizontal" placement="right" name="trip_cost_1" type="number" suffix="元" placeholder="请输入费用" required="{{true}}" />
-					</view>
-					<view class="tripitem">
-						<view class="subheader">
-							<view class="subname">2. 四方仓库吉祥提货点四方仓库吉祥提货点</view>
-							<t-icon name="delete" size="38rpx" color="#ff3b30" />
-						</view>
-						<form-input label="期望单趟费用" name="trip_cost_1" type="number" layout="horizontal" placement="right" suffix="元" placeholder="请输入费用" required="{{true}}" />
-					</view>
-					<popup-select options="{{tihuodianOptions}}" display="block" placeholder="请输入提货点">
-						<view class="addbtn">
-							<t-icon name="add" />
-							<text>添加提货点</text>
-						</view>
-					</popup-select>
-				</view>
+				<tmpl-drivers id="signupDrivers" actionType="signup" phone="{{phoneNumber}}" />
 			</block>
 		</view>
 		<view class="fixedbottom">
-			<t-button bind:tap="onRoleSure" theme="primary" size="large" block>确 定</t-button>
+			<t-button bind:tap="onSignupSure" theme="primary" size="large" block>确 定</t-button>
 		</view>		
 
 		<!-- <form-input
@@ -180,6 +140,7 @@
 			bind:onblur="onBlur"
 		/> -->
 	</view>
+
 	<!-- 有多个角色，请选择一个进入 -->
 	<view wx:elif="{{roleState == 3}}" class="page-roles">
 		<t-radio-group value="{{roleValue}}" bind:change="onRoleRadio">
@@ -189,10 +150,17 @@
 			<t-button bind:tap="onRoleSure" theme="primary" size="large" block>确 定</t-button>
 		</view>
 	</view>
+
 	<!-- 账号正在审核中 -->
 	<view wx:elif="{{roleState == 4}}" class="container page-audit">
 		<t-result theme="warning" title="账号正在审核中" description="" />
 	</view>
+
+	<!-- 提交成功，等待审核 -->
+	<view wx:elif="{{roleState == 5}}" class="container page-audit">
+		<t-result theme="success" title="提交成功，等待系统审核" description="" />
+	</view>
+
 	<!-- // 微信授权和验证码登录 -->
 	<view wx:else class="page-login">
 		<image class="imglogo" mode="aspectFit" src="/assets/logo.png" />

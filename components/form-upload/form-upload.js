@@ -1,4 +1,3 @@
-
 //
 const app = getApp();
 
@@ -37,7 +36,7 @@ Component({
             const { index } = e.detail;
             const { fileList } = this.data;    
             fileList.splice(index, 1);
-            this.setData({ fileList });
+            this.setData({ fileList, errTips: '' });
 		},
 		handleDrop(e) {
 			if(this.data.draggable) {
@@ -57,11 +56,10 @@ Component({
                 name: 'file',
                 // formData: { user: 'test' }, // 额外参数
                 success: (res) => {
-                	this.setData({[`fileList[${length}].status`]: 'done'  }); // status: loading/reload/failed/done; percent: 68
+                	this.setData({ [`fileList[${length}].status`]: 'done', errTips: '' }); // status: loading/reload/failed/done; percent: 68
 				},
 				fail: (res, statusCode) => {
-					console.log(res, statusCode);
-					this.setData({[`fileList[${length}].status`]: 'failed'  });
+					this.setData({ [`fileList[${length}].status`]: 'failed', errTips: '图片上传失败，请删除重新上传'  });
 				}
             });
         },               
@@ -71,7 +69,8 @@ Component({
             let isVerify = true;
             
             if(required) {
-                const errTips = fileList.length > 0 ? '' : (message || '图片不能为空，请上传');
+				const failList = fileList.filter((item) => item['status'] == 'failed');
+                const errTips = failList.length > 0 ? '图片上传失败，请删除重新上传' : (fileList.length > 0 ? '' : (message || '图片不能为空，请上传'));
                 isVerify = errTips ? false : true;
                 this.setData({ errTips });
             }            
@@ -79,8 +78,9 @@ Component({
             return { verify: isVerify, name, value: fileList };
         },
         getFieldValue() {
-            const { name, fileList } = this.data;
-            return { name, value: fileList };
+			const { name, fileList } = this.data;
+			const doneList = fileList.filter((item) => item['status'] == 'done');
+            return { name, value: doneList };
         },
         setFieldValue(newValue) {
             this.setData({ fileList: newValue });

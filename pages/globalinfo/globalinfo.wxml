@@ -1,0 +1,30 @@
+<view class="golbal-infobox">
+	<navigation-bar title="全局信息设置" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="scrollbox">
+			<view class="moduleinfo">
+				<view class="bannertitle">规格异常处罚设置</view>
+				<form-input id="formInputRate" label="处罚比例" name="punish_rate" value="{{detail['punish_rate']}}" remark="如：10、10.5、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入规格异常处罚比例" required="{{true}}" />
+				<form-textarea id="formTextareaDesc" label="处罚描述" name="punish_desc" value="{{detail['punish_desc']}}" placeholder="请输入规格异常处罚描述" required="{{true}}" maxlength="-1" />
+				<view class="bannerbtips">
+					<view class="strong">温馨提示：</view>
+					<view class="itemtips">1、用于发货人规格异常处罚</view>
+					<view class="itemtips">2、处罚金额 = 规格单价*处罚比例*件数</view>
+				</view>
+			</view>
+			<view class="moduleinfo">
+				<view class="bannertitle">BANNER信息上传</view>
+				<view class="bannerimgs">
+					<t-upload mediaType="{{['image']}}" files="{{fileList}}" draggable="{{false}}" sizeLimit="{{10240}}" bind:add="handleAdd" bind:remove="handleRemove" bind:drop="handleDrop" />
+				</view>
+				<view class="bannerbtips">
+					<view class="strong">温馨提示：</view>
+					<view class="itemtips">1、用于显示于发货人界面的轮播图</view>
+					<view class="itemtips">2、图片宽高比为 1.5，推荐 720*480、1080*720</view>
+					<view class="itemtips">3、图片最大尺寸为 10M，上传前建议先进行压缩</view>
+				</view>
+			</view>
+		</view>		
+	</view>
+	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+</view>

@@ -5,6 +5,7 @@
 			<t-input
 				name="{{name}}"
 				value="{{formValue}}"
+				disabled="{{disabled}}"
 				placeholder="{{placeholder || ('请输入' + label)}}"
 				suffix="{{suffix}}"
 				suffix-icon="{{suffixicon}}"

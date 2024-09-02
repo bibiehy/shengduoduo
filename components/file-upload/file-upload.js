@@ -1,3 +1,5 @@
+// 未使用
+
 Component({
     behaviors: ['wx://form-field'],
     properties: {
@@ -8,7 +10,7 @@ Component({
         count: { type: Number, value: 2 }, // 最多可以选择的文件个数
 		draggable: { type: Boolean, value: false }, // 是否支持拖拽
 		limit: { type: Number, value: 15360 }, // 单位 KB, 15360/1024 = 15M, 组件自己内部做了大小限制提醒
-		uploadURL: { type: String, value: 'https://sddwl.tonglujipei.com/api/common/upload' }, // 上传地址
+		uploadURL: { type: String, value: '' }, // 上传地址
     },
     data: {
         fileList: [] // 图片列表

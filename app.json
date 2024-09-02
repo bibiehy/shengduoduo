@@ -10,7 +10,8 @@
 		"pages/pickuppoint/pickuppoint",
 		"pages/pickuppoint/create/create",
 		"pages/storecenter/storecenter",
-		"pages/storecenter/create/create"
+		"pages/storecenter/create/create",
+		"pages/globalinfo/globalinfo"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

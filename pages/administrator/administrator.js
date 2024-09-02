@@ -4,8 +4,6 @@ import { fetchGetUserInfo } from '../../service/index';
 // 获取 app 实例
 const app = getApp();
 
-// 信息，全局信息设置
-
 Page({
 	data: {
 		// 底部 tabbar
@@ -19,12 +17,14 @@ Page({
 	},
 	onPageJump(e) {
 		const { name } = e.currentTarget.dataset;
-		if(name == 'guige') {
+		if(name == 'guige') { // 规格管理
 			wx.navigateTo({ url: '/pages/guige/guige' });
-		}else if(name == 'pickup_point') {
+		}else if(name == 'pickup_point') { // 提货点
 			wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
-		}else if(name == 'store_center') {
+		}else if(name == 'store_center') { // 集货中心
 			wx.navigateTo({ url: '/pages/storecenter/storecenter' });
+		}else if(name == 'global') { // 全局信息设置
+			wx.navigateTo({ url: '/pages/globalinfo/globalinfo' });
 		}
 	},	
 	onLoad(options) {

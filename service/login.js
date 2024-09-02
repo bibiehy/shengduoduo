@@ -11,10 +11,10 @@ export const fetchSendSMS = (params) => ({ url: '/common/sendSms', method: 'post
 export const fetchToken = (params) => ({ url: '/selectRole', method: 'post', loading: true, delay: 500, data: { code: params['code'], phone: params['phone'], type: params['roleType'] } });
 
 // 发货人注册
-export const fetchSignConsignor = (params) => ({ url: '/consignorRegister', method: 'post', loading: true, delay: 500, data: params });
+export const fetchSignConsignor = (params) => ({ url: '/common/consignorRegister', method: 'post', loading: true, delay: 500, data: params });
 
 // 司机注册
-export const fetchSignDriver = (params) => ({ url: '/driverRegister', method: 'post', loading: true, delay: 500, data: params });
+export const fetchSignDriver = (params) => ({ url: '/common/driverRegister', method: 'post', loading: true, delay: 500, data: params });
 
 
 

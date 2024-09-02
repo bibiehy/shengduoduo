@@ -22,8 +22,8 @@
 					<view wx:if="{{zhuguanList.length > 1}}" class="delbtn" bind:tap="onDeleteZhuguan" data-id="{{item['id']}}">删除</view>
 				</view>
 				<view class="subbody">
-					<form-input class="FORM_INPUT" label="姓名" name="director__{{index + 1}}" value="{{item['director']}}" placeholder="请输入主管姓名" layout="horizontal" required="{{true}}" />
-					<form-input class="FORM_INPUT" label="联系电话" name="director_phone__{{index + 1}}" value="{{item['director_phone']}}" type="phone" placeholder="请输入主管联系电话" layout="horizontal" required="{{true}}" />
+					<form-input id="formZhuguanName_{{item['id']}}" label="姓名" name="director__{{item['id']}}" value="{{type == 'edit' ? item['director'] : ''}}" placeholder="请输入主管姓名" layout="horizontal" required="{{true}}" />
+					<form-input id="formZhuguanPhone_{{item['id']}}" label="联系电话" name="director_phone__{{item['id']}}" value="{{type == 'edit' ? item['director_phone'] : ''}}" type="phone" placeholder="请输入主管联系电话" layout="horizontal" required="{{true}}" />
 				</view>					
 			</view>				
 			<view class="addbtn" bind:tap="onAddZhuguan">
@@ -34,7 +34,7 @@
 		<view class="tihuodian-listbox">
 			<view class="listtitle">所属提货点信息管理</view>
 			<view wx:if="{{tihuodianList.length <= 0}}" class="nodata"><empty showDesc="{{false}}" /></view>
-			<view class="listitem" wx:for="{{tihuodianList}}" wx:key="point_id">
+			<view class="listitem" wx:for="{{tihuodianList}}" wx:key="id">
 				<view class="subheader">
 					<view class="subtitle">{{item['point_name']}}</view>
 					<view class="editbtn" bind:tap="onEditTihuodian" data-item="{{item}}">编辑</view>
@@ -79,14 +79,14 @@
 			<form-select id="formInputTihuodian" label="所属提货点" name="point_id" value="{{actionItem['point_id']}}" placeholder="请选择所属提货点" required="{{true}}" options="{{allPickupList}}" />
 			<form-input id="formInputReachTime" label="预估送达时长" name="reach_time" value="{{actionItem['reach_time']}}" remark="如：36、36.5 等小时制" suffix="小时" type="digit" placeholder="请输入预估送达时长" required="{{true}}" />
 			<form-radio id="formInputClosed" label="是否关闭收单" name="closed" value="{{actionItem['closed'] || 0}}" options="{{radioOptions}}" layout="horizontal" required="{{true}}" />
-			<form-input id="formInputCardNum" label="卡板数量" name="card_num" value="{{actionItem['card_num']}}" remark="如：8、16 的整数" suffix="个" type="number" placeholder="请输入卡板数量" required="{{true}}" />
-			<form-input id="formInputCancelRate" label="取消订单扣款比例" name="cancel_order_rate" value="{{actionItem['cancel_order_rate']}}" remark="如：10、10.5、10.58 等" suffix="%" type="digit" placeholder="请输入取消订单扣款比例" required="{{true}}" />
-			<form-datepicker id="formInputLastTime" label="送达集货中心最晚时间" name="last_time" value="{{actionItem['last_time']}}" mode="{{['null', 'minute']}}" format="HH:mm" title="送达最晚时间" placeholder="请选择送达集货中心最晚时间" required="{{true}}" />
+			<form-input id="formInputCardNum" label="卡板数量" name="card_num" value="{{actionItem['card_num']}}" remark="如：12、18 的整数" suffix="个" type="number" placeholder="请输入卡板数量" required="{{true}}" />
+			<form-input id="formInputCancelRate" label="取消订单扣款比例" name="cancel_order_rate" value="{{actionItem['cancel_order_rate']}}" remark="如：10、10.5、10.58 等格式" suffix="%" type="digit" placeholder="请输入取消订单扣款比例" required="{{true}}" />
+			<form-datepicker id="formInputLastTime" label="送达集货中心最晚时间" name="last_time" value="{{actionItem['last_time'] || '20:30'}}" mode="{{['null', 'minute']}}" format="HH:mm" title="送达最晚时间" placeholder="请选择送达集货中心最晚时间" required="{{true}}" />
 			<view class="popsubbox">
 				<view class="psbtitle">设置规格类别运费比例</view>
 				<view class="psbbody">
 					<view class="psbtips">* 请输入如：10、10.5、10.58 等格式</view>
-					<block wx:for="{{actionItem['spec_freight']}}" wx:key="spec">
+					<block wx:for="{{actionItem['spec_rate_list']}}" wx:key="spec">
 						<form-input id="formInputGuige__{{index + 1}}" label="{{item['spec_name']}}" name="freight_rate__{{item['spec']}}__{{item['spec_name']}}" value="{{item['freight_rate']}}" suffix="%" type="digit" layout="horizontal" placement="right" min="{{0}}" max="{{100}}" placeholder="请输入运费系数" required="{{true}}" />
 					</block>
 				</view>

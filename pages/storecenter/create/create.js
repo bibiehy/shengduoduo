@@ -1,7 +1,18 @@
 import useRequest from '../../../utils/request';
 import { fetchAllPickupPoint, fetchAllGuige } from '../../../service/global';
-import { fetchStoreCenterCreate, fetchStoreCenterEdit } from '../../../service/storecenter';
+import { fetchStoreCenterCreate, fetchStoreCenterEdit, fetchStoreCenterDetail } from '../../../service/storecenter';
 import { form, delay, createGuid, goBackAndRefresh } from '../../../utils/tools';
+
+/*
+提货点1号店
+长河街道和平广场118号
+猪小明
+18069886088
+润土
+18069886011
+中国农业银行
+6242821234567890000
+*/
 
 Page({
 	data: { // 以下所有格式化数据都同接口返回 keyName 保持一直
@@ -38,15 +49,10 @@ Page({
 			newPickupList.push({ label: item['name'], value: item['id'], disabled: pickupIds.includes(item['id']) });
 		});
 
-		guigeList.forEach((item) => { // { spec: 1, spec_name: "食品粮油", freight_rate: '运费比例' }
+		guigeList.forEach((item) => { // 用于添加提货点 { spec: 1, spec_name: "食品粮油", freight_rate: '运费比例' }
 			newGuigeList.push({ spec: item['id'], spec_name: item['name'], freight_rate: '' });
 		});
 		
-		console.log(resultPickup);
-		console.log(resultGuige);
-		console.log(newPickupList);
-		console.log(newGuigeList);
-
 		this.setData({ allPickupList: newPickupList, allGuigeList: newGuigeList });
 	},
 	// 主管事件
@@ -54,6 +60,7 @@ Page({
 		const { zhuguanList } = this.data;
 		const id = createGuid(6);
 		zhuguanList.push({ id, director: '', director_phone: '' });
+
 		this.setData({ zhuguanList });
 	},
 	onDeleteZhuguan(e) {
@@ -63,47 +70,89 @@ Page({
 		zhuguanList.splice(thisIndex, 1);
 		this.setData({ zhuguanList });
 	},
+	getZhuguanFormValues() {
+		const { zhuguanList } = this.data;
+		const formIds = [];
+		zhuguanList.forEach((item) => {
+			formIds.push(`formZhuguanName_${item['id']}`);
+			formIds.push(`formZhuguanPhone_${item['id']}`);
+		});
+
+		const newList = []; // 格式化后的主管数据 []
+		const formValues = form.validateFields(this, formIds);
+		if(formValues) {			
+			zhuguanList.forEach((item) => {
+				const director = formValues[`director__${item['id']}`];
+				const director_phone = formValues[`director_phone__${item['id']}`];
+				newList.push({ id: item['id'], director, director_phone });
+			});
+		}
+		
+		return newList;
+	},
 	// 所属提货点事件
 	onAddTihuodian() {
 		const { allGuigeList } = this.data;
-		const newActionItem = { spec_freight: allGuigeList };
+		const newActionItem = { spec_rate_list: allGuigeList };
 		this.setData({ visible: true, actionItem: newActionItem });
 	},
 	onEditTihuodian(e) {
+		const { allGuigeList } = this.data;
 		const { item } = e.currentTarget.dataset;
+		const guigeValues = item['spec_rate_list'] || [];
+
+		if(guigeValues.length <= 0) { // 异常情况
+			item['spec_rate_list'] = allGuigeList;
+		}else{ // 编辑老数据时候，应把新增加的规格信息添加进去
+			const newList = [];
+			allGuigeList.forEach((listItem) => {
+				const findItem = guigeValues.find((valItem) => valItem['spec'] == listItem['spec']);
+				newList.push(findItem || listItem);
+			});
+
+			item['spec_rate_list'] = newList;
+		}
+
 		this.setData({ visible: true, actionItem: item });
 	},
 	onPopupSure() { // 添加/编辑提货点弹窗确认动作
-		const { allPickupList, allGuigeList, tihuodianList, actionItem } = this.data;
-		const formInputIds = ['formInputTihuodian', 'formInputReachTime', 'formInputClosed', 'formInputCardNum', 'formInputCancelRate', 'formInputLastTime'];
-		actionItem['spec_freight'].forEach((item, index) => formInputIds.push(`formInputGuige__${index + 1}`));
+		//
+		const { allPickupList, tihuodianList, actionItem } = this.data;
 
-		const formValues = form.validateFields(this, formInputIds);
+		// 获取提货点信息
+		const formIds = ['formInputTihuodian', 'formInputReachTime', 'formInputClosed', 'formInputCardNum', 'formInputCancelRate', 'formInputLastTime'];
+		actionItem['spec_rate_list'].forEach((item, index) => formIds.push(`formInputGuige__${index + 1}`));
+		const formValues = form.validateFields(this, formIds);
 
-		// 添加提货点名称
-		const pickupItem = allPickupList.find((item) => item['value'] == formValues['point_id']);
-		formValues['point_name'] = pickupItem['label'];
+		if(formValues) {
+			// 添加提货点名称
+			const pickupIndex = allPickupList.findIndex((item) => item['value'] == formValues['point_id']);
+			formValues['point_name'] = allPickupList[pickupIndex]['label'];
 
-		// 格式化
-		const newFormValues = { spec_freight: [] };
-		Object.keys(formValues).forEach((keyName) => {
-			if(keyName.includes('__')) { // 规格类别运费数据
-				const thisArray = keyName.split('__');
-				newFormValues['spec_freight'].push({ spec: thisArray[1], spec_name: thisArray[2], freight_rate: formValues[keyName] });
+			// 禁用添加的提货点
+			const newPickupItem = { ...allPickupList[pickupIndex], disabled: true };
+			allPickupList.splice(pickupIndex, 1, newPickupItem);
+
+			// 格式化成表单提交数据
+			const newFormValues = { spec_rate_list: [] };
+			Object.keys(formValues).forEach((keyName) => {
+				if(keyName.includes('__')) { // 规格类别运费数据
+					const thisArray = keyName.split('__');
+					newFormValues['spec_rate_list'].push({ spec: Number(thisArray[1]), spec_name: thisArray[2], freight_rate: formValues[keyName] });
+				}else{
+					newFormValues[keyName] = formValues[keyName];
+				}
+			});
+
+			if(actionItem['id']) { // 编辑
+				const thisIndex = tihuodianList.findIndex((item) => item['id'] == actionItem['id']);
+				tihuodianList.splice(thisIndex, 1, { ...newFormValues, id: actionItem['id'] });
 			}else{
-				newFormValues[keyName] = formValues[keyName];
+				tihuodianList.push({ ...newFormValues, id: createGuid(6) });
 			}
-		});
-
-		console.log('newFormValues', newFormValues);
-		if(actionItem['id']) { // 编辑
-			const thisIndex = tihuodianList.findIndex((item) => item['id'] == actionItem['id']);
-			tihuodianList.splice(thisIndex, 1, { ...newFormValues, id: actionItem['id'] });
-		}else{
-			tihuodianList.push({ ...newFormValues, id: createGuid(6) });
+			
+			this.setData({ tihuodianList, allPickupList, visible: false });
 		}
-		
-		this.setData({ tihuodianList, visible: false });
 	},
 	onDeleteTihuodian(e) { // 显示二次确认删除弹窗
 		const { item } = e.currentTarget.dataset;
@@ -122,15 +171,32 @@ Page({
 	onCancelDialog() { // 二次确认取消
 		this.setData({ showConfirm: false });
 	},	
-	async onSave() { // 保存
-		const { defaultValues } = this.data;
-		const formValues = form.validateFields(this);
+	// 保存提交
+	async onSave() {
+		//
+		const { defaultValues, tihuodianList, type } = this.data;
+
+		// 获取主管数据
+		const zhuguanList = this.getZhuguanFormValues();
+
+		const formValues = form.validateFields(this); // 表单是 class 的值，不包括主管和提货点
 		if(formValues) {
-			const { type } = this.data;
+			if(zhuguanList.length <= 0) {
+				wx.showToast({ title: '请添加主管信息', icon: 'error' });
+				return false;
+			}
+
+			if(tihuodianList.length <= 0) {
+				wx.showToast({ title: '请添加提货点', icon: 'error' });
+				return false;
+			}
+
 			if(type === 'edit') {
 				formValues['id'] = defaultValues['id'];
 			}
 
+			formValues['director_list'] = zhuguanList;
+			formValues['pickup_points'] = tihuodianList;
 			formValues['head_pic'] = formValues['head_pic'][0]['url'];
 			formValues['payment_code'] = formValues['payment_code'][0]['url'];
 			formValues['address'] = JSON.stringify(formValues['address']);
@@ -139,26 +205,36 @@ Page({
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });
 				await delay(500);
-				goBackAndRefresh(type, result['data']); // 返回父页面并调用父页面的 onRefresh 方法，当 type=edit 时才使用 result['data']
+				goBackAndRefresh(type, result); // 返回父页面并调用父页面的 onRefresh 方法，当 type=edit 时才使用 result
 			}
 		}
 	},
-	onLoad({ type, strItem }) {
-		// type: create/edit
-		const jsonItem = JSON.parse(strItem || "{}");
-
-		// 图像为数组
+	async onLoad({ type, strItem }) { // type: create/edit
 		if(type == 'edit') {
-			jsonItem['head_pic'] = [{ url: jsonItem['head_pic'] }];
-			jsonItem['payment_code'] = [{ url: jsonItem['payment_code'] }];
+			const jsonItem = JSON.parse(strItem);
+			const result = await useRequest(() => fetchStoreCenterDetail({ id: jsonItem['id'] }));
+			if(result) {
+				// 图像格式为数组
+				result['head_pic'] = [{ url: result['head_pic'] }];
+				result['payment_code'] = [{ url: result['payment_code'] }];
+
+				// 所在地区
+				result['address'] = JSON.parse(result['address']);
+				
+				// 主管和提货点赋值数据
+				const zhuguanList = result['director_list'];
+				const tihuodianList = result['pickup_points'];
+
+				this.setData({ type, defaultValues: result, zhuguanList, tihuodianList });
+				this.onAllList(type, result); // 获取提货点和规格下拉列表数据
+			}
+		}else{
+			// 主管和提货点数据
+			const zhuguanList = [{ id: createGuid(6), director: '', director_phone: '' }];
+			const tihuodianList = [];
+			
+			this.setData({ type, defaultValues: {}, zhuguanList, tihuodianList });
+			this.onAllList(type, {}); // 获取提货点和规格下拉列表数据
 		}
-
-		// 主管列表需要添加 id，提货点使用 point_id
-		const zhuguanList = type == 'edit' ? jsonItem['director_list'].map((item) => ({ id: createGuid(6), ...item })) : [{ id: createGuid(6), director: '', director_phone: '' }];
-		const tihuodianList = type == 'edit' ? jsonItem['pickup_points'].map((item) => ({ id: createGuid(6), ...item })) : [];
-		this.setData({ type, defaultValues: jsonItem, zhuguanList, tihuodianList });
-
-		// 获取所有提货点和规格
-		this.onAllList(type, jsonItem);
 	}
 })

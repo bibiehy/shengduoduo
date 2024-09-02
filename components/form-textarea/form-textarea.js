@@ -21,7 +21,7 @@ Component({
         remark: { type: String, value: '' }, // 对 label 字段的补充
         message: { type: String, value: '' }, // 必填后的错误提示内容
         maxlength: { type: String, value: -1 }, // 用户最多可以输入的字符个数。默认为 -1，不限制输入长度，
-        height: { type: String, value: 120 }, // 文本框的高度 24*4
+        height: { type: String, value: 96 }, // 文本框的高度 24*4
     },
     data: {
         formValue: '',

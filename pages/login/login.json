@@ -2,19 +2,12 @@
 	"usingComponents": {
 		"t-result": "tdesign-miniprogram/result/result",
 		"t-count-down": "tdesign-miniprogram/count-down/count-down",
-		"t-tabs": "tdesign-miniprogram/tabs/tabs",
-		"t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-		"t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar",
 		"t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
 		"t-radio": "tdesign-miniprogram/radio/radio",
-		"t-checkbox-group": "tdesign-miniprogram/checkbox-group/checkbox-group",
 		"t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
 		"t-input": "tdesign-miniprogram/input/input",
 
-		"form-input": "/components/form-input/form-input",
-		"form-avatar": "/components/form-avatar/form-avatar",
-		"form-picker": "/components/form-picker/form-picker",
-		"form-carnumber": "/components/form-carnumber/form-carnumber",
-		"popup-select": "/components/popup-select/popup-select"
+		"tmpl-fahuoren": "/components/tmpl-fahuoren/index",
+		"tmpl-drivers": "/components/tmpl-drivers/index"
 	}
 }

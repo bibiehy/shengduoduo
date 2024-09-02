@@ -35,7 +35,7 @@ Page({
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });
 				await delay(500);
-				goBackAndRefresh(type, result['data']); // 返回父页面并调用父页面的 onRefresh 方法，当 type=edit 时才使用 result['data']
+				goBackAndRefresh(type, result); // 返回父页面并调用父页面的 onRefresh 方法，当 type=edit 时才使用 result
 			}
 		}
 	},

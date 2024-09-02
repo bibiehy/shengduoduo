@@ -26,6 +26,7 @@ Component({
         onChange(e) {
             const formValue = e.detail.value;
 			this.setData({ formValue });
+			this.triggerEvent('callback', { value: formValue });
         },
         // 以下是对外的方法
         getFieldVerify() { // 获取校验后的表单值

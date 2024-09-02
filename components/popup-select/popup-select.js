@@ -22,7 +22,7 @@ Component({
         value: function(newValue) { // 监听外部传递的 value
             const { options } = this.data;
             const thisOption = options.find((item) => item['value'] == newValue) || { label: '', value: '', content: '' };
-            this.setData({ formValue: thisOption['value'], formName: thisOption['label'] });
+            this.setData({ selectValue: thisOption['value'], selectLabel: thisOption['label'] });
         },
         options: function(newOptions) {
             this.setData({ searchOptions: newOptions });

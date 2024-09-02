@@ -20,7 +20,7 @@ Component({
     },
     methods: {
         onChooseAvatar(e) {
-            const { avatarUrl } = e.detail;
+			const { avatarUrl } = e.detail;
             this.setData({ formValue: avatarUrl });
         },        
         // 以下是对外的方法

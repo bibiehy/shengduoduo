@@ -30,16 +30,7 @@
 .tabs-signup .tabitem.active { color:#1677ff; font-weight:600; }
 .page-signup { flex:1; position:relative; padding-bottom:150px; }
 .page-signup .tips { background-color:#fffbe6; font-size:14px; line-height:18px; padding:10px 20px; }
-.page-signup .mainbox { background-color:#fff; border-radius:8px; padding-top:8px; margin:10px; overflow:hidden; }
-.page-signup .mainbox .tripbox { border:solid 1rpx #f3f3f3; border-radius:8px; padding-bottom:10px; margin:10px; }
-.page-signup .mainbox .tripbox .header { font-size:16px; background-color:#f3f3f3; color:rgba(0, 0, 0, 0.8); font-weight:600; padding:15px; }
-.page-signup .mainbox .tripbox .tripselect { display:flex; justify-content:flex-end; height:44px; margin:10px; }
-.page-signup .mainbox .tripbox .tripitem { border:solid 1rpx #f3f3f3; margin:5px 10px 10px; }
-.page-signup .mainbox .tripbox .tripitem .subheader { display:flex; align-items:center; justify-content:space-between; background-color:#f0f0f0; padding:12px; }
-.page-signup .mainbox .tripbox .tripitem .subheader .subname { flex:1; font-size:16px; color:rgba(0, 0, 0, 0.9); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-right:12px; }
-.page-signup .mainbox .tripbox .tripitem .subheader .t-icon { font-size:20px; color:#ff3b30; }
-.page-signup .mainbox .tripbox .addbtn { display:flex; align-items:center; justify-content:center; color:#1677ff; font-size:18px; font-weight:600; padding:10px 0; }
-.page-signup .mainbox .tripbox .addbtn .t-icon { font-size:22px; }
+.page-signup .mainbox { background-color:#fff; border-radius:8px; padding:10px 10px; margin:10px; overflow:hidden; }
 .page-signup .fixedbottom { z-index:50; position:fixed; left:0; bottom:0; width:100%; background-color:#fff; box-shadow:5px 0 10px #e2e1e1; padding:18px; }
 .page-signup .fixedbottom .t-button { font-size:20px !important; }
 

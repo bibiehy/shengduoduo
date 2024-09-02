@@ -1,7 +1,7 @@
 .admin-wrapper { width:100%; height:100%; padding-bottom:150px; overflow-y:auto; }
 .admin-wrapper .main-summary { display:flex; padding:20px 0; }
 .admin-wrapper .main-summary .sumbox { flex:1; text-align:center; }
-.admin-wrapper .main-summary .sumbox .sumname { color:rgba(255, 255, 255, 0.6); font-size:15px; margin-bottom:10px; }
+.admin-wrapper .main-summary .sumbox .sumname { color:rgba(255, 255, 255, 0.6);  font-size:15px; margin-bottom:10px; }
 .admin-wrapper .main-summary .sumbox .sumnumber { color:rgba(255, 255, 255, 0.9); font-size:24px; font-weight:600; }
 
 .admin-wrapper .main-modules { display:flex; flex-wrap:wrap; background-color:#fff; border-radius:10px; padding:8px 8px 10px; margin:0 10px; }
@@ -16,10 +16,11 @@
 .main-message .header .msgright { display:flex; align-items:center; color:rgb(206, 205, 205); margin-right:-10px; }
 .main-message .header .msgright .msgcount { min-width:24px; height:24px; text-align:center; line-height:24px; background-color:#ff3b30; border-radius:50%; color:#fff; font-size:12px; transform:scale(0.85); margin-right:-5px; }
 .main-message .nodata { height:240px; }
-.main-message .msgitem { position:relative; padding-bottom:15px; padding-left:25px; }
-.main-message .msgitem .t-icon { position:absolute; left:0; top:13px; width:20px; }
-.main-message .msgitem .msgtime { color:rgba(0, 0, 0, 0.45); font-size:13px; line-height:13px; }
-.main-message .msgitem .msgdesc { color:rgba(0, 0, 0, 0.9); font-size:15px; }
+.main-message .msgitem { padding-bottom:15px; }
+.main-message .msgitem .msgdesc { display:flex; align-items:center; width:100%; }
+.main-message .msgitem .msgdesc .t-icon { display:block; margin-right:4px; }
+.main-message .msgitem .msgdesc .desc { flex:1; color:rgba(0, 0, 0, 0.9); font-size:15px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.main-message .msgitem .msgtime { color:rgba(0, 0, 0, 0.45); font-size:13px; line-height:13px; padding-left:25px; }
 
 .main-global { background-color:#fff; border-radius:10px; padding:15px 20px 10px; margin:10px; }
 .main-global .gbtitle { font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; }

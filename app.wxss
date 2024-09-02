@@ -57,10 +57,10 @@ page {
 .myFormInput .t-input .t-input__wrap--suffix { font-size:16px; color:rgba(0, 0, 0, 0.8) !important; }
 
 /* form-radio */
-/* .myFormRadio.myFormHorizontal { display:flex; align-items:center; justify-content:space-between; } */
 .myFormRadio .t-radio-group { width:100%; }
 .myFormRadio .t-radio-group .t-radio { margin-right:10px; }
 .myFormRadio .t-radio-group .t-radio .t-radio__title { font-size:17px !important; line-height:24px !important; color:rgba(0, 0, 0, 0.7) !important; }
+.myFormRadio.myFormVertical .myFormItem {margin-top:10px !important; }
 
 /* form-datepicker 日期字号小一点 */
 .myFormDatepicker .myFormBox .myFormItem .myItemName { font-size:15px; }
@@ -89,7 +89,7 @@ page {
 .myPopupFormselect .myPopupHeader .myPopupTitle { flex:1; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); }
 .myPopupFormselect .myPopupSearch { z-index:10; position:relative; box-shadow:2px 2px 10px #ececec; padding:5px 12px; }
 .myPopupFormselect .myPopupScrollbox { flex:1; padding:5px 15px 25px 5px; overflow-y:auto; }
-.myPopupFormselect .myPopupScrollbox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:24px 16px; }
+.myPopupFormselect .myPopupScrollbox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:12px 16px !important; }
 
 /* form-mulselect */
 .myPopupFormMulselect { display:flex; flex-direction:column; width:100%; height:60vh; background-color:#fff; border-top-left-radius:12px; border-top-right-radius:12px; }
@@ -132,7 +132,7 @@ page {
 .myPopupSingleselect .myHeader .myTitle { flex:1; text-align:center; font-size:17px; color:rgba(0, 0, 0, 0.8); }
 .myPopupSingleselect .mySearch { z-index:10; position:relative; box-shadow:2px 2px 10px #ececec; padding:5px 12px; }
 .myPopupSingleselect .myScrollBox { flex:1; padding:5px 15px 25px 5px; overflow-y:auto; }
-.myPopupSingleselect .myScrollBox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:24px 16px; }
+.myPopupSingleselect .myScrollBox .t-radio-group .t-radio { --td-radio-icon-size:22px; padding:14px 16px !important; }
 
 /* 省市县级联 */
 .t-cascader__close-btn { z-index:100 !important; }
@@ -154,4 +154,5 @@ page {
 .global-page-search .pageline { width:1px; height:18px; background-color:#ccc; margin:0 15px; }
 .global-page-search .pageaddbtn { display:flex; align-items:center; font-size:18px; color:#1677ff; font-weight:600; line-height:36px; }
 
+/* 添加/注册/审核用户信息 */
 

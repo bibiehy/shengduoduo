@@ -17,13 +17,14 @@ Page({
 		// 上拉加载
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
 	},
+	// 
 	async onAjaxList(thisPage, callback) { // 列表请求
 		const { keyword, dataList, upStatus } = this.data;
 		const result = await useRequest(() => fetchStoreCenterList({ page: thisPage, name: keyword || '' }));
 		if(result) {
 			const newList = [];
 			result['content'].forEach((item) => {
-				item['address'] = item['address'] == '北京' ? [{ label: '北京' }] : JSON.parse(item['address']);
+				item['address'] = JSON.parse(item['address']);
 				item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、');
 				newList.push(item);
 			});
@@ -49,7 +50,7 @@ Page({
 		}else if(type == 'edit') { // 编辑
 			const { dataList } = this.data;
 			const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
-			if(findIndex) {
+			if(findIndex >= 0) {
 				formValues['address'] = JSON.parse(formValues['address']);
 				formValues['addressStr'] = (formValues['address'].map((adItem) => adItem['label'])).join('、');
 				dataList.splice(findIndex, 1, formValues);
@@ -69,6 +70,7 @@ Page({
 			this.setData({ upStatus: currentList.length <= 0 ? 3 : 1 });
 		});
 	},
+	// 搜索
 	onSearchChange(e) { // 更新搜索关键字
 		const targetValue = e.detail.value;
 		this.setData({ keyword: targetValue });
@@ -76,6 +78,7 @@ Page({
 	onSearch() { // 搜索
 		this.onAjaxList(1);
 	},
+	// 操作
 	async onDisabled(e) { // 禁用/启用
 		const { dataList } = this.data;
 		const { id, status, index } = e.currentTarget.dataset;

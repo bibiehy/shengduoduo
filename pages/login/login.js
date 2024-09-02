@@ -9,7 +9,7 @@ Page({
 	data: {
 		loginVisible: false, // 是否显示验证码登录
 		isChecked: false, // 协议是否选中
-		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中
+		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 提交成功，等待审核(非接口定义)
 		phoneNumber: '', // 手机号码
 		phoneNumberAsterisk: '', // 中间4位为*
 		// roleList: [{ type: 1, name: '发货人' }, { type: 2, name: '收货人' }, { type: 3, name: '干线司机' }], // 角色列表，用于多角色
@@ -21,11 +21,6 @@ Page({
 		// roleState: '1', // 测试
 		// phoneNumber: '180****6071', // 测试 '18069866071'.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 		tabsValue: 'consignor',
-		popupVisible: false, // 提货点
-		jihuoCenterOptions: [], // 激活中心
-		tihuodianOptions: [], // 集货中心下的提货点
-		goodsOptions: [], // 商品类别
-		carOptions: [], // 车辆型号
 	},
 	onWxAuth() { // 判断是否勾选用户协议
 		if(!this.data.isChecked) {
@@ -168,8 +163,14 @@ Page({
 
 		this.setData({ tabsValue: dataValue });
 	},
-	onAddTihuo() { // 添加提货点
-		this.setData({ popupVisible: true });
+	async onSignupSure() { // 提交：注册发货人或干线司机
+		const { tabsValue } = this.data;
+		const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+		const formValues = child.getFormValues();
+		const result = tabsValue == 'consignor' ? (await useRequest(() => fetchSignConsignor(formValues))) : (await useRequest(() => fetchSignDriver(formValues)));
+		if(result) {
+			this.setData({ roleState: 5 }); // 等待审核
+		}
 	},
 	onLoad(options) {
 		
