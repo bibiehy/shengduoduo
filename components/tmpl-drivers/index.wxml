@@ -17,33 +17,23 @@
 	<form-select class="FORM_SELECT" bind:callback="onSelectCenter" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" remark="注意：切换此值路线信息会被清空" options="{{centerOptions}}" placeholder="请选择集货中心" required="{{true}}" />
 	<view class="runRouteBox">
 		<view class="header">请添加您想跑的路线信息</view>
-		<!-- <view class="routeselect">
-			<popup-select bind:callback="onSelectCenter" options="{{centerOptions}}" width="300px" showInput="{{true}}" placeholder="请选择所属集货中心" />
-		</view> -->
-		<view class="routeitem">
-			<view class="subheader">
-				<view class="subname">1. 四方仓库吉祥提货点四方仓库吉祥提货点</view>
-				<t-icon name="delete" size="20px" color="#ff3b30" />
+		<view class="routeBody">
+			<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+			<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
+				<view class="subheader">
+					<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
+					<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
+					<!-- <t-icon bind:tap="onDelete" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" name="delete" size="20px" color="#ff3b30" /> -->
+				</view>
+				<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元" placeholder="请输入费用" required="{{true}}" />
 			</view>
-			<form-input label="期望单趟费用" layout="horizontal" placement="right" name="trip_cost_1" type="number" suffix="元" placeholder="请输入费用" required="{{true}}" />
-		</view>
-		<view class="routeitem">
-			<view class="subheader">
-				<view class="subname">2. 四方仓库吉祥提货点四方仓库吉祥提货点</view>
-				<t-icon name="delete" size="20px" color="#ff3b30" />
-			</view>
-			<form-input label="期望单趟费用" name="trip_cost_1" type="number" layout="horizontal" placement="right" suffix="元" placeholder="请输入费用" required="{{true}}" />
-		</view>
-		<popup-select options="{{pickupOptions}}" display="block" placeholder="请输入提货点">
+		</view>		
+		<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
 			<view class="routeAddBtn">
 				<t-icon name="add" />
 				<text>添加路线</text>
 			</view>
 		</popup-select>
-	</view>		
-	<!-- <block wx:if="{{actionType != 'signup'}}">
-		<form-radio class="FORM_RADIO" bind:callback="{{onPaytype}}" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" layout="horizontal" required="{{true}}" />
-		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
-		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
-	</block> -->
+	</view>
 </view>
+<t-action-sheet id="actionSheetDrivers" bind:selected="onHandlerSelected" />

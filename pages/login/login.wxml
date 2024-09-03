@@ -4,6 +4,7 @@
 		<view class="tabs-signup">
 			<view class="{{tabsValue == 'consignor' ? 'tabitem active' : 'tabitem'}}" bind:tap="onClickTabs" data-value="consignor">发货人</view>
 			<view class="{{tabsValue == 'drivers' ? 'tabitem active' : 'tabitem'}}" bind:tap="onClickTabs" data-value="drivers">干线司机</view>
+			<view class="line {{tabsValue}}"></view>
 		</view>
 	</navigation-bar>
 	<navigation-bar wx:else title="{{roleState == 3 ? '请选择登录角色' : '登录'}}" placement="center" showBack="{{false}}" boxShadow="none" background="#fff"></navigation-bar>
@@ -157,7 +158,7 @@
 	</view>
 
 	<!-- 提交成功，等待审核 -->
-	<view wx:elif="{{roleState == 5}}" class="container page-audit">
+	<view wx:elif="{{roleState == 10}}" class="container page-audit">
 		<t-result theme="success" title="提交成功，等待系统审核" description="" />
 	</view>
 

@@ -15,6 +15,10 @@ Component({
 	methods: {
 		getFormValues() {
 			const formValues = form.validateFields(this);
+			if(formValues) {
+				formValues['address'] = JSON.stringify(formValues['address']);
+			}
+			
 			return formValues;
 		}
 	},

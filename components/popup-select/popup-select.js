@@ -7,7 +7,7 @@ Component({
 		title: { type: String, value: '' }, // 暂时没用
         value: { type: Number, value: '', optionalTypes: [String] },
         placeholder: { type: String, value: '' },
-        options: { type: Array, value: [] }, // { label: '', value: '', content: '' }
+        options: { type: Array, value: [] }, // { label: '', value: '', content: '', disabled: false }
         showInput: { type: Boolean, value: false }, // 是否展示文本框形式，否则就用 solt
         width: { type: String, value: '100%' },
 		display: { type: String, value: 'inline-block' },

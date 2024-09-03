@@ -89,10 +89,14 @@ Component({
 				}
 
 				this.setData({ errTips });
-                return false;
+			}
+			
+			let newValue = '';
+			if(formValue == 0 || formValue) {
+				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
 			}
 
-            this.triggerEvent('onblur', { name, value: formValue });
+            this.triggerEvent('onblur', { name, value: newValue });
         },
         onClick() { // 点击图标
             const { name, formValue } = this.data;
@@ -121,12 +125,21 @@ Component({
                 this.setData({ errTips });
             }            
 
-			const newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
+			let newValue = '';
+			if(formValue == 0 || formValue) {
+				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
+			}
+
             return { verify: isVerify, name, value: newValue };
         },
         getFieldValue() {
 			const { name, type, formValue } = this.data;
-			const newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
+
+			let newValue = '';
+			if(formValue == 0 || formValue) {
+				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
+			}
+
             return { name, value: newValue };
         },
         setFieldValue(value) {

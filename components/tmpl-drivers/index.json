@@ -9,6 +9,7 @@
 		"form-radio": "/components/form-radio/form-radio",
 		"form-carnumber": "/components/form-carnumber/form-carnumber",
 		"popup-select": "/components/popup-select/popup-select",
-		"form-provincecity": "/components/form-provincecity/form-provincecity"
+		"form-provincecity": "/components/form-provincecity/form-provincecity",
+		"t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
     }
 }

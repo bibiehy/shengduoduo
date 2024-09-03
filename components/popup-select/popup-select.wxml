@@ -22,7 +22,7 @@
         <view class="myScrollBox">
             <empty wx:if="{{searchOptions.length <= 0}}" />
             <t-radio-group wx:else value="{{selectValue}}" bind:change="onRadioChange">
-                <t-radio wx:for="{{searchOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" />
+                <t-radio wx:for="{{searchOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" disabled="{{item['disabled']}}" />
             </t-radio-group>
         </view>        
     </view>

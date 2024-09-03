@@ -25,9 +25,12 @@
 .page-login .mainbox .codebtn { margin-top:20px; }
 
 /* 角色注册 */
-.tabs-signup { display:flex; width:100%; padding:0 15px; }
+.tabs-signup { position:relative; display:flex; width:100%; padding:0 15px; }
 .tabs-signup .tabitem { color:rgba(0, 0, 0, 0.8); font-size:17px; line-height:32px; padding:0 15px; }
 .tabs-signup .tabitem.active { color:#1677ff; font-weight:600; }
+.tabs-signup .line { position:absolute; left:28px; bottom:-4px; width:0; height:3px; background-color:#1677ff; transition:all 0.3s; }
+.tabs-signup .line.consignor { left:28px; width:52px; }
+.tabs-signup .line.drivers { left:112px; width:68px; }
 .page-signup { flex:1; position:relative; padding-bottom:150px; }
 .page-signup .tips { background-color:#fffbe6; font-size:14px; line-height:18px; padding:10px 20px; }
 .page-signup .mainbox { background-color:#fff; border-radius:8px; padding:10px 10px; margin:10px; overflow:hidden; }
@@ -42,7 +45,7 @@
 
 /* 审核 */
 .page-audit { flex:1; padding-top:80px; }
-
+.page-audit .t-result__title { margin-top:30px !important; }
 
 
 

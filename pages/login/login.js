@@ -2,6 +2,12 @@ import useRequest from '../../utils/request';
 import { fetchWxLogin, fetchPhoneLogin, fetchToken, fetchSendSMS, fetchSignConsignor, fetchSignDriver } from '../../service/login';
 import { getUserAndGoRolePage, form, getScrollColor } from '../../utils/tools';
 
+// 黑神话悟空
+// 王小北
+// 南来北往
+// 和平广场180号
+// 20000
+
 // 获取 app 实例
 const app = getApp();
 
@@ -9,7 +15,7 @@ Page({
 	data: {
 		loginVisible: false, // 是否显示验证码登录
 		isChecked: false, // 协议是否选中
-		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 提交成功，等待审核(非接口定义)
+		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 10: 提交成功，等待审核(非接口定义)
 		phoneNumber: '', // 手机号码
 		phoneNumberAsterisk: '', // 中间4位为*
 		// roleList: [{ type: 1, name: '发货人' }, { type: 2, name: '收货人' }, { type: 3, name: '干线司机' }], // 角色列表，用于多角色
@@ -123,18 +129,24 @@ Page({
 	},
 	async onCodeLogin() { // 验证码登录按钮
 		const { isChecked, phoneNumber, verifycode } = this.data;
-		if(!isChecked) {
-			wx.showToast({ title: '请勾选用户协议', icon: 'error' });
-			return false;
-		}
 
 		if(!phoneNumber) {
 			wx.showToast({ title: '请输入手机号码', icon: 'error' });
 			return false;
 		}
 
+		if(phoneNumber && !/^1[0-9]{10}$/.test(phoneNumber)) {
+			wx.showToast({ title: '手机格式不正确', icon: 'error' });
+			return false;
+		}
+
 		if(!verifycode) {
 			wx.showToast({ title: '请输入验证码', icon: 'error' });
+			return false;
+		}
+
+		if(!isChecked) {
+			wx.showToast({ title: '请勾选用户协议', icon: 'error' });
 			return false;
 		}
 
@@ -167,9 +179,11 @@ Page({
 		const { tabsValue } = this.data;
 		const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
 		const formValues = child.getFormValues();
-		const result = tabsValue == 'consignor' ? (await useRequest(() => fetchSignConsignor(formValues))) : (await useRequest(() => fetchSignDriver(formValues)));
-		if(result) {
-			this.setData({ roleState: 5 }); // 等待审核
+		if(formValues) {
+			const result = tabsValue == 'consignor' ? (await useRequest(() => fetchSignConsignor(formValues))) : (await useRequest(() => fetchSignDriver(formValues)));
+			if(result) {
+				this.setData({ roleState: 10 }); // 等待审核
+			}
 		}
 	},
 	onLoad(options) {

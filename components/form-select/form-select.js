@@ -1,5 +1,5 @@
 // components/form-select/form-select.js
-// bind:callback 点击图标事件，参数为 e, e.detail.value = { name, value }
+// bind:callback 点击确定事件，参数为 e, e.detail = { name, value }
 
 Component({
     behaviors: ['wx://form-field'],
