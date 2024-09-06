@@ -1,3 +1,6 @@
+//
+const app = getApp();
+
 Component({
     behaviors: ['wx://form-field'],
     properties: {
@@ -21,7 +24,26 @@ Component({
     methods: {
         onChooseAvatar(e) {
 			const { avatarUrl } = e.detail;
-            this.setData({ formValue: avatarUrl });
+			const fileSystem = wx.getFileSystemManager();
+			const savedFilePath = fileSystem.saveFileSync(avatarUrl);
+
+			wx.uploadFile({
+                url: app.uploadURL,
+                filePath: savedFilePath,
+                name: 'file',
+                // formData: { user: 'test' }, // 额外参数
+                success: (res) => {
+					const response = JSON.parse(res['data']);
+					if(response['code'] == 0) {
+						this.setData({ formValue: response['data'] });
+					}else{
+						wx.showToast({ title: '图片上传失败', icon: 'error' });
+					}                	
+				},
+				fail: (res, statusCode) => {
+					wx.showToast({ title: res['errMsg'], icon: 'error' });
+				}
+            });
         },        
         // 以下是对外的方法
         getFieldVerify() { // 获取校验后的表单值

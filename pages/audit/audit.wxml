@@ -1,0 +1,50 @@
+<view class="audit-box">
+	<navigation-bar title="信息审核" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、手机号等关键字" />
+	</view>
+	<t-tabs defaultValue="{{3}}">
+		<t-tab-panel label="全部" value="3" />
+		<t-tab-panel label="待审核" value="0" badge-props="{{ { count: unAuditCount, offset: ['8px', '8px'] } }}" />
+		<t-tab-panel label="已审核" value="1" />
+	</t-tabs>
+	<t-pull-down-refresh
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag wx:if="{{item['status'] == 0}}" class="status" variant="light" theme="primary" size="small">待审核</t-tag>
+					<t-tag wx:elif="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已通过</t-tag>
+					<t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<view class="mainbox" bind:tap="onAudit" data-id="{{item['id']}}" data-role="{{item['role_type']}}">
+						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
+						<view wx:if="{{item['role_type'] == 1}}" class="rightbox">
+							<view class="psname">发货人申请</view>
+							<view class="pstime">{{item['createTime']}}</view>
+							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+							<view class="psinfo">{{item['center_name']}}</view>
+							<!-- <view class="psinfo">{{item['addressStr']}} {{item['region']}}</view> -->
+						</view>
+						<view wx:if="{{item['role_type'] == 3}}" class="rightbox">
+							<view class="psname">干线司机申请</view>
+							<view class="pstime">{{item['createTime']}}</view>
+							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+							<view class="psinfo">{{item['center_name']}} | {{item['type_name']}}</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 10px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>	
+</view>

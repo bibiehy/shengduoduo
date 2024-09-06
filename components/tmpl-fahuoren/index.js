@@ -20,6 +20,11 @@ Component({
 			}
 			
 			return formValues;
+		},
+		getFormValuesUnverified() {
+			const formValues = form.getFieldsValue(this);
+			formValues['address'] = JSON.stringify(formValues['address']);
+			return formValues;
 		}
 	},
 	// 自定义组件内的生命周期

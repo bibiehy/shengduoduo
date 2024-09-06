@@ -33,6 +33,10 @@
 			<view class="modimg"><image mode="widthFix" src="../../assets/pickup_point.png" /></view>
 			<view class="modname">提货点</view>
 		</view>
+		<view class="moditem" bind:tap="onPageJump" data-name="audit">
+			<view class="modimg"><image mode="widthFix" src="../../assets/audit.png" /></view>
+			<view class="modname">信息审核</view>
+		</view>
 		<view class="moditem">
 			<view class="modimg"><image mode="widthFix" src="../../assets/drivers.png" /></view>
 			<view class="modname">司机调度</view>
@@ -40,10 +44,6 @@
 		<view class="moditem">
 			<view class="modimg"><image mode="widthFix" src="../../assets/error_order.png" /></view>
 			<view class="modname">异常订单</view>
-		</view>
-		<view class="moditem">
-			<view class="modimg"><image mode="widthFix" src="../../assets/audit.png" /></view>
-			<view class="modname">信息审核</view>
 		</view>
 		<view class="moditem">
 			<view class="modimg"><image mode="widthFix" src="../../assets/finance.png" /></view>

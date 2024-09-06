@@ -92,7 +92,7 @@ Component({
 			}
 			
 			let newValue = '';
-			if(formValue == 0 || formValue) {
+			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
 			}
 
@@ -126,7 +126,7 @@ Component({
             }            
 
 			let newValue = '';
-			if(formValue == 0 || formValue) {
+			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
 			}
 
@@ -136,7 +136,7 @@ Component({
 			const { name, type, formValue } = this.data;
 
 			let newValue = '';
-			if(formValue == 0 || formValue) {
+			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
 			}
 

@@ -59,7 +59,7 @@ Page({
 	},
 	onPullUpLoaded(e) { // 上拉加载
 		const { currentPage, upStatus } = this.data;
-		if(upStatus == 3) { // 已全部加载
+		if(upStatus == 2 || upStatus == 3) { // 加载中或已全部加载
 			return false;
 		}
 

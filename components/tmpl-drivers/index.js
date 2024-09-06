@@ -4,7 +4,6 @@ import { form, delay, createGuid } from '../../utils/tools';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 
 // ActionSheet
-let actionSheetHandler = '';
 const getActionSheetOptions = (that, args) => {
 	const { id, name, biaoshi } = args;
 	const moveupDisabled = biaoshi == 'all' ? true : (biaoshi == 'moveup');
@@ -35,24 +34,30 @@ Component({
 		carOptions: [],
 		centerOptions: [],
 		pickupOptions: [], // 集货中心下的提货点
-		routeList: [], // 添加的路线信息
+		routeList: [], // 添加的路线信息 { point_id: '', point_name: '', cost: '' }
 		// 支付类型
-		payType: 1,
+		payType: 1, // 1 固定工价，2 运费系数
 		paytypeOptions: [{ label: '固定工价', value: 1 }, { label: '运费系数', value: 2 }],
 	},
     // 监听 properties 值变化
     observers: {
-        defaultValues: function(values) { // 监听外部传递的 value
-			this.setData({ payType: values['pay_type'] || 1 });
-        }
+        defaultValues: function(values) { // 监听外部传递的 values
+			this.setData({ payType: values['pay_type'] || 1, routeList: values['expect_route_list'] || [] });
+		},
+		actionType: function(value) { // 编辑和审核时候根据集货中心id获取其提货点
+			if(['audit', 'edit'].includes(value)) {
+				const { defaultValues } = this.data;
+				this.onSelectCenter({ value: defaultValues['center_id'] });
+			}
+		}
     },
 	methods: {
-		async onSelectCenter(e) { // 选择激活中心后的回调，去匹配下面的提货点或编辑时候父组件调用
-			const { label, value, expectList } = e.detail;
+		async onSelectCenter(e) { // 选择激活中心后的回调，去匹配下面的提货点
+			const { label, value } = e.detail;
 			const dataList = await useRequest(() => fetchPickupFromCenter({ id: value }));
 			if(dataList) { // { label: '', value: '' }
 				const newList = dataList.map((item) => ({ label: item['name'], value: item['point_id'] }));
-				this.setData({ pickupOptions: newList, routeList: expectList || [] });
+				this.setData({ pickupOptions: newList });
 			}
 		},
 		onAddSure(e) { // 添加路线

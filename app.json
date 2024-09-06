@@ -11,7 +11,9 @@
 		"pages/pickuppoint/create/create",
 		"pages/storecenter/storecenter",
 		"pages/storecenter/create/create",
-		"pages/globalinfo/globalinfo"
+		"pages/globalinfo/globalinfo",
+		"pages/audit/audit",
+		"pages/audit/detail/detail"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

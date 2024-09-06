@@ -25,6 +25,8 @@ Page({
 			wx.navigateTo({ url: '/pages/storecenter/storecenter' });
 		}else if(name == 'global') { // 全局信息设置
 			wx.navigateTo({ url: '/pages/globalinfo/globalinfo' });
+		}else if(name == 'audit') { // 信息审核
+			wx.navigateTo({ url: '/pages/audit/audit' });
 		}
 	},	
 	onLoad(options) {

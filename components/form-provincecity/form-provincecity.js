@@ -6,7 +6,7 @@ Component({
     properties: {
         label: { type: String, value: '' },
         name: { type: String, value: '' },
-        value: { type: Array, value: [] }, // selectedOptions[] { label: '', value: '' }
+        value: { type: Array, value: [], optionalTypes: [String] }, // selectedOptions[] { label: '', value: '' }
         title: { type: String, value: '' },
         placeholder: { type: String, value: '' },
         disabled: { type: Boolean, value: false },

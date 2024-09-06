@@ -1,0 +1,7 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"tmpl-fahuoren": "/components/tmpl-fahuoren/index",
+		"tmpl-drivers": "/components/tmpl-drivers/index"
+	}
+}
