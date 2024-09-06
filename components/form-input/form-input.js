@@ -94,7 +94,12 @@ Component({
 			let newValue = '';
 			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
-			}
+            }
+            
+            // 为了兼容后台设定的必须是浮点型值类型，如果为空传 null
+            if(typeof formValue == 'string' && formValue === '' && ['number', 'digit'].includes(type)) {
+                newValue = null;
+            }
 
             this.triggerEvent('onblur', { name, value: newValue });
         },
@@ -128,7 +133,12 @@ Component({
 			let newValue = '';
 			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
-			}
+            }
+            
+            // 为了兼容后台设定的必须是浮点型值类型，如果为空传 null
+            if(typeof formValue == 'string' && formValue === '' && ['number', 'digit'].includes(type)) {
+                newValue = null;
+            }
 
             return { verify: isVerify, name, value: newValue };
         },
@@ -138,7 +148,12 @@ Component({
 			let newValue = '';
 			if(formValue === '0' || formValue) {
 				newValue = ['number', 'digit'].includes(type) ? parseFloat(formValue) : formValue;
-			}
+            }
+            
+            // 为了兼容后台设定的必须是浮点型值类型，如果为空传 null
+            if(typeof formValue == 'string' && formValue === '' && ['number', 'digit'].includes(type)) {
+                newValue = null;
+            }
 
             return { name, value: newValue };
         },
