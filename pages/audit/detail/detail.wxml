@@ -1,7 +1,7 @@
 <view class="audit-detail-box">
 	<navigation-bar title="{{roleType == 1 ? '发货人信息审核' : '干线司机信息审核'}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
 	<view class="mainbox">
-		<view class="innerbox">
+		<view wx:if="{{status == 0}}" class="innerbox">
 			<block wx:if="{{roleType == 1}}">
 				<tmpl-fahuoren id="templateFahuoren" defaultValues="{{defaultValues}}" actionType="audit" />
 			</block>
@@ -9,11 +9,18 @@
 				<tmpl-drivers id="templateDrivers" defaultValues="{{defaultValues}}" actionType="audit" />
 			</block>
 		</view>
+        <view wx:if="{{status == 1 || status == 2}}" class="innerbox">
+            <view wx:if="{{status == 1}}" class="status"><image src="../../../assets/agress.png" /></view>
+            <view wx:if="{{status == 2}}" class="status"><image src="../../../assets/refuse.png" /></view>
+        </view>
 	</view>
-	<fixed-bottom-button>
-		<view class="fixed-bottom-btns">
-			<t-button t-class="fixedbtn" bind:tap="onAgree" theme="primary" shape="round">同 意</t-button>
-			<t-button t-class="fixedbtn" bind:tap="onRefuse" theme="danger" shape="round" variant="outline">拒 绝</t-button>
-		</view>
-	</fixed-bottom-button>
+    <block wx:if="{{status == 0}}">
+        <fixed-bottom-button>
+            <view class="fixed-bottom-btns">
+                <view class="daishenhe">待审核。。。</view>
+                <t-button t-class="fixedbtn" bind:tap="onAgree" theme="primary" shape="round">同 意</t-button>
+                <t-button t-class="fixedbtn" bind:tap="onRefuse" theme="danger" shape="round" variant="outline">拒 绝</t-button>
+            </view>
+        </fixed-bottom-button>
+    </block>
 </view>

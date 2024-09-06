@@ -23,7 +23,7 @@
 					<t-tag wx:if="{{item['status'] == 0}}" class="status" variant="light" theme="primary" size="small">待审核</t-tag>
 					<t-tag wx:elif="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已通过</t-tag>
 					<t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
-					<view class="mainbox" bind:tap="onAudit" data-id="{{item['id']}}" data-role="{{item['role_type']}}">
+					<view class="mainbox" bind:tap="onAudit" data-id="{{item['id']}}" data-role="{{item['role_type']}}" data-status="item['status']">
 						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
 						<view wx:if="{{item['role_type'] == 1}}" class="rightbox">
 							<view class="psname">发货人申请</view>

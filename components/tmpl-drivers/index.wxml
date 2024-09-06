@@ -8,12 +8,7 @@
 	<form-picker class="FORM_PICKER" label="车辆类型" name="type" value="{{defaultValues['type']}}" options="{{carOptions}}" placeholder="请选择车辆类型" required="{{true}}" cancelBtn="取消" confirmBtn="确定" />
 	<form-input class="FORM_INPUT" label="最大载重" name="max_number" value="{{defaultValues['max_number']}}" placeholder="请输入车辆最大载重" type="number" remark="如：1150" suffix="千克(kg)" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="可装卡板数量" name="can_card_num" value="{{defaultValues['can_card_num']}}" placeholder="请输入可装卡板最大数量" type="number" remark="如：12" suffix="个" required="{{true}}" />
-	<form-carnumber class="FORM_CARNUMBER" label="车牌号码" name="card_no" value="{{defaultValues['card_no']}}" placeholder="请添加车牌号码" required="{{true}}" />
-	<block wx:if="{{actionType != 'signup'}}">
-		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
-		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
-		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
-	</block>	
+	<form-carnumber class="FORM_CARNUMBER" label="车牌号码" name="card_no" value="{{defaultValues['card_no']}}" placeholder="请添加车牌号码" required="{{true}}" />	
 	<form-select class="FORM_SELECT" bind:callback="onSelectCenter" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" remark="注意：切换此值路线信息会被清空" options="{{centerOptions}}" placeholder="请选择集货中心" required="{{true}}" />
 	<view class="runRouteBox">
 		<view class="header">请添加您想跑的路线信息</view>
@@ -23,7 +18,6 @@
 				<view class="subheader">
 					<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
 					<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
-					<!-- <t-icon bind:tap="onDelete" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" name="delete" size="20px" color="#ff3b30" /> -->
 				</view>
 				<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元" placeholder="请输入费用" required="{{true}}" />
 			</view>
@@ -35,5 +29,13 @@
 			</view>
 		</popup-select>
 	</view>
+    <block wx:if="{{actionType != 'signup'}}">
+		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
+		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
+		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
+	</block>
+    <block wx:if="{{actionType == 'audit'}}">
+		<form-textarea class="FORM_TEXTAREA" label="审核意见" name="remark" value="{{defaultValues['remark']}}" placeholder="请输入审核意见" required="{{false}}" />
+	</block>
 </view>
 <t-action-sheet id="actionSheetDrivers" bind:selected="onHandlerSelected" />

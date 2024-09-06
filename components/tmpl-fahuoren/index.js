@@ -21,7 +21,7 @@ Component({
 			
 			return formValues;
 		},
-		getFormValuesUnverified() {
+		getFormValuesUnverified() { // 审核拒绝时调用
 			const formValues = form.getFieldsValue(this);
 			formValues['address'] = JSON.stringify(formValues['address']);
 			return formValues;

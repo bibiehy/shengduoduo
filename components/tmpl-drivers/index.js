@@ -145,6 +145,15 @@ Component({
 			}
 
 			return formValues;
+        },
+        getFormValuesUnverified() { // 审核拒绝时调用
+			const { routeList } = this.data;
+
+			// 表单的值
+			const formValues = form.getFieldsValue(this);
+			formValues['expect_route_list'] = routeList;
+
+			return formValues;
 		}
 	},
 	// 自定义组件内的生命周期

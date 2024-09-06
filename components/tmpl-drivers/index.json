@@ -4,6 +4,7 @@
     "usingComponents": {
 		"form-avatar": "/components/form-avatar/form-avatar",
         "form-input": "/components/form-input/form-input",
+        "form-textarea": "/components/form-textarea/form-textarea",
 		"form-picker": "/components/form-picker/form-picker",
 		"form-select": "/components/form-select/form-select",
 		"form-radio": "/components/form-radio/form-radio",

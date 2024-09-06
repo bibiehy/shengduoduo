@@ -69,8 +69,8 @@ Page({
 		this.onAjaxList(1);
 	},
 	onAudit(e) { // 审核
-		const { id, role } = e.currentTarget.dataset;
-		wx.navigateTo({ url: `/pages/audit/detail/detail?id=${id}&roleType=${role}` });
+		const { id, role, status } = e.currentTarget.dataset;
+		wx.navigateTo({ url: `/pages/audit/detail/detail?id=${id}&roleType=${role}&status=${status}` });
 	},
 	onLoad(options) {
 		this.onAjaxList(1);
