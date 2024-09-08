@@ -1,6 +1,6 @@
 <view class="login-signup-box">
 	<!-- 导航栏 -->
-	<navigation-bar wx:if="{{roleState == 1}}" showBack="{{false}}" background="#fff">
+	<navigation-bar wx:if="{{roleState == 1 || roleState == 5}}" showBack="{{false}}" background="#fff">
 		<view class="tabs-signup">
 			<view class="{{tabsValue == 'consignor' ? 'tabitem active' : 'tabitem'}}" bind:tap="onClickTabs" data-value="consignor">发货人</view>
 			<view class="{{tabsValue == 'drivers' ? 'tabitem active' : 'tabitem'}}" bind:tap="onClickTabs" data-value="drivers">干线司机</view>
@@ -10,18 +10,17 @@
 	<navigation-bar wx:else title="{{roleState == 3 ? '请选择登录角色' : '登录'}}" placement="center" showBack="{{false}}" boxShadow="none" background="#fff"></navigation-bar>
 
 	<!-- 无账号，注册成为发货人或干线司机 -->
-	<view wx:if="{{roleState == 1}}" class="page-signup">
-		<view class="tips">该手机号 {{phoneNumber}} 尚未注册任何角色，请选择注册成为发货人或干线司机。</view>
-		<view class="mainbox">
-			<block wx:if="{{tabsValue == 'consignor'}}">
-				<tmpl-fahuoren id="signupConsignor" actionType="signup" phone="{{phoneNumber}}"  />
-			</block>
-			<block wx:else>
-				<tmpl-drivers id="signupDrivers" actionType="signup" phone="{{phoneNumber}}" />
-			</block>
+	<view wx:if="{{roleState == 1 || roleState == 5}}" class="page-signup">
+		<view wx:if="{{roleState == 1}}" class="tips">该手机号 {{phoneNumber}} 尚未注册任何角色，请选择注册成为发货人或干线司机。</view>
+		<view wx:if="{{roleState == 5}}" class="tips">审核未通过：{{userInfo['remark'] || '请修改信息后重新提交'}}</view>
+		<view class="mainbox" style="display: {{tabsValue == 'consignor' ? 'block' : 'none'}};">
+			<tmpl-fahuoren id="signupConsignor" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" />
+		</view>
+		<view class="mainbox" style="display: {{tabsValue == 'drivers' ? 'block' : 'none'}};">
+			<tmpl-drivers id="signupDrivers" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" />
 		</view>
 		<view class="fixedbottom">
-			<t-button bind:tap="onSignupSure" theme="primary" size="large" block>确 定</t-button>
+			<t-button bind:tap="onSignupSure" theme="primary" size="large" block>{{roleState == 1 ? '提交信息' : '重新提交'}}</t-button>
 		</view>		
 
 		<!-- <form-input

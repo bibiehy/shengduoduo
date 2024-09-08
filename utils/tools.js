@@ -6,10 +6,12 @@ export const getUserAndGoRolePage = async (app, delay) => {
 	const result = await useRequest(() => fetchGetUserInfo({ delay })); // 请求用户信息
 	const roleType = result['role_type']; // 获取角色类型
 	app.userInfo = result; // 把用户信息保存到全局
-	if(roleType == 1) {
-
-	}else if(roleType == 2) {
-
+	if(roleType == 1) { // 发货人
+		wx.reLaunch({ url: '/pages/user_fahuoren/index' });
+	}else if(roleType == 2) { // 收货人
+		wx.reLaunch({ url: '/pages/user_shouhuoren/index' });
+	}else if(roleType == 3) { // 干线司机
+		wx.reLaunch({ url: '/pages/user_driver/index' });
 	}else if(roleType == 12) { // 超级管理员
 		wx.reLaunch({ url: '/pages/administrator/administrator' });
 	}
@@ -176,4 +178,29 @@ export const goBackAndRefresh = (type, formValues) => { // create/edit，表单�
 		const prevPage = pages[pages.length - 1];
 		prevPage.onRefresh(type, formValues);
 	}});
+}
+
+// 返回角色类型
+export const getRoleInfo = () => {
+	// 角色类型，手机号+角色类型唯一
+	const roleAllList = [
+		{ label: '发货人', value: 1 }, // 可注册
+		{ label: '收货人', value: 2 }, // 只能由发货人添加
+		{ label: '干线司机', value: 3 }, // 可注册
+		{ label: '提货点负责人', value: 4 },
+		{ label: '集货中心负责人', value: 5 },
+		{ label: '集货中心主管', value: 6 },
+		{ label: '分拣员', value: 7 }, // 由集货中心负责人或主管添加
+		{ label: '干线调度', value: 8 }, // 8/9/10/11 页面信息一样
+		{ label: '业务负责人', value: 9 },
+		{ label: '财务管理', value: 10 },
+		{ label: '差异审核员', value: 11 },
+		{ label: '超级管理员', value: 12 }
+	];
+
+	// 角色类型对象
+	const roleAllObject = {};
+	roleAllList.forEach((item) => roleAllObject[item['value']] = item['label']);
+
+	return { roleAllList, roleAllObject };
 }

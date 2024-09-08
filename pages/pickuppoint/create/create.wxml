@@ -16,5 +16,5 @@
 			<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
 		</view>
 	</view>
-	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+	<fixed-bottom-button bind:callback="onSave" title="确认提交" />
 </view>

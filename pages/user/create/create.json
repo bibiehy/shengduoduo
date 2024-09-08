@@ -1,0 +1,16 @@
+{
+	"usingComponents": {
+		"popup": "/components/popup/popup",
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"form-input": "/components/form-input/form-input",
+		"form-upload": "/components/form-upload/form-upload",
+		"form-provincecity": "/components/form-provincecity/form-provincecity",
+		"form-radio": "/components/form-radio/form-radio",
+		"form-select": "/components/form-select/form-select",
+		"t-dialog": "tdesign-miniprogram/dialog/dialog",
+		"form-datepicker": "/components/form-datepicker/form-datepicker",
+		
+		"tmpl-fahuoren": "/components/tmpl-fahuoren/index",
+		"tmpl-drivers": "/components/tmpl-drivers/index"
+	}
+}

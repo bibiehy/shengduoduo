@@ -17,7 +17,7 @@
 		</view>
 	</view>	
 	<view class="main-modules">
-		<view class="moditem">
+		<view class="moditem" bind:tap="onPageJump" data-name="user">
 			<view class="modimg"><image mode="widthFix" src="../../assets/user.png" /></view>
 			<view class="modname">人员管理</view>
 		</view>

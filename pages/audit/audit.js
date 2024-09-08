@@ -9,15 +9,15 @@ Page({
 		dataList: [],
 		unAuditCount: 0, // 未审核总数
 		// tabs
-		activeStatus: 3, // 0为待审核 1为已审核 2审核拒绝 3全部
+		activeStatus: 3, // 0: 待审核; 1: 已通过; 2: 已拒绝; 3 全部; 4: 已通过+已拒绝
 		// 下拉刷新
 		downStatus: false, // 组件状态，值为 true 表示下拉状态，值为 false 表示收起状态
 		loadingProps: { size: '20px' }, // 设置 loading 大小
 		// 上拉加载
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
 	},
-	// 
-	async onAjaxList(thisPage, callback) { // 列表请求
+	// 列表请求
+	async onAjaxList(thisPage, callback) {
 		const { keyword, dataList, activeStatus, upStatus } = this.data;
 		const result = await useRequest(() => fetchAuditList({ page: thisPage, status: activeStatus, keyword: keyword || '' }));
 		if(result) {
@@ -30,7 +30,14 @@ Page({
 				callback(newList);
 			}
 		}
-	},	
+	},
+	// Tabs 切换
+	onTabsChange(e) {
+		const detailValue = e.detail.value;
+		this.setData({ activeStatus: detailValue });
+		this.onAjaxList(1);		
+	},
+	// 上拉加载、下拉刷新
 	onRefresh(action, formValues) { // 1.audit 审核后会调用该方法; 2.refresh 下拉刷新
 		const type = (typeof action) == 'string' ? action : action['type'];
 		if(type == 'refresh') { // 下拉刷新
@@ -68,7 +75,8 @@ Page({
 	onSearch() { // 搜索
 		this.onAjaxList(1);
 	},
-	onAudit(e) { // 审核
+	// 审核
+	onAudit(e) {
 		const { id, role, status } = e.currentTarget.dataset;
 		wx.navigateTo({ url: `/pages/audit/detail/detail?id=${id}&roleType=${role}&status=${status}` });
 	},

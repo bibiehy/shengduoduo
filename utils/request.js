@@ -42,7 +42,7 @@ const useRequest = async (service) => {
             method: options['method'],
             data: options['data'],
             header: headers,
-            complete: function (response) {
+            complete: function (response, aaa) {
                 // 取消loding
                 if(options['loading']) {
                     wx.hideLoading();

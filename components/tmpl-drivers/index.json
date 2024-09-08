@@ -11,6 +11,7 @@
 		"form-carnumber": "/components/form-carnumber/form-carnumber",
 		"popup-select": "/components/popup-select/popup-select",
 		"form-provincecity": "/components/form-provincecity/form-provincecity",
+		"form-upload": "/components/form-upload/form-upload",
 		"t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet"
     }
 }

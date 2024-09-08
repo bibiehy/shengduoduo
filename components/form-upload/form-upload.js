@@ -22,7 +22,7 @@ Component({
     },
     observers: {
         value: function(newValue) { // 监听外部传递的 value []
-			this.setData({ fileList: newValue });
+			this.setData({ fileList: newValue || [] });
         }
     },
     methods: {
@@ -56,7 +56,9 @@ Component({
                 name: 'file',
                 // formData: { user: 'test' }, // 额外参数
                 success: (res) => {
-                	this.setData({ [`fileList[${length}].status`]: 'done', errTips: '' }); // status: loading/reload/failed/done; percent: 68
+					const response = JSON.parse(res['data']);
+					const imgURL = response['data'];
+                	this.setData({ [`fileList[${length}].status`]: 'done', [`fileList[${length}].url`]: imgURL, errTips: '' }); // status: loading/reload/failed/done; percent: 68
 				},
 				fail: (res, statusCode) => {
 					this.setData({ [`fileList[${length}].status`]: 'failed', errTips: '图片上传失败，请删除重新上传'  });

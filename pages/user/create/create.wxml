@@ -1,0 +1,14 @@
+<view class="user-create-box">
+	<navigation-bar title="{{roleType ? roleAllObject[roleType] : ''}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="innerbox">
+			<block wx:if="{{roleType == 1}}">
+				<tmpl-fahuoren id="templateFahuoren" actionType="{{actionType}}" />
+			</block>
+			<block wx:if="{{roleType == 3}}">
+				<tmpl-drivers id="templateDrivers" actionType="{{actionType}}" />
+			</block>
+		</view>
+	</view>
+	<fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+</view>

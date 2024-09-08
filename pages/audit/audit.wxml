@@ -3,10 +3,10 @@
 	<view class="global-page-search">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、手机号等关键字" />
 	</view>
-	<t-tabs defaultValue="{{3}}">
-		<t-tab-panel label="全部" value="3" />
-		<t-tab-panel label="待审核" value="0" badge-props="{{ { count: unAuditCount, offset: ['8px', '8px'] } }}" />
-		<t-tab-panel label="已审核" value="1" />
+	<t-tabs bind:change="onTabsChange" defaultValue="{{3}}">
+		<t-tab-panel label="全部" value="{{3}}" />
+		<t-tab-panel label="待审核" value="{{0}}" badge-props="{{ { count: unAuditCount, offset: ['8px', '8px'] } }}" />
+		<t-tab-panel label="已审核" value="{{4}}" />
 	</t-tabs>
 	<t-pull-down-refresh
 		value="{{downStatus}}"
@@ -23,20 +23,13 @@
 					<t-tag wx:if="{{item['status'] == 0}}" class="status" variant="light" theme="primary" size="small">待审核</t-tag>
 					<t-tag wx:elif="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已通过</t-tag>
 					<t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
-					<view class="mainbox" bind:tap="onAudit" data-id="{{item['id']}}" data-role="{{item['role_type']}}" data-status="item['status']">
+					<view class="mainbox" bind:tap="onAudit" data-id="{{item['id']}}" data-role="{{item['role_type']}}" data-status="{{item['status']}}">
 						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
-						<view wx:if="{{item['role_type'] == 1}}" class="rightbox">
-							<view class="psname">发货人申请</view>
+						<view class="rightbox">
+							<view class="psname">{{item['role_type'] == 1 ? '发货人申请' : '干线司机申请'}}</view>
 							<view class="pstime">{{item['createTime']}}</view>
 							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
-							<view class="psinfo">{{item['center_name']}}</view>
-							<!-- <view class="psinfo">{{item['addressStr']}} {{item['region']}}</view> -->
-						</view>
-						<view wx:if="{{item['role_type'] == 3}}" class="rightbox">
-							<view class="psname">干线司机申请</view>
-							<view class="pstime">{{item['createTime']}}</view>
-							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
-							<view class="psinfo">{{item['center_name']}} | {{item['type_name']}}</view>
+							<view class="psinfo">{{item['center_name']}} / {{item['type_name']}}</view>
 						</view>
 					</view>
 				</view>

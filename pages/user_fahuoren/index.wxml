@@ -1,0 +1,8 @@
+<view class="admin-wrapper">
+	<navigation-bar title="发货人管理" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<!-- <view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入搜索关键字" />
+		<view class="pageline"></view>
+		<view class="pageaddbtn" bind:tap="onCreate" data-type="create"><t-icon name="add" size="24" /> 发货人</view>
+	</view> -->
+</view>

@@ -2,7 +2,7 @@
 	<form-avatar class="FORM_AVATAR" name="avator" value="{{defaultValues['avator']}}" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" type="nickname" placeholder="请输入用户昵称" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="用户姓名" name="username" value="{{defaultValues['username']}}" placeholder="请输入用户姓名" required="{{true}}" />
-	<form-input class="FORM_INPUT" label="手机号码" name="phone" value="{{phone || defaultValues['phone']}}" type="phone" placeholder="请输入手机号码" disabled="{{actionType == 'signup'}}" required="{{true}}" />
+	<form-input class="FORM_INPUT" label="手机号码" name="phone" value="{{phone || defaultValues['phone']}}" type="phone" placeholder="请输入手机号码" disabled="{{actionType != 'create'}}" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="紧急联系人姓名" name="urgent_user" value="{{defaultValues['urgent_user']}}" placeholder="请输入紧急联系人姓名" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="紧急联系人手机号码" name="urgent_user_phone" value="{{defaultValues['urgent_user_phone']}}" type="phone" placeholder="请输入紧急联系人手机号码" required="{{true}}" />
 	<form-picker class="FORM_PICKER" label="车辆类型" name="type" value="{{defaultValues['type']}}" options="{{carOptions}}" placeholder="请选择车辆类型" required="{{true}}" cancelBtn="取消" confirmBtn="确定" />
@@ -19,7 +19,7 @@
 					<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
 					<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
 				</view>
-				<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元" placeholder="请输入费用" required="{{true}}" />
+				<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元(RMB)" placeholder="请输入费用" required="{{true}}" />
 			</view>
 		</view>		
 		<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
@@ -29,10 +29,11 @@
 			</view>
 		</popup-select>
 	</view>
-    <block wx:if="{{actionType != 'signup'}}">
+    <block wx:if="{{actionType != 'signup' && actionType != 'signupAgain'}}">
 		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
 		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
-		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
+		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" remark="如：10、10.5、10.58 等格式" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
+		<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
 	</block>
     <block wx:if="{{actionType == 'audit'}}">
 		<form-textarea class="FORM_TEXTAREA" label="审核意见" name="remark" value="{{defaultValues['remark']}}" placeholder="请输入审核意见" required="{{false}}" />

@@ -15,7 +15,7 @@ Page({
 	data: {
 		loginVisible: false, // 是否显示验证码登录
 		isChecked: false, // 协议是否选中
-		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 10: 提交成功，等待审核(非接口定义)
+		roleState: '', // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 审核不通过，请完善信息后重新提交; 10: 提交成功，等待审核(非接口定义)
 		phoneNumber: '', // 手机号码
 		phoneNumberAsterisk: '', // 中间4位为*
 		// roleList: [{ type: 1, name: '发货人' }, { type: 2, name: '收货人' }, { type: 3, name: '干线司机' }], // 角色列表，用于多角色
@@ -27,6 +27,8 @@ Page({
 		// roleState: '1', // 测试
 		// phoneNumber: '180****6071', // 测试 '18069866071'.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 		tabsValue: 'consignor',
+		// 在审核拒绝时候使用
+		userInfo: {}
 	},
 	onWxAuth() { // 判断是否勾选用户协议
 		if(!this.data.isChecked) {
@@ -55,13 +57,19 @@ Page({
 			const code = e.detail.code;
 			const result = await useRequest(() => fetchWxLogin({ code })); // 返回角色信息
 			if(result) {
-				const state = result['type'] // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中
+				const state = result['type'] // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 审核不通过;
 				const roleList = result['data'];
 				if(state == 2 && roleList.length == 1) {
 					this.onGetToken(result['phone'], roleList[0]['type']);
 				}else{
 					const phoneNumberAsterisk = String(result['phone']).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-					this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '' });
+					const userInfo = state == 5 ? result['user_info'] : {};
+					const tabsValue = state == 5 ? (userInfo['role_type'] == 1 ? 'consignor' : 'drivers') : 'consignor';
+					this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo });
+
+					// 调用子组件方法
+					const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+					child.getPageRequest(userInfo);
 				}
 			}
 		}
@@ -152,13 +160,19 @@ Page({
 
 		const result = await useRequest(() => fetchPhoneLogin({ phone: phoneNumber, code: verifycode })); // 返回角色信息
 		if(result) {
-			const state = result['type'] // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中
+			const state = result['type'] // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 审核不通过;
 			const roleList = result['data'];
 			if(state == 2 && roleList.length == 1) { // 单角色，获取token后直接跳转到首页
 				this.onGetToken(result['phone'], roleList[0]['type']);
 			}else{
 				const phoneNumberAsterisk = String(result['phone']).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-				this.setData({ roleState: state, phoneNumber: result['phone'], phoneNumberAsterisk, roleList, roleValue: state == 3 ? roleList[0]['type'] : '' });
+				const userInfo = state == 5 ? result['user_info'] : {};
+				const tabsValue = state == 5 ? (userInfo['role_type'] == 1 ? 'consignor' : 'drivers') : 'consignor';
+				this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo });
+
+				// 调用子组件方法
+				const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+				child.getPageRequest(userInfo);
 			}
 		}
 	},
@@ -176,10 +190,14 @@ Page({
 		this.setData({ tabsValue: dataValue });
 	},
 	async onSignupSure() { // 提交：注册发货人或干线司机
-		const { tabsValue } = this.data;
+		const { tabsValue, userInfo } = this.data;
 		const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
 		const formValues = child.getFormValues();
 		if(formValues) {
+			if(userInfo['id']) {
+				formValues['id'] = Number(userInfo['id']);
+			}
+
 			const result = tabsValue == 'consignor' ? (await useRequest(() => fetchSignConsignor(formValues))) : (await useRequest(() => fetchSignDriver(formValues)));
 			if(result) {
 				this.setData({ roleState: 10 }); // 等待审核

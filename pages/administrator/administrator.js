@@ -17,7 +17,9 @@ Page({
 	},
 	onPageJump(e) {
 		const { name } = e.currentTarget.dataset;
-		if(name == 'guige') { // 规格管理
+		if(name == 'user') { // 用户管理
+			wx.navigateTo({ url: '/pages/user/user' });
+		}else if(name == 'guige') { // 规格管理
 			wx.navigateTo({ url: '/pages/guige/guige' });
 		}else if(name == 'pickup_point') { // 提货点
 			wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });

@@ -26,11 +26,12 @@ const getActionSheetOptions = (that, args) => {
 
 Component({
 	properties: {
-		actionType: { type: String, value: 'signup' }, // 注册(signup)/审核(audit)/创建(create)/编辑(edit)
-		defaultValues: { type: Object, value: {} },
-		phone: { type: String, value: '' }, // 只有 signup 时使用
+		actionType: { type: String, value: 'signup' }, // 注册(signup/signupAgain)/审核(audit)/创建(create)/编辑(edit)
+		// defaultValues: { type: Object, value: {} },
+		phone: { type: String, value: '' }, // 只有 signup/signupAgain 时使用
 	},
 	data: {
+		defaultValues: {},
 		carOptions: [],
 		centerOptions: [],
 		pickupOptions: [], // 集货中心下的提货点
@@ -41,23 +42,15 @@ Component({
 	},
     // 监听 properties 值变化
     observers: {
-        defaultValues: function(values) { // 监听外部传递的 values
-			this.setData({ payType: values['pay_type'] || 1, routeList: values['expect_route_list'] || [] });
-		},
-		actionType: function(value) { // 编辑和审核时候根据集货中心id获取其提货点
-			if(['audit', 'edit'].includes(value)) {
-				const { defaultValues } = this.data;
-				this.onSelectCenter({ value: defaultValues['center_id'] });
-			}
-		}
+	
     },
 	methods: {
-		async onSelectCenter(e) { // 选择激活中心后的回调，去匹配下面的提货点
+		async onSelectCenter(e) { // 选择激活中心后的回调，去匹配下面的提货点，且路线信息清空
 			const { label, value } = e.detail;
 			const dataList = await useRequest(() => fetchPickupFromCenter({ id: value }));
-			if(dataList) { // { label: '', value: '' }
-				const newList = dataList.map((item) => ({ label: item['name'], value: item['point_id'] }));
-				this.setData({ pickupOptions: newList });
+			if(dataList) { // 格式化成 { label: '', value: '' }
+				const newList = dataList.map((item) => ({ label: item['point_name'], value: item['point_id'] }));
+				this.setData({ pickupOptions: newList, routeList: [] });
 			}
 		},
 		onAddSure(e) { // 添加路线
@@ -131,8 +124,9 @@ Component({
 			const { value } = e.detail;
 			this.setData({ payType: value });
 		},
-		getFormValues() {
-			const { routeList } = this.data;
+		// 父组件调用
+		getFormValues() { // 审核-同意/保存
+			const { actionType, routeList } = this.data;
 
 			// 表单的值
 			const formValues = form.validateFields(this);
@@ -141,24 +135,28 @@ Component({
 					wx.showToast({ title: '请添加路线信息', icon: 'error' });
 				}else{
 					formValues['expect_route_list'] = routeList;
+					if(['audit', 'create', 'edit'].includes(actionType)) {
+						formValues['payment_code'] = formValues['payment_code'][0]['url'];
+					}					
 				}
 			}
 
 			return formValues;
         },
-        getFormValuesUnverified() { // 审核拒绝时调用
-			const { routeList } = this.data;
+        getFormValuesUnverified() { // 审核-拒绝
+			const { actionType, routeList } = this.data;
 
 			// 表单的值
 			const formValues = form.getFieldsValue(this);
 			formValues['expect_route_list'] = routeList;
+			if(['audit', 'create', 'edit'].includes(actionType)) {
+				formValues['payment_code'] = formValues['payment_code'].length > 0 ? formValues['payment_code'][0]['url'] : '';
+			}			
 
 			return formValues;
-		}
-	},
-	// 自定义组件内的生命周期
-    lifetimes: {
-		async attached() { // 组件完全初始化完毕
+		},
+		async getPageRequest(detailInfo={}) { // 下拉组件的请求，一般用于父组件详情接口请求完后调用或父组件 onLoad 方法中直接使用
+			const { actionType } = this.data;
 			const carList = await useRequest(() => fetchAllCars());
 			const centerList = await useRequest(() => fetchAllStoreCenter());
 
@@ -174,7 +172,38 @@ Component({
 				newCenterList.push({ label: item['name'], value: item['id'] });
 			});
 
-			this.setData({ carOptions: newCarList, centerOptions: newCenterList });
+			// 编辑、审核时需根据集货中心ID获取其下提货点，格式化路线信息
+			const routeList = detailInfo['expect_route_list'] || []; // 期望路线信息
+			const pickupOptions = []; // 提货点信息
+			if(['audit', 'edit', 'signupAgain'].includes(actionType)) {
+				const centerId = detailInfo['center_id'];
+				const dataList = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
+				if(dataList) { // 格式化成 { label: '', value: '' }
+					dataList.forEach((item) => {
+						const findItem = routeList.find((listItem) => listItem['point_id'] == item['point_id']);
+						if(!findItem) {
+							pickupOptions.push({ label: item['point_name'], value: item['point_id'] });
+						}
+					});
+				}
+			}
+
+			// 支付类型
+			const payType = detailInfo['pay_type'] || 1;
+
+			// 微信二维码
+			if(['audit', 'create', 'edit'].includes(actionType)) {
+				const wxQRCode = detailInfo['payment_code'];
+				detailInfo['payment_code'] = wxQRCode ? [{ url: wxQRCode }] : [];
+			}
+
+			this.setData({ defaultValues: detailInfo, carOptions: newCarList, centerOptions: newCenterList, routeList, pickupOptions, payType });
+		}
+	},
+	// 自定义组件内的生命周期
+    lifetimes: {
+		async attached() { // 组件完全初始化完毕
+			
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

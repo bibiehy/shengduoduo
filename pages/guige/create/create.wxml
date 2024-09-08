@@ -33,7 +33,7 @@
 			</view>
 		</view>
 	</view>
-	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+	<fixed-bottom-button bind:callback="onSave" title="确认提交" />
 </view>
 <popup title="规格信息设置" visible="{{visible}}" bind:callback="onPopupSure" close-on-overlay-click="{{false}}">
 	<view class="popup-guige-create">

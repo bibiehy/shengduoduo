@@ -23,13 +23,23 @@ Component({
         errTips: '',
     },
     observers: {
-        value: function(newValue) { // 监听外部传递的 value
+		value: function(newValue) { // 监听外部传递的 value
+			if(!newValue) {
+				return false;
+			}
+
             const { options } = this.data;
-            const thisOption = options.find((item) => item['value'] == newValue) || { label: '', value: '', content: '' };
+			const thisOption = options.find((item) => item['value'] == newValue) || { label: '', value: '', content: '' };
             this.setData({ formValue: thisOption['value'], formName: thisOption['label'] });
         },
-        options: function(newOptions) {
-            this.setData({ formOptions: newOptions });
+		options: function(newOptions) { // options 的值是异步获取，比 value 晚，这时监听 value 值时 options=[]
+			if(newOptions.length <= 0) {
+				return false;
+			}
+
+			const { value } = this.data;
+			const thisOption = newOptions.find((item) => item['value'] == value) || { label: '', value: '', content: '' };
+			this.setData({ formValue: thisOption['value'], formName: thisOption['label'], formOptions: newOptions });
         }
     },
     methods: {

@@ -38,7 +38,9 @@ Page({
 			name: 'file',
 			// formData: { user: 'test' }, // 额外参数
 			success: (res) => {
-				this.setData({ [`fileList[${length}].status`]: 'done' }); // status: loading/reload/failed/done; percent: 68
+				const response = JSON.parse(res['data']);
+				const imgURL = response['data'];
+				this.setData({ [`fileList[${length}].status`]: 'done', [`fileList[${length}].url`]: imgURL, }); // status: loading/reload/failed/done; percent: 68
 			},
 			fail: (res, statusCode) => {
 				this.setData({ [`fileList[${length}].status`]: 'failed'  });
