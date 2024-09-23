@@ -197,8 +197,6 @@ Page({
 
 			formValues['director_list'] = zhuguanList;
 			formValues['pickup_points'] = tihuodianList;
-			formValues['head_pic'] = formValues['head_pic'][0]['url'];
-			formValues['payment_code'] = formValues['payment_code'][0]['url'];
 			formValues['address'] = JSON.stringify(formValues['address']);
 
 			const result = type == 'edit' ? (await useRequest(() => fetchStoreCenterEdit(formValues))) : (await useRequest(() => fetchStoreCenterCreate(formValues)));
@@ -214,10 +212,6 @@ Page({
 			const jsonItem = JSON.parse(strItem);
 			const result = await useRequest(() => fetchStoreCenterDetail({ id: jsonItem['id'] }));
 			if(result) {
-				// 图像格式为数组
-				result['head_pic'] = [{ url: result['head_pic'] }];
-				result['payment_code'] = [{ url: result['payment_code'] }];
-
 				// 所在地区
 				result['address'] = JSON.parse(result['address']);
 				

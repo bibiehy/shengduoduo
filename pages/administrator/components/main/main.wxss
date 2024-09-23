@@ -1,0 +1,38 @@
+.adminmain-wrapper { width:100%; height:100vh; overflow:hidden; }
+.adminmain-wrapper .main-summary { display:flex; padding:30px 0; }
+.adminmain-wrapper .main-summary .sumbox { flex:1; text-align:center; }
+.adminmain-wrapper .main-summary .sumbox .sumname { color:rgba(255, 255, 255, 0.6);  font-size:15px; margin-bottom:5px; }
+.adminmain-wrapper .main-summary .sumbox .sumnumber { color:rgba(255, 255, 255, 0.9); font-size:24px; font-weight:600; }
+
+.adminmain-wrapper .innerscroll { width:calc(100% + 20px); height:100%; padding-bottom:150px; padding-right:20px; overflow-y:auto; }
+
+
+.adminmain-wrapper .main-modules { display:flex; flex-wrap:wrap; background-color:#fff; border-radius:10px; padding:8px 8px 10px; margin:0 10px; }
+.adminmain-wrapper .main-modules .moditem { width:25%; padding:12px; }
+.adminmain-wrapper .main-modules .moditem .modimg { display:flex; align-items:center; justify-content:center; width:100%; background-color:#f0f0f0; border-radius:8px; padding:20px; overflow:hidden; }
+.adminmain-wrapper .main-modules .moditem .modimg image { display:block; width:100%; }
+.adminmain-wrapper .main-modules .moditem .modname { text-align:center; font-size:16px; color:rgba(0, 0, 0, 0.8); margin-top:5px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+
+.adminmain-wrapper .main-message { background-color:#fff; border-radius:10px; padding:0 20px 10px; margin:10px; }
+.adminmain-wrapper .main-message .header { display:flex; align-items:center; justify-content:space-between; padding:15px 0; }
+.adminmain-wrapper .main-message .header .msgtitle { font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; }
+.adminmain-wrapper .main-message .header .msgright { display:flex; align-items:center; color:rgb(206, 205, 205); margin-right:-10px; }
+.adminmain-wrapper .main-message .header .msgright .msgcount { min-width:24px; height:24px; text-align:center; line-height:24px; background-color:#ff3b30; border-radius:50%; color:#fff; font-size:12px; transform:scale(0.85); margin-right:-5px; }
+.adminmain-wrapper .main-message .nodata { height:240px; }
+.adminmain-wrapper .main-message .msgitem { display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; }
+.adminmain-wrapper .main-message .msgitem .t-icon { display:block; margin-right:6px; }
+.adminmain-wrapper .main-message .msgitem .desc { flex:1; color:rgba(0, 0, 0, 0.9); font-size:15px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.adminmain-wrapper .main-message .msgitem .time { color:rgba(0, 0, 0, 0.45); font-size:13px; padding-left:20px; }
+
+
+.adminmain-wrapper .main-global { background-color:#fff; border-radius:10px; padding:15px 20px 10px; margin:10px; }
+.adminmain-wrapper .main-global .gbtitle { font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; }
+.adminmain-wrapper .main-global .gbcontent { display:flex; justify-content:space-between; padding:15px 0; }
+.adminmain-wrapper .main-global .gbcontent .gbitem { position:relative; width:48%; height:200px; border-radius:10px; border:solid 1px #f0f0f0; overflow:hidden; }
+.adminmain-wrapper .main-global .gbcontent .gbname { z-index:30; position:absolute; left:15px; top:10px; font-size:17px; color:rgba(0, 0, 0, 0.75); text-shadow:1px 1px #fff; font-weight:600; }
+.adminmain-wrapper .main-global .gbcontent .gbitem image { z-index:20; position:absolute; left:0; bottom:0; width:100%; }
+
+
+
+
+

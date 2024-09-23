@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "t-search": "tdesign-miniprogram/search/search",
+		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar"
+    }
+}

@@ -1,5 +1,5 @@
 import useRequest from '../../utils/request';
-import { fetchAllStoreCenter, fetchAllGuige } from '../../service/global';
+import { fetchAllStoreCenter, fetchAllGuige, fetchRandomAvatar } from '../../service/global';
 import { form, delay, createGuid } from '../../utils/tools';
 
 Component({
@@ -28,6 +28,18 @@ Component({
 			return formValues;
 		},
 		async getPageRequest(detailInfo={}) { // 下拉组件的请求，一般用于父组件详情接口请求完后调用或父组件 onLoad 方法中直接使用
+			const { actionType } = this.data;
+
+			// 获取随机头像和昵称
+			let avatarNickname = {};
+			if(['signup', 'create'].includes(actionType)) {
+				const resultRandom = await useRequest(() => fetchRandomAvatar());
+				if(resultRandom) {
+					avatarNickname['avator'] = resultRandom['avatar'];
+					avatarNickname['nickname'] = resultRandom['nick_name'];
+				}
+			}
+
 			const centerList = await useRequest(() => fetchAllStoreCenter());
 			const guigeList = await useRequest(() => fetchAllGuige());
 
@@ -43,7 +55,7 @@ Component({
 				newGuigeList.push({ label: item['name'], value: item['id'] });
 			});
 
-			this.setData({ defaultValues: detailInfo, centerOptions: newCenterList, guigeOptions: newGuigeList });
+			this.setData({ defaultValues: { ...detailInfo, ...avatarNickname }, centerOptions: newCenterList, guigeOptions: newGuigeList });
 		}
 	},
 	// 自定义组件内的生命周期

@@ -1,8 +1,8 @@
-<view class="my-navigation-bar {{extClass}}">
+<view class="my-navigation-bar">
 	<!-- 空层撑起 navigation-bar -->
     <view style="width: 100%; {{safeAreaTop}}"></view>
 	<!-- fixed -->
-	<view class="mybar-mainbox {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; box-shadow: {{boxShadow}}; {{innerPaddingRight}}; {{safeAreaTop}}">
+	<view class="mybar-mainbox {{extClass}} {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; box-shadow: {{boxShadow}}; {{innerPaddingRight}}; {{safeAreaTop}}">
 		<view wx:if="{{showBack}}" class="goback" bind:tap="onBack" style="background-color: {{color}};"></view>
 		<block wx:if="{{placement == 'center'}}">
 			<view class="mybar-centertitle" style="padding-left: calc({{leftWidth}} - {{showBack ? '30px' : '0px'}})">{{title}}</view>

@@ -27,8 +27,6 @@ Page({
 				formValues['id'] = defaultValues['id'];
 			}
 
-			formValues['head_pic'] = formValues['head_pic'][0]['url'];
-			formValues['payment_code'] = formValues['payment_code'][0]['url'];
 			formValues['address'] = JSON.stringify(formValues['address']);
 
 			const result = type == 'edit' ? (await useRequest(() => fetchPickupEdit(formValues))) : (await useRequest(() => fetchPickupCreate(formValues)));
@@ -41,11 +39,6 @@ Page({
 	},
 	onLoad({ type, strItem }) { // type: create/edit
 		const jsonItem = JSON.parse(strItem || "{}");
-
-		if(type == 'edit') { // 图像为数组
-			jsonItem['head_pic'] = [{ url: jsonItem['head_pic'] }];
-			jsonItem['payment_code'] = [{ url: jsonItem['payment_code'] }];
-		}
 		
 		// jsonItem['address'] = [
 		// 	{label: "河北省", value: "130000"},

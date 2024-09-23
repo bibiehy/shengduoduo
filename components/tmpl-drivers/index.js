@@ -1,5 +1,5 @@
 import useRequest from '../../utils/request';
-import { fetchAllCars, fetchAllStoreCenter, fetchPickupFromCenter } from '../../service/global';
+import { fetchAllCars, fetchAllStoreCenter, fetchPickupFromCenter, fetchRandomAvatar } from '../../service/global';
 import { form, delay, createGuid } from '../../utils/tools';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 
@@ -27,7 +27,6 @@ const getActionSheetOptions = (that, args) => {
 Component({
 	properties: {
 		actionType: { type: String, value: 'signup' }, // 注册(signup/signupAgain)/审核(audit)/创建(create)/编辑(edit)
-		// defaultValues: { type: Object, value: {} },
 		phone: { type: String, value: '' }, // 只有 signup/signupAgain 时使用
 	},
 	data: {
@@ -135,9 +134,6 @@ Component({
 					wx.showToast({ title: '请添加路线信息', icon: 'error' });
 				}else{
 					formValues['expect_route_list'] = routeList;
-					if(['audit', 'create', 'edit'].includes(actionType)) {
-						formValues['payment_code'] = formValues['payment_code'][0]['url'];
-					}					
 				}
 			}
 
@@ -149,14 +145,22 @@ Component({
 			// 表单的值
 			const formValues = form.getFieldsValue(this);
 			formValues['expect_route_list'] = routeList;
-			if(['audit', 'create', 'edit'].includes(actionType)) {
-				formValues['payment_code'] = formValues['payment_code'].length > 0 ? formValues['payment_code'][0]['url'] : '';
-			}			
 
 			return formValues;
 		},
 		async getPageRequest(detailInfo={}) { // 下拉组件的请求，一般用于父组件详情接口请求完后调用或父组件 onLoad 方法中直接使用
 			const { actionType } = this.data;
+
+			// 获取随机头像和昵称
+			let avatarNickname = {};
+			if(['signup', 'create'].includes(actionType)) {
+				const resultRandom = await useRequest(() => fetchRandomAvatar());
+				if(resultRandom) {
+					avatarNickname['avator'] = resultRandom['avatar'];
+					avatarNickname['nickname'] = resultRandom['nick_name'];
+				}
+			}
+
 			const carList = await useRequest(() => fetchAllCars());
 			const centerList = await useRequest(() => fetchAllStoreCenter());
 
@@ -191,13 +195,7 @@ Component({
 			// 支付类型
 			const payType = detailInfo['pay_type'] || 1;
 
-			// 微信二维码
-			if(['audit', 'create', 'edit'].includes(actionType)) {
-				const wxQRCode = detailInfo['payment_code'];
-				detailInfo['payment_code'] = wxQRCode ? [{ url: wxQRCode }] : [];
-			}
-
-			this.setData({ defaultValues: detailInfo, carOptions: newCarList, centerOptions: newCenterList, routeList, pickupOptions, payType });
+			this.setData({ defaultValues: { ...detailInfo, ...avatarNickname }, carOptions: newCarList, centerOptions: newCenterList, routeList, pickupOptions, payType });
 		}
 	},
 	// 自定义组件内的生命周期

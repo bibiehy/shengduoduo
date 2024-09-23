@@ -1,0 +1,23 @@
+<view class="personalTemplate">
+	<view class="innerScroll">
+		<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none" placement="center" title="个人中心">
+			
+		</navigation-bar>
+		<view class="personalInfo">
+			<view class="personalAvator"><image mode="aspectFill" src="{{userInfo['avator']}}" /></view>
+			<view class="personalBaseInfo">
+				<view class="baseNickname">{{userInfo['nickname']}}</view>
+				<view class="baseOther">{{userInfo['username']}} {{userInfo['phone']}}</view>
+				<view class="baseOther">{{roleAllObject[userInfo['role_type']]}}</view>
+				<view class="eidtBtn"><t-check-tag bind:tap="onEditUser" icon="edit" variant="light-outline" content="编辑资料" /></view>
+			</view>
+		</view>
+		<view class="personalBody">
+			<slot></slot>
+		</view>
+		<view class="personalActions">
+			<t-button size="large" block style="margin-bottom: 20px;">切换角色</t-button>
+			<t-button size="large" theme="primary" block>退出登录</t-button>
+		</view>
+	</view>
+</view>

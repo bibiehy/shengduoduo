@@ -1,14 +1,122 @@
 <view class="user-create-box">
 	<navigation-bar title="{{roleType ? roleAllObject[roleType] : ''}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
 	<view class="mainbox">
-		<view class="innerbox">
+		<!-- <view class="innerbox">
 			<block wx:if="{{roleType == 1}}">
 				<tmpl-fahuoren id="templateFahuoren" actionType="{{actionType}}" />
 			</block>
 			<block wx:if="{{roleType == 3}}">
 				<tmpl-drivers id="templateDrivers" actionType="{{actionType}}" />
 			</block>
+			<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11}}">
+				<tmpl-yewufzren id="templateYewufzren" actionType="{{actionType}}" roleType="{{roleType}}" />
+			</block>
+		</view> -->
+
+		<view class="innerbox">
+			<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11}}">
+				<tmpl-yewufzren id="templateYewufzren" actionType="{{actionType}}" roleType="{{roleType}}" />
+			</block>
+
+			<block wx:if="{{roleType == 1}}" title="发货人">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['avator']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">用户昵称</text>{{defaultValues['nickname']}}</view>
+					<view class="formItem required"><text class="labelText">用户姓名</text>{{defaultValues['username']}}</view>
+					<view class="formItem required"><text class="labelText">手机号码</text>{{defaultValues['phone']}}</view>
+					<view class="formItem required"><text class="labelText">店铺名称</text>{{defaultValues['shop_name']}}</view>
+					<view class="formItem required"><text class="labelText">所在地区</text>{{defaultValues['addressStr']}}</view>
+					<view class="formItem required"><text class="labelText">店铺详细地址</text>{{defaultValues['region']}}</view>
+					<view class="formItem required"><text class="labelText">集货中心</text>{{defaultValues['center_name']}}</view>
+					<view class="formItem required"><text class="labelText">默认规格类别</text>{{defaultValues['type_name']}}</view>
+					<view class="formItem required"><text class="labelText">月均发货件数</text>{{defaultValues['max_number']}}件</view>
+					<view class="formItem required"><text class="labelText">运费系数</text>{{defaultValues['wages']}}%</view>
+				</view>
+			</block>
+			
+			<block wx:if="{{roleType == 3}}" title="干线司机">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['avator']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">用户昵称</text>{{defaultValues['nickname']}}</view>
+					<view class="formItem required"><text class="labelText">用户姓名</text>{{defaultValues['username']}}</view>
+					<view class="formItem required"><text class="labelText">手机号码</text>{{defaultValues['phone']}}</view>
+					<view class="formItem required"><text class="labelText">紧急联系人姓名</text>{{defaultValues['urgent_user']}}</view>
+					<view class="formItem required"><text class="labelText">紧急联系人手机号码</text>{{defaultValues['urgent_user_phone']}}</view>
+					<view class="formItem required"><text class="labelText">车辆类型</text>{{defaultValues['type']}}</view>
+					<view class="formItem required"><text class="labelText">最大载重</text>{{defaultValues['max_number']}}千克(kg)</view>
+					<view class="formItem required"><text class="labelText">可装卡板数量</text>{{defaultValues['can_card_num']}}个</view>
+					<view class="formItem required"><text class="labelText">车牌号码</text>{{defaultValues['card_no']}}</view>
+					<view class="formItem required"><text class="labelText">集货中心</text>{{defaultValues['center_name']}}</view>
+					<view class="loopBox">
+						<view class="loopTitle">想跑的路线信息</view>
+						<view class="loopBody">
+							<view class="looptips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+							<view class="loopitem" wx:for="{{defaultValues['expect_route_list']}}" wx:key="point_id">
+								<view class="loopname">{{index + 1}}. {{item['point_name']}}</view>
+								<view class="formItem required"><text class="labelText">期望单趟费用</text>{{item['cost']}}元</view>
+							</view>
+						</view>
+					</view>
+					<view class="formItem required"><text class="labelText">支付类型</text>{{defaultValues['pay_type'] == 1 ? '固定工价' : '运费系数'}}</view>
+					<view class="formItem required" wx:if="{{defaultValues['pay_type'] == 1}}"><text class="labelText">固定工价</text>{{defaultValues['wages']}}元(RMB)</view>
+					<view class="formItem required" wx:if="{{defaultValues['pay_type'] == 2}}"><text class="labelText">运费系数</text>{{defaultValues['wages']}}%</view>
+				</view>
+			</block>
+
+			<block wx:if="{{roleType == 4}}" title="提货点负责人">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['head_pic']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">提货点名称</text>{{defaultValues['name']}}</view>
+					<view class="formItem required"><text class="labelText">所在地区</text>{{defaultValues['addressStr']}}</view>
+					<view class="formItem required"><text class="labelText">详细地址</text>{{defaultValues['region']}}</view>
+					<view class="formItem required"><text class="labelText">负责人姓名</text>{{defaultValues['head_user']}}</view>
+					<view class="formItem required"><text class="labelText">负责人联系电话</text>{{defaultValues['head_phone']}}</view>
+					<view class="formItem required"><text class="labelText">紧急联系人姓名</text>{{defaultValues['urgent_user']}}</view>
+					<view class="formItem required"><text class="labelText">紧急联系人电话</text>{{defaultValues['urgent_phone']}}</view>
+					<view class="formItem required"><text class="labelText">分成比例</text>{{defaultValues['divide_rate']}}%</view>
+					<view class="formItem required"><text class="labelText">所属银行</text>{{defaultValues['bank']}}</view>
+					<view class="formItem required"><text class="labelText">银行卡号</text>{{defaultValues['card_no']}}</view>
+				</view>
+			</block>
+
+			<block wx:if="{{roleType == 5}}" title="集货中心负责人">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['head_pic']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">集货中心名称</text>{{defaultValues['name']}}</view>
+					<view class="formItem required"><text class="labelText">所在地区</text>{{defaultValues['addressStr']}}</view>
+					<view class="formItem required"><text class="labelText">详细地址</text>{{defaultValues['region']}}</view>
+					<view class="formItem required"><text class="labelText">负责人姓名</text>{{defaultValues['head_user']}}</view>
+					<view class="formItem required"><text class="labelText">负责人联系电话</text>{{defaultValues['head_phone']}}</view>
+					<view class="formItem required"><text class="labelText">分成比例</text>{{defaultValues['divide_rate']}}%</view>
+					<view class="formItem required"><text class="labelText">分拣员分成比例</text>{{defaultValues['sorter_rate']}}%</view>
+					<view class="formItem required"><text class="labelText">负责人所属银行</text>{{defaultValues['bank']}}</view>
+					<view class="formItem required"><text class="labelText">负责人银行卡号</text>{{defaultValues['card_no']}}</view>
+				</view>
+			</block>
+
+			<block wx:if="{{roleType == 6}}" title="集货中心主管">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['avator']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">主管姓名</text>{{defaultValues['username']}}</view>
+					<view class="formItem required"><text class="labelText">主管联系电话</text>{{defaultValues['phone']}}</view>
+					<view class="formItem required"><text class="labelText">所属集货中心</text>{{defaultValues['center_name']}}</view>
+					<view class="formItem required"><text class="labelText">集货中心所在地区</text>{{defaultValues['addressStr']}}</view>
+					<view class="formItem required"><text class="labelText">集货中心详细地址</text>{{defaultValues['region']}}</view>
+				</view>
+			</block>
 		</view>
 	</view>
-	<fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+	<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11}}">
+		<fixed-bottom-button  bind:callback="onSubmit" title="确认提交" />
+	</block>
 </view>

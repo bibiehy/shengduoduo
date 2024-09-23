@@ -1,0 +1,6 @@
+{
+	"component": true,
+	"usingComponents": {
+		"tmpl-personal": "../../../../components/tmpl-personal/index"
+	}
+}

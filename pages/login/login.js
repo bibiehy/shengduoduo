@@ -43,7 +43,6 @@ Page({
 				const token = await useRequest(() => fetchToken({ code: authCode, phone, roleType })); // 返回 token
 				if(token) {
 					wx.setStorageSync('MINI_PROGRAM_TOKEN', token);
-					// wx.reLaunch({ url: '/pages/index/index' }); // 跳到首页去请求用户信息
 					getUserAndGoRolePage(app, 0); // 获取用户信息保存到全局且跳到角色对应的页面
 				}
 			},

@@ -7,30 +7,28 @@ const app = getApp();
 Page({
 	data: {
 		// 底部 tabbar
-		tabbarActive: 'home',
+		tabbarActive: 'main',
 		tabbarList: [
-			{ value: 'home', label: '主页', icon: 'home' },
+			{ value: 'main', label: '主页', icon: 'home' },
 			{ value: 'order', label: '订单管理', icon: 'assignment' },
-			{ value: 'operation ', label: '运营概况', icon: 'chart-combo' },
-			{ value: 'user', label: '我的', icon: 'user' },
+			{ value: 'operation', label: '运营概况', icon: 'chart-combo' },
+			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],
 	},
-	onPageJump(e) {
-		const { name } = e.currentTarget.dataset;
-		if(name == 'user') { // 用户管理
-			wx.navigateTo({ url: '/pages/user/user' });
-		}else if(name == 'guige') { // 规格管理
-			wx.navigateTo({ url: '/pages/guige/guige' });
-		}else if(name == 'pickup_point') { // 提货点
-			wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
-		}else if(name == 'store_center') { // 集货中心
-			wx.navigateTo({ url: '/pages/storecenter/storecenter' });
-		}else if(name == 'global') { // 全局信息设置
-			wx.navigateTo({ url: '/pages/globalinfo/globalinfo' });
-		}else if(name == 'audit') { // 信息审核
-			wx.navigateTo({ url: '/pages/audit/audit' });
+	onTabbar(e) {
+		const { tabbarActive } = this.data;
+		const { value } = e.detail;
+
+		if(tabbarActive == value) {
+			return false;
 		}
-	},	
+
+		if(['order', 'operation'].includes(value)) {
+			wx.showToast({ icon: 'warn', title: '暂未开放' })
+		}else{
+			this.setData({ tabbarActive: value });
+		}
+	},
 	onLoad(options) {
 		console.log('admin', app);
 	},

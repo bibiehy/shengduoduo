@@ -23,7 +23,11 @@ Component({
         errTips: '',
     },
     observers: {
-        value: function(newValue) { // 监听外部传递的 value[]
+		value: function(newValue=[]) { // 监听外部传递的 value[]
+			if(newValue.length <= 0) {
+				return false;
+			}
+
             const { options } = this.data;
             const formValues = [];
             const labelArray = [];
@@ -34,10 +38,14 @@ Component({
                     labelArray.push(thisOption['label']);
                 }
             });
-            
+			
             this.setData({ formValues, formNames: labelArray.join(', ') });
         },
         options: function(newOptions) {
+			if(newOptions.length <= 0) {
+				return false;
+			}
+
             this.setData({ formOptions: newOptions });
         }
     },

@@ -1,7 +1,9 @@
 {
 	"usingComponents": {
-		"t-search": "tdesign-miniprogram/search/search",
 		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-    	"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item"
+		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
+		
+		"main": "/pages/administrator/components/main/main",
+		"personal": "/pages/administrator/components/personal/personal"
 	}
 }

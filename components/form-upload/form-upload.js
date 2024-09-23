@@ -6,7 +6,7 @@ Component({
     properties: {
         label: { type: String, value: '' },
         name: { type: String, value: '' },
-        value: { type: Array, value: [] },
+        value: null,
         disabled: { type: Boolean, value: false },
         required: { type: Boolean, value: true }, // 是否必填
         remark: { type: String, value: '' }, // 对 label 字段的补充
@@ -21,8 +21,15 @@ Component({
         errTips: ''
     },
     observers: {
-        value: function(newValue) { // 监听外部传递的 value []
-			this.setData({ fileList: newValue || [] });
+		value: function(newValue) { // 监听外部传递的 value，1.头像地址字符串，2.数组字符串，多值
+			if(!newValue) {
+				return false;
+			}
+
+			const { max } = this.data;
+			const newFileList = max == 1 ? [{ url: newValue }] : newValue.map((value) => ({ url: value }));
+			
+			this.setData({ fileList: newFileList });
         }
     },
     methods: {
@@ -67,7 +74,7 @@ Component({
         },               
         // 以下是对外的方法
         getFieldVerify() { // 获取校验后的表单值
-            const { required, name, fileList, message } = this.data;
+            const { required, name, fileList, message, max } = this.data;
             let isVerify = true;
             
             if(required) {
@@ -77,15 +84,33 @@ Component({
                 this.setData({ errTips });
             }            
 
-            return { verify: isVerify, name, value: fileList };
+			const newFileList = max == 1 ? (fileList.length > 0 ? fileList[0]['url'] : '') : fileList.map((item) => item['url']);
+            return { verify: isVerify, name, value: newFileList };
         },
         getFieldValue() {
-			const { name, fileList } = this.data;
+			const { name, fileList, max } = this.data;
 			const doneList = fileList.filter((item) => item['status'] == 'done');
-            return { name, value: doneList };
+
+			let newFileList = '';
+			if(max == 1) {
+				newFileList = doneList.length == 1 ? doneList[0]['url'] : '';
+			}else{
+				newFileList = doneList.map((item) => item['url']);
+			}
+
+            return { name, value: newFileList };
         },
         setFieldValue(newValue) {
-            this.setData({ fileList: newValue });
+			const { max } = this.data;
+
+			let newFileList = '';
+			if(max == 1) {
+				newFileList = newValue ? [{ url: newValue }] : [];
+			}else{
+				newFileList = newValue.map((value) => ({ url: value }));
+			}
+
+            this.setData({ fileList: newFileList });
         }
     }
 })

@@ -22,4 +22,5 @@ export const fetchGetGlobalInfo = () => ({ url: '/admin/system/get', loading: tr
 // 设置全局信息，banner上传和创建任务时规格内容填错，后被分拣员发现的处罚，用于规格上报相关功能
 export const fetchSetGlobalInfo = (params) => ({ url: '/admin/system/edit', method: 'post', data: params, loading: true, delay: 500 });
 
-
+// 获取随机头像昵称
+export const fetchRandomAvatar = () => ({ url: '/common/getRandomAvatar' });

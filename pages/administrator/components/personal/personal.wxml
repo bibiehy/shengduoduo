@@ -1,0 +1,5 @@
+<tmpl-personal>
+	<view style="display:flex; align-items:center; justify-content:center; height:400px;">
+		<empty description="暂无内容" />
+	</view>
+</tmpl-personal>

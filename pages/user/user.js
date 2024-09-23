@@ -4,7 +4,7 @@ import { delay, getRoleInfo } from '../../utils/tools';
 
 // 角色类型
 const { roleAllList, roleAllObject } = getRoleInfo();
-const newRoleList = roleAllList.slice(0, roleAllList.length - 1);
+const newRoleList = roleAllList.filter((item) => [8, 9, 10, 11].includes(item['value']));
 
 Page({
 	data: {
@@ -30,7 +30,15 @@ Page({
 		const { keyword, dataList, upStatus } = this.data;
 		const result = await useRequest(() => fetchUserList({ page: thisPage, name: keyword || '' }));
 		if(result) {
-			const newList = result['content'];
+			const newList = [];
+			result['content'].forEach((item) => {
+				if([4, 5].includes(item['role_type'])) { // 4提货点负责人/5集货中心负责人
+					item['address'] = item['address'] ? JSON.parse(item['address']) : [];
+					item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、');
+				}
+				
+				newList.push(item);
+			});
 
 			// upStatus == 2 表示上拉加载，数据许合并
 			this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
@@ -87,7 +95,7 @@ Page({
 	},
 	onPickerSure(e) { // 添加
 		const { label, value } = e.detail;
-		const strItem = JSON.stringify({ role_type: value });
+		const strItem = JSON.stringify({ role_type: value[0] });
 		this.setData({ pickerVisible: false });
 		wx.navigateTo({ url: `/pages/user/create/create?type=create&strItem=${strItem}` });
 	},
@@ -105,7 +113,7 @@ Page({
 			wx.showToast({ title: status == 1 ? '已禁用' : '已启用', icon: 'success' });
 		}
 	},	
-	onEdit(e) { // 编辑
+	onEdit(e) { // 编辑/查看
 		const { type, item } = e.currentTarget.dataset;
 		const strItem = JSON.stringify(item || {});
 		wx.navigateTo({ url: `/pages/user/create/create?type=${type}&strItem=${strItem}` });

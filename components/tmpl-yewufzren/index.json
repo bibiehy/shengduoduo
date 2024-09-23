@@ -1,4 +1,12 @@
 {
-	"component": true,
-	"usingComponents": {}
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+		"form-avatar": "/components/form-avatar/form-avatar",
+        "form-input": "/components/form-input/form-input",
+		"form-select": "/components/form-select/form-select",
+		"form-mselect": "/components/form-mulselect/form-mulselect",
+		"form-radio": "/components/form-radio/form-radio",
+		"form-upload": "/components/form-upload/form-upload"
+    }
 }
