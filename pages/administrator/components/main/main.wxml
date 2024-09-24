@@ -1,12 +1,12 @@
 <view class="adminmain-wrapper global-pagebg">
-	<view class="innerscroll">
-		<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
-			<view class="global-navigation-bar">
-				<view class="main-searchbox">
-					<t-search disabled="{{true}}" shape="round" placeholder="订单查询" />
-				</view>
+	<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
+		<view class="global-navigation-bar">
+			<view class="main-searchbox">
+				<t-search disabled="{{true}}" shape="round" placeholder="订单查询" />
 			</view>
-		</navigation-bar>
+		</view>
+	</navigation-bar>
+	<view class="innerscroll">
 		<view class="main-summary">
 			<view class="sumbox">
 				<view class="sumname">本月收益</view>

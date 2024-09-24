@@ -1,6 +1,6 @@
 {
     "component": true,
-    "styleIsolation": "apply-shared",
+	"styleIsolation": "apply-shared",
     "usingComponents": {
 		"t-check-tag": "tdesign-miniprogram/check-tag/check-tag"
     }

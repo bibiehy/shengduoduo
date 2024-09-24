@@ -1,4 +1,4 @@
-<view class="my-navigation-bar">
+<view class="my-navigation-bar" style="opacity: {{opacity}};">
 	<!-- 空层撑起 navigation-bar -->
     <view style="width: 100%; {{safeAreaTop}}"></view>
 	<!-- fixed -->

@@ -1,4 +1,4 @@
-import { delay, getRoleInfo } from '../../utils/tools';
+import { delay, getRoleInfo, getScrollColor } from '../../utils/tools';
 
 Component({
 	properties: {
@@ -6,12 +6,19 @@ Component({
 	},
 	data: {
 		userInfo: {},
-		roleAllObject: {}
+		roleAllObject: {},
+		opacity: 0
 	},
 	methods: {
 		onEditUser() {
 			this.triggerEvent('callback', {}, {});
-		}
+		},
+		onScrollView(e) { // 控制透明度 navigation-bar
+			const { scrollTop } = e.detail;
+			const thisOpacity = scrollTop / 120;
+			const newOpacity = thisOpacity >= 1 ? 1 : thisOpacity;
+			this.setData({ opacity: newOpacity });
+		},
 	},
 	// 自定义组件内的生命周期
     lifetimes: {

@@ -3,6 +3,7 @@
 	--left: 16px;
 	overflow: hidden;
 	color: rgba(0, 0, 0, 0.9);
+	transition: all 0.5s;
 }
 .my-navigation-bar .mybar-mainbox .android {
 	--height: 48px;

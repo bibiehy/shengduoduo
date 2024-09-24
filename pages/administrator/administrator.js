@@ -32,13 +32,11 @@ Page({
 	onLoad(options) {
 		console.log('admin', app);
 	},
-	onReady() {
-
-	},
-	onPullDownRefresh() {
-
-	},
-	onReachBottom() {
-
-	},
+	// onPageScroll(e) { 
+	// 	console.log(111, e);
+	// 	// const navigationBackgroundColor = getScrollColor(e.scrollTop, '#1677ff');
+    //     // if(navigationBackgroundColor) {
+    //     //     this.setData({ navigationBackgroundColor });
+    //     // }
+    // }
 });

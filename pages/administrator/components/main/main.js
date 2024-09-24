@@ -26,7 +26,7 @@ Component({
 
 	},
 	data: {
-
+		
 	},
 	methods: {
 		onPageJump(e) {
@@ -44,7 +44,7 @@ Component({
 			}else if(name == 'audit') { // 信息审核
 				wx.navigateTo({ url: '/pages/audit/audit' });
 			}
-		},	
+		}
 	},
 	// 自定义组件内的生命周期
     lifetimes: {

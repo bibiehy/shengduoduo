@@ -32,7 +32,8 @@ Component({
 		showBack: { type: Boolean, value: true },
 		placement: { type: String, value: '' }, // 空为插槽，left 为 title 局左，center 为 title 居中
         // loading: { type: Boolean, value: false },
-        delta: { type: Number, value: 1 }, // back为true的时候，返回的页面深度
+		delta: { type: Number, value: 1 }, // back为true的时候，返回的页面深度
+		opacity: { type: Number, value: 1 }, // 不透明度
     },
     data: {
         

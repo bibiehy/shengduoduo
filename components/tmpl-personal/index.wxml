@@ -1,8 +1,6 @@
 <view class="personalTemplate">
-	<view class="innerScroll">
-		<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none" placement="center" title="个人中心">
-			
-		</navigation-bar>
+	<navigation-bar extClass="global-pagebg" opacity="{{opacity}}" showBack="{{false}}" boxShadow="none" placement="center" title="个人中心"></navigation-bar>
+	<scroll-view class="scrollview" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="personalInfo">
 			<view class="personalAvator"><image mode="aspectFill" src="{{userInfo['avator']}}" /></view>
 			<view class="personalBaseInfo">
@@ -16,8 +14,8 @@
 			<slot></slot>
 		</view>
 		<view class="personalActions">
-			<t-button size="large" block style="margin-bottom: 20px;">切换角色</t-button>
 			<t-button size="large" theme="primary" block>退出登录</t-button>
+			<t-button size="large" theme="primary" ghost="{{true}}" variant="text" block style="background-color: transparent; margin-top: 20px;">切换角色</t-button>
 		</view>
-	</view>
+	</scroll-view>
 </view>
