@@ -6,19 +6,35 @@ Component({
 	},
 	data: {
 		userInfo: {},
-		roleAllObject: {},
-		opacity: 0
+		roleAllObject: {}, // 角色类型
+        opacity: 0,
+        // 退出登录
+        showConfirm: false,
 	},
 	methods: {
+        // 编辑个人信息
 		onEditUser() {
 			this.triggerEvent('callback', {}, {});
-		},
-		onScrollView(e) { // 控制透明度 navigation-bar
+        },
+        // 控制透明度 navigation-bar
+		onScrollView(e) {
 			const { scrollTop } = e.detail;
 			const thisOpacity = scrollTop / 120;
 			const newOpacity = thisOpacity >= 1 ? 1 : thisOpacity;
 			this.setData({ opacity: newOpacity });
-		},
+        },
+        // 退出登录
+        onVisibleDialog() { // 显示和关闭确认退出弹框
+            const { showConfirm } = this.data;
+            this.setData({ showConfirm: !showConfirm });
+        },
+        async onSureLogout() {
+            this.setData({ showConfirm: false });
+            wx.showToast({ title: '退出成功', icon: 'success' });
+            wx.clearStorageSync();
+            await delay(1500);
+            wx.reLaunch({ url: '/pages/login/login' });
+        }
 	},
 	// 自定义组件内的生命周期
     lifetimes: {
