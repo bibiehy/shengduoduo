@@ -23,4 +23,4 @@ export const fetchGetGlobalInfo = () => ({ url: '/admin/system/get', loading: tr
 export const fetchSetGlobalInfo = (params) => ({ url: '/admin/system/edit', method: 'post', data: params, loading: true, delay: 500 });
 
 // 获取随机头像昵称
-export const fetchRandomAvatar = () => ({ url: '/common/getRandomAvatar' });
+export const fetchRandomAvatar = () => ({ url: '/common/getRandomAvatar', method: 'get' });

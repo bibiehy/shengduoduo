@@ -1,5 +1,5 @@
-<tmpl-personal bind:callback="onEditUser">
-	<view style="display:flex; align-items:center; justify-content:center; height:400px;">
+<tmpl-personal bind:callback="onEditUser" defaultValues="{{defaultValues}}">
+	<view style="display:flex; align-items:center; justify-content:center; height:350px;">
 		<empty description="暂无内容" />
 	</view>
 </tmpl-personal>

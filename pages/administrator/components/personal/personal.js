@@ -4,7 +4,7 @@ Component({
 
 	},
 	data: {
-
+        defaultValues: {}, // 编辑后的信息，用于改变基本信息
 	},
 	methods: {
         onEditUser() {
@@ -13,8 +13,7 @@ Component({
                 url: `/pages/administrator/pages/edit/edit`,
                 events: { // 注册事件监听器
                     acceptOpenedData: (data) => { // 监听由子页面触发的同名事件
-                        console.log(111, data);
-                        this.setData({ ...data });
+                        this.setData({ defaultValues: data });
                     }
                 }
             });

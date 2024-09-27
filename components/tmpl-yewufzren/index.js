@@ -27,7 +27,7 @@ Component({
 			const { actionType } = this.data;
 			let avatarNickname = {};
 			if(actionType == 'create') {
-				const resultRandom = await useRequest(() => fetchRandomAvatar());
+                const resultRandom = await useRequest(() => fetchRandomAvatar());
 				if(resultRandom) {
 					avatarNickname['avator'] = resultRandom['avatar'];
 					avatarNickname['nickname'] = resultRandom['nick_name'];

@@ -38,9 +38,9 @@
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit.png" /></view>
 				<view class="modname">信息审核</view>
 			</view>
-			<view class="moditem">
+			<view class="moditem" bind:tap="onPageJump" data-name="drivers">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/drivers.png" /></view>
-				<view class="modname">司机调度</view>
+				<view class="modname">干线调度</view>
 			</view>
 			<view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/error_order.png" /></view>
@@ -88,11 +88,11 @@
 			<view class="gbcontent">
 				<view class="gbitem" bind:tap="onPageJump" data-name="global">
 					<view class="gbname">BANNER设置</view>
-					<image mode="widthFix" src="../../../../assets/global_img01.png" />
+					<image class="gbimage" mode="widthFix" src="../../../../assets/global_img01.png" />
 				</view>
 				<view class="gbitem">
 					<view class="gbname">订单处罚设置</view>
-					<image mode="widthFix" src="../../../../assets/global_img02.png" />
+					<image class="gbimage" mode="widthFix" src="../../../../assets/global_img02.png" />
 				</view>
 			</view>
 		</view>

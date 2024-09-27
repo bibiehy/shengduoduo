@@ -1,8 +1,8 @@
-<view class="personalTemplate">
-	<navigation-bar extClass="global-pagebg" opacity="{{opacity}}" showBack="{{false}}" boxShadow="none" placement="center" title="个人中心"></navigation-bar>
-	<scroll-view class="scrollview" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
+<view class="personalTemplate global-userbg">
+	<navigation-bar extClass="global-userbg" opacity="{{opacity}}" showBack="{{false}}" boxShadow="none" placement="center" title="个人中心"></navigation-bar>
+	<scroll-view class="scrollviewbox" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="personalInfo">
-			<view class="personalAvator"><image mode="aspectFill" src="{{userInfo['avator']}}" /></view>
+			<view class="personalAvator"><image class="avatorImage" mode="aspectFill" src="{{userInfo['avator']}}" /></view>
 			<view class="personalBaseInfo">
 				<view class="baseNickname">{{userInfo['nickname']}}</view>
 				<view class="baseOther">{{userInfo['username']}} {{userInfo['phone']}}</view>
@@ -22,9 +22,9 @@
 
 <t-dialog
     visible="{{showConfirm}}"
-    title=""
-    content="您确认要退出当前登录嘛？"
-    confirmBtn="确定"
+    title="退出登录"
+    content="您确定要退出当前账号嘛？点击确定后将会重新登录！"
+    confirmBtn="{{confirmBtn}}"
     cancelBtn="取消"
     bind:confirm="onSureLogout"
     bind:cancel="onVisibleDialog"

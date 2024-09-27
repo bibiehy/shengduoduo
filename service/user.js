@@ -28,8 +28,8 @@ export const fetchUserDisabled = (params) => ({ url: `/admin/user/disable/${para
 // 查看详情
 export const fetchUserDetail = (params) => ({ url: `/admin/user/getAdminUserById/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
-
-
+// 编辑超级管理员
+export const fetchEditAdmin = (params) => ({ url: `/user/admin/updateUserInfo`, method: 'post', loading: true, delay: 500, data: params });
 
 
 

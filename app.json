@@ -4,29 +4,23 @@
 		"pages/login/login",
 		"pages/page403/page403",
 		"pages/privacy/privacy",
-        "pages/administrator/administrator",
-        "pages/administrator/pages/edit/edit",
-        
+		"pages/administrator/administrator",
+		"pages/administrator/pages/edit/edit",
 		"pages/guige/guige",
-        "pages/guige/create/create",
-        
+		"pages/guige/create/create",
 		"pages/pickuppoint/pickuppoint",
-        "pages/pickuppoint/create/create",
-        
+		"pages/pickuppoint/create/create",
 		"pages/storecenter/storecenter",
-        "pages/storecenter/create/create",
-        
-        "pages/globalinfo/globalinfo",
-        
+		"pages/storecenter/create/create",
+		"pages/globalinfo/globalinfo",
 		"pages/audit/audit",
-        "pages/audit/detail/detail",
-        
+		"pages/audit/detail/detail",
 		"pages/user/user",
-        "pages/user/create/create",
-        
+		"pages/user/create/create",
 		"pages/user_fahuoren/index",
 		"pages/user_driver/index",
-		"pages/user_shouhuoren/index"		
+		"pages/user_shouhuoren/index",
+		"pages/drivers/drivers"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

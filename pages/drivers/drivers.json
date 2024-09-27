@@ -1,0 +1,9 @@
+{
+	"usingComponents": {
+		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
+		
+		"main": "/pages/drivers/components/main/main",
+		"personal": "/pages/drivers/components/personal/personal"
+	}
+}

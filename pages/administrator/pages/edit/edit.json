@@ -1,3 +1,7 @@
 {
-	"usingComponents": {}
+	"usingComponents": {
+        "fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"form-input": "/components/form-input/form-input",
+		"form-avatar": "/components/form-avatar/form-avatar"
+    }
 }

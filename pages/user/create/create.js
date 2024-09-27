@@ -38,7 +38,7 @@ Page({
 			const result = await useRequest(() => fetchRequest({ ...formValues }));
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });
-				await delay(500);
+				await delay(1000);
 				goBackAndRefresh(actionType, result); // 返回父页面并调用父页面的 onRefresh 方法
 			}
 		}

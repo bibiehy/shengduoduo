@@ -1,0 +1,3 @@
+@import "../../utils/iconfont.wxss";
+
+.drivers-outer-wrapper { width:100vw; height:auto; overflow-y:auto; }
