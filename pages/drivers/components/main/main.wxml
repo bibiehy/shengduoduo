@@ -1,2 +1,67 @@
-<!--pages/drivers/components/main/main.wxml-->
-<text>pages/drivers/components/main/main.wxml</text>
+<view class="driversmain-wrapper global-pagebg">
+	<navigation-bar extClass="global-pagebg" title="干线调度" placement="center" showBack="{{isShowBack}}" boxShadow="none"></navigation-bar>
+	<view class="innerscroll">
+		<view class="quick-entry">
+			<view class="entryitem">
+				<view class="itemicon"><t-icon name="tree-round-dot" size="42px" bind:click="onIconTap" /></view>
+				<view class="itemname">
+					<view class="cn">创建任务</view>
+					<view class="en">CREATE TASK</view>
+				</view>
+			</view>
+			<view class="entryitem">
+				<view class="itemicon"><t-icon name="truck" prefix="iconfont" size="42px" bind:click="onIconTap" /></view>
+				<view class="itemname">
+					<view class="cn">添加司机</view>
+					<view class="en">ADD DRIVER</view>
+				</view>
+			</view>
+		</view>	
+
+		<view class="task-fenjian-status">
+			<view class="header">
+				<view class="title">提货点分拣概况</view>
+				<view class="selectbox">
+					<view class="jihzxname">粤西农批57号仓粤西农批57号仓</view>
+					<t-icon name="chevron-down-s" size="24px" />
+				</view>
+			</view>
+			<view class="listitem">
+				<view class="headbox">
+					<view class="tihdname">高州新城</view>
+					<view class="status01">分拣中</view>
+				</view>
+				<view class="bodybox">
+					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
+					<view class="profile">已分拣/未分拣的商品件数：<text>20/100</text></view>
+					<view class="profile">可调度的卡板编号数：<text>30</text></view>
+				</view>
+			</view>
+			<view class="listitem">
+				<view class="headbox">
+					<view class="tihdname">化州</view>
+					<view class="status02">已分拣</view>
+				</view>
+				<view class="bodybox">
+					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
+					<view class="profile">已分拣/未分拣的商品件数：<text>20/100</text></view>
+					<view class="profile">可调度的卡板编号数：<text>30</text></view>
+				</view>
+			</view>
+		</view>
+
+		<view class="task-in-process">
+			<view class="title">配送中的任务<text class="number">(10)</text></view>
+			<view class="nodata">
+				<empty description="暂无任务" />
+			</view>
+			<!-- <view class="listbox">
+				
+			</view> -->
+		</view>
+
+		
+		
+		
+	</view>
+</view>

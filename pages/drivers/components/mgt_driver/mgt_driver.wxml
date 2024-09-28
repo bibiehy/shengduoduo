@@ -1,0 +1,83 @@
+<view class="user-box">
+	<navigation-bar showBack="{{false}}" background="#fff" boxShadow="none">
+		<view>
+			<view>司机管理</view>
+			<view>配送概况</view>
+		</view>
+	</navigation-bar>
+	<!-- <view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、电话等关键字" />
+		<view class="pageline"></view>
+		<view class="pageaddbtn" bind:tap="onSelectRole"><t-icon name="add" size="24" /> 添加</view>
+	</view> -->
+	<!-- <t-pull-down-refresh
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag wx:if="{{item['disabled'] == 2}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
+					<block wx:if="{{item['role_type'] == 8 || item['role_type'] == 9 || item['role_type'] == 10 || item['role_type'] == 11}}">
+						<view class="mainbox" bind:tap="onEdit" data-type="edit" data-item="{{item}}">
+							<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
+							<view class="rightbox">
+								<view class="psname">{{item['nickname']}}</view>
+								<view class="pstime">{{item['createTime']}}</view>
+								<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+								<view class="psinfo">角色类型：{{roleAllObject[item['role_type']]}}</view>
+							</view>
+						</view>
+						<view class="psbtns">
+							<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+							<t-tag class="mr16" bind:tap="onEdit" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+							<t-tag class="mr16" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="mainbox" bind:tap="onEdit" data-type="view" data-item="{{item}}">
+							<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
+							<view class="rightbox">
+								<view class="psname">{{item['nickname']}}</view>
+								<view class="pstime">{{item['createTime']}}</view>
+								<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+								<view class="psinfo">角色类型：{{roleAllObject[item['role_type']]}}</view>
+								<block wx:if="{{item['role_type'] == 4 || item['role_type'] == 5}}">
+									<view class="psinfo">详细地址：{{item['addressStr']}}{{item['region']}}</view>
+								</block>
+								<block wx:else>
+									<view class="psinfo">{{item['center_name'] ? ('所属集货中心：' + item['center_name']) : ''}}</view>
+								</block>
+							</view>
+						</view>
+						<view class="psbtns">
+							<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+							<t-tag class="mr16" bind:tap="onEdit" data-type="view" data-item="{{item}}" variant="light-outline" shape="round">查 看</t-tag>
+						</view>
+					</block>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>	 -->
+</view>
+<!-- 
+<t-picker
+	visible="{{pickerVisible}}"
+	title="请选择角色类型"
+	cancelBtn="取消"
+	confirmBtn="确定"
+	bind:confirm="onPickerSure"
+	bind:cancel="onPickerCancel"
+>
+	<t-picker-item options="{{rolePickerList}}"></t-picker-item>
+</t-picker> -->
+

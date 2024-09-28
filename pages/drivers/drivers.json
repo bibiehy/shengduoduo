@@ -4,6 +4,7 @@
 		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
 		
 		"main": "/pages/drivers/components/main/main",
+		"mgt_driver": "/pages/drivers/components/mgt_driver/mgt_driver",
 		"personal": "/pages/drivers/components/personal/personal"
 	}
 }

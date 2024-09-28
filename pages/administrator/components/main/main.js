@@ -44,7 +44,7 @@ Component({
 			}else if(name == 'audit') { // 信息审核
 				wx.navigateTo({ url: '/pages/audit/audit' });
 			}else if(name == 'drivers') { // 干线调度
-				wx.navigateTo({ url: '/pages/drivers/drivers' });
+				wx.navigateTo({ url: '/pages/drivers/drivers?from=admin' });
 			}
 		}
 	},

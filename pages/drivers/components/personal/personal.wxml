@@ -1,2 +1,5 @@
-<!--pages/drivers/components/personal/personal.wxml-->
-<text>pages/drivers/components/personal/personal.wxml</text>
+<tmpl-personal bind:callback="onEditUser" defaultValues="{{defaultValues}}">
+	<view style="display:flex; align-items:center; justify-content:center; height:350px;">
+		<empty description="暂无内容" />
+	</view>
+</tmpl-personal>

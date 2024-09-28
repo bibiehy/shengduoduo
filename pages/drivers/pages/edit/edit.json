@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+        "fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"tmpl-yewufzren": "/components/tmpl-yewufzren/index"
+    }
+}

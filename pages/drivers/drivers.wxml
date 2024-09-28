@@ -1,5 +1,6 @@
 <view class="drivers-outer-wrapper">
-	<main wx:if="{{tabbarActive == 'main'}}" />
+	<main wx:if="{{tabbarActive == 'main'}}" isShowBack="{{isShowBack}}" />
+	<mgt_driver wx:elif="{{tabbarActive == 'driver'}}" />
 	<personal wx:elif="{{tabbarActive == 'personal'}}" />
 
 	<t-tab-bar value="{{tabbarActive}}" bind:change="onTabbar" fixed="{{true}}" theme="normal" split="{{false}}">

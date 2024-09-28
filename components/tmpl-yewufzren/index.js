@@ -13,6 +13,7 @@ Component({
 	properties: {
 		actionType: { type: String, value: '' }, // 创建(create)/编辑(edit)
 		roleType: { type: Number, value: '' }, // 8干线调度/9业务负责人/10财务管理/11差异审核员; 8和9需要设置分成比例
+		fromto: { type: String, value: '' }, // 来自哪个页面，如果是 admin 部分项不用禁止，否则需要禁止，如手机号，分成比例等
 	},
 	data: {
 		defaultValues: {},

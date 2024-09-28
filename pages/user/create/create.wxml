@@ -15,7 +15,7 @@
 
 		<view class="innerbox">
 			<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11}}">
-				<tmpl-yewufzren id="templateYewufzren" actionType="{{actionType}}" roleType="{{roleType}}" />
+				<tmpl-yewufzren id="templateYewufzren" actionType="{{actionType}}" roleType="{{roleType}}" fromto="admin" />
 			</block>
 
 			<block wx:if="{{roleType == 1}}" title="发货人">
