@@ -1,3 +1,17 @@
 {
-	"usingComponents": {}
+    "component": true,
+    "disableScroll": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-search": "tdesign-miniprogram/search/search",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-loading": "tdesign-miniprogram/loading/loading",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog",
+        "t-radio": "tdesign-miniprogram/radio/radio",
+        "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
+
+		"t-picker": "tdesign-miniprogram/picker/picker",
+    	"t-picker-item": "tdesign-miniprogram/picker-item/picker-item"
+    }
 }

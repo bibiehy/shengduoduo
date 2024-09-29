@@ -5,7 +5,7 @@
 .quick-entry .entryitem { display:flex; align-items:center; }
 .quick-entry .entryitem .itemicon {  color:rgba(255, 255, 255, 0.65); margin-right:10px; }
 .quick-entry .entryitem .itemname { color:rgba(255, 255, 255, 0.75); }
-.quick-entry .entryitem .itemname .cn { font-size:21px; }
+.quick-entry .entryitem .itemname .cn { font-size:20px; }
 .quick-entry .entryitem .itemname .en { font-size:12px; padding-left:2px; }
 
 .task-fenjian-status { background-color:#fff; border-radius:8px; padding:12px; margin:10px; }

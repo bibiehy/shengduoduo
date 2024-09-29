@@ -181,7 +181,8 @@ Page({
 	// 注册
 	onClickTabs(e) { // tabs
 		const { tabsValue } = this.data;
-		const dataValue = e.target.dataset.value;
+        // const dataValue = e.target.dataset.value;
+        const dataValue = e.currentTarget.dataset.value;
 		if(tabsValue == dataValue) {
 			return false;
 		}

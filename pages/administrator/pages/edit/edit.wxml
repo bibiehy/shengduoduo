@@ -1,5 +1,5 @@
 <view class="personal-editbox">
-    <navigation-bar title="超级管理员" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <navigation-bar title="个人中心" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
             <form-avatar class="FORM_AVATAR" name="avator" value="{{defaultValues['avator']}}" required="{{true}}" />

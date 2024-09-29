@@ -22,7 +22,7 @@
 		"pages/user_shouhuoren/index",
 		"pages/drivers/drivers",
 		"pages/drivers/pages/edit/edit",
-		"pages/drivers/components/mgt_driver/mgt_driver"
+		"pages/drivers/pages/adddriver/adddriver"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

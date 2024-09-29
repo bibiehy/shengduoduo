@@ -1,1 +1,30 @@
-/* pages/drivers/components/mgt_driver/mgt_driver.wxss */
+.mgt-driver-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
+
+.driver-tabs { display:flex; align-items:flex-end; width:100%; padding-left:10px; box-sizing:border-box; }
+.driver-tabs .tabitem { font-size:15px; color:rgba(0, 0, 0, 0.45); padding:0 15px; transition:all 0.5s; }
+.driver-tabs .tabitem.active { font-size:20px; font-weight:600; color:#1677ff; }
+
+.peisong-conditions { display:flex; align-items:center; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:14px 15px 8px; margin-top:-1px; }
+.peisong-conditions .selectbox { display:flex; align-items:center; height:32px; background-color:#f3f3f3; border-radius:4px; padding:0 4px 0 10px; }
+.peisong-conditions .selectbox .jihzxname { max-width:100px; font-size:16px; color:rgba(0, 0, 0, 0.65); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.peisong-conditions .datebox { display:flex; align-items:center; margin-left:10px; --td-radio-vertical-padding:0 !important; --td-radio-icon-size:19px !important; }
+.peisong-conditions .datebox .showdate { display:flex; align-items:center; height:32px; background-color:#f3f3f3; border-radius:4px; padding:0 8px; }
+.peisong-conditions .datebox .showdate .datevalue { font-size:14px; color:rgba(0, 0, 0, 0.65); margin-right:4px; }
+.peisong-conditions .allbox { margin-left:10px; --td-radio-vertical-padding:0 !important; --td-radio-icon-size:19px !important; --td-radio-font-size:14px !important; --td-font-gray-1:rgba(0, 0, 0, 0.65) !important; }
+
+
+.page-scroll { flex:1; padding:10px 10px 80px; overflow-y:auto; }
+.page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
+.page-scroll .listitem .mainbox { display:flex; }
+.page-scroll .listitem .mainbox .imgbox { width:100px; height:100px; border-radius:8px; background-color:#f3f3f3; overflow:hidden; }
+.page-scroll .listitem .mainbox .imgbox image { display:block; width:100%; height:100%; }
+.page-scroll .listitem .mainbox .rightbox { flex:1; margin-left:12px; }
+.page-scroll .listitem .mainbox .rightbox .psname { width:80%; font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.page-scroll .listitem .mainbox .rightbox .pstime { font-size:13px; color:rgba(0, 0, 0, 0.45); }
+.page-scroll .listitem .mainbox .rightbox .psinfo { font-size:15px; color:rgba(0, 0, 0, 0.75); }
+.page-scroll .listitem .psbtns { display:flex; padding-top:8px; }
+.page-scroll .listitem .psbtns .t-tag { min-width:70px; text-align:center; }
+.page-scroll .listitem .psbtns .t-tag .t-tag__text { width:100%; }
+.page-scroll .nodata { height:500px; }
+

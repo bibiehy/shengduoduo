@@ -1,0 +1,9 @@
+<view class="user-create-box">
+	<navigation-bar title="干线司机" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="innerbox">
+			<tmpl-drivers id="templateDrivers" actionType="{{actionType}}" />
+		</view>
+	</view>
+	<fixed-bottom-button  bind:callback="onSubmit" title="确认提交" />
+</view>

@@ -3,14 +3,14 @@
 	<view class="innerscroll">
 		<view class="quick-entry">
 			<view class="entryitem">
-				<view class="itemicon"><t-icon name="tree-round-dot" size="42px" bind:click="onIconTap" /></view>
+				<view class="itemicon"><t-icon name="tree-round-dot" size="38px" bind:click="onIconTap" /></view>
 				<view class="itemname">
 					<view class="cn">创建任务</view>
 					<view class="en">CREATE TASK</view>
 				</view>
 			</view>
 			<view class="entryitem">
-				<view class="itemicon"><t-icon name="truck" prefix="iconfont" size="42px" bind:click="onIconTap" /></view>
+				<view class="itemicon"><t-icon name="truck" prefix="iconfont" size="38px" bind:click="onIconTap" /></view>
 				<view class="itemname">
 					<view class="cn">添加司机</view>
 					<view class="en">ADD DRIVER</view>
