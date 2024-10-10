@@ -74,7 +74,7 @@
 </view>
 
 <popup title="提货点信息设置" visible="{{visible}}" bind:callback="onPopupSure" close-on-overlay-click="{{false}}">
-	<view class="popup-tihuodian-create">
+	<scroll-view class="popup-scrollviewbox" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="popupinner">
 			<form-select id="formInputTihuodian" label="所属提货点" name="point_id" value="{{actionItem['point_id']}}" placeholder="请选择所属提货点" required="{{true}}" options="{{allPickupList}}" />
 			<form-input id="formInputReachTime" label="预估送达时长" name="reach_time" value="{{actionItem['reach_time']}}" remark="如：36、36.5 等小时制" suffix="小时" type="digit" placeholder="请输入预估送达时长" required="{{true}}" />
@@ -92,7 +92,7 @@
 				</view>
 			</view>
 		</view>
-	</view>
+	</scroll-view>		
 </popup>
 
 <t-dialog

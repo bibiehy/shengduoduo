@@ -8,7 +8,7 @@ export const fetchGuigeCreate = (params) => ({ url: '/admin/spec/add', method: '
 export const fetchGuigeEdit = (params) => ({ url: '/admin/spec/edit', method: 'post', loading: true, delay: 500, data: params });
 
 // 删除
-export const fetchGuigeDelete = (params) => ({ url: `/admin/spec/delete/${params['id']}`, method: 'post', loading: true, delay: 500 });
+export const fetchGuigeDelete = (params) => ({ url: `/admin/spec/delete/${params['id']}`, method: 'post', loading: false, delay: 500 });
 
 // 禁用/启用
 export const fetchGuigeDisabled = (params) => ({ url: `/admin/spec/disable/${params['id']}/${params['type']}`, method: 'post', loading: true, delay: 500 });

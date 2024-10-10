@@ -50,12 +50,14 @@
                             <view class="psname">{{item['nickname']}}</view>
                             <view class="pstime">{{item['createTime']}}</view>
                             <view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+							<view class="psinfo">{{item['center_name']}}</view>
+							<view class="psinfo">{{item['type_name']}}</view>
                         </view>
                     </view>
                     <view class="psbtns">
-                        <t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-                        <t-tag class="mr16" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}" variant="light-outline" shape="round">编 辑</t-tag>
-                        <t-tag class="mr16" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+                        <t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+                        <t-tag t-class="listag" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}" variant="light-outline" shape="round">编 辑</t-tag>
+                        <t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
                     </view>
 				</view>
 			</block>

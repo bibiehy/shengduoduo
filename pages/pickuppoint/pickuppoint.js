@@ -36,26 +36,12 @@ Page({
 			}
 		}
 	},	
-	onRefresh(action, formValues) { // 1.create/edit 添加/编辑页面，保存后会调用该方法; 2.refresh 下拉刷新
-		const type = (typeof action) == 'string' ? action : action['type'];
-		if(type == 'refresh') { // 下拉刷新
-			this.setData({ downStatus: true });
-			this.onAjaxList(1, async () => {
-				await delay(500);
-				this.setData({ downStatus: false });
-			});
-		}else if(type == 'create') { // 添加
-			this.onAjaxList(1);
-		}else if(type == 'edit') { // 编辑
-			const { dataList } = this.data;
-			const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
-			if(findIndex >= 0) {
-				formValues['address'] = JSON.parse(formValues['address']);
-				formValues['addressStr'] = (formValues['address'].map((adItem) => adItem['label'])).join('、');
-				dataList.splice(findIndex, 1, formValues);
-				this.setData({ dataList });
-			}
-		}
+	onRefresh() { // 下拉刷新
+		this.setData({ downStatus: true });
+		this.onAjaxList(1, async () => {
+			await delay(500);
+			this.setData({ downStatus: false });
+		});
 	},
 	onPullUpLoaded(e) { // 上拉加载
 		const { currentPage, upStatus } = this.data;
@@ -89,7 +75,25 @@ Page({
 	onCreate(e) { // 添加/编辑
 		const { type, item } = e.currentTarget.dataset;
 		const strItem = JSON.stringify(item || {});
-		wx.navigateTo({ url: `/pages/pickuppoint/create/create?type=${type}&strItem=${strItem}` });
+		wx.navigateTo({ 
+			url: `/pages/pickuppoint/create/create?type=${type}&strItem=${strItem}`,
+			events: { // 注册事件监听器
+				acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
+					if(type == 'create') { // 添加
+						this.onAjaxList(1);
+					}else{ // 编辑
+						const { dataList } = this.data;
+						const findIndex = dataList.findIndex((listItem) => listItem['id'] == item['id']);
+						if(findIndex >= 0) {
+							formValues['address'] = JSON.parse(formValues['address']);
+							formValues['addressStr'] = (formValues['address'].map((adItem) => adItem['label'])).join('、');
+							dataList.splice(findIndex, 1, formValues);
+							this.setData({ dataList });
+						}
+					}
+				}
+			}
+		});
 	},
 	onDelete(e) {
 		const { item } = e.currentTarget.dataset;
@@ -111,6 +115,7 @@ Page({
 		this.setData({ showConfirm: false });
 	},
 	onLoad(options) {
+		wx.showLoading();
 		this.onAjaxList(1);
 	},
 	onReady() {

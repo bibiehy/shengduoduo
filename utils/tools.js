@@ -12,6 +12,8 @@ export const getUserAndGoRolePage = async (app, delay) => {
 		wx.reLaunch({ url: '/pages/user_shouhuoren/index' });
 	}else if(roleType == 3) { // 干线司机
 		wx.reLaunch({ url: '/pages/user_driver/index' });
+	}else if(roleType == 8) { // 干线调度
+		wx.reLaunch({ url: '/pages/drivers/drivers' });
 	}else if(roleType == 12) { // 超级管理员
 		wx.reLaunch({ url: '/pages/administrator/administrator' });
 	}
@@ -172,7 +174,7 @@ export const getScrollColor = (scrollTop, color) => {
 
 // 返回上一页面并调用父页面的 onRefresh 方法
 export const goBackAndRefresh = (type, formValues) => { // create/edit，表单的值在 edit 时使用
-	wx.navigateBack({ delta: 1, success: function() {
+	wx.navigateBack({ delta: 1, complete: function() {
 		const pages = getCurrentPages();
 		const prevPage = pages[pages.length - 1];
 		prevPage.onRefresh(type, formValues);

@@ -24,7 +24,6 @@
 .page-scroll .listitem .mainbox .rightbox .pstime { font-size:13px; color:rgba(0, 0, 0, 0.45); }
 .page-scroll .listitem .mainbox .rightbox .psinfo { font-size:15px; color:rgba(0, 0, 0, 0.75); }
 .page-scroll .listitem .psbtns { display:flex; padding-top:8px; }
-.page-scroll .listitem .psbtns .t-tag { min-width:70px; text-align:center; }
-.page-scroll .listitem .psbtns .t-tag .t-tag__text { width:100%; }
+.page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:16px; }
 .page-scroll .nodata { height:500px; }
 

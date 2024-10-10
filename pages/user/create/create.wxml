@@ -82,6 +82,7 @@
 					<view class="formItem required"><text class="labelText">分成比例</text>{{defaultValues['divide_rate']}}%</view>
 					<view class="formItem required"><text class="labelText">所属银行</text>{{defaultValues['bank']}}</view>
 					<view class="formItem required"><text class="labelText">银行卡号</text>{{defaultValues['card_no']}}</view>
+					<view class="formItem required"><text class="labelText">代号标识</text>{{defaultValues['code']}}</view>
 				</view>
 			</block>
 

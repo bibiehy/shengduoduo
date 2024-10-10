@@ -22,7 +22,9 @@
 		"pages/user_shouhuoren/index",
 		"pages/drivers/drivers",
 		"pages/drivers/pages/edit/edit",
-		"pages/drivers/pages/adddriver/adddriver"
+		"pages/drivers/pages/adddriver/adddriver",
+		"pages/globalchufa/globalchufa",
+		"pages/globalbanner/globalbanner"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

@@ -14,10 +14,10 @@
 		<view wx:if="{{roleState == 1}}" class="tips">该手机号 {{phoneNumber}} 尚未注册任何角色，请选择注册成为发货人或干线司机。</view>
 		<view wx:if="{{roleState == 5}}" class="tips">审核未通过：{{userInfo['remark'] || '请修改信息后重新提交'}}</view>
 		<view class="mainbox" style="display: {{tabsValue == 'consignor' ? 'block' : 'none'}};">
-			<tmpl-fahuoren id="signupConsignor" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" />
+			<tmpl-fahuoren id="signupConsignor" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" fromto="signup" />
 		</view>
 		<view class="mainbox" style="display: {{tabsValue == 'drivers' ? 'block' : 'none'}};">
-			<tmpl-drivers id="signupDrivers" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" />
+			<tmpl-drivers id="signupDrivers" actionType="{{roleState == 1 ? 'signup' : 'signupAgain'}}" phone="{{phoneNumber}}" fromto="signup" />
 		</view>
 		<view class="fixedbottom">
 			<t-button bind:tap="onSignupSure" theme="primary" size="large" block>{{roleState == 1 ? '提交信息' : '重新提交'}}</t-button>
@@ -163,7 +163,7 @@
 
 	<!-- // 微信授权和验证码登录 -->
 	<view wx:else class="page-login">
-		<image class="imglogo" mode="aspectFit" src="/assets/logo.png" />
+		<image class="imglogo" mode="aspectFit" src="/assets/logo.jpg" />
 		<view class="mainbtn" wx:if="{{!loginVisible}}">
 			<t-button wx:if="{{isChecked}}" theme="primary" size="large" block open-type="getPhoneNumber" bind:getphonenumber="onPhoneNumber">微信授权快捷登录</t-button>
 			<t-button wx:else bind:tap="onWxAuth" theme="primary" size="large" block>微信授权快捷登录</t-button>

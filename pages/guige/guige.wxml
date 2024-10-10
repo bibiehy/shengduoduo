@@ -21,10 +21,14 @@
 					</view>
 				</view>
 				<view class="psbtns">
-					<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
-					<t-tag class="mr16" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
-					<t-tag class="mr16" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+					<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
+					<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+					<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 				</view>
+			</view>
+			<view style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
 			</view>
 		</block>
 	</view>

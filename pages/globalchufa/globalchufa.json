@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"form-textarea": "/components/form-textarea/form-textarea",
+		"form-input": "/components/form-input/form-input",
+		"t-upload": "tdesign-miniprogram/upload/upload"
+	}
+}

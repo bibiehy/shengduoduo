@@ -20,9 +20,6 @@ Page({
 			}
 		}
 	},
-	onRefresh() { // 添加页面，保存后会调用该方法
-		this.onAjaxList();
-	},
 	onSearchChange(e) {
 		const targetValue = e.detail.value;
 		this.setData({ keyword: targetValue });
@@ -42,7 +39,14 @@ Page({
 	onCreate(e) { // 添加/编辑
 		const { type, item } = e.currentTarget.dataset;
 		const strItem = JSON.stringify(item || {});
-		wx.navigateTo({ url: `/pages/guige/create/create?type=${type}&strItem=${strItem}` });
+		wx.navigateTo({ 
+			url: `/pages/guige/create/create?type=${type}&strItem=${strItem}`,
+			events: { // 注册事件监听器
+				acceptOpenedData: () => { // 监听由子页面触发的同名事件
+					this.onAjaxList();
+				}
+			}
+		});
 	},
 	onDelete(e) {
 		const { item } = e.currentTarget.dataset;

@@ -28,7 +28,7 @@ Page({
 	// 
 	async onAjaxList(thisPage, callback) { // 列表请求
 		const { keyword, dataList, upStatus } = this.data;
-		const result = await useRequest(() => fetchUserList({ page: thisPage, name: keyword || '' }));
+		const result = await useRequest(() => fetchUserList({ page: thisPage, keyword }));
 		if(result) {
 			const newList = [];
 			result['content'].forEach((item) => {
@@ -48,26 +48,12 @@ Page({
 			}
 		}
 	},	
-	onRefresh(action, formValues) { // 1.create/edit 添加/编辑页面，保存后会调用该方法; 2.refresh 下拉刷新
-		const type = (typeof action) == 'string' ? action : action['type'];
-		if(type == 'refresh') { // 下拉刷新
-			this.setData({ downStatus: true });
-			this.onAjaxList(1, async () => {
-				await delay(500);
-				this.setData({ downStatus: false });
-			});
-		}else if(type == 'create') { // 添加
-			this.onAjaxList(1);
-		}else if(type == 'edit') { // 编辑
-			const { dataList } = this.data;
-			const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
-			if(findIndex >= 0) {
-				// formValues['address'] = JSON.parse(formValues['address']);
-				// formValues['addressStr'] = (formValues['address'].map((adItem) => adItem['label'])).join('、');
-				dataList.splice(findIndex, 1, formValues);
-				this.setData({ dataList });
-			}
-		}
+	onRefresh() { // 下拉刷新
+		this.setData({ downStatus: true });
+		this.onAjaxList(1, async () => {
+			await delay(500);
+			this.setData({ downStatus: false });
+		});
 	},
 	onPullUpLoaded(e) { // 上拉加载
 		const { currentPage, upStatus } = this.data;
@@ -97,7 +83,15 @@ Page({
 		const { label, value } = e.detail;
 		const strItem = JSON.stringify({ role_type: value[0] });
 		this.setData({ pickerVisible: false });
-		wx.navigateTo({ url: `/pages/user/create/create?type=create&strItem=${strItem}` });
+
+		wx.navigateTo({ 
+			url: `/pages/user/create/create?type=create&strItem=${strItem}`,
+			events: { // 注册事件监听器
+				acceptOpenedCreate: () => { // 监听由子页面触发的同名事件
+					this.onAjaxList(1);
+				}
+			}
+		});
 	},
 	onPickerCancel() {
 		this.setData({ pickerVisible: false });
@@ -116,7 +110,19 @@ Page({
 	onEdit(e) { // 编辑/查看
 		const { type, item } = e.currentTarget.dataset;
 		const strItem = JSON.stringify(item || {});
-		wx.navigateTo({ url: `/pages/user/create/create?type=${type}&strItem=${strItem}` });
+		wx.navigateTo({ 
+			url: `/pages/user/create/create?type=${type}&strItem=${strItem}`,
+			events: { // 注册事件监听器
+				acceptOpenedEdit: (formValues) => { // 监听由子页面触发的同名事件
+					const { dataList } = this.data;
+					const findIndex = dataList.findIndex((listItem) => listItem['id'] == item['id']);
+					if(findIndex >= 0) {
+						dataList.splice(findIndex, 1, formValues);
+						this.setData({ dataList });
+					}
+				}
+			}
+		});
 	},
 	onDelete(e) {
 		const { item } = e.currentTarget.dataset;
@@ -138,6 +144,7 @@ Page({
 		this.setData({ showConfirm: false });
 	},	
 	onLoad(options) {
+		wx.showLoading();
 		this.onAjaxList(1);
 	},
 	onReady() {

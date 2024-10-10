@@ -39,12 +39,12 @@ Component({
 				wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
 			}else if(name == 'store_center') { // 集货中心
 				wx.navigateTo({ url: '/pages/storecenter/storecenter' });
-			}else if(name == 'global') { // 全局信息设置
-				wx.navigateTo({ url: '/pages/globalinfo/globalinfo' });
 			}else if(name == 'audit') { // 信息审核
 				wx.navigateTo({ url: '/pages/audit/audit' });
-			}else if(name == 'drivers') { // 干线调度
-				wx.navigateTo({ url: '/pages/drivers/drivers?from=admin' });
+			}else if(name == 'banner') { // 全局信息设置-BANNER
+				wx.navigateTo({ url: '/pages/globalbanner/globalbanner' });
+			}else if(name == 'chufa') { // 全局信息设置-订单处罚
+				wx.navigateTo({ url: '/pages/globalchufa/globalchufa' });
 			}
 		}
 	},

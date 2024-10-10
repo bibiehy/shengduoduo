@@ -5,7 +5,10 @@
 		<view class="pageline"></view>
 		<view class="pageaddbtn" bind:tap="onSelectRole"><t-icon name="add" size="24" /> 添加</view>
 	</view>
+
 	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
 		value="{{downStatus}}"
 		lowerThreshold="{{50}}"
 		loadingProps="{{loadingProps}}"
@@ -29,9 +32,9 @@
 							</view>
 						</view>
 						<view class="psbtns">
-							<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-							<t-tag class="mr16" bind:tap="onEdit" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
-							<t-tag class="mr16" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+							<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+							<t-tag t-class="listag" bind:tap="onEdit" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+							<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 						</view>
 					</block>
 					<block wx:else>
@@ -51,8 +54,8 @@
 							</view>
 						</view>
 						<view class="psbtns">
-							<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-							<t-tag class="mr16" bind:tap="onEdit" data-type="view" data-item="{{item}}" variant="light-outline" shape="round">查 看</t-tag>
+							<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+							<t-tag t-class="listag" bind:tap="onEdit" data-type="view" data-item="{{item}}" variant="light-outline" shape="round">查 看</t-tag>
 						</view>
 					</block>
 				</view>

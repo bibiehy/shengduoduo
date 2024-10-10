@@ -3,10 +3,10 @@
 	<view class="mainbox">
 		<view wx:if="{{status == 0}}" class="innerbox">
 			<block wx:if="{{roleType == 1}}">
-				<tmpl-fahuoren id="templateFahuoren" actionType="audit" />
+				<tmpl-fahuoren id="templateFahuoren" actionType="audit" fromto="audit" />
 			</block>
 			<block wx:if="{{roleType == 3}}">
-				<tmpl-drivers id="templateDrivers" actionType="audit" />
+				<tmpl-drivers id="templateDrivers" actionType="audit" fromto="audit" />
 			</block>
 		</view>
         <view wx:if="{{status == 1 || status == 2}}" class="innerbox">

@@ -39,7 +39,14 @@ Page({
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });
 				await delay(1000);
-				goBackAndRefresh(actionType, result); // 返回父页面并调用父页面的 onRefresh 方法
+				wx.navigateBack({ delta: 1, success: () => {
+					const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
+					if(actionType == 'create') { // 添加
+						eventChannel.emit('acceptOpenedCreate');
+					}else{ // 编辑
+						eventChannel.emit('acceptOpenedEdit', result);
+					}					
+				}});
 			}
 		}
 	},

@@ -1,11 +1,13 @@
 .my-navigation-bar {
-    --height: 44px;
-	--left: 16px;
 	overflow: hidden;
 	color: rgba(0, 0, 0, 0.9);
 	transition: all 0.5s;
 }
-.my-navigation-bar .mybar-mainbox .android {
+.my-navigation-bar .mybar-mainbox, .my-navigation-bar .mybar-emptybox {
+	--height: 44px;
+	--left: 16px;
+}
+.my-navigation-bar .mybar-mainbox.android, .my-navigation-bar .mybar-emptybox.android {
 	--height: 48px;
 }
 .my-navigation-bar .mybar-mainbox {
@@ -18,6 +20,13 @@
 	display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+	transition: all 0.5s;
+	padding-top: env(safe-area-inset-top);
+}
+.my-navigation-bar .mybar-emptybox {
+	width: 100%;
+	height: calc(var(--height) + env(safe-area-inset-top));
     box-sizing: border-box;
 	transition: all 0.5s;
 	padding-top: env(safe-area-inset-top);
@@ -150,24 +159,5 @@
     }
 } */
 
-
-/* 
-.weui-navigation-bar .back-home-button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 32px;
-    border: solid 1px #e7e7e7;
-    border-radius: 16px;
-    background-color: #fff;
-}
-.weui-navigation-bar .back-home-button .tdicon {
-    flex: 1;
-}
-.weui-navigation-bar .back-home-button .line {
-    width: 1px;
-    height: 100%;
-    background-color: #e7e7e7;
-} */
 
 

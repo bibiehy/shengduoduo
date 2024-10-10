@@ -14,7 +14,8 @@
 			<slot></slot>
 		</view>
 		<view class="personalActions">
-			<t-button bind:tap="onVisibleDialog" size="large" theme="primary" block>退出登录</t-button>
+			<t-button bind:tap="onVisibleDialog" size="large" block>退出登录</t-button>
+			<!-- <t-button bind:tap="onVisibleDialog" size="large" theme="primary" block>退出登录</t-button> -->
 			<!-- <t-button size="large" theme="primary" ghost="{{true}}" variant="text" block style="background-color: transparent; margin-top: 20px;">切换角色</t-button> -->
 		</view>
 	</scroll-view>

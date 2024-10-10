@@ -1,5 +1,5 @@
-.storecenter-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
-.storecenter-create-box .mainbox { flex:1; padding:10px 10px 180px; overflow-y:auto; }
+.storecenter-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+.storecenter-create-box .mainbox { flex:1; width:calc(100% + 20px); padding:10px 30px 180px 10px; overflow-y:auto; }
 .storecenter-create-box .mainbox .innerbox { background-color:#fff; border-radius:8px; padding:10px 10px 0; overflow:hidden; }
 
 .zhuguan-listbox { background-color:#fff; border-radius:8px; padding:0 10px 10px; margin-top:10px; }
@@ -29,12 +29,12 @@
 .tihuodian-listbox .addbtn .t-icon { font-size:22px; }
 
 /* 弹窗 */
-.popup-tihuodian-create { height:70vh; padding:10px 10px 30px; overflow-y:auto; }
-.popup-tihuodian-create .popupinner { background-color:#fff; padding:5px 10px 10px; }
-.popup-tihuodian-create .popupinner .popsubbox { border:solid 1px #f3f3f3; margin-top:2px; }
-.popup-tihuodian-create .popupinner .popsubbox .psbtitle { height:42px; line-height:42px; background-color:#f0f0f0; font-size:17px; color:rgba(0, 0, 0, 0.9); padding:0 15px; }
-.popup-tihuodian-create .popupinner .popsubbox .psbbody { position:relative; border-top:solid 1px #f3f3f3; padding:30px 15px 0; }
-.popup-tihuodian-create .popupinner .popsubbox .psbbody .psbtips { position:absolute; left:0; top:0; width:100%; line-height:30px; font-size:13px; color:rgba(0, 0, 0, 0.65); background-color:#fffbe6; padding-left:24px; }
+.popup-scrollviewbox { height:70vh; }
+.popup-scrollviewbox .popupinner { background-color:#fff; padding:5px 10px 40px; margin:10px; }
+.popup-scrollviewbox .popupinner .popsubbox { border:solid 1px #f3f3f3; margin-top:2px; }
+.popup-scrollviewbox .popupinner .popsubbox .psbtitle { height:42px; line-height:42px; background-color:#f0f0f0; font-size:17px; color:rgba(0, 0, 0, 0.9); padding:0 15px; }
+.popup-scrollviewbox .popupinner .popsubbox .psbbody { position:relative; border-top:solid 1px #f3f3f3; padding:30px 15px 0; }
+.popup-scrollviewbox .popupinner .popsubbox .psbbody .psbtips { position:absolute; left:0; top:0; width:100%; line-height:30px; font-size:13px; color:rgba(0, 0, 0, 0.65); background-color:#fffbe6; padding-left:24px; }
 
 
 

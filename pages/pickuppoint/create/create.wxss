@@ -1,5 +1,5 @@
-.pickuppoint-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
-.pickuppoint-create-box .mainbox { flex:1; padding:10px 10px 180px; overflow-y:auto; }
+.pickuppoint-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+.pickuppoint-create-box .mainbox { flex:1; width:calc(100% + 20px); padding:10px 30px 180px 10px; overflow-y:auto; }
 .pickuppoint-create-box .mainbox .innerbox { background-color:#fff; border-radius:8px; padding:10px; overflow:hidden; }
 
 

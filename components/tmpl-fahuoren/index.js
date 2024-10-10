@@ -7,6 +7,8 @@ Component({
 		actionType: { type: String, value: 'signup' }, // 注册(signup/signupAgain)/审核(audit)/创建(create)/编辑(edit)
 		// defaultValues: { type: Object, value: {} },
 		phone: { type: String, value: '' }, // 只有 signup/signupAgain 时使用
+		// 来自哪个页面，总共分3类，一个是注册，一个是审核列表，发货人个人中心，
+		fromto: { type: String, value: '' }, // signup / audit / personal
 	},
 	data: {
 		defaultValues: {},

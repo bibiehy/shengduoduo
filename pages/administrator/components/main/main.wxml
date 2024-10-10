@@ -42,7 +42,7 @@
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/error_order.png" /></view>
 				<view class="modname">异常订单</view>
 			</view>
-			<view class="moditem" bind:tap="onPageJump" data-name="drivers">
+			<view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/drivers.png" /></view>
 				<view class="modname">干线调度</view>
 			</view>
@@ -86,12 +86,12 @@
 		<view class="main-global">
 			<view class="gbtitle">全局信息设置</view>
 			<view class="gbcontent">
-				<view class="gbitem" bind:tap="onPageJump" data-name="global">
-					<view class="gbname">BANNER设置</view>
+				<view class="gbitem" bind:tap="onPageJump" data-name="banner">
+					<view class="gbname">BANNER</view>
 					<image class="gbimage" mode="widthFix" src="../../../../assets/global_img01.png" />
 				</view>
-				<view class="gbitem">
-					<view class="gbname">订单处罚设置</view>
+				<view class="gbitem" bind:tap="onPageJump" data-name="chufa">
+					<view class="gbname">订单处罚</view>
 					<image class="gbimage" mode="widthFix" src="../../../../assets/global_img02.png" />
 				</view>
 			</view>

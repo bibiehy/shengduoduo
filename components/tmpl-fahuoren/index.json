@@ -9,6 +9,7 @@
 		"form-select": "/components/form-select/form-select",
 		"form-carnumber": "/components/form-carnumber/form-carnumber",
 		"popup-select": "/components/popup-select/popup-select",
+		"form-upload": "/components/form-upload/form-upload",
 		"form-provincecity": "/components/form-provincecity/form-provincecity"
     }
 }

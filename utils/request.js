@@ -42,11 +42,9 @@ const useRequest = async (service) => {
             method: options['method'],
             data: options['data'],
             header: headers,
-            complete: function (response, aaa) {
+            complete: function (response) {
                 // 取消loding
-                if(options['loading']) {
-                    wx.hideLoading();
-                }
+                wx.hideLoading();
 
                 const status = response['statusCode'];
                 if(status >= 200 && status < 300) {

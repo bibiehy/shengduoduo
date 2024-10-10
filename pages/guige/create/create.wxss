@@ -1,21 +1,29 @@
 .guige-create-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
 .guige-create-box .mainbox { flex:1; padding:10px 10px 180px; overflow-y:auto; }
 .guige-create-box .mainbox .innerbox { background-color:#fff; border-radius:8px; padding:10px; }
-.main-listbox { border:solid 1px #f3f3f3; border-radius:8px; }
+.main-listbox { border:solid 1px #f3f3f3; border-radius:8px; overflow:hidden; margin-top:10px; }
 .main-listbox .listtitle { font-size:17px; background-color:#f0f0f0; color:rgba(0, 0, 0, 0.8); font-weight:600; padding:12px 15px; }
 .main-listbox .nodata { padding:30px 0; }
 .main-listbox .addbtn { display:flex; align-items:center; justify-content:center; color:#1677ff; font-size:18px; font-weight:600; padding:20px 0; }
 .main-listbox .addbtn .t-icon { font-size:22px; }
-.main-listbox .listitem { border:solid 1px #f3f3f3; margin:10px; }
-.main-listbox .listitem .subheader { display:flex; align-items:center; justify-content:space-between; background-color:#f0f0f0; padding-left:15px; }
-.main-listbox .listitem .subheader .subtitle { flex:1; font-size:17px; color:rgba(0, 0, 0, 0.9); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-right:12px; }
-.main-listbox .listitem .subheader .editbtn { color:#1677ff; font-size:16px; padding:10px 15px; }
-.main-listbox .listitem .subheader .line { width:1px; height:15px; background-color:#ccc; }
-.main-listbox .listitem .subheader .delbtn { color:#ff3b30; font-size:16px; padding:10px 15px; }
-.main-listbox .listitem .subbody { display:flex; align-items:center; padding:12px 18px; }
-.main-listbox .listitem .subbody .subitem { flex:1; display:flex; align-items:center; }
-.main-listbox .listitem .subbody .subitem .subname { color:rgba(0, 0, 0, 0.9); }
-.main-listbox .listitem .subbody .subitem .subvalue { color:rgba(0, 0, 0, 0.45); }
+.main-listbox .tablebox { margin:10px; }
+.main-listbox .tablebox .thead { display:flex; align-items:center; height:42px; border:solid 1px #f3f3f3; background-color:#f0f0f0; }
+.main-listbox .tablebox .thead .tcell { font-size:16px; color:rgba(0, 0, 0, 0.85); text-align:center; }
+.main-listbox .tablebox .thead .tcell:nth-child(1) { width:80px; }
+.main-listbox .tablebox .thead .tcell:nth-child(2) { flex:1; }
+.main-listbox .tablebox .thead .tcell:nth-child(3) { flex:1; }
+.main-listbox .tablebox .thead .tcell:nth-child(4) { width:106px; }
+
+.main-listbox .tablebox .trow { display:flex; align-items:center; height:42px; border-bottom:solid 1px #f3f3f3; }
+.main-listbox .tablebox .trow .tcell { font-size:16px; color:rgba(0, 0, 0, 0.45); text-align:center; }
+.main-listbox .tablebox .trow .tcell:nth-child(1) { width:80px; }
+.main-listbox .tablebox .trow .tcell:nth-child(2) { flex:1; }
+.main-listbox .tablebox .trow .tcell:nth-child(3) { flex:1; }
+.main-listbox .tablebox .trow .action { display:flex; align-items:center; width:106px; }
+.main-listbox .tablebox .trow .action .editbtn { color:#1677ff; font-size:16px; padding:10px; }
+.main-listbox .tablebox .trow .action .line { width:1px; height:15px; background-color:#ccc; }
+.main-listbox .tablebox .trow .action .delbtn { color:#ff3b30; font-size:16px; padding:10px; }
+
 
 /* 规格弹窗 */
 .popup-guige-create { padding:10px 10px 30px; }

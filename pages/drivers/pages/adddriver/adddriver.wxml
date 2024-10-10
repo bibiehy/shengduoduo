@@ -1,4 +1,4 @@
-<view class="user-create-box">
+<view class="driver-create-box">
 	<navigation-bar title="干线司机" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
 	<view class="mainbox">
 		<view class="innerbox">

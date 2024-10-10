@@ -7,23 +7,25 @@
 				<view class="listtitle">规格列表</view>
 				<view wx:if="{{guigeList.length <= 0}}" class="nodata"><empty showDesc="{{false}}" /></view>
 				<block wx:else>
-					<view class="listitem" wx:for="{{guigeList}}" wx:key="id">
-						<view class="subheader">
-							<view class="subtitle">{{item['name']}}</view>
-							<view class="editbtn" bind:tap="onEdit" data-item="{{item}}">编辑</view>
-							<view class="line"></view>
-							<view class="delbtn" bind:tap="onDelete" data-id="{{item['id']}}">删除</view>
+					<view class="tablebox">
+						<view class="thead">
+							<view class="tcell">规格</view>
+							<view class="tcell">基础运费</view>
+							<view class="tcell">预估重量</view>
+							<view class="tcell">操作</view>
 						</view>
-						<view class="subbody">
-							<view class="subitem">
-								<view class="subname">基础运费：</view>
-								<view class="subvalue">￥{{item['freight']}}</view>
+						<block wx:for="{{guigeList}}">
+							<view class="trow" wx:key="id">
+								<view class="tcell">{{item['name']}}</view>
+								<view class="tcell">￥{{item['freight']}}元</view>
+								<view class="tcell">{{item['weight']}}斤</view>
+								<view class="action">
+									<view class="editbtn" bind:tap="onEdit" data-item="{{item}}">编辑</view>
+									<view class="line"></view>
+									<view class="delbtn" bind:tap="onDelete" data-id="{{item['id']}}">删除</view>
+								</view>
 							</view>
-							<view class="subitem">
-								<view class="subname">预估重量：</view>
-								<view class="subvalue">{{item['weight']}}斤</view>
-							</view>
-						</view>					
+						</block>
 					</view>
 				</block>				
 				<view class="addbtn" bind:tap="onPopupShow">

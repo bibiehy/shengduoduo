@@ -27,6 +27,7 @@ Page({
 		// roleState: '1', // 测试
 		// phoneNumber: '180****6071', // 测试 '18069866071'.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 		tabsValue: 'consignor',
+		tabsRecord: [], // 当roleState为1或5时会出现tabs切换，记录切换过的tab标识，以便切换时去调用组件接口去生成初始化信息包括头像昵称和集中中心下拉列表
 		// 在审核拒绝时候使用
 		userInfo: {}
 	},
@@ -64,11 +65,13 @@ Page({
 					const phoneNumberAsterisk = String(result['phone']).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 					const userInfo = state == 5 ? result['user_info'] : {};
 					const tabsValue = state == 5 ? (userInfo['role_type'] == 1 ? 'consignor' : 'drivers') : 'consignor';
-					this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo });
+					this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo, tabsRecord: [tabsValue] });
 
 					// 调用子组件方法
-					const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
-					child.getPageRequest(userInfo);
+					if(state == 1 || state == 5) {
+						const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+						child.getPageRequest(userInfo);
+					}					
 				}
 			}
 		}
@@ -167,11 +170,13 @@ Page({
 				const phoneNumberAsterisk = String(result['phone']).replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
 				const userInfo = state == 5 ? result['user_info'] : {};
 				const tabsValue = state == 5 ? (userInfo['role_type'] == 1 ? 'consignor' : 'drivers') : 'consignor';
-				this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo });
+				this.setData({ roleState: state, phoneNumber: result['phone'], roleList, phoneNumberAsterisk, roleValue: state == 3 ? roleList[0]['type'] : '', tabsValue, userInfo, tabsRecord: [tabsValue] });
 
 				// 调用子组件方法
-				const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
-				child.getPageRequest(userInfo);
+				if(state == 1 || state == 5) {
+					const child = tabsValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+					child.getPageRequest(userInfo);
+				}				
 			}
 		}
 	},
@@ -180,14 +185,20 @@ Page({
 	},
 	// 注册
 	onClickTabs(e) { // tabs
-		const { tabsValue } = this.data;
-        // const dataValue = e.target.dataset.value;
+		const { tabsValue, tabsRecord } = this.data;
         const dataValue = e.currentTarget.dataset.value;
 		if(tabsValue == dataValue) {
 			return false;
 		}
 
-		this.setData({ tabsValue: dataValue });
+		// 判断是否加载过
+		if(!tabsRecord.includes(dataValue)) {
+			const child = dataValue == 'consignor' ? this.selectComponent('#signupConsignor') : this.selectComponent('#signupDrivers');
+			child.getPageRequest({});
+			tabsRecord.push(dataValue);
+		}
+
+		this.setData({ tabsValue: dataValue, tabsRecord });
 	},
 	async onSignupSure() { // 提交：注册发货人或干线司机
 		const { tabsValue, userInfo } = this.data;

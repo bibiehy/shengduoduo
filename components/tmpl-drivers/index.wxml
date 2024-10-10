@@ -1,6 +1,12 @@
 <view class="userTemplate">
-	<form-avatar class="FORM_AVATAR" name="avator" value="{{defaultValues['avator']}}" required="{{true}}" />
-	<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" type="nickname" placeholder="请输入用户昵称" required="{{true}}" />
+	<block wx:if="{{fromto == 'personal' || fromto == 'signup'}}">
+		<form-avatar class="FORM_AVATAR" name="avator" value="{{defaultValues['avator']}}" required="{{true}}" />
+		<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" type="nickname" placeholder="请输入用户昵称" required="{{true}}" />
+	</block>
+	<block wx:else>
+		<form-upload class="FORM_UPLOAD" label="头像上传" remark="注：请上传10M以内的正方形图片(.jpg或.png)" name="avator" value="{{defaultValues['avator']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传头像" required="{{true}}" />
+		<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" placeholder="请输入用户昵称" required="{{true}}" />
+	</block>
 	<form-input class="FORM_INPUT" label="用户姓名" name="username" value="{{defaultValues['username']}}" placeholder="请输入用户姓名" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="手机号码" name="phone" value="{{phone || defaultValues['phone']}}" type="phone" placeholder="请输入手机号码" disabled="{{actionType != 'create'}}" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="紧急联系人姓名" name="urgent_user" value="{{defaultValues['urgent_user']}}" placeholder="请输入紧急联系人姓名" required="{{true}}" />

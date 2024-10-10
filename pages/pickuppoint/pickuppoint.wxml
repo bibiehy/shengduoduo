@@ -6,6 +6,8 @@
 		<view class="pageaddbtn" bind:tap="onCreate" data-type="create"><t-icon name="add" size="24" /> 添加提货点</view>
 	</view>
 	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
 		value="{{downStatus}}"
 		lowerThreshold="{{50}}"
 		loadingProps="{{loadingProps}}"
@@ -28,9 +30,9 @@
 						</view>
 					</view>
 					<view class="psbtns">
-						<t-tag class="mr16" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
-						<t-tag class="mr16" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
-						<t-tag class="mr16" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+						<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
+						<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 					</view>
 				</view>
 			</block>

@@ -1,0 +1,20 @@
+<view class="golbal-infobox">
+	<navigation-bar title="全局信息设置" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+		<view class="scrollbox">
+			<view class="moduleinfo">
+				<view class="bannertitle">BANNER信息上传</view>
+				<view class="bannerimgs">
+					<t-upload mediaType="{{['image']}}" files="{{fileList}}" draggable="{{false}}" sizeLimit="{{10240}}" bind:add="handleAdd" bind:remove="handleRemove" bind:drop="handleDrop" />
+				</view>
+				<view class="bannerbtips">
+					<view class="strong">温馨提示：</view>
+					<view class="itemtips">1、用于显示于发货人界面的轮播图</view>
+					<view class="itemtips">2、图片宽高比为 9:6，推荐 720*480、1080*720</view>
+					<view class="itemtips">3、图片最大尺寸为 10M，上传前建议先进行压缩</view>
+				</view>
+			</view>
+		</view>		
+	</view>
+	<fixed-bottom-button bind:callback="onSave" title="保 存" />
+</view>

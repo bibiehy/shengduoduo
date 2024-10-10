@@ -78,9 +78,22 @@ Page({
 	// 审核
 	onAudit(e) {
 		const { id, role, status } = e.currentTarget.dataset;
-		wx.navigateTo({ url: `/pages/audit/detail/detail?id=${id}&roleType=${role}&status=${status}` });
+		wx.navigateTo({ 
+			url: `/pages/audit/detail/detail?id=${id}&roleType=${role}&status=${status}`,
+			events: { // 注册事件监听器
+				acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
+					const { dataList } = this.data;
+					const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
+					if(findIndex >= 0) {
+						dataList.splice(findIndex, 1, formValues);
+						this.setData({ dataList });
+					}
+				}
+			}
+		});
 	},
 	onLoad(options) {
+		wx.showLoading();
 		this.onAjaxList(1);
 	},
 	onReady() {

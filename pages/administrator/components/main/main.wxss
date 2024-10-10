@@ -7,9 +7,9 @@
 .adminmain-wrapper .main-summary .sumbox .sumnumber { color:rgba(255, 255, 255, 0.9); font-size:24px; font-weight:600; }
 
 .adminmain-wrapper .main-modules { display:flex; flex-wrap:wrap; background-color:#fff; border-radius:10px; padding:8px 8px 10px; margin:0 10px; }
-.adminmain-wrapper .main-modules .moditem { width:25%; padding:12px; }
-.adminmain-wrapper .main-modules .moditem .modimg { display:flex; align-items:center; justify-content:center; width:100%; background-color:#f0f0f0; border-radius:8px; padding:18px; overflow:hidden; }
-.adminmain-wrapper .main-modules .moditem .modname { text-align:center; font-size:16px; color:rgba(0, 0, 0, 0.8); margin-top:5px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.adminmain-wrapper .main-modules .moditem { width:25%; padding:10px 0; }
+.adminmain-wrapper .main-modules .moditem .modimg { display:flex; align-items:center; justify-content:center; background-color:#f0f0f0; border-radius:8px; padding:18px; margin:0 10px; overflow:hidden; }
+.adminmain-wrapper .main-modules .moditem .modname { text-align:center; font-size:15px; color:rgba(0, 0, 0, 0.65); margin-top:6px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 
 .adminmain-wrapper .main-message { background-color:#fff; border-radius:10px; padding:0 20px 10px; margin:10px; }
 .adminmain-wrapper .main-message .header { display:flex; align-items:center; justify-content:space-between; padding:15px 0; }
@@ -27,7 +27,7 @@
 .adminmain-wrapper .main-global .gbtitle { font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; }
 .adminmain-wrapper .main-global .gbcontent { display:flex; justify-content:space-between; padding:15px 0; }
 .adminmain-wrapper .main-global .gbcontent .gbitem { position:relative; width:48%; height:200px; border-radius:10px; border:solid 1px #f0f0f0; overflow:hidden; }
-.adminmain-wrapper .main-global .gbcontent .gbname { z-index:30; position:absolute; left:15px; top:10px; font-size:17px; color:rgba(0, 0, 0, 0.75); text-shadow:1px 1px #fff; font-weight:600; }
+.adminmain-wrapper .main-global .gbcontent .gbname { z-index:30; position:absolute; left:20px; top:15px; font-size:17px; color:rgba(0, 0, 0, 0.65); text-shadow:1px 1px rgba(255, 255, 255, 0.72); }
 .adminmain-wrapper .main-global .gbcontent .gbitem .gbimage { z-index:20; position:absolute; left:0; bottom:0; width:100%; }
 
 
