@@ -172,7 +172,7 @@ export const getScrollColor = (scrollTop, color) => {
     return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-// 返回上一页面并调用父页面的 onRefresh 方法
+// 返回上一页面并调用父页面的 onRefresh 方法，废弃，有兼容性问题
 export const goBackAndRefresh = (type, formValues) => { // create/edit，表单的值在 edit 时使用
 	wx.navigateBack({ delta: 1, complete: function() {
 		const pages = getCurrentPages();

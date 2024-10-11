@@ -14,7 +14,7 @@
 			<form-input class="FORM_INPUT" label="所属银行" name="bank" value="{{defaultValues['bank']}}" remark="如：中国农业银行" placeholder="请输入银行名字" />
 			<form-input class="FORM_INPUT" label="银行卡号" name="card_no" value="{{defaultValues['card_no']}}" type="bankcard" placeholder="请输入银行卡号" />
 			<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="代号标识" name="code" value="{{defaultValues['code']}}" type="text" remark="如：FM3088" placeholder="请输入代号标识" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="代号标识" name="code" value="{{defaultValues['code']}}" remark="如：FM3088" placeholder="请输入代号标识" required="{{true}}" regexp="^[a-zA-Z0-9_]+$" message="请输入字母、数字或带下划线等格式" />
 		</view>
 	</view>
 	<fixed-bottom-button bind:callback="onSave" title="确认提交" />

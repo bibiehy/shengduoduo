@@ -56,8 +56,9 @@ Component({
 
             if(required) {
                 errTips = formValue ? '' : '内容不能为空，请输入';
-                if(regexp && message) {
-                    errTips = regexp.test(formValue) ? '' : message;
+                if(formValue && regexp && message) {
+					const reg = new RegExp(regexp, 'ig');
+                    errTips = reg.test(formValue) ? '' : message;
                 }
             }
 
@@ -68,7 +69,7 @@ Component({
             this.triggerEvent('onfocus', { name, value: formValue });
         },
 		onBlur(e) { // 失去焦点
-			const { name, formValue, required, type, max, min, message } = this.data;
+			const { name, formValue, required, type, max, min, regexp, message } = this.data;
 			
 			if(type === 'nickname') {
 				return false;
@@ -86,6 +87,9 @@ Component({
 					errTips = /(^\d{15}$)|(^\d{18}$)|(^\d{17}X$)/i.test(formValue) ? '' : '身份证号码格式不正确，请检查';
 				}else if(formValue && ['number', 'digit'].includes(type) && max && min >= 0) {
 					errTips = ((formValue >= min) && (formValue <= max)) ? '' : `请输入 ${min}~${max} 之内的数字`;
+				}else if(formValue && regexp && message) {
+					const reg = new RegExp(regexp, 'ig');
+					errTips = reg.test(formValue) ? '' : message;
 				}
 
 				this.setData({ errTips });
@@ -109,7 +113,7 @@ Component({
 		},
         // 以下是对外的方法
         getFieldVerify() { // 获取校验后的表单值
-            const { required, name, type, formValue, max, min, message } = this.data;
+            const { required, name, type, formValue, max, min, regexp, message } = this.data;
             let isVerify = true;
             
             if(required) {
@@ -124,6 +128,9 @@ Component({
 					errTips = /(^\d{15}$)|(^\d{18}$)|(^\d{17}X$)/i.test(formValue) ? '' : '身份证号码格式不正确，请检查';
 				}else if(formValue && ['number', 'digit'].includes(type) && max && min >= 0) {
 					errTips = ((formValue >= min) && (formValue <= max)) ? '' : `请输入 ${min}~${max} 之间的数字`;
+				}else if(formValue && regexp && message) {
+					const reg = new RegExp(regexp, 'ig');
+                    errTips = reg.test(formValue) ? '' : message;
 				}
 
                 isVerify = errTips ? false : true;
