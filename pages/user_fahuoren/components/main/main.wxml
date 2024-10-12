@@ -1,0 +1,23 @@
+<view class="pagemain-box global-userbg">
+    <navigation-bar extClass="global-userbg" opacity="{{opacity}}" showBack="{{false}}" boxShadow="none" placement="center" title="发货人管理"></navigation-bar>
+	<scroll-view class="scrollviewbox" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
+		<t-swiper
+            current="{{0}}"
+            autoplay="{{true}}"
+            duration="{{300}}"
+            interval="{{5000}}"
+            list="{{swiperList}}"
+            navigation="{{{type: 'dots-bar'}}}"
+        />
+
+        <view class="task-in-process">
+			<view class="title">配送中的任务<text class="number">(10)</text></view>
+			<view class="nodata">
+				<empty description="暂无任务" />
+			</view>
+			<!-- <view class="listbox">
+				
+			</view> -->
+		</view>
+	</scroll-view>
+</view>

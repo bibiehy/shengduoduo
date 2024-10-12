@@ -24,7 +24,8 @@
 		"pages/drivers/pages/edit/edit",
 		"pages/drivers/pages/adddriver/adddriver",
 		"pages/globalchufa/globalchufa",
-		"pages/globalbanner/globalbanner"
+		"pages/globalbanner/globalbanner",
+		"pages/user_fahuoren/pages/personal_edit/personal_edit"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

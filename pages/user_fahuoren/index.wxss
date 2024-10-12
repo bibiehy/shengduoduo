@@ -1,1 +1,3 @@
-/* pages/user_fahuoren/index.wxss */
+@import "../../utils/iconfont.wxss";
+
+.fahuoren-wrapper { width:100vw; height:auto; overflow-y:auto; }

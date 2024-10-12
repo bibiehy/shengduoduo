@@ -26,27 +26,17 @@ Component({
 
 	},
 	data: {
-		
+        opacity: 0,
+		swiperList: []
 	},
 	methods: {
-		onPageJump(e) {
-			const { name } = e.currentTarget.dataset;
-			if(name == 'user') { // 用户管理
-				wx.navigateTo({ url: '/pages/user/user' });
-			}else if(name == 'guige') { // 规格管理
-				wx.navigateTo({ url: '/pages/guige/guige' });
-			}else if(name == 'pickup_point') { // 提货点
-				wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
-			}else if(name == 'store_center') { // 集货中心
-				wx.navigateTo({ url: '/pages/storecenter/storecenter' });
-			}else if(name == 'audit') { // 信息审核
-				wx.navigateTo({ url: '/pages/audit/audit' });
-			}else if(name == 'banner') { // 全局信息设置-BANNER
-				wx.navigateTo({ url: '/pages/globalbanner/globalbanner' });
-			}else if(name == 'chufa') { // 全局信息设置-订单处罚
-				wx.navigateTo({ url: '/pages/globalchufa/globalchufa' });
-			}
-		}
+		// 控制透明度 navigation-bar
+		onScrollView(e) {
+			const { scrollTop } = e.detail;
+			const thisOpacity = scrollTop / 420;
+			const newOpacity = thisOpacity >= 1 ? 1 : thisOpacity;
+			this.setData({ opacity: newOpacity });
+        },
 	},
 	// 自定义组件内的生命周期
     lifetimes: {

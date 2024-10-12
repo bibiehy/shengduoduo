@@ -19,3 +19,8 @@
     font-weight: 600;
 }
 
+.iconfont-shouhuoren:before {
+    content: "\e60a";
+    font-weight: 600;
+}
+
