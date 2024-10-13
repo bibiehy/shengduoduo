@@ -1,4 +1,7 @@
 
+import useRequest from '../../../../utils/request';
+import { fetchGetGlobalInfo } from '../../../../service/global';
+
 // 根据指定日期返回与当前日期的差值
 function compareDate(dateStr) {
 	const msgDate = new Date(dateStr);
@@ -26,22 +29,32 @@ Component({
 
 	},
 	data: {
-        opacity: 0,
-		swiperList: []
+		opacity: 0,
+		swiperNavigation: { type: 'dots-bar' }, //  navigation="{{swiperNavigation}}"
+		swiperList: [], // banner
 	},
 	methods: {
 		// 控制透明度 navigation-bar
 		onScrollView(e) {
 			const { scrollTop } = e.detail;
-			const thisOpacity = scrollTop / 420;
+			const thisOpacity = scrollTop / 50;
 			const newOpacity = thisOpacity >= 1 ? 1 : thisOpacity;
 			this.setData({ opacity: newOpacity });
-        },
+		},
+		// 获取banner
+		async getBannerList() {
+			const result = await useRequest(() => fetchGetGlobalInfo());
+			if(result) {
+				const fileList = result['banner'];
+				this.setData({ swiperList: fileList });
+			}
+		}
 	},
 	// 自定义组件内的生命周期
     lifetimes: {
-        attached() { // 组件完全初始化完毕
-            
+		attached() { // 组件完全初始化完毕
+			// 获取banner
+			this.getBannerList();
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

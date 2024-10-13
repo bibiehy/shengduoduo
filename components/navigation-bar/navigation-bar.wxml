@@ -1,6 +1,6 @@
 <view class="my-navigation-bar" style="opacity: {{opacity}};">
 	<!-- 空层撑起 navigation-bar -->
-    <view class="mybar-emptybox {{ios ? 'ios' : 'android'}}" style="width: 100%; {{safeAreaTop}}"></view>
+    <view wx:if="{{showEmpty}}" class="mybar-emptybox {{ios ? 'ios' : 'android'}}" style="width: 100%; {{safeAreaTop}}"></view>
 	<!-- fixed -->
 	<view class="mybar-mainbox {{extClass}} {{ios ? 'ios' : 'android'}}" style="color: {{color}}; background: {{background}}; box-shadow: {{boxShadow}}; {{innerPaddingRight}}; {{safeAreaTop}}">
 		<view wx:if="{{showBack}}" class="goback" bind:tap="onBack" style="background-color: {{color}};"></view>

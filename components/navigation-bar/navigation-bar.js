@@ -30,6 +30,7 @@ Component({
 		color: { type: String, value: 'rgba(0, 0, 0, 0.9)' },
 		boxShadow: { type: String, value: '5px 0 10px #e2e1e1' },
 		showBack: { type: Boolean, value: true },
+		showEmpty: { type: Boolean, value: true },
 		placement: { type: String, value: '' }, // 空为插槽，left 为 title 局左，center 为 title 居中
         // loading: { type: Boolean, value: false },
 		delta: { type: Number, value: 1 }, // back为true的时候，返回的页面深度
