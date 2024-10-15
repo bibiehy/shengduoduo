@@ -5,11 +5,20 @@
 .main-swiper .radian01 { position:absolute; left:-20%; bottom:-170px; width:140%; height:200px; background-color:#f3f3f3; border-top-left-radius:45%; border-top-right-radius:45%; }
 
 .main-process { z-index:50; position:relative; background-color:#fff; border-radius:8px; padding:15px 20px; margin:10px 10px 0; }
-.main-process .title { color:rgba(0, 0, 0, 0.75); font-size:17px; font-weight:600; }
-.main-process .title .number { color:rgba(0, 0, 0, 0.45); font-size:15px; font-weight:400; padding-left:10px; }
+.main-process .header { display:flex; align-items:center; justify-content:space-between; }
+.main-process .header .title { color:rgba(0, 0, 0, 0.75); font-size:17px; font-weight:600; }
+.main-process .header .title .number { color:rgba(0, 0, 0, 0.45); font-size:15px; font-weight:400; padding-left:10px; }
+.main-process .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
+.main-process .listitem .status { position:absolute; right:15px; top:15px; }
+.main-process .listitem .mainbox {  }
+.main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.main-process .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
+.main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
+.main-process .listitem .mainbox .psinfo .paystate { color:#ff3b30; padding-left:15px; }
+.main-process .listitem .mainbox .money { font-size:14px; color:#ff3b30; margin-top:4px; }
+.main-process .listitem .psbtns { display:flex; padding-top:8px; }
+.main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:12px; }
+
 .main-process .nodata { height:380px; }
-.main-process .listbox { }
-
-
 
 

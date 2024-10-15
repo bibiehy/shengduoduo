@@ -4,6 +4,10 @@
     "usingComponents": {
         "t-search": "tdesign-miniprogram/search/search",
         "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-        "t-swiper": "tdesign-miniprogram/swiper/swiper"
+        "t-swiper": "tdesign-miniprogram/swiper/swiper",
+        "t-tag": "tdesign-miniprogram/tag/tag",
+		"t-loading": "tdesign-miniprogram/loading/loading",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog",
+        "t-textarea": "tdesign-miniprogram/textarea/textarea"
     }
 }
