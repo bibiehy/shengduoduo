@@ -15,7 +15,7 @@
 	<form-select class="FORM_SELECT" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" options="{{centerOptions}}" placeholder="请选择集货中心" required="{{true}}" />
 	<form-select class="FORM_SELECT" label="默认规格类别" name="type" value="{{defaultValues['type']}}" options="{{guigeOptions}}" placeholder="请选择默认规格类别" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="月均发货件数" remark="如：2000" name="max_number" value="{{defaultValues['max_number']}}" suffix="件" type="number" placeholder="请输入月均发货件数" required="{{true}}" />
-	<block wx:if="{{actionType != 'signup' && actionType != 'signupAgain'}}">
+	<block wx:if="{{fromto == 'audit' || fromto == 'userlist'}}">
 		<form-input class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" remark="如：10、10.5、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入运费系数" required="{{true}}" />
 	</block>
 	<block wx:if="{{actionType == 'audit'}}">

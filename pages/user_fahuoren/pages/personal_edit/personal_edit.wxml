@@ -1,2 +1,10 @@
-<!--pages/user_fahuoren/pages/personal_edit/personal_edit.wxml-->
-<text>pages/user_fahuoren/pages/personal_edit/personal_edit.wxml</text>
+<view class="personal-editbox">
+    <navigation-bar title="个人中心" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+			<tmpl-fahuoren id="templateFahuoren" actionType="edit" fromto="personal" />
+        </view>
+    </view>
+    <fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+</view>
+

@@ -66,11 +66,15 @@ Page({
 			// }else if([8, 9, 10, 11].includes(jsonItem['role_type'])) { // 干线调度/业务负责人/财务管理/差异审核员
 			// 	this.selectComponent('#templateYewufzren').getPageRequest({});
 			// }
-		}else if(type == 'edit') { // 只可能是这几个角色，8干线调度/9业务负责人/10财务管理/11差异审核员
+		}else if(type == 'edit') { // 只可能是这几个角色，8干线调度/9业务负责人/10财务管理/11差异审核员，以及特殊角色发货人role_type=1
 			const result = await useRequest(() => fetchUserDetail({ id: jsonItem['id'] }));
 			if(result) {
 				this.setData({ defaultValues: result }); // 设置详情信息
-				this.selectComponent('#templateYewufzren').getPageRequest(result); // 调用子组件方法
+				if(jsonItem['role_type'] == 1) { // 特殊角色发货人
+					this.selectComponent('#templateFahuoren').getPageRequest(result); // 调用子组件方法
+				}else{
+					this.selectComponent('#templateYewufzren').getPageRequest(result); // 调用子组件方法
+				}
 
 				// if(jsonItem['role_type'] == 1) { // 发货人
 				// 	this.selectComponent('#templateFahuoren').getPageRequest(result);
@@ -80,7 +84,7 @@ Page({
 				// 	this.selectComponent('#templateYewufzren').getPageRequest(result);
 				// }		
 			}
-		}else if(type == 'view') { // 查看，1发货人/2收货人/3干线司机/4提货点负责人/5集货中心负责人/6集货中心主管/7分拣员
+		}else if(type == 'view') { // 查看，2收货人/3干线司机/4提货点负责人/5集货中心负责人/6集货中心主管/7分拣员
 			let result = await useRequest(() => fetchUserDetail({ id: jsonItem['id'] }));
 			if(result) {
 				// 

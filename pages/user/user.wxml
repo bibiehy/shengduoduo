@@ -37,8 +37,8 @@
 							<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 						</view>
 					</block>
-					<block wx:else>
-						<view class="mainbox" bind:tap="onEdit" data-type="view" data-item="{{item}}">
+					<block wx:else> <!-- 发货人特殊角色，需要编辑其运费系数，role_type=1 -->
+						<view class="mainbox" bind:tap="onEdit" data-type="{{item['role_type'] == 1 ? 'edit' : 'view'}}" data-item="{{item}}">
 							<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
 							<view class="rightbox">
 								<view class="psname">{{item['nickname']}}</view>
@@ -55,7 +55,8 @@
 						</view>
 						<view class="psbtns">
 							<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-							<t-tag t-class="listag" bind:tap="onEdit" data-type="view" data-item="{{item}}" variant="light-outline" shape="round">查 看</t-tag>
+							<t-tag wx:if="{{item['role_type'] == 1}}" t-class="listag" bind:tap="onEdit" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+							<t-tag wx:else t-class="listag" bind:tap="onEdit" data-type="view" data-item="{{item}}" variant="light-outline" shape="round">查 看</t-tag>
 						</view>
 					</block>
 				</view>

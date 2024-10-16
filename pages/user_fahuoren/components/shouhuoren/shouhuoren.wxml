@@ -1,0 +1,55 @@
+<view class="shouhuoren-box">
+    <navigation-bar title="收货人管理" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、电话" />
+		<view class="pageline"></view>
+		<view class="pageaddbtn" bind:tap="onCreate" data-type="create"><t-icon name="add" size="24" /> 收货人</view>
+	</view>
+    <t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
+					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
+						<view class="imgbox"><image mode="aspectFill" src="{{item['head_pic']}}" /></view>
+						<view class="rightbox">
+							<view class="psname">{{item['name']}}</view>
+							<view class="pstime">{{item['createTime']}}</view>
+							<view class="psinfo">{{item['head_user']}} {{item['head_phone']}}</view>
+							<view class="psinfo">{{item['addressStr']}}{{item['region']}}</view>
+						</view>
+					</view>
+					<view class="psbtns">
+						<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
+						<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
+						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
+</view>
+
+<t-dialog
+	visible="{{showConfirm}}"
+	title="确定要删除嘛？"
+	content="您将要删除名称为【{{deleteItem['name']}}】的集货中心。"
+	confirm-btn="{{confirmBtn}}"
+	cancel-btn="取消"
+	bind:confirm="onDeleteSure"
+	bind:cancel="onCancelDialog"
+/>

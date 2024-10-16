@@ -19,7 +19,8 @@
 			</block>
 
 			<block wx:if="{{roleType == 1}}" title="发货人">
-				<view class="myFormViewbox">
+				<tmpl-fahuoren id="templateFahuoren" actionType="edit" fromto="userlist" />
+				<!-- <view class="myFormViewbox">
 					<view class="formAvatar required">
 						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['avator']}}" />
 					</view>
@@ -33,7 +34,7 @@
 					<view class="formItem required"><text class="labelText">默认规格类别</text>{{defaultValues['type_name']}}</view>
 					<view class="formItem required"><text class="labelText">月均发货件数</text>{{defaultValues['max_number']}}件</view>
 					<view class="formItem required"><text class="labelText">运费系数</text>{{defaultValues['wages']}}%</view>
-				</view>
+				</view> -->
 			</block>
 			
 			<block wx:if="{{roleType == 3}}" title="干线司机">
@@ -117,7 +118,7 @@
 			</block>
 		</view>
 	</view>
-	<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11}}">
+	<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11 || roleType == 1}}">
 		<fixed-bottom-button  bind:callback="onSubmit" title="确认提交" />
 	</block>
 </view>

@@ -4,6 +4,7 @@
 		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
 		
 		"main": "/pages/user_fahuoren/components/main/main",
+		"shouhuoren": "/pages/user_fahuoren/components/shouhuoren/shouhuoren",
 		"personal": "/pages/user_fahuoren/components/personal/personal"
 	}
 }

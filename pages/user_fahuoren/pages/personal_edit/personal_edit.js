@@ -1,66 +1,37 @@
-// pages/user_fahuoren/pages/personal_edit/personal_edit.js
+
+import useRequest from '../../../../utils/request';
+import { fetchUserDetail, fetchEditFahuoren } from '../../../../service/user';
+import { form, delay } from '../../../../utils/tools';
+
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
+        defaultValues: {},
+    },
+    async onSubmit() {
+		const { defaultValues } = this.data;
+		const childComponent = this.selectComponent('#templateFahuoren');
+        const formValues = childComponent.getFormValues(); // 会验证;
+		formValues['id'] = defaultValues['id'];
+		formValues['role_type'] = 1;
 
-	},
+        const result = await useRequest(() => fetchEditFahuoren(formValues));
+        if(result) {
+            wx.showToast({ title: '操作成功', icon: 'success' });
+            await delay(1000);
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage() {
-
-	}
+            wx.navigateBack({ delta: 1, success: () => {
+                const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
+                eventChannel.emit('acceptOpenedData', { ...defaultValues, ...formValues });
+            }});            
+        }
+    },
+    async onLoad(options) {
+        const app = getApp(); // 获取 app 实例
+        const userInfo = app['userInfo'];
+        const result = await useRequest(() => fetchUserDetail({ id: userInfo['id'] }));
+        if(result) {
+			this.setData({ defaultValues: result });
+			this.selectComponent('#templateFahuoren').getPageRequest(result);
+        }
+	}	
 })

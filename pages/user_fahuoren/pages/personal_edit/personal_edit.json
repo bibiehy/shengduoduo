@@ -1,3 +1,6 @@
 {
-	"usingComponents": {}
+	"usingComponents": {
+		"tmpl-fahuoren": "/components/tmpl-fahuoren/index",
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button"
+	}
 }
