@@ -10,7 +10,7 @@ export const fetchShouList = (params) => ({ url: '/consignor/getSenderListPage',
 export const fetchShouDelete = (params) => ({ url: `/consignor/deleteSender/${params['id']}`, method: 'post', loading: true, delay: 500 });
 
 // 禁用/启用
-export const fetchShouDisabled = (params) => ({ url: `/admin/collectCenter/disable/${params['id']}/${params['type']}`, method: 'post', loading: true, delay: 500 });
+export const fetchShouDisabled = (params) => ({ url: `/consignor/disableSender/${params['id']}/${params['type']}`, method: 'post', loading: true, delay: 500 });
 
 // 添加
 export const fetchShouCreate = (params) => ({ url: '/consignor/addSender', method: 'post', loading: true, delay: 500, data: params });

@@ -27,11 +27,11 @@ Component({
 			const result = await useRequest(() => fetchShouList({ page: thisPage, name: keyword || '' }));
 			if(result) {
 				const newList = [];
-				// result['content'].forEach((item) => {
-				// 	item['address'] = JSON.parse(item['address']);
-				// 	item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、');
-				// 	newList.push(item);
-				// });
+				result['content'].forEach((item) => {
+					item['address'] = JSON.parse(item['address']);
+					item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、');
+					newList.push(item);
+				});
 
 				// upStatus == 2 表示上拉加载，数据许合并
 				this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
@@ -72,18 +72,18 @@ Component({
 		async onDisabled(e) { // 禁用/启用
 			const { dataList } = this.data;
 			const { id, status, index } = e.currentTarget.dataset;
-			const result = await useRequest(() => fetchShouDelete({ id, type: status == 0 ? 1 : 0 }));
+			const result = await useRequest(() => fetchShouDelete({ id, type: status == 1 ? 2 : 1 }));
 			if(result) {
-				dataList[index]['status'] = status == 0 ? 1 : 0;
+				dataList[index]['status'] = status == 1 ? 2 : 1;
 				this.setData({ dataList });
-				wx.showToast({ title: status == 0 ? '已禁用' : '已启用', icon: 'success' });
+                wx.showToast({ title: status == 1 ? '已禁用' : '已启用', icon: 'success' });
 			}
 		},
 		onCreate(e) { // 添加/编辑
 			const { type, item } = e.currentTarget.dataset;
-			const strItem = JSON.stringify(item || {});
-			wx.navigateTo({ 
-				url: `/pages/storecenter/create/create?type=${type}&strItem=${strItem}`,
+            const strItem = JSON.stringify(item || {});
+			wx.navigateTo({
+				url: `/pages/user_fahuoren/pages/shouhuoren_create/shouhuoren_create?type=${type}&strItem=${strItem}`,
 				events: { // 注册事件监听器
 					acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
 						if(type == 'create') { // 添加

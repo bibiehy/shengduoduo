@@ -119,6 +119,6 @@
 		</view>
 	</view>
 	<block wx:if="{{roleType == 8 || roleType == 9 || roleType == 10 || roleType == 11 || roleType == 1}}">
-		<fixed-bottom-button  bind:callback="onSubmit" title="确认提交" />
+		<fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
 	</block>
 </view>

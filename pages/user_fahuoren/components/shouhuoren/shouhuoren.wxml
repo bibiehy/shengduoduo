@@ -19,18 +19,18 @@
 			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
-					<t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
+                    <t-tag wx:if="{{item['disabled'] == 2}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
 					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
-						<view class="imgbox"><image mode="aspectFill" src="{{item['head_pic']}}" /></view>
+						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
 						<view class="rightbox">
-							<view class="psname">{{item['name']}}</view>
+							<view class="psname">{{item['nickname']}}</view>
 							<view class="pstime">{{item['createTime']}}</view>
-							<view class="psinfo">{{item['head_user']}} {{item['head_phone']}}</view>
+							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
 							<view class="psinfo">{{item['addressStr']}}{{item['region']}}</view>
 						</view>
 					</view>
 					<view class="psbtns">
-						<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['status']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['status'] == 0 ? '禁 用' : '启 用'}}</t-tag>
+                        <t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
 						<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
 						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 					</view>
@@ -47,7 +47,7 @@
 <t-dialog
 	visible="{{showConfirm}}"
 	title="确定要删除嘛？"
-	content="您将要删除名称为【{{deleteItem['name']}}】的集货中心。"
+	content="收货人：{{deleteItem['username']}} {{deleteItem['phone']}}"
 	confirm-btn="{{confirmBtn}}"
 	cancel-btn="取消"
 	bind:confirm="onDeleteSure"

@@ -21,14 +21,13 @@ Component({
         errTips: ''
     },
     observers: {
-		value: function(newValue) { // 监听外部传递的 value，1.头像地址字符串，2.数组字符串，多值
+        value: function(newValue) { // 监听外部传递的 value，1.头像地址字符串，2.数组字符串，多值
 			if(!newValue) {
 				return false;
-			}
+            }
 
 			const { max } = this.data;
 			const newFileList = max == 1 ? [{ url: newValue }] : newValue.map((value) => ({ url: value }));
-			
 			this.setData({ fileList: newFileList });
         }
     },
