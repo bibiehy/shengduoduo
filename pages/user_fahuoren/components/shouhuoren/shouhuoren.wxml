@@ -1,5 +1,5 @@
 <view class="shouhuoren-box">
-    <navigation-bar title="收货人管理" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+    <navigation-bar title="收货人管理" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="global-page-search">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、电话" />
 		<view class="pageline"></view>

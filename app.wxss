@@ -36,8 +36,8 @@ page {
 
 /* navigation-bar下面的搜索框 */
 .global-page-search { --td-search-height:38px !important; display:flex; align-items:center; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
-.global-page-search .pagesearch { flex:1; }
-.global-page-search .pageline { width:1px; height:18px; background-color:#ccc; margin:0 15px; }
+.global-page-search .pagesearch, .global-page-search .t-search { flex:1; }
+.global-page-search .pageline { width:1px; height:18px; background-color:#ccc; margin:0 12px; }
 .global-page-search .pageaddbtn { display:flex; align-items:center; font-size:18px; color:#1677ff; font-weight:600; line-height:36px; }
 
 

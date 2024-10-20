@@ -16,17 +16,18 @@
 		"pages/audit/audit",
 		"pages/audit/detail/detail",
 		"pages/user/user",
-		"pages/user/create/create",		
+		"pages/user/create/create",
 		"pages/user_driver/index",
 		"pages/user_shouhuoren/index",
 		"pages/drivers/drivers",
 		"pages/drivers/pages/edit/edit",
 		"pages/drivers/pages/adddriver/adddriver",
 		"pages/globalchufa/globalchufa",
-        "pages/globalbanner/globalbanner",
-        "pages/user_fahuoren/index",
+		"pages/globalbanner/globalbanner",
+		"pages/user_fahuoren/index",
 		"pages/user_fahuoren/pages/personal_edit/personal_edit",
-		"pages/user_fahuoren/pages/shouhuoren_create/shouhuoren_create"
+		"pages/user_fahuoren/pages/shouhuoren_create/shouhuoren_create",
+		"pages/user_fahuoren/pages/task_create/task_create"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

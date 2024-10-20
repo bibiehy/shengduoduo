@@ -25,6 +25,5 @@ export const fetchSetGlobalChufa = (params) => ({ url: '/admin/system/edit', met
 // 设置全局BANNER信息，banner上传
 export const fetchSetGlobalBanner = (params) => ({ url: '/admin/system/editBanner', method: 'post', data: params, loading: true, delay: 500 });
 
-
 // 获取随机头像昵称
 export const fetchRandomAvatar = () => ({ url: '/common/getRandomAvatar', method: 'get' });

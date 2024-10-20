@@ -1,0 +1,99 @@
+<view class="task-box">
+	<navigation-bar title="任务管理" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="任务名/收货人姓名/手机号" />
+		<view class="pageline"></view>
+		<view class="pageaddbtn" bind:tap="onCreate" data-type="create" data-item=""><t-icon name="add" size="24" /> 添加任务</view>
+	</view>
+	<view class="task-tabs">
+		<t-tabs bind:change="onTabsChange" value="{{tabsActive}}" defaultValue="1" theme="tag">
+			<t-tab-panel label="全部" value="1" />
+			<t-tab-panel label="待配送" value="2" />
+			<t-tab-panel label="已揽件" value="3" />
+			<t-tab-panel label="配送中" value="4" />
+			<t-tab-panel label="待签收" value="5" />
+			<t-tab-panel label="已签收" value="6" />
+			<t-tab-panel label="已取消" value="7" />
+		</t-tabs>
+	</view>
+	
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<!-- <view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem">
+					<t-tag class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
+					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="">
+						<view class="psname">任务名字任务名字任务名字</view>
+						<view class="pstime">2024-10-01 15:30:30</view>
+						<view class="psinfo">收货人：猪小明 18069860000</view>
+						<view class="psinfo">类别：水果类</view>
+						<view class="psinfo">总件数：100件</view>
+						<view class="psinfo">运费支付方：发货人</view>
+					</view>
+					<view class="footbox">
+						<view class="psbtns">
+							<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
+							<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
+						</view>
+						<view class="yunfei">待支付：￥2,188.00</view>
+					</view>
+				</view>
+			</block> -->
+			<view class="listitem">
+				<t-tag class="status" variant="light" theme="danger" size="small">待配送</t-tag>
+				<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="">
+					<view class="psname">任务名字任务名字任务名字</view>
+					<view class="pstime">2024-10-01 15:30:30</view>
+					<view class="psinfo">收货人：猪小明 18069860000</view>
+					<view class="psinfo">类别：水果类</view>
+					<view class="psinfo">总件数：100件</view>
+					<view class="psinfo">运费支付方：发货人</view>
+					<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
+				</view>
+				<view class="footbox">
+					<view class="psbtns">
+						<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
+						<t-tag t-class="listag" variant="light-outline" shape="round">确认配送</t-tag>
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
+					</view>
+				</view>
+				<view class="yunfei">
+					<view class="money"><text class="fuhao">￥</text>2,188.00</view>
+					<view class="paystate">待支付</view>
+				</view>
+			</view>
+			<view class="listitem">
+				<t-tag class="status" variant="light" theme="danger" size="small">待配送</t-tag>
+				<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="">
+					<view class="psname">任务名字任务名字任务名字</view>
+					<view class="pstime">2024-10-01 15:30:30</view>
+					<view class="psinfo">收货人：猪小明 18069860000</view>
+					<view class="psinfo">类别：水果类</view>
+					<view class="psinfo">总件数：100件</view>
+					<view class="psinfo">运费支付方：发货人</view>
+					<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
+				</view>
+				<view class="footbox">
+					<view class="psbtns">
+						<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
+					</view>
+				</view>
+				<view class="yunfei">
+					<view class="money"><text class="fuhao">￥</text>2,188.00</view>
+					<view class="paystate">待支付</view>
+				</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
+</view>

@@ -18,7 +18,7 @@
 					<empty description="暂无任务" />
 				</view> -->
 				<view class="listitem">
-					<t-tag class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
+					<t-tag class="status" variant="light" theme="danger" size="small">待配送</t-tag>
 					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="">
 						<view class="psname">任务名字任务名字任务名字</view>
 						<view class="pstime">2024-10-01 15:30:30</view>

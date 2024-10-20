@@ -64,7 +64,6 @@ Component({
     lifetimes: {
 		attached() { // 组件完全初始化完毕			
 			const { roleAllObject } = getRoleInfo(); // 角色类型
-			
 			this.setData({ userInfo: app['userInfo'], roleAllObject });
         },
         detached() { // 组件实例被从页面节点树移除时执行

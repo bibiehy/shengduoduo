@@ -1,0 +1,18 @@
+<view class="task-create-box">
+    <navigation-bar title="创建发货任务" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+		    <form-input class="FORM_INPUT" label="任务名字" name="name" value="{{defaultValues['name']}}" placeholder="请输入任务名字" required="{{true}}" />
+            <form-input class="FORM_INPUT" label="集货中心" name="center_id" value="{{defaultValues['center_name']}}" placeholder="请输入集货中心" disabled="{{true}}" required="{{true}}" />
+			<form-select class="FORM_SELECT" label="收货人" name="receive_user_id" value="{{defaultValues['receive_user_id']}}" options="{{shouhuorenList}}" placeholder="请选择收货人" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="收货人手机号码" name="receive_user_phone" value="{{defaultValues['receive_user_phone']}}" type="phone" placeholder="请输入收货人手机号码" required="{{true}}" disabled="{{true}}" />
+            <form-radio class="FORM_RADIO" label="运费支付方" name="pay_type" value="{{defaultValues['pay_type'] || 1}}" options="{{paytypeOptions}}" required="{{true}}" />
+			<form-select class="FORM_SELECT" label="设置提货点" name="pickup_id" value="{{defaultValues['pickup_id']}}" options="{{pointList}}" placeholder="请选择提货点" required="{{true}}" />
+			<form-datepicker class="FORM_DATEPICKER" label="预估送达集货中心的时间" name="estimate_time" value="{{defaultValues['estimate_time']}}" placeholder="请选择预估送达时间" mode="minute" required="{{true}}" />
+            <form-input class="FORM_INPUT" label="辅助标识" name="code" value="{{defaultValues['code']}}" remark="如：FM3088" placeholder="请输入辅助标识" required="{{true}}" disabled="{{true}}" regexp="^[a-zA-Z0-9_]+$" message="请输入字母、数字或带下划线等格式" />
+			<form-select class="FORM_SELECT" label="商品类别" name="goods_type" value="{{defaultValues['goods_type']}}" options="{{goodsTypeList}}" placeholder="请选择商品规格类别" required="{{true}}" />
+
+        </view>
+    </view>
+    <fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+</view>

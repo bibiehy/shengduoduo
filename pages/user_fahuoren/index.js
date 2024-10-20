@@ -5,7 +5,7 @@ Page({
 		tabbarList: [
 			{ value: 'main', label: '主页', icon: 'home' },
 			{ value: 'task', label: '任务管理', icon: 'tree-round-dot' },
-			{ value: 'shouhuoren', label: '收货人', icon: { name: 'shouhuoren', prefix: 'iconfont', size: '24px' } },
+			{ value: 'shouhuoren', label: '收货人', icon: { name: 'shouhuoren', prefix: 'iconfont', size: '22px' } },
 			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],
 	},

@@ -10,7 +10,7 @@
 	        <form-input class="FORM_INPUT" label="收货人详细地址" name="region" value="{{defaultValues['region']}}" remark="如 长河街道 108 号" placeholder="请输入收货人详细地址" required="{{true}}" />
             <form-select class="FORM_SELECT" label="设置默认提货点" name="point_id" value="{{defaultValues['type']}}" options="{{pointList}}" placeholder="请选择默认提货点" required="{{true}}" />
             <form-radio class="FORM_RADIO" label="运费支付方" name="pay_type" value="{{defaultValues['pay_type'] || 1}}" options="{{paytypeOptions}}" required="{{true}}" />
-            <form-input class="FORM_INPUT" label="代号标识" name="code" value="{{defaultValues['code']}}" remark="如：FM3088" placeholder="请输入代号标识" required="{{true}}" regexp="^[a-zA-Z0-9_]+$" message="请输入字母、数字或带下划线等格式" />
+            <form-input class="FORM_INPUT" label="辅助标识" name="code" value="{{defaultValues['code']}}" remark="如：FM3088" placeholder="请输入辅助标识" required="{{true}}" regexp="^[a-zA-Z0-9_]+$" message="请输入字母、数字或带下划线等格式" />
         </view>
     </view>
     <fixed-bottom-button bind:callback="onSubmit" title="确认提交" />

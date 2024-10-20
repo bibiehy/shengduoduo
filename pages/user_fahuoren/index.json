@@ -5,6 +5,7 @@
 		
 		"main": "/pages/user_fahuoren/components/main/main",
 		"shouhuoren": "/pages/user_fahuoren/components/shouhuoren/shouhuoren",
+		"task": "/pages/user_fahuoren/components/task/task",
 		"personal": "/pages/user_fahuoren/components/personal/personal"
 	}
 }

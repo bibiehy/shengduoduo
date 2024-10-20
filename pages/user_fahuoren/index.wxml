@@ -1,9 +1,6 @@
-<!-- <view class="admin-wrapper">
-	<navigation-bar title="发货人管理" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
-</view> -->
-
 <view class="fahuoren-wrapper">
 	<main wx:if="{{tabbarActive == 'main'}}" />
+	<task wx:elif="{{tabbarActive == 'task'}}" />
 	<shouhuoren wx:elif="{{tabbarActive == 'shouhuoren'}}" />
 	<personal wx:elif="{{tabbarActive == 'personal'}}" />
 	<t-tab-bar value="{{tabbarActive}}" bind:change="onTabbar" fixed="{{true}}" theme="normal" split="{{false}}">
