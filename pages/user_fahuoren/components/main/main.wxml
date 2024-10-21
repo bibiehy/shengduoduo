@@ -26,13 +26,15 @@
 						<view class="psinfo">类别：水果类</view>
 						<view class="psinfo">总件数：100件</view>
 						<view class="psinfo">运费支付方：发货人</view>
+						<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
 					</view>
-					<view class="footbox">
-						<view class="psbtns">
-							<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
-							<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
-						</view>
-						<view class="yunfei">待支付：￥2,188.00</view>
+					<view class="psbtns">
+						<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
+					</view>
+					<view class="yunfei">
+						<view class="money"><text class="fuhao">￥</text>2,188.00</view>
+						<view class="paystate">待支付</view>
 					</view>
 				</view>
 			</view>

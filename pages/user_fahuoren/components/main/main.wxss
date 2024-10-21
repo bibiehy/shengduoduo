@@ -15,10 +15,13 @@
 .main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .main-process .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
-.main-process .listitem .footbox { display:flex; align-items:center; justify-content:space-between; padding-top:8px; }
-.main-process .listitem .footbox .psbtns { display:flex; }
-.main-process .listitem .footbox .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
-.main-process .listitem .footbox .yunfei { font-size:14px; color:#ff3b30; }
+.main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
+.main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
+.main-process .listitem .yunfei { position:absolute; right:12px; bottom:15px; text-align:center; color:#ff3b30; }
+.main-process .listitem .yunfei .money { display:flex; align-items:flex-end; font-size:20px; font-weight:600; }
+.main-process .listitem .yunfei .money .fuhao { display:block; font-size:12px; padding-bottom:2px; }
+.main-process .listitem .yunfei .paystate { font-size:12px; padding-top:2px; }
+
 .main-process .nodata { height:380px; }
 
 

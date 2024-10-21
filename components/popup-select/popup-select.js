@@ -1,4 +1,4 @@
-// components/popup-select/popup-select.js
+// /components/popup-select/popup-select
 // 对外绑定事件
 // bind:callback 回调函数，参数为 e, e.detail.value = { label, value }
 
