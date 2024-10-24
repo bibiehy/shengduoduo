@@ -9,7 +9,7 @@
 .tablebox .throw .cell_2, .tablebox .tdrow .cell_2 { width:110px; }
 .tablebox .throw .cell_3, .tablebox .tdrow .cell_3 { flex:1; display:flex; justify-content:center; }
 .tablebox .tongji { display:flex; justify-content:flex-end; align-items:flex-end; font-size:14px; padding:10px; }
-.tablebox .tongji .total { color:#ff3b30; padding:0 3px; }
+.tablebox .tongji .total { color:#ff3b30; font-size:15px; padding:0 3px; }
 .tablebox .tongji .fuhao { color:#ff3b30; }
-.tablebox .tongji .count { color:#ff3b30; font-size:18px; margin-bottom:-1px; }
+.tablebox .tongji .count { color:#ff3b30; font-size:20px; margin-bottom:-1px; }
 

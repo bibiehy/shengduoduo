@@ -41,7 +41,7 @@
 	<view class="popup-guige-create">
 		<view class="popupinner">
 			<form-input id="formInputName" label="规格名称" name="name" value="{{listItem['name']}}" remark="如：1~10斤" placeholder="请输入规格名字" required="{{true}}" />
-			<form-input id="formInputFreight" label="基础运费" name="freight" value="{{listItem['freight']}}" remark="如：6、6.5、6.58" suffix="元(￥)" type="digit" placeholder="请输入基础运费" required="{{true}}" />
+			<form-input id="formInputFreight" label="基础运费" name="freight" value="{{listItem['freight']}}" remark="如：6、6.5、6.58" suffix="元(￥)" type="tofixed" placeholder="请输入基础运费" required="{{true}}" />
 			<form-input id="formInputWeight" label="预估重量" name="weight" value="{{listItem['weight']}}" remark="如：8、16 的整数" suffix="斤" type="number" placeholder="请输入预估重量" required="{{true}}" />
 		</view>
 	</view>

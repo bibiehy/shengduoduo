@@ -58,7 +58,7 @@
 					<view class="psinfo">类别：水果类</view>
 					<view class="psinfo">总件数：100件</view>
 					<view class="psinfo">运费支付方：发货人</view>
-					<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
+					<view class="psinfo">辅助标识：01001-FM1088-ZF2144</view>
 				</view>
 				<view class="psbtns">
 					<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
@@ -79,7 +79,7 @@
 					<view class="psinfo">类别：水果类</view>
 					<view class="psinfo">总件数：100件</view>
 					<view class="psinfo">运费支付方：发货人</view>
-					<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
+					<view class="psinfo">辅助标识：01001-FM1088-ZF2144</view>
 				</view>
 				<view class="psbtns">
 					<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>

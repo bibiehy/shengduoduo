@@ -5,7 +5,8 @@
 	<scroll-view class="scrollviewbox" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="main-swiper">
 			<t-swiper height="240px" autoplay="{{true}}" duration="{{300}}" interval="{{5000}}" list="{{swiperList}}" navigation="{{swiperNavigation}}" />
-			<!-- <view class="radian01"></view> -->
+			<image class="fahuobtn" mode="widthFix" src="../../../../assets/fahuo_btn.png" />
+			<image class="fahuobg" mode="widthFix" src="../../../../assets/fahuo_bg.png" />
 		</view>
 		
 		<view class="main-outerbox">

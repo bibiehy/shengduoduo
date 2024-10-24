@@ -13,6 +13,9 @@ export const fetchAllPickupPoint = () => ({ url: '/common/getPickupList' });
 // 获取规格分类列表
 export const fetchAllGuige = () => ({ url: '/common/getSpecCategory' });
 
+// 根据规格分类获取其下规格
+export const fetchGuigeByTypeId = (params) => ({ url: `/common/getSpecListByCate/${params['id']}` });
+
 // 获取车辆类型
 export const fetchAllCars = () => ({ url: '/common/getCarType' });
 

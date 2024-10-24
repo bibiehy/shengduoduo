@@ -10,6 +10,25 @@
 // child.getFieldValue(); 返回 formValue
 // child.setFieldValue(value);
 
+// 保留几位小数
+function formatNumberToFixed(num, precision) {
+	let multiplier = Math.pow(10, precision);
+	let adjustedNum = num * multiplier;
+	let formattedNum = String(Math.round(adjustedNum));
+
+	// 用正则表达式添加小数点和前导零
+	let regex = new RegExp('\\.(\\d{' + precision + '})(\\d*)');
+	let replaceValue = '.$1' + '0'.repeat(precision - 1); // 创建一串前导零
+	formattedNum = formattedNum.replace(regex, replaceValue);
+
+	let newValue = parseFloat(formattedNum) / multiplier;
+	if(!/\./.test(newValue)) {
+		newValue += '.00';
+	}
+
+	return newValue;
+}
+
 Component({
     // wx://form-field 使自定义组件有类似于表单控件的行为，并在 submit 事件中返回组件的字段名及其对应字段值
     // wx://form-field-group 使 form 组件可以识别到这个自定义组件内部的所有表单控件
@@ -26,7 +45,7 @@ Component({
         disabled: { type: Boolean, value: false },        
         suffix: { type: String, value: '' }, // 元/个
         suffixicon: { type: String, value: '' }, // 图标
-		type: { type: String, value: 'text' }, // 输入框类型。可选项：text/number/idcard/digit/safe-password/password/nickname 新增 phone/bankcard
+		type: { type: String, value: 'text' }, // 输入框类型。可选项：text/number/idcard/digit/safe-password/password/nickname 新增 phone/bankcard/tofixed
 		max: { type: Number, value: '' }, // 最大值，只适用于'number', 'digit'
 		min: { type: Number, value: '' }, // 最小值
         remark: { type: String, value: '' }, // 对 label 字段的补充
@@ -34,24 +53,41 @@ Component({
         regexp: { type: String, value: '' }, // 正则表达式
 		message: { type: String, value: '' }, // 必填后的错误提示内容
 		layout: { type: String, value: 'vertical' }, // 布局方式，可选项：vertical/horizontal
-        placement: { type: String, value: 'left' }, // 文本内容位置，居左/居中/居右。可选项：left/center/right
+		placement: { type: String, value: 'left' }, // 文本内容位置，居左/居中/居右。可选项：left/center/right
+		decimal: { type: Number, value: 2 } // 默认保留2位小数
     },
     // 组件的内部数据
     data: {
         formValue: '',
-        errTips: '',
+		errTips: '',
+		realType: '', // 就在 .wxml 用一下
     },
     // 监听 properties 值变化
     observers: {
-        value: function(newValue) { // 监听外部传递的 value
+		value: function(newValue) { // 监听外部传递的 value
+			const { type, decimal } = this.data;
+			if(newValue && type == 'tofixed') {
+				newValue = formatNumberToFixed(newValue, decimal);
+			}
+
 			this.setData({ formValue: newValue });
-        }
+		},
+		type: function(value) { // 文本框类型
+			let newType = value;
+			if(value == 'phone' || value == 'bankcard') {
+				newType = 'number';
+			}else if(value == 'tofixed') {
+				newType = 'digit';
+			}
+			
+			this.setData({ realType: newType });
+		}
     },
     // 组件的方法列表
     methods: {
 		onChange(e) {
-            const { required, regexp, message } = this.data;
-            const formValue = (e.detail.value).replace(/(^\s+)|(\s+$)/g, '');
+            const { required, regexp, message, type, decimal } = this.data;
+            let formValue = (e.detail.value).replace(/(^\s+)|(\s+$)/g, '');
             let errTips = '';
 
             if(required) {
@@ -60,7 +96,11 @@ Component({
 					const reg = new RegExp(regexp, 'ig');
                     errTips = reg.test(formValue) ? '' : message;
                 }
-            }
+			}
+			
+			if(formValue && type == 'tofixed') {
+				formValue = formatNumberToFixed(formValue, decimal);
+			}
 
 			this.setData({ formValue, errTips });
         },

@@ -17,7 +17,7 @@
 				<view class="psbody" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
 					<view class="psitem" wx:for="{{item['list']}}" wx:for-item="subItem" wx:key="id">
 						<view class="yuguweight">{{subItem['name']}}，预估 {{subItem['weight']}} 斤</view>
-						<view class="yunfeibase">基础运费：{{subItem['freight']}}元 /件</view>
+						<view class="yunfeibase">基础运费：{{subItem['freight']}}元/份</view>
 					</view>
 				</view>
 				<view class="psbtns">

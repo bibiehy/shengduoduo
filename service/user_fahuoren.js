@@ -39,8 +39,10 @@ export const fetchTaskException = (params) => ({ url: `/consignor/getTaskExcepti
 export const fetchTaskDetail = (params) => ({ url: `/consignor/getTaskDetail/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
 // 根据集货中心和提货点ID获取规格列表
-export const fetchTaskGuige = (params) => ({ url: `/consignor/getPickupAndSpec/${params['centerId']}/${params['pointId']}`, method: 'get', delay: 500 });
+export const fetchTaskGuige = (params) => ({ url: `/consignor/getPickupAndSpec/${params['centerId']}/${params['pointId']}`, method: 'get' });
 
+// 获取发货人下所有收货人
+export const fetchAllShouhuoren = (params) => ({ url: `/consignor/getReceiverList/${params['id']}`, method: 'get' });
 
 
 

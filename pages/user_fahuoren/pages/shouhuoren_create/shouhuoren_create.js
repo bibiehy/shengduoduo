@@ -13,13 +13,13 @@ Page({
     async getRandomAvatar() { // 获取随机昵称和头像
         const result = await useRequest(() => fetchRandomAvatar());
         if(result) {
-            const defaultValues = { avatar: result['avatar'], nickname: result['nick_name'] };
+            const defaultValues = { avator: result['avatar'], nickname: result['nick_name'] };
             this.setData({ defaultValues });
         }
     },
     async getPointsFromCenter() { // 根据集货中心ID获取提货点
         const app = getApp();
-        const centerId = app['userInfo']['center_id'] || 6;
+        const centerId = app['userInfo']['center_id'];
         const result = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
         if(result) {
             const newList = [];
@@ -48,7 +48,7 @@ Page({
 				await delay(500);
 				wx.navigateBack({ delta: 1, success: () => {
 					const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
-					eventChannel.emit('acceptOpenedData', actionType == 'edit' ? result : {});
+					eventChannel.emit('acceptOpenedData', actionType == 'edit' ? formValues : {});
 				}});
 			}
 		}

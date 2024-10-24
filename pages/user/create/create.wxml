@@ -36,6 +36,22 @@
 					<view class="formItem required"><text class="labelText">运费系数</text>{{defaultValues['wages']}}%</view>
 				</view> -->
 			</block>
+
+			<block wx:if="{{roleType == 2}}" title="收货人">
+				<view class="myFormViewbox">
+					<view class="formAvatar required">
+						<image class="avatarImage" mode="aspectFill" src="{{defaultValues['avator']}}" />
+					</view>
+					<view class="formItem required"><text class="labelText">用户昵称</text>{{defaultValues['nickname']}}</view>
+					<view class="formItem required"><text class="labelText">用户姓名</text>{{defaultValues['username']}}</view>
+					<view class="formItem required"><text class="labelText">手机号码</text>{{defaultValues['phone']}}</view>
+					<view class="formItem required"><text class="labelText">所在地区</text>{{defaultValues['addressStr']}}</view>
+					<view class="formItem required"><text class="labelText">收货人详细地址</text>{{defaultValues['region']}}</view>
+					<view class="formItem required"><text class="labelText">默认提货点</text>{{defaultValues['point_name']}}</view>
+					<view class="formItem required"><text class="labelText">运费支付方</text>{{defaultValues['pay_type'] == 1 ? '发货人' : '收货人'}}</view>
+					<view class="formItem required"><text class="labelText">辅助标识</text>{{defaultValues['code']}}</view>
+				</view>
+			</block>
 			
 			<block wx:if="{{roleType == 3}}" title="干线司机">
 				<view class="myFormViewbox">

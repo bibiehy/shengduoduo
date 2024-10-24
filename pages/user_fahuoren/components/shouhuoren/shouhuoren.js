@@ -24,7 +24,7 @@ Component({
         // 
 		async onAjaxList(thisPage, callback) { // 列表请求
 			const { keyword, dataList, upStatus } = this.data;
-			const result = await useRequest(() => fetchShouList({ page: thisPage, name: keyword || '' }));
+			const result = await useRequest(() => fetchShouList({ page: thisPage, keyword: keyword || '' }));
 			if(result) {
 				const newList = [];
 				result['content'].forEach((item) => {
@@ -72,9 +72,9 @@ Component({
 		async onDisabled(e) { // 禁用/启用
 			const { dataList } = this.data;
 			const { id, status, index } = e.currentTarget.dataset;
-			const result = await useRequest(() => fetchShouDelete({ id, type: status == 1 ? 2 : 1 }));
+			const result = await useRequest(() => fetchShouDisabled({ id, type: status == 1 ? 2 : 1 }));
 			if(result) {
-				dataList[index]['status'] = status == 1 ? 2 : 1;
+				dataList[index]['disabled'] = status == 1 ? 2 : 1;
 				this.setData({ dataList });
                 wx.showToast({ title: status == 1 ? '已禁用' : '已启用', icon: 'success' });
 			}
@@ -110,7 +110,7 @@ Component({
 			const { deleteItem, dataList } = this.data;
 			this.setData({ showConfirm: false }); // 先关闭确认框
 
-			const result = await useRequest(() => fetchShouDisabled({ id: deleteItem['id'] }));
+			const result = await useRequest(() => fetchShouDelete({ id: deleteItem['id'] }));
 			if(result) {
 				const findIndex = dataList.findIndex((item) => item['id'] == deleteItem['id']);
 				dataList.splice(findIndex, 1);
