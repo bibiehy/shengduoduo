@@ -9,7 +9,9 @@
         <view class="myFormMessage" wx:if="{{errTips}}">{{errTips}}</view>
     </view>
 </view>
-<t-popup bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
+
+<!-- bind:visible-change="onVisibleChange" -->
+<t-popup visible="{{visible}}" placement="bottom" close-on-overlay-click="{{false}}">
     <view class="myPopupFormselect">
         <view class="myPopupHeader">
             <view class="myPopupCancelbtn" bind:tap="onHidePopup">取消</view>

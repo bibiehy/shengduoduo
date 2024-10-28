@@ -23,11 +23,20 @@ export const fetchShouDetail = (params) => ({ url: `/consignor/getSender/${param
 
 
 /************************** 任务管理 ***********************/
-// 任务列表 size page name status begin_time end_time
+// 任务列表 size page keyword status begin_time end_time
 export const fetchTaskList = (params) => ({ url: '/consignor/getTaskList', method: 'get', data: { size: 20, ...params } });
 
 // 添加
 export const fetchTaskCreate = (params) => ({ url: '/consignor/createTask', method: 'post', loading: true, delay: 500, data: params });
+
+// 编辑
+export const fetchTaskEdit = (params) => ({ url: '/consignor/editTask', method: 'post', loading: true, delay: 500, data: params });
+
+// 删除
+export const fetchTaskDelete = (params) => ({ url: '/consignor/deleteTask', method: 'post', loading: true, delay: 500, data: params });
+
+// 确认发送
+export const fetchTaskSend = (params) => ({ url: '/consignor/conformTask', method: 'post', loading: true, delay: 500, data: params });
 
 // 取消任务 id、reason
 export const fetchTaskCancel = (params) => ({ url: '/consignor/cancelTask', method: 'post', loading: true, delay: 500, data: params });

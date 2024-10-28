@@ -2,7 +2,7 @@
 
 .task-tabs { background-color:#fff; padding:0 5px; margin-top:-1px; }
 
-.page-scroll { flex:1; padding:10px 10px 80px; overflow-y:auto; }
+.page-scroll { flex:1; padding:10px 10px 150px; overflow-y:auto; }
 .page-scroll .listitem { position:relative; border:solid 1px #ebebeb; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
 .page-scroll .listitem .status { position:absolute; right:12px; top:12px; }
 .page-scroll .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
@@ -10,10 +10,21 @@
 .page-scroll .listitem .mainbox .psinfo { display:flex; align-items:center; font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
 .page-scroll .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
 .page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
-.page-scroll .listitem .yunfei { position:absolute; right:12px; bottom:15px; text-align:center; color:#ff3b30; }
+.page-scroll .listitem .yunfei { position:absolute; right:12px; bottom:15px; text-align:right; color:#ff3b30; }
 .page-scroll .listitem .yunfei .money { display:flex; align-items:flex-end; font-size:20px; font-weight:600; }
 .page-scroll .listitem .yunfei .money .fuhao { display:block; font-size:12px; padding-bottom:2px; }
-.page-scroll .listitem .yunfei .paystate { font-size:12px; padding-top:2px; }
+.page-scroll .listitem .yunfei .paystate { font-size:12px; padding-top:2px; padding-right:2px; }
 .page-scroll .nodata { height:380px; }
 
+.dialog-paybox { padding-top:10px; }
+.dialog-paybox .yunfei { font-size:28px; color:#ff3b30; text-align:center; font-weight:600; }
+.dialog-paybox .yunfei .fuhao { display:inline-block; font-size:14px; vertical-align:middle; padding-top:3px; }
+.dialog-sending { background-color:#f5f5f5; border-radius:5px; padding:10px 15px; margin-top:15px; }
+.dialog-sending .dialabel { font-size:16px; color:rgba(0, 0, 0, 0.65); font-weight:600; padding:5px 0 10px; }
+.dialog-sending .panel-item { --td-cell-vertical-padding:10px; }
+.dialog-sending .diaitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:3px 0; }
+.dialog-sending .diaitem .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
+.dialog-sending .diatips { font-size:16px; color:#ff3b30; padding:3px 0; }
+.dialog-sending .diatips .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
 
+.dialog-success .success { font-size:16px; text-align:center; padding:5px 0; } 

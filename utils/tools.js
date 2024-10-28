@@ -95,9 +95,9 @@ export const form = {
     }
 };
 
-// 获取当前日期 YYYY-MM-DD HH:mm:ss
-export const getCurrentDateTime = (format) => {
-    const now = new Date();
+// 获取当前日期 YYYY-MM-DD HH:mm:ss，或格式化 strDate
+export const getCurrentDateTime = (format, strDate) => {
+    const now = strDate ? (new Date(strDate)) : (new Date());
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，要加1
     const day = String(now.getDate()).padStart(2, '0');
@@ -130,7 +130,7 @@ export const fmtThousands = (value, dotNum) => {
         if(dotNum) { // 指定保留几位小数
             str = Number(value).toFixed(dotNum);
         }else{ // 如果是浮点数默认保留 2 位小数
-            str = /\./.test(value) ? Number(value).toFixed(2) : value.toString();
+            str = /\./.test(value) ? Number(value).toFixed(2) : (value).toString();
         }
 
         return str.replace(/\B(?=(\d{3})+(?!\d))/g, ',');

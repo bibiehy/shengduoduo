@@ -10,24 +10,7 @@
 // child.getFieldValue(); 返回 formValue
 // child.setFieldValue(value);
 
-// 保留几位小数
-function formatNumberToFixed(num, precision) {
-	let multiplier = Math.pow(10, precision);
-	let adjustedNum = num * multiplier;
-	let formattedNum = String(Math.round(adjustedNum));
-
-	// 用正则表达式添加小数点和前导零
-	let regex = new RegExp('\\.(\\d{' + precision + '})(\\d*)');
-	let replaceValue = '.$1' + '0'.repeat(precision - 1); // 创建一串前导零
-	formattedNum = formattedNum.replace(regex, replaceValue);
-
-	let newValue = parseFloat(formattedNum) / multiplier;
-	if(!/\./.test(newValue)) {
-		newValue += '.00';
-	}
-
-	return newValue;
-}
+import { fmtThousands } from '../../utils/tools';
 
 Component({
     // wx://form-field 使自定义组件有类似于表单控件的行为，并在 submit 事件中返回组件的字段名及其对应字段值
@@ -45,8 +28,8 @@ Component({
         disabled: { type: Boolean, value: false },        
         suffix: { type: String, value: '' }, // 元/个
         suffixicon: { type: String, value: '' }, // 图标
-		type: { type: String, value: 'text' }, // 输入框类型。可选项：text/number/idcard/digit/safe-password/password/nickname 新增 phone/bankcard/tofixed
-		max: { type: Number, value: '' }, // 最大值，只适用于'number', 'digit'
+		type: { type: String, value: 'text' }, // 输入框类型。可选项：text/number/idcard/digit/safe-password/password/nickname 新增 phone/bankcard/tofixed/int
+		max: { type: Number, value: '' }, // 最大值，只适用于'number', 'digit', tofixed, int
 		min: { type: Number, value: '' }, // 最小值
         remark: { type: String, value: '' }, // 对 label 字段的补充
         required: { type: Boolean, value: true }, // 是否必填
@@ -66,8 +49,9 @@ Component({
     observers: {
 		value: function(newValue) { // 监听外部传递的 value
 			const { type, decimal } = this.data;
+
 			if(newValue && type == 'tofixed') {
-				newValue = formatNumberToFixed(newValue, decimal);
+				newValue = fmtThousands(newValue, decimal);
 			}
 
 			this.setData({ formValue: newValue });
@@ -78,6 +62,8 @@ Component({
 				newType = 'number';
 			}else if(value == 'tofixed') {
 				newType = 'digit';
+			}else if(value == 'int') {
+				newType = 'number';
 			}
 			
 			this.setData({ realType: newType });
@@ -97,19 +83,22 @@ Component({
                     errTips = reg.test(formValue) ? '' : message;
                 }
 			}
-			
-			if(formValue && type == 'tofixed') {
-				formValue = formatNumberToFixed(formValue, decimal);
-			}
 
 			this.setData({ formValue, errTips });
         },
         onFocus() { // 获得焦点
-            const { name, formValue } = this.data;
+			const { name, formValue, type } = this.data;
+			
+			// 千分位获得焦点去掉逗号
+			if(formValue && type == 'tofixed') {
+				const fmtValue = formValue.replaceAll(',', '');
+				this.setData({ formValue: fmtValue });
+			}
+
             this.triggerEvent('onfocus', { name, value: formValue });
         },
 		onBlur(e) { // 失去焦点
-			const { name, formValue, required, type, max, min, regexp, message } = this.data;
+			const { name, formValue, decimal, required, type, max, min, regexp, message } = this.data;
 			
 			if(type === 'nickname') {
 				return false;
@@ -125,7 +114,11 @@ Component({
 					errTips = /^1\d{10}$/.test(formValue) ? '' : '手机号码格式不正确，请检查';
 				}else if(formValue && type == 'idcard') {
 					errTips = /(^\d{15}$)|(^\d{18}$)|(^\d{17}X$)/i.test(formValue) ? '' : '身份证号码格式不正确，请检查';
-				}else if(formValue && ['number', 'digit'].includes(type) && max && min >= 0) {
+				}else if(formValue && ['number', 'digit', 'tofixed', 'int'].includes(type) && max && min >= 0) {
+					if(type == 'tofixed') {
+						formValue = formValue.replaceAll(',', '');
+					}
+					
 					errTips = ((formValue >= min) && (formValue <= max)) ? '' : `请输入 ${min}~${max} 之内的数字`;
 				}else if(formValue && regexp && message) {
 					const reg = new RegExp(regexp, 'ig');
@@ -143,7 +136,13 @@ Component({
             // 为了兼容后台设定的必须是浮点型值类型，如果为空传 null
             if(typeof formValue == 'string' && formValue === '' && ['number', 'digit'].includes(type)) {
                 newValue = null;
-            }
+			}
+			
+			// 千分位并保留2位小数
+			if(formValue && type == 'tofixed') {
+				const fmtValue = fmtThousands(formValue, decimal);
+				this.setData({ formValue: fmtValue });
+			}
 
             this.triggerEvent('onblur', { name, value: newValue });
         },
@@ -166,7 +165,11 @@ Component({
 					errTips = /^1\d{10}$/.test(formValue) ? '' : '手机号码格式不正确，请检查';
 				}else if(formValue && type == 'idcard') {
 					errTips = /(^\d{15}$)|(^\d{18}$)|(^\d{17}X$)/i.test(formValue) ? '' : '身份证号码格式不正确，请检查';
-				}else if(formValue && ['number', 'digit'].includes(type) && max && min >= 0) {
+				}else if(formValue && ['number', 'digit', 'tofixed', 'int'].includes(type) && max && min >= 0) {
+					if(type == 'tofixed') {
+						formValue = formValue.replaceAll(',', '');
+					}
+
 					errTips = ((formValue >= min) && (formValue <= max)) ? '' : `请输入 ${min}~${max} 之间的数字`;
 				}else if(formValue && regexp && message) {
 					const reg = new RegExp(regexp, 'ig');
