@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchTaskList, fetchTaskDelete, fetchTaskPay, fetchTaskSend, fetchTaskCancel, fetchTaskException } from '../../../../service/user_fahuoren';
+import { fetchTaskList, fetchTaskDelete, fetchTaskPay, fetchTaskOrder, fetchTaskSend, fetchTaskCancel, fetchTaskException } from '../../../../service/user_fahuoren';
 
 // 当前时间
 const currentDatetime = getCurrentDateTime('YYYY-MM-DD HH:mm');
@@ -21,7 +21,7 @@ Component({
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
 		// 弹窗
 		showConfirm: '', // gopaying 发货人去支付; paysuccess 支付成功; gosetime 发货人已支付; sending 收货人确认配送; delete 删除任务; cancel 取消任务;
-		confirmBtn: { content: '确定', variant: 'base' },
+		confirmBtn: { content: '确定', variant: 'base', loading: false },
 		confirmBtn2: { content: '去支付', variant: 'base' },
 		actionItem: {},
         // 日期选择框
@@ -81,23 +81,29 @@ Component({
 			this.onAjaxList(1);
 		},
 		// 按钮操作
-		onCreate(e) { // 添加/编辑
-			const { type, item } = e.currentTarget.dataset;
-            const strItem = JSON.stringify(item || {});
+		onCreate() { // 添加
 			wx.navigateTo({
-				url: `/pages/user_fahuoren/pages/task_create/task_create?type=${type}&strItem=${strItem}`,
+				url: `/pages/user_fahuoren/pages/task_create/task_create?type=create&strItem=`,
+				events: { // 注册事件监听器
+					acceptOpenedData: () => { // 监听由子页面触发的同名事件
+						this.setData({ tabsActive: 1 }); // 显示全部
+						this.onAjaxList(1);
+					}
+				}
+			});
+		},
+		onEdit(e) { // 编辑
+			const { item } = e.currentTarget.dataset;
+			const strItem = JSON.stringify(item);
+			wx.navigateTo({
+				url: `/pages/user_fahuoren/pages/task_create/task_create?type=edit&strItem=${strItem}`,
 				events: { // 注册事件监听器
 					acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
-						if(type == 'create') { // 添加
-							this.setData({ tabsActive: 1 }); // 显示全部
-							this.onAjaxList(1);
-						}else{ // 编辑
-							const { dataList } = this.data;
-							const findIndex = dataList.findIndex((listItem) => listItem['id'] == item['id']);
-							if(findIndex >= 0) {
-								dataList.splice(findIndex, 1, formValues);
-								this.setData({ dataList });
-							}
+						const { dataList } = this.data;
+						const findIndex = dataList.findIndex((listItem) => listItem['id'] == item['id']);
+						if(findIndex >= 0) {
+							dataList.splice(findIndex, 1, formValues);
+							this.setData({ dataList });
 						}
 					}
 				}
@@ -113,19 +119,17 @@ Component({
 				return false;
 			}
 
+			// this.setData({ showConfirm: 'gosetime', actionItem: item });
 			this.setData({ showConfirm: action, actionItem: item });
 		},
 		async onSureDialog() { // 弹窗确认
-			const { actionItem } = this.data;
 			const actionType = this.data.showConfirm;
-			this.setData({ showConfirm: '' }); // 先关闭确认框
-
 			if(actionType == 'gopaying') { // 发货人去支付，支付完成弹出支付成功并设置发送时间
 				this.onWxPay();
 			}else if(actionType == 'paysuccess') { // 发货人已支付，支付提示+设置送达时间
                 this.onPaySuccess();
 			}else if(actionType == 'gosetime') { // 发货人已支付，支付成功关闭页面再次点击确认配送
-
+				this.onPaySend();
 			}else if(actionType == 'sending') { // 收货人确认配送
 				this.onTaskSendingShouhuoren();
 			}else if(actionType == 'delete') { // 删除任务
@@ -134,8 +138,28 @@ Component({
 				this.onTaskCancel();
 			}			
 		},
-		onWxPay() { // 掉起微信支付
+		async onWxPay() { // 去支付
+			// 关闭弹窗
+			// this.setData({ showConfirm: false });
 			this.setData({ showConfirm: 'paysuccess' });
+
+			// const { actionItem, dataList } = this.data;
+			// const result = await useRequest(() => fetchTaskOrder()); // 下单接口
+			// if(result) {
+			// 	wx.requestPayment({
+			// 		timeStamp: '',
+			// 		nonceStr: '',
+			// 		package: '',
+			// 		signType: 'MD5',
+			// 		paySign: '',
+			// 		success: (res) => {
+			// 			this.setData({ showConfirm: 'paysuccess' });
+			// 		},
+			// 		fail: (res) => {
+
+			// 		}
+			// 	});
+			// }			
 		},
 		async onPaySuccess() { // 支付提示+设置送达时间框的确定
             const { actionItem, datetimeValue, dataList } = this.data;
@@ -146,6 +170,7 @@ Component({
 				return false;
             }
 
+			// 送货最晚时间判断
             const dateDay = getCurrentDateTime('YYYY-MM-DD', datetimeValue);
             const lastDatatime = `${dateDay} ${lastTime}`;
             if((new Date(datetimeValue)) > (new Date(lastDatatime))) {
@@ -155,14 +180,19 @@ Component({
 
             // 调用支付 + 确认发送
             const result = await useRequest(() => fetchTaskPay({ id: actionItem['id'], status: 1, estimate_time: datetimeValue }));
-            if(result) {
+            if(result['code'] == 0) {
                 const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
                 dataList[findIndex]['is_pay'] = 1; // 已支付
                 dataList[findIndex]['status'] = 2; // 待配送
 				this.setData({ dataList, actionItem: {} });
 				wx.showToast({ title: '操作成功', icon: 'success' });
-            }
-        },
+            }else{
+				wx.showToast({ title: '设置失败请重试', icon: 'error' });
+			}
+		},
+		onPaySend() { // 发货人已支付，但未配送，支付成功刷新页面
+
+		},
 		async onTaskSendingShouhuoren() { // 确认配送，收货人
 			const { actionItem, dataList } = this.data;
 			const result = await useRequest(() => fetchTaskSend({ id: actionItem['id'] }));

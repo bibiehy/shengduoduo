@@ -217,7 +217,7 @@ Page({
 	},
 	async onLoad(options) {
 		const { type, strItem } = options;
-		const jsonItem = JSON.parse(strItem);
+		const jsonItem = type == 'edit' ? JSON.parse(strItem) : {};
 		const { center_id, center_name } = userInfo;
         this.setData({ actionType: type, taskId: jsonItem['id'], center_id, center_name });
 

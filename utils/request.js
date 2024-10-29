@@ -65,7 +65,7 @@ const useRequest = async (service) => {
                         wx.reLaunch({ url: '/pages/page403/page403' });
 					}else{ // 系统错误
 						reslove('');
-                        wx.showToast({ title: data['message'], duration: 3500 });
+                        wx.showToast({ title: data['message'], duration: 2500, icon: 'none' });
                     }
                 }else{
                     let errorContent = '';
@@ -80,7 +80,7 @@ const useRequest = async (service) => {
                     }
 
 					reslove('');
-					wx.showToast({ title: errorContent, icon: 'error', duration: 3500 });
+					wx.showToast({ title: errorContent, icon: 'error', duration: 2500 });
                 }
             }
         });

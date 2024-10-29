@@ -3,7 +3,7 @@
 	<view class="global-page-search">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="任务名/收货人姓名/手机号" />
 		<view class="pageline"></view>
-		<view class="pageaddbtn" bind:tap="onCreate" data-type="create" data-item=""><t-icon name="add" size="24" /> 添加任务</view>
+		<view class="pageaddbtn" bind:tap="onCreate"><t-icon name="add" size="24" /> 添加任务</view>
 	</view>
 	<view class="task-tabs">
 		<t-tabs bind:change="onTabsChange" value="{{tabsActive}}" defaultValue="-1" theme="tag">
@@ -37,7 +37,7 @@
 					<t-tag wx:if="{{item['status'] == 50}}" class="status" variant="light" theme="warning" size="small">待签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 70}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 99}}" class="status" variant="light" size="small">已取消</t-tag>
-					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
+					<view class="mainbox" bind:tap="onEdit" data-item="{{item}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">收货人：{{item['receive_username']}} {{item['receive_user_phone']}}</view>
@@ -92,42 +92,63 @@
 <t-dialog
 	visible="{{showConfirm == 'paysuccess'}}"
 	title=""
+	z-index="{{11300}}"
 	confirmBtn="{{confirmBtn}}"
 	bind:confirm="onSureDialog"
 >
 	<view class="dialog-success" slot="content">
 		<t-icon name="check-circle" size="64px" color="#2ba471" />
-		<view class="success">支付成功</view>
+		<view class="success">支付成功 <text class="money">￥{{actionItem['total_freight_front']}}</text></view>
 		<view class="dialog-sending">
 			<view class="dialabel">请设置送达集货中心时间：</view>
-			<t-cell title="{{datetimeValue || '选择预估送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<t-cell title="{{datetimeValue || '请选择送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
 		</view>
 	</view>
 </t-dialog>
 <t-date-time-picker
-    title="选择预估送达时间"
+    title="请选择送达时间"
     visible="{{datetimeVisible}}"
     value="{{datetimeValue || defaultDatetime}}"
-    mode="second"
-    format="YYYY-MM-DD HH:mm:ss"
+    mode="minute"
+    format="YYYY-MM-DD HH:mm"
     bind:confirm="onSureDatePicker"
     bind:cancel="onCancelDatePicker"
 />
 
+<!-- // 发货人运费支付成功但未配送，刷新页面导致 -->
+<t-dialog
+	visible="{{showConfirm == 'gosetime'}}"
+	title="{{actionItem['name']}}"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	z-index="{{11300}}"
+	bind:confirm="onSureDialog"
+	bind:cancel="onCancelDialog"
+>	
+	<view class="dialog-sending" slot="content">
+		<view class="dialabel">请设置送达集货中心时间：</view>
+		<t-cell title="{{datetimeValue || '请选择送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+		<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
+		<view class="diatips">* 您已支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+	</view>
+</t-dialog>
 
+<!-- // 收货人确认配送 -->
 <t-dialog
 	visible="{{showConfirm == 'sending'}}"
-	title="确定要送货到集货中心嘛？"
-	confirmBtn="{{actionItem['pay_type'] == 1 ? confirmBtn2 : confirmBtn}}"
+	title="{{actionItem['name']}}"
+	confirmBtn="{{confirmBtn}}"
 	cancelBtn="取消"
+	z-index="{{11300}}"
 	bind:confirm="onSureDialog"
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-sending" slot="content">
-		<view class="diaitem">任务名：{{actionItem['name']}}</view>
-		<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
-		<view wx:if="{{actionItem['pay_type'] == 1}}" class="diatips">* 您需要先支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
-		<view wx:else class="diaitem">运费支付方：收货人 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+		<view class="dialabel">请设置送达集货中心时间：</view>
+		<t-cell title="{{datetimeValue || '请选择送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+		<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
+		<view class="diatips">* 由收货人支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
 	</view>
 </t-dialog>
 
