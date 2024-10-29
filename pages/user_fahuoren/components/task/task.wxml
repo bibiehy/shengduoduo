@@ -70,6 +70,7 @@
 	</t-pull-down-refresh>
 </view>
 
+<!-- // 发货人去支付运费 -->
 <t-dialog
 	visible="{{showConfirm == 'gopaying'}}"
 	title="请先进行支付运费"
@@ -87,6 +88,7 @@
 	</view>
 </t-dialog>
 
+<!-- // 发货人运费支付成功后显示设置送达时间 -->
 <t-dialog
 	visible="{{showConfirm == 'paysuccess'}}"
 	title=""
@@ -98,18 +100,18 @@
 		<view class="success">支付成功</view>
 		<view class="dialog-sending">
 			<view class="dialabel">请设置送达集货中心时间：</view>
-			<t-cell title="选择日期时间" hover arrow data-mode="datetime" bind:tap="showPicker" t-class="panel-item" />
+			<t-cell title="{{datetimeValue || '选择预估送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
 		</view>
 	</view>
 </t-dialog>
 <t-date-time-picker
-  title="选择日期和时间"
-  visible="{{datetimeVisible}}"
-  mode="second"
-  format="YYYY-MM-DD HH:mm:ss"
-  bindchange="onConfirm"
-  bindpick="onColumnChange"
-  bindcancel="hidePicker"
+    title="选择预估送达时间"
+    visible="{{datetimeVisible}}"
+    value="{{datetimeValue || defaultDatetime}}"
+    mode="second"
+    format="YYYY-MM-DD HH:mm:ss"
+    bind:confirm="onSureDatePicker"
+    bind:cancel="onCancelDatePicker"
 />
 
 
