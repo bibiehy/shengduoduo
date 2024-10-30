@@ -39,7 +39,7 @@ export const fetchTaskDelete = (params) => ({ url: '/consignor/deleteTask', meth
 export const fetchTaskSend = (params) => ({ url: '/consignor/conformTask', method: 'post', loading: true, delay: 500, data: params });
 
 // 支付下单接口
-export const fetchTaskOrder = (params) => ({ url: '/consignor/conformTask', method: 'post', loading: true, delay: 500, data: params });
+export const fetchTaskOrder = (params) => ({ url: '/consignor/preOrderTask', method: 'post', skipError: true, loading: true, delay: 500, data: params });
 
 // 任务支付+确认发送
 export const fetchTaskPay = (params) => ({ url: '/consignor/payTask', method: 'post', skipError: true, loading: true, delay: 500, data: params });

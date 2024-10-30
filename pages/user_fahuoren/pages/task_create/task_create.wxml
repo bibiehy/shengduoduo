@@ -1,16 +1,16 @@
 <view class="task-create-box">
-    <navigation-bar title="创建发货任务" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <navigation-bar title="{{actionType == 'view' ? '查看发货任务' : '创建发货任务'}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
             <form-input class="FORM_INPUT" label="集货中心" name="center_id" value="{{center_name}}" placeholder="请输入集货中心" disabled="{{true}}" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="任务名字" name="name" value="{{name}}" placeholder="请输入任务名字" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="任务名字" name="name" value="{{name}}" placeholder="请输入任务名字" required="{{true}}" disabled="{{actionType == 'view'}}" />
 			<!-- <form-datepicker class="FORM_DATEPICKER" label="预估送达集货中心的时间" name="estimate_time" value="{{estimate_time}}" placeholder="请选择预估送达时间" mode="minute" format="YYYY-MM-DD HH:mm" required="{{true}}" /> -->
-			<form-select class="FORM_SELECT" bind:callback="onSelectShuohuoren" label="收货人" name="receive_user_id" value="{{receive_user_id}}" options="{{shouhuorenList}}" placeholder="请选择收货人" required="{{true}}" />
+			<form-select class="FORM_SELECT" bind:callback="onSelectShuohuoren" label="收货人" name="receive_user_id" value="{{receive_user_id}}" options="{{shouhuorenList}}" placeholder="请选择收货人" required="{{true}}" disabled="{{actionType == 'view'}}" />
 			<block wx:if="{{receive_user_id}}">
-				<form-radio class="FORM_RADIO" label="运费支付方" name="pay_type" value="{{pay_type}}" options="{{paytypeOptions}}" required="{{true}}" />
-				<form-select class="FORM_SELECT" bind:callback="onChangePoint" label="设置提货点" name="pickup_id" value="{{pickup_id}}" options="{{pointList}}" placeholder="请选择提货点" required="{{true}}" />
-				<form-input class="FORM_INPUT" label="辅助标识" name="code" value="{{code}}" placeholder="请输入辅助标识" required="{{true}}" disabled="{{true}}" regexp="^[a-zA-Z0-9-_]+$" message="请输入字母、数字或带下划线等格式" />
-				<form-select class="FORM_SELECT" bind:callback="onChangeGuigeType" label="规格类型" name="goods_type" value="{{goods_type}}" options="{{guigeTypeList}}" placeholder="请选择规格类型" required="{{true}}" />
+				<form-radio class="FORM_RADIO" label="运费支付方" name="pay_type" value="{{pay_type}}" options="{{paytypeOptions}}" required="{{true}}" disabled="{{actionType == 'view'}}" />
+				<form-select class="FORM_SELECT" bind:callback="onChangePoint" label="设置提货点" name="pickup_id" value="{{pickup_id}}" options="{{pointList}}" placeholder="请选择提货点" required="{{true}}"  disabled="{{actionType == 'view'}}"/>
+				<form-input class="FORM_INPUT" label="辅助标识" name="code" value="{{code}}" placeholder="请输入辅助标识" required="{{true}}" disabled="{{true}}" regexp="^[a-zA-Z0-9-_]+$" message="请输入字母、数字或带下划线等格式" disabled="{{actionType == 'view'}}" />
+				<form-select class="FORM_SELECT" bind:callback="onChangeGuigeType" label="规格类型" name="goods_type" value="{{goods_type}}" options="{{guigeTypeList}}" placeholder="请选择规格类型" required="{{true}}" disabled="{{actionType == 'view'}}" />
 				<view class="tablebox">
 					<view class="throw">
 						<view class="cell_1">规格</view>
@@ -20,7 +20,7 @@
 					<view class="tdrow" wx:for="{{guigeList}}" wx:key="id">
 						<view class="cell_1">{{item['name']}}</view>
 						<view class="cell_2">￥{{item['freight']}}</view>
-						<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-id="{{item['id']}}" min="{{0}}" max="{{1000}}" value="{{item['number'] || 0}}" theme="filled" /></view>
+						<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-id="{{item['id']}}" min="{{0}}" max="{{1000}}" value="{{item['number'] || 0}}" theme="filled" disabled="{{actionType == 'view'}}" /></view>
 					</view>
 					<view class="tongji">
 						共<view class="total">{{totalNumber}}</view>件，合计：<view class="fuhao">￥</view><view class="count">{{totalMoney}}</view>
@@ -29,5 +29,7 @@
 			</block>
         </view>
     </view>
-    <fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+	<block wx:if="{{actionType != 'view'}}">
+		<fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+	</block>
 </view>

@@ -37,7 +37,7 @@
 					<t-tag wx:if="{{item['status'] == 50}}" class="status" variant="light" theme="warning" size="small">待签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 70}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 99}}" class="status" variant="light" size="small">已取消</t-tag>
-					<view class="mainbox" bind:tap="onEdit" data-item="{{item}}">
+					<view class="mainbox" bind:tap="onEdit" data-item="{{item}}" data-type="{{item['status'] == 2 ? 'view' : 'edit'}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">收货人：{{item['receive_username']}} {{item['receive_user_phone']}}</view>
@@ -73,7 +73,7 @@
 <!-- // 发货人去支付运费 -->
 <t-dialog
 	visible="{{showConfirm == 'gopaying'}}"
-	title="请先进行支付运费"
+	title="请先支付运费"
 	confirmBtn="{{confirmBtn2}}"
 	cancelBtn="取消"
 	bind:confirm="onSureDialog"
@@ -152,6 +152,7 @@
 	</view>
 </t-dialog>
 
+<!-- // 删除任务 -->
 <t-dialog
 	visible="{{showConfirm == 'delete'}}"
 	title="确定要删除嘛？"

@@ -16,7 +16,7 @@
 	<form-select class="FORM_SELECT" label="默认规格类别" name="type" value="{{defaultValues['type']}}" options="{{guigeOptions}}" placeholder="请选择默认规格类别" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="月均发货件数" remark="如：2000" name="max_number" value="{{defaultValues['max_number']}}" suffix="件" type="number" placeholder="请输入月均发货件数" required="{{true}}" />
 	<block wx:if="{{fromto == 'audit' || fromto == 'userlist'}}">
-		<form-input class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" remark="如：10、10.5、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入运费系数" required="{{true}}" />
+		<form-input class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" remark="如：10、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入运费系数" required="{{true}}" />
 		<form-input class="FORM_INPUT" label="辅助标识" name="code" value="{{defaultValues['code']}}" remark="如：FM3088" placeholder="请输入辅助标识" required="{{true}}" regexp="^[a-zA-Z0-9_]+$" message="请输入字母、数字或带下划线等格式" />
 	</block>
 	<block wx:if="{{actionType == 'audit'}}">

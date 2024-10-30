@@ -11,7 +11,7 @@ Page({
 	data: {
 		// 发货人=center_id/center_name/goods_type
 		// 收货人=receive_user_phone/pay_type/pickup_id
-		// create 添加; edit 编辑
+		// create 添加; edit 编辑，view 查看
 		actionType: '', 
 		taskId: '', // 编辑使用
 		// form 表单
@@ -161,14 +161,13 @@ Page({
 		const { guigeList, goods_type, pointItem } = this.data;
 		const thisRateItem = pointItem['spec_rate_list'].find((item) => item['spec'] == goods_type);
 		if(thisRateItem) {
-			const thisRateValue = thisRateItem['freight_rate']; // 百分比的数值，即放大了100倍
 			let totalNumber = 0, totalMoney = 0;
 			guigeList.forEach((item) => {
 				totalNumber += (item['number'] || 0);
-				totalMoney += item['freight']*(100 + thisRateValue + userInfo['wages'])*(item['number'] || 0); // 放大了100倍
+				totalMoney += item['freight']*(10000 + thisRateItem['freight_rate']*100 + userInfo['wages']*100)*(item['number'] || 0); // 百分比的数值，如10.58 没有%符号，放大了10000倍
 			});
 
-			totalMoney = fmtThousands((totalMoney/100), 2); // 千分位
+			totalMoney = fmtThousands((totalMoney/10000), 2); // 千分位
 			this.setData({ totalNumber, totalMoney });
 		}
 	},
@@ -217,7 +216,7 @@ Page({
 	},
 	async onLoad(options) {
 		const { type, strItem } = options;
-		const jsonItem = type == 'edit' ? JSON.parse(strItem) : {};
+		const jsonItem = strItem ? JSON.parse(strItem) : {};
 		const { center_id, center_name } = userInfo;
         this.setData({ actionType: type, taskId: jsonItem['id'], center_id, center_name });
 
@@ -232,7 +231,7 @@ Page({
 
 		if(type == 'create') { // 添加
 			this.getGuigeByTypeId(userInfo['type']); // 根据规格类别ID获取其规格列表
-		}else{ // 编辑
+		}else{ // 编辑或查看 edit/view
 			this.getTaskDetail(jsonItem['id']); // 获取任务详情
 		}
 	}

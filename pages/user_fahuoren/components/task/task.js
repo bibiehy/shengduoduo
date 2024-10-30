@@ -93,10 +93,10 @@ Component({
 			});
 		},
 		onEdit(e) { // 编辑
-			const { item } = e.currentTarget.dataset;
+			const { item, type } = e.currentTarget.dataset;
 			const strItem = JSON.stringify(item);
 			wx.navigateTo({
-				url: `/pages/user_fahuoren/pages/task_create/task_create?type=edit&strItem=${strItem}`,
+				url: `/pages/user_fahuoren/pages/task_create/task_create?type=${type}&strItem=${strItem}`,
 				events: { // 注册事件监听器
 					acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
 						const { dataList } = this.data;
@@ -129,7 +129,7 @@ Component({
 			}else if(actionType == 'paysuccess') { // 发货人已支付，支付提示+设置送达时间
                 this.onPaySuccess();
 			}else if(actionType == 'gosetime') { // 发货人已支付，支付成功关闭页面再次点击确认配送
-				this.onPaySend();
+				this.onPaySuccess();
 			}else if(actionType == 'sending') { // 收货人确认配送
 				this.onTaskSendingShouhuoren();
 			}else if(actionType == 'delete') { // 删除任务
@@ -139,34 +139,30 @@ Component({
 			}			
 		},
 		async onWxPay() { // 去支付
-			// 关闭弹窗
-			// this.setData({ showConfirm: false });
-			this.setData({ showConfirm: 'paysuccess' });
-
-			// const { actionItem, dataList } = this.data;
-			// const result = await useRequest(() => fetchTaskOrder()); // 下单接口
-			// if(result) {
-			// 	wx.requestPayment({
-			// 		timeStamp: '',
-			// 		nonceStr: '',
-			// 		package: '',
-			// 		signType: 'MD5',
-			// 		paySign: '',
-			// 		success: (res) => {
-			// 			this.setData({ showConfirm: 'paysuccess' });
-			// 		},
-			// 		fail: (res) => {
-
-			// 		}
-			// 	});
-			// }			
+			const { actionItem } = this.data;
+			const result = await useRequest(() => fetchTaskOrder({ id: actionItem['id'] })); // 下单接口
+			if(result['code'] == 0) {
+				this.setData({ showConfirm: '' }); // 关闭弹窗
+				wx.requestPayment({ ...result['data'], complete: (res) => {
+					if(res['errMsg'] == 'requestPayment:ok') {
+						this.setData({ showConfirm: 'paysuccess' });
+					}else{ // requestPayment:fail (detail message) 其中 detail message 为后台返回的详细失败原因
+						const message = res['errMsg'] == 'requestPayment:fail cancel' ? '您已取消支付' : '支付失败';
+						const statusValue = res['errMsg'] == 'requestPayment:fail cancel' ? 3 : 2;
+						wx.showToast({ title: message, duration: 2500, icon: 'error' });
+						useRequest(() => fetchTaskPay({ id: actionItem['id'], status: statusValue, estimate_time: '', remark: res['errMsg'] }));
+					}
+				}});
+			}else{
+				wx.showToast({ title: '下单失败，请重新操作', duration: 2500, icon: 'none' });
+			}		
 		},
 		async onPaySuccess() { // 支付提示+设置送达时间框的确定
             const { actionItem, datetimeValue, dataList } = this.data;
             const lastTime = actionItem['point_relation']['last_time'];
             
             if(!datetimeValue) {
-                wx.showToast({ title: '请设置送达时间', duration: 2500 });
+                wx.showToast({ title: '请设置送达时间', duration: 2500, icon: 'error' });
 				return false;
             }
 
@@ -179,28 +175,40 @@ Component({
             }
 
             // 调用支付 + 确认发送
-            const result = await useRequest(() => fetchTaskPay({ id: actionItem['id'], status: 1, estimate_time: datetimeValue }));
+            const result = await useRequest(() => fetchTaskPay({ id: actionItem['id'], status: 1, estimate_time: datetimeValue, remark: 'requestPayment:ok' }));
             if(result['code'] == 0) {
                 const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
                 dataList[findIndex]['is_pay'] = 1; // 已支付
                 dataList[findIndex]['status'] = 2; // 待配送
-				this.setData({ dataList, actionItem: {} });
-				wx.showToast({ title: '操作成功', icon: 'success' });
+				this.setData({ showConfirm: '', dataList, actionItem: {} });
+				wx.showToast({ title: '操作成功', duration: 2500, icon: 'success' });
             }else{
-				wx.showToast({ title: '设置失败请重试', icon: 'error' });
+				wx.showToast({ title: '设置失败请重试', duration: 2500, icon: 'error' });
 			}
 		},
-		onPaySend() { // 发货人已支付，但未配送，支付成功刷新页面
-
-		},
 		async onTaskSendingShouhuoren() { // 确认配送，收货人
-			const { actionItem, dataList } = this.data;
+			const { actionItem, datetimeValue, dataList } = this.data;
+            const lastTime = actionItem['point_relation']['last_time'];
+            
+            if(!datetimeValue) {
+                wx.showToast({ title: '请设置送达时间', duration: 2500, icon: 'error' });
+				return false;
+            }
+
+			// 送货最晚时间判断
+            const dateDay = getCurrentDateTime('YYYY-MM-DD', datetimeValue);
+            const lastDatatime = `${dateDay} ${lastTime}`;
+            if((new Date(datetimeValue)) > (new Date(lastDatatime))) {
+                wx.showToast({ title: '已超过最晚送达时间，请修改', duration: 2500, icon: 'none' });
+				return false;
+            }
+
 			const result = await useRequest(() => fetchTaskSend({ id: actionItem['id'] }));
 			if(result) {
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList[findIndex]['status'] = 2; // 待配送
-				this.setData({ dataList, actionItem: {} });
-				wx.showToast({ title: '操作成功', icon: 'success' });
+				this.setData({ showConfirm: '', dataList, actionItem: {} });
+				wx.showToast({ title: '操作成功', duration: 2500, icon: 'success' });
 			}
 		},
 		async onTaskDelete() { // 删除任务
@@ -210,7 +218,7 @@ Component({
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList.splice(findIndex, 1);
 				this.setData({ dataList, actionItem: {} });
-				wx.showToast({ title: '删除成功', icon: 'success' });
+				wx.showToast({ title: '删除成功', duration: 2500, icon: 'success' });
 			}
 		},
 		async onTaskCancel() { // 取消任务
@@ -220,7 +228,7 @@ Component({
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList[findIndex]['status'] = 99; // 已取消
 				this.setData({ dataList, actionItem: {} });
-				wx.showToast({ title: '任务已取消', icon: 'success' });
+				wx.showToast({ title: '任务已取消', duration: 2500, icon: 'success' });
 			}
 		},
 		onCancelDialog() {
