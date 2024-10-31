@@ -27,7 +27,9 @@ Component({
         // 日期选择框
         defaultDatetime: currentDatetime,
         datetimeValue: '',
-		datetimeVisible: false
+		datetimeVisible: false,
+		// 取消任务原因
+		textareaValue: '',
 	},
 	methods: {
 		// 
@@ -109,7 +111,7 @@ Component({
 				}
 			});
 		},
-		// gopaying 发货人去支付; paysuccess 支付成功; gosetime 发货人已支付; sending 收货人确认配送; delete 删除任务; cancel 取消任务;
+		// gopaying 发货人去支付; paysuccess 支付成功; gosetime 发货人已支付; sending 收货人确认配送; delete 删除任务; cancel 取消任务; print 打印标签;
 		onShowDialog(e) {
 			const { action, item } = e.currentTarget.dataset;
 
@@ -119,7 +121,6 @@ Component({
 				return false;
 			}
 
-			// this.setData({ showConfirm: 'gosetime', actionItem: item });
 			this.setData({ showConfirm: action, actionItem: item });
 		},
 		async onSureDialog() { // 弹窗确认
@@ -136,7 +137,9 @@ Component({
 				this.onTaskDelete();
 			}else if(actionType == 'cancel') { // 取消任务
 				this.onTaskCancel();
-			}			
+			}else if(actionType == 'print') { // 打印标签
+				this.onPrintLabel();
+			}		
 		},
 		async onWxPay() { // 去支付
 			const { actionItem } = this.data;
@@ -217,19 +220,29 @@ Component({
 			if(result) {
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList.splice(findIndex, 1);
-				this.setData({ dataList, actionItem: {} });
+				this.setData({ showConfirm: '', dataList, actionItem: {} });
 				wx.showToast({ title: '删除成功', duration: 2500, icon: 'success' });
 			}
 		},
 		async onTaskCancel() { // 取消任务
-			const { actionItem, dataList } = this.data;
-			const result = await useRequest(() => fetchTaskCancel({ id: actionItem['id'] }));
+			const { actionItem, dataList, textareaValue } = this.data;
+
+			if(!textareaValue) {
+				wx.showToast({ title: '请输入取消原因', duration: 2500, icon: 'error' });
+				return false;
+			}
+
+			const result = await useRequest(() => fetchTaskCancel({ id: actionItem['id'], reason: textareaValue }));
 			if(result) {
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList[findIndex]['status'] = 99; // 已取消
-				this.setData({ dataList, actionItem: {} });
+				this.setData({ showConfirm: '', dataList, actionItem: {} });
 				wx.showToast({ title: '任务已取消', duration: 2500, icon: 'success' });
 			}
+		},
+		onChangeTextarea(e) {
+			const detailValue = e.detail.value;
+			this.setData({ textareaValue: detailValue });
 		},
 		onCancelDialog() {
 			this.setData({ showConfirm: '' });
