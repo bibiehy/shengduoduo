@@ -28,7 +28,9 @@
 		bind:scrolltolower="onPullUpLoaded"
 	>
 		<view class="page-scroll">
-			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>	
+			</block>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" key="{{item['id']}}">
 					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="warning" size="small">待配送</t-tag>
@@ -37,7 +39,7 @@
 					<t-tag wx:if="{{item['status'] == 50}}" class="status" variant="light" theme="warning" size="small">待签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 70}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
 					<t-tag wx:if="{{item['status'] == 99}}" class="status" variant="light" size="small">已取消</t-tag>
-					<view class="mainbox" bind:tap="onEdit" data-item="{{item}}" data-type="{{item['status'] == 2 ? 'view' : 'edit'}}">
+					<view class="mainbox" bind:tap="onEdit" data-item="{{item}}" data-type="{{item['status'] == 1 ? 'edit' : 'view'}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">收货人：{{item['receive_username']}} {{item['receive_user_phone']}}</view>
@@ -95,7 +97,6 @@
 	<t-dialog
 		visible="{{true}}"
 		title=""
-		z-index="{{11300}}"
 		confirmBtn="{{confirmBtn}}"
 		bind:confirm="onSureDialog"
 	>
@@ -103,35 +104,40 @@
 			<t-icon name="check-circle" size="64px" color="#2ba471" />
 			<view class="success">支付成功 <text class="money">￥{{actionItem['total_freight_front']}}</text></view>
 			<view class="dialog-sending">
+				<view class="diaitem">任务名：{{actionItem['name']}}</view>
+				<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
 				<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
 				<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
 			</view>
 		</view>
 	</t-dialog>
 </block>
-<t-date-time-picker
-    title="请选择送达时间"
-    visible="{{datetimeVisible}}"
-    value="{{datetimeValue || defaultDatetime}}"
-    mode="minute"
-    format="YYYY-MM-DD HH:mm"
-    bind:confirm="onSureDatePicker"
-    bind:cancel="onCancelDatePicker"
-/>
+<view style="position: relative; z-index: 12500;">
+	<t-date-time-picker
+		title="请选择送达时间"
+		visible="{{datetimeVisible}}"
+		value="{{datetimeValue || defaultDatetime}}"
+		mode="minute"
+		format="YYYY-MM-DD HH:mm"
+		bind:confirm="onSureDatePicker"
+		bind:cancel="onCancelDatePicker"
+	/>
+</view>
 
 <!-- // 发货人运费支付成功但未配送，刷新页面导致 -->
 <block wx:if="{{showConfirm == 'gosetime'}}">
 	<t-dialog
 		visible="{{true}}"
-		title="{{actionItem['name']}}"
+		title="您确认要配送嘛？"
 		confirmBtn="{{confirmBtn}}"
 		cancelBtn="取消"
-		z-index="{{11300}}"
 		bind:confirm="onSureDialog"
 		bind:cancel="onCancelDialog"
 	>	
 		<view class="dialog-sending" slot="content">
-			<t-cell title="{{datetimeValue || '请选择送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<view class="diaitem">任务名：{{actionItem['name']}}</view>
+			<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
 			<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
 			<view class="diatips">* 您已支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
 		</view>
@@ -142,15 +148,16 @@
 <block wx:if="{{showConfirm == 'sending'}}">
 	<t-dialog
 		visible="{{true}}"
-		title="{{actionItem['name']}}"
+		title="您确认要配送嘛？"
 		confirmBtn="{{confirmBtn}}"
 		cancelBtn="取消"
-		z-index="{{11300}}"
 		bind:confirm="onSureDialog"
 		bind:cancel="onCancelDialog"
 	>
 		<view class="dialog-sending" slot="content">
-			<t-cell title="{{datetimeValue || '请选择送达时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<view class="diaitem">任务名：{{actionItem['name']}}</view>
+			<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
 			<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
 			<view class="diatips">* 由收货人支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
 		</view>
@@ -235,11 +242,7 @@
 				<view class="fahuorow">
 					<view class="fahuoitem">件数：1/10</view>
 					<view class="fahuoitem">总件数：100</view>
-				</view>
-				<view class="fahuorow">
-					<view class="fahuoitem">件数：1/10</view>
-					<view class="fahuoitem">总件数：100</view>
-				</view>
+				</view>				
 				<view class="fahuorow">
 					<view class="fahuoitem">发货人：王乾隆 18069866324</view>
 				</view>

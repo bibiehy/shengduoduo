@@ -2,7 +2,7 @@
 	<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
 		<view class="global-navigation-bar">
 			<view class="main-searchbox">
-				<t-search disabled="{{true}}" shape="round" placeholder="订单查询" />
+				<t-search disabled="{{true}}" shape="round" placeholder="任务查询" />
 			</view>
 		</view>
 	</navigation-bar>
@@ -34,13 +34,13 @@
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/pickup_point.png" /></view>
 				<view class="modname">提货点</view>
 			</view>
-			<view class="moditem" bind:tap="onPageJump" data-name="audit">
-				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit.png" /></view>
-				<view class="modname">信息审核</view>
+			<view class="moditem" bind:tap="onPageJump" data-name="audit_user">
+				<view class="modimg" style="padding: 15px;"><image mode="widthFix" src="../../../../assets/audit_user.png" /></view>
+				<view class="modname">人员审核</view>
 			</view>
-			<view class="moditem">
-				<view class="modimg"><image mode="widthFix" src="../../../../assets/error_order.png" /></view>
-				<view class="modname">异常订单</view>
+			<view class="moditem" bind:tap="onPageJump" data-name="audit_msg">
+				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit_message.png" /></view>
+				<view class="modname">消息审核</view>
 			</view>
 			<view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/drivers.png" /></view>
@@ -73,12 +73,12 @@
 				<view class="time">30分钟前</view>
 			</view>
 			<view class="msgitem">
-				<t-icon name="error-triangle" size="18px" color="#f00" />
+				<t-icon name="error-circle" size="18px" color="#f00" />
 				<view class="desc">分拣员朱小明上报了异常规格。</view>
 				<view class="time">2小时前</view>
 			</view>
 			<view class="msgitem">
-				<t-icon name="error-triangle" size="18px" color="#ff3b30" />
+				<t-icon name="error-circle" size="18px" color="#ff3b30" />
 				<view class="desc">系统自动上报了一条异常规格。</view>
 				<view class="time">1天前</view>
 			</view>

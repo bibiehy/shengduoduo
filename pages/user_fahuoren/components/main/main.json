@@ -8,6 +8,9 @@
         "t-tag": "tdesign-miniprogram/tag/tag",
 		"t-loading": "tdesign-miniprogram/loading/loading",
         "t-dialog": "tdesign-miniprogram/dialog/dialog",
-        "t-textarea": "tdesign-miniprogram/textarea/textarea"
+		"t-cell": "tdesign-miniprogram/cell/cell",
+		"t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
+		"t-textarea": "tdesign-miniprogram/textarea/textarea",
+		"popup-select": "/components/popup-select/popup-select"
     }
 }

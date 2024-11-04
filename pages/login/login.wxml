@@ -147,7 +147,7 @@
 			<t-radio wx:for="{{roleList}}" wx:key="type" label="{{item['name']}}" value="{{item['type']}}" />
 		</t-radio-group>
 		<view class="fixedbottom">
-			<t-button bind:tap="onRoleSure" theme="primary" size="large" block>确 定</t-button>
+			<t-button bind:tap="onRoleSure" theme="primary" size="large" block>确定</t-button>
 		</view>
 	</view>
 
@@ -179,7 +179,7 @@
 				<view class="verifycode" bind:tap="onPhoneCode">{{countDownTime > 0 ? ('剩余 ' +  countDownTime + ' 秒') : '获取验证码'}}</view>
 			</view>
 			<t-button bind:tap="onCodeLogin" t-class="submit" theme="primary" size="large" block>验证码登录</t-button>
-			<t-button t-class="codebtn" bind:tap="onHideLogin" theme="light" size="large" variant="text">返 回</t-button>
+			<t-button t-class="codebtn" bind:tap="onHideLogin" theme="light" size="large" variant="text">返回</t-button>
 		</view>
 		<!-- <view class="noaccount">没有账号？立即注册</view> -->
 		<view class="privacy">

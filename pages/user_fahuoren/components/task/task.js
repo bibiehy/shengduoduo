@@ -88,7 +88,7 @@ Component({
 				url: `/pages/user_fahuoren/pages/task_create/task_create?type=create&strItem=`,
 				events: { // 注册事件监听器
 					acceptOpenedData: () => { // 监听由子页面触发的同名事件
-						this.setData({ tabsActive: 1 }); // 显示全部
+						this.setData({ tabsActive: -1 }); // 显示全部
 						this.onAjaxList(1);
 					}
 				}
@@ -165,7 +165,7 @@ Component({
             const lastTime = actionItem['point_relation']['last_time'];
             
             if(!datetimeValue) {
-                wx.showToast({ title: '请设置送达时间', duration: 2500, icon: 'error' });
+                wx.showToast({ title: '请选择送达时间', duration: 2500, icon: 'error' });
 				return false;
             }
 
@@ -194,7 +194,7 @@ Component({
             const lastTime = actionItem['point_relation']['last_time'];
             
             if(!datetimeValue) {
-                wx.showToast({ title: '请设置送达时间', duration: 2500, icon: 'error' });
+                wx.showToast({ title: '请选择送达时间', duration: 2500, icon: 'error' });
 				return false;
             }
 

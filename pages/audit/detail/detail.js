@@ -1,6 +1,6 @@
 import useRequest from '../../../utils/request';
 import { fetchAuditDetail, fetchAuditFahuoren, fetchAuditDriver } from '../../../service/audit';
-import { form, delay, createGuid, goBackAndRefresh } from '../../../utils/tools';
+import { form, delay, createGuid } from '../../../utils/tools';
 
 Page({
 	data: {

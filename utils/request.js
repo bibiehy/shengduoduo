@@ -29,12 +29,12 @@ const useRequest = async (service) => {
     // 请求时是否显示 wx.showLoading({ title: 'loading...' });
     if(options['loading']) {
         wx.showLoading({ title: options['loadingText'] });
-    }
-
-    // 延迟请求，默认不延迟
-    if(options['delay']) {
-        await delay(options['delay']);
-    }
+	}
+	
+	// 延迟请求，默认不延迟
+	if(options['delay']) {
+		await delay(options['delay']);
+	}
 
     return new Promise((reslove, reject) => {
         wx.request({
@@ -43,8 +43,8 @@ const useRequest = async (service) => {
             data: options['data'],
             header: headers,
             complete: function (response) {
-                // 取消loding
-                wx.hideLoading();
+				// 取消loding
+				wx.hideLoading();
 
                 const status = response['statusCode'];
                 if(status >= 200 && status < 300) {

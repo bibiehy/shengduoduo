@@ -10,7 +10,7 @@ Page({
 		tabbarActive: 'main',
 		tabbarList: [
 			{ value: 'main', label: '主页', icon: 'home' },
-			{ value: 'order', label: '订单管理', icon: 'assignment' },
+			{ value: 'order', label: '任务管理', icon: 'assignment' },
 			{ value: 'operation', label: '运营概况', icon: 'chart-combo' },
 			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],

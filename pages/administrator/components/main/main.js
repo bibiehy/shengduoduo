@@ -35,12 +35,14 @@ Component({
 				wx.navigateTo({ url: '/pages/user/user' });
 			}else if(name == 'guige') { // 规格管理
 				wx.navigateTo({ url: '/pages/guige/guige' });
-			}else if(name == 'pickup_point') { // 提货点
-				wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
 			}else if(name == 'store_center') { // 集货中心
 				wx.navigateTo({ url: '/pages/storecenter/storecenter' });
-			}else if(name == 'audit') { // 信息审核
+			}else if(name == 'pickup_point') { // 提货点
+				wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
+			}else if(name == 'audit_user') { // 人员审核
 				wx.navigateTo({ url: '/pages/audit/audit' });
+			}else if(name == 'audit_msg') { // 消息审核
+				wx.navigateTo({ url: '/pages/auditmsg/auditmsg' });
 			}else if(name == 'banner') { // 全局信息设置-BANNER
 				wx.navigateTo({ url: '/pages/globalbanner/globalbanner' });
 			}else if(name == 'chufa') { // 全局信息设置-订单处罚

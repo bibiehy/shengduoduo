@@ -1,6 +1,6 @@
 /************************** 主页 ***********************/
 // 获取最近一周创建的任务
-export const fetchMainList = (params) => ({ url: '/consignor/getWeekTask', method: 'get', loading: true });
+export const fetchMainList = (params) => ({ url: '/consignor/getWeekTask', method: 'get', loading: false });
 
 /************************** 收货人 ***********************/
 // 获取收货人列表

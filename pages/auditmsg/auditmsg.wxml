@@ -1,5 +1,5 @@
 <view class="audit-box">
-	<navigation-bar title="人员审核" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<navigation-bar title="消息审核" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="global-page-search">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、手机号等关键字" />
 	</view>

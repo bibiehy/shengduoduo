@@ -4,65 +4,237 @@
 	</block>
 	<scroll-view class="scrollviewbox" bind:scroll="onScrollView" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="main-swiper">
-			<t-swiper height="240px" autoplay="{{true}}" duration="{{300}}" interval="{{5000}}" list="{{swiperList}}" navigation="{{swiperNavigation}}" />
-			<image class="fahuobtn" mode="widthFix" src="../../../../assets/fahuo_btn.png" />
+			<t-swiper height="320px" autoplay="{{true}}" duration="{{300}}" interval="{{5000}}" list="{{swiperList}}" navigation="{{swiperNavigation}}" />
+			<image class="fahuobtn" bind:tap="onCreate" mode="widthFix" src="../../../../assets/fahuo_btn.png" />
 			<image class="fahuobg" mode="widthFix" src="../../../../assets/fahuo_bg.png" />
 		</view>
 		
 		<view class="main-outerbox">
 			<view class="main-process">
 				<view class="header">
-					<view class="title">最近一周的任务<text class="number">(10)</text></view>
-					<view class="refresh"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+					<view class="title">最近一周的任务<text class="number">({{dataList.length}})</text></view>
+					<view class="refresh" bind:tap="getLastestTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
 				</view>
-				<!-- <view class="nodata">
-					<empty description="暂无任务" />
-				</view> -->
-				<view class="listitem">
-					<t-tag class="status" variant="light" theme="danger" size="small">待配送</t-tag>
-					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="">
-						<view class="psname">任务名字任务名字任务名字</view>
-						<view class="pstime">2024-10-01 15:30:30</view>
-						<view class="psinfo">收货人：猪小明 18069860000</view>
-						<view class="psinfo">类别：水果类</view>
-						<view class="psinfo">总件数：100件</view>
-						<view class="psinfo">运费支付方：发货人</view>
-						<view class="psinfo">代号标识：01001-FM1088-ZF2144</view>
+				<block wx:if="{{dataList.length <= 0}}">
+					<view class="nodata"><empty /></view>	
+				</block>
+				<block wx:else>
+					<view class="listitem" wx:for="{{dataList}}" key="{{item['id']}}">
+						<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="warning" size="small">待配送</t-tag>
+						<t-tag wx:if="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
+						<t-tag wx:if="{{item['status'] == 40}}" class="status" variant="light" theme="danger" size="small">配送中</t-tag>
+						<t-tag wx:if="{{item['status'] == 50}}" class="status" variant="light" theme="warning" size="small">待签收</t-tag>
+						<t-tag wx:if="{{item['status'] == 70}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
+						<t-tag wx:if="{{item['status'] == 99}}" class="status" variant="light" size="small">已取消</t-tag>
+						<view class="mainbox" bind:tap="onEdit" data-item="{{item}}" data-type="{{item['status'] == 1 ? 'edit' : 'view'}}">
+							<view class="psname">{{item['name']}}</view>
+							<view class="pstime">{{item['created_at']}}</view>
+							<view class="psinfo">收货人：{{item['receive_username']}} {{item['receive_user_phone']}}</view>
+							<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+							<view class="psinfo">总件数：{{item['total_number']}}件</view>
+							<view class="psinfo">运费支付方：{{item['pay_type'] == 1 ? '发货人' : '收货人'}}</view>
+							<view class="psinfo">辅助标识：{{item['code']}}</view>
+						</view>
+						<view class="psbtns" wx:if="{{item['status'] == 1 || item['status'] == 2}}">
+							<t-tag wx:if="{{item['status'] == 1 || item['status'] == 2}}" bind:tap="onShowDialog" data-action="print" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
+							<block wx:if="{{item['status'] == 1}}"> <!-- 未配送 -->
+								<t-tag wx:if="{{item['pay_type'] == 1 && item['is_pay'] == 0}}" bind:tap="onShowDialog" data-action="gopaying" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round">确认配送</t-tag>
+								<t-tag wx:if="{{item['pay_type'] == 1 && item['is_pay'] == 1}}" bind:tap="onShowDialog" data-action="gosetime" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round">确认配送</t-tag>
+								<t-tag wx:if="{{item['pay_type'] == 2}}" bind:tap="onShowDialog" data-action="sending" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round">确认配送</t-tag>
+								<t-tag wx:if="{{item['is_pay'] == 0}}" bind:tap="onShowDialog" data-action="delete" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">删除任务</t-tag>
+							</block>
+							<t-tag wx:if="{{item['status'] == 2}}" bind:tap="onShowDialog" data-action="cancel" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
+						</view>
+						<view class="yunfei">
+							<view class="money"><text class="fuhao">￥</text>{{item['total_freight_front']}}</view>
+							<view class="paystate">{{item['is_pay'] == 1 ? '已支付' : '待支付'}}</view>
+						</view>
 					</view>
-					<view class="psbtns">
-						<t-tag t-class="listag" variant="light-outline" shape="round">打印标签</t-tag>
-						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">取消任务</t-tag>
-					</view>
-					<view class="yunfei">
-						<view class="money"><text class="fuhao">￥</text>2,188.00</view>
-						<view class="paystate">待支付</view>
-					</view>
-				</view>
+				</block>
 			</view>
 		</view>
 	</scroll-view>
 </view>
 
-<t-dialog
-	visible="{{showPrintLabel}}"
-	title="确定要打印标签嘛？"
-	content="任务名：任务名字任务名字任务名字。"
-	confirm-btn="{{confirmBtn}}"
-	cancel-btn="取消"
-	bind:confirm="onSurePrint"
-	bind:cancel="onCancelPrint"
-/>
 
-<t-dialog
-	visible="{{showCancelTask}}"
-	title="确定要取消任务嘛？"
-	content="任务名：任务名字任务名字任务名字。"
-    bordered="{{true}}"
-	confirm-btn="{{confirmBtn}}"
-	cancel-btn="取消"
-	bind:confirm="onSureCancel"
-	bind:cancel="onCancelTask"
-    style="{{taskStyle}}"
->
-    <t-textarea t-class="external-class" bind:change="onChangeTextarea" value="{{cancelReason}}" placeholder="请输任务取消原因" disableDefaultPadding="{{true}}" />
-</t-dialog>
+<!-- // 发货人去支付运费 -->
+<block wx:if="{{showConfirm == 'gopaying'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="请先支付运费"
+		confirmBtn="{{confirmBtn2}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>
+		<view class="dialog-paybox" slot="content">
+			<view class="yunfei"><text class="fuhao">￥</text>{{actionItem['total_freight_front']}}</view>
+			<view class="dialog-sending">
+				<view class="diaitem">任务名：{{actionItem['name']}}</view>
+				<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			</view>
+		</view>
+	</t-dialog>
+</block>
+
+<!-- // 发货人运费支付成功后显示设置送达时间 -->
+<block wx:if="{{showConfirm == 'paysuccess'}}">
+	<t-dialog
+		visible="{{true}}"
+		title=""
+		confirmBtn="{{confirmBtn}}"
+		bind:confirm="onSureDialog"
+	>
+		<view class="dialog-success" slot="content">
+			<t-icon name="check-circle" size="64px" color="#2ba471" />
+			<view class="success">支付成功 <text class="money">￥{{actionItem['total_freight_front']}}</text></view>
+			<view class="dialog-sending">
+				<view class="diaitem">任务名：{{actionItem['name']}}</view>
+				<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+				<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+				<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
+			</view>
+		</view>
+	</t-dialog>
+</block>
+<view style="position: relative; z-index: 12500;">
+	<t-date-time-picker
+		title="请选择送达时间"
+		visible="{{datetimeVisible}}"
+		value="{{datetimeValue || defaultDatetime}}"
+		mode="minute"
+		format="YYYY-MM-DD HH:mm"
+		bind:confirm="onSureDatePicker"
+		bind:cancel="onCancelDatePicker"
+	/>
+</view>
+
+<!-- // 发货人运费支付成功但未配送，刷新页面导致 -->
+<block wx:if="{{showConfirm == 'gosetime'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="您确认要配送嘛？"
+		confirmBtn="{{confirmBtn}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>	
+		<view class="dialog-sending" slot="content">
+			<view class="diaitem">任务名：{{actionItem['name']}}</view>
+			<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
+			<view class="diatips">* 您已支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+		</view>
+	</t-dialog>
+</block>
+
+<!-- // 收货人确认配送 -->
+<block wx:if="{{showConfirm == 'sending'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="您确认要配送嘛？"
+		confirmBtn="{{confirmBtn}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>
+		<view class="dialog-sending" slot="content">
+			<view class="diaitem">任务名：{{actionItem['name']}}</view>
+			<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			<t-cell title="{{datetimeValue || '请选择送达集货中心时间'}}" hover arrow data-mode="datetime" bind:tap="onShowDatePicker" t-class="diacell" />
+			<view class="diatips">* 每天送达最晚时间 <text class="diatext">{{actionItem['point_relation']['last_time']}}</text></view>
+			<view class="diatips">* 由收货人支付运费 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+		</view>
+	</t-dialog>
+</block>
+
+<!-- // 删除任务 -->
+<block wx:if="{{showConfirm == 'delete'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="确定要删除任务嘛？"
+		confirmBtn="{{confirmBtn}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>
+		<view class="dialog-sending" slot="content">
+			<view class="diaitem">任务名：{{actionItem['name']}}</view>
+			<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+			<view class="diaitem">运费支付方：{{item['pay_type'] == 1 ? '发货人' : '收货人'}} <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+		</view>
+	</t-dialog>
+</block>
+
+<!-- // 取消任务 -->
+<block wx:if="{{showConfirm == 'cancel'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="确定要取消任务嘛？"
+		confirmBtn="{{confirmBtn}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>	
+		<block wx:if="{{actionItem['pay_type'] == 1}}">
+			<view class="dialog-cancelbox" slot="content">
+				<view class="yunfei"><text class="fuhao">￥</text>{{actionItem['total_freight_front']}}</view>
+				<view class="notetips">运费将会在 1~3 个工作日内返还</view>
+				<view class="dialog-sending">
+					<view class="diaitem">任务名：{{actionItem['name']}}</view>
+					<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+					<t-textarea t-class="clstextarea" bind:change="onChangeTextarea" value="{{textareaValue}}" placeholder="请输入任务取消原因" disableDefaultPadding="{{true}}" />
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view class="dialog-sending" slot="content">
+				<view class="diaitem">任务名：{{actionItem['name']}}</view>
+				<view class="diaitem">收货人：{{actionItem['receive_username']}} {{actionItem['receive_user_phone']}}</view>
+				<view class="diaitem">运费支付方：收货人 <text class="diatext">￥{{actionItem['total_freight_front']}}</text></view>
+				<t-textarea t-class="clstextarea" bind:change="onChangeTextarea" value="{{textareaValue}}" placeholder="请输入任务取消原因" disableDefaultPadding="{{true}}" />
+			</view>
+		</block>
+	</t-dialog>
+</block>
+
+<!-- // 打印标签 -->
+<block wx:if="{{showConfirm == 'print'}}">
+	<t-dialog
+		visible="{{true}}"
+		title="确定要打印嘛？"
+		confirmBtn="{{confirmBtn}}"
+		cancelBtn="取消"
+		bind:confirm="onSureDialog"
+		bind:cancel="onCancelDialog"
+	>	
+		<view class="dialog-print" slot="content">
+			<view class="shoubox">
+				<t-icon name="shouhuoren" prefix="iconfont" size="32px" />
+				<view class="rightbox">
+					<view class="shouitem">王乾隆</view>
+					<view class="shouitem">18069866324</view>
+					<view class="shouitem">提货点名称提货点名称提货点名称提货点名称</view>
+					<view class="xuhao">01011</view>
+				</view>
+			</view>
+			<view class="fahuobox">
+				<view class="fahuorow">
+					<view class="fahuoitem">类别：水果类</view>
+					<view class="fahuoitem">规格：20-25斤</view>
+				</view>
+				<view class="fahuorow">
+					<view class="fahuoitem">件数：1/10</view>
+					<view class="fahuoitem">总件数：100</view>
+				</view>				
+				<view class="fahuorow">
+					<view class="fahuoitem">发货人：王乾隆 18069866324</view>
+				</view>
+				<view class="fahuorow">
+					<view class="fahuoitem">地址：粤西农批57号仓粤西农批57号仓粤西农批57号仓</view>
+				</view>
+			</view>
+		</view>
+	</t-dialog>
+</block>
