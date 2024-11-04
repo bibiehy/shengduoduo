@@ -1,0 +1,5 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button"
+	}
+}

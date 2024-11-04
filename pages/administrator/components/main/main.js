@@ -41,8 +41,8 @@ Component({
 				wx.navigateTo({ url: '/pages/pickuppoint/pickuppoint' });
 			}else if(name == 'audit_user') { // 人员审核
 				wx.navigateTo({ url: '/pages/audit/audit' });
-			}else if(name == 'audit_msg') { // 消息审核
-				wx.navigateTo({ url: '/pages/auditmsg/auditmsg' });
+			}else if(name == 'audit_task') { // 任务审核
+				wx.navigateTo({ url: '/pages/auditask/auditask' });
 			}else if(name == 'banner') { // 全局信息设置-BANNER
 				wx.navigateTo({ url: '/pages/globalbanner/globalbanner' });
 			}else if(name == 'chufa') { // 全局信息设置-订单处罚

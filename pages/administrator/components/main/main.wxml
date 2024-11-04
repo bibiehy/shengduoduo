@@ -38,9 +38,9 @@
 				<view class="modimg" style="padding: 15px;"><image mode="widthFix" src="../../../../assets/audit_user.png" /></view>
 				<view class="modname">人员审核</view>
 			</view>
-			<view class="moditem" bind:tap="onPageJump" data-name="audit_msg">
-				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit_message.png" /></view>
-				<view class="modname">消息审核</view>
+			<view class="moditem" bind:tap="onPageJump" data-name="audit_task">
+				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit_task.png" /></view>
+				<view class="modname">任务审核</view>
 			</view>
 			<view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/drivers.png" /></view>

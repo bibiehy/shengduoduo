@@ -1,6 +1,9 @@
 import useRequest from '../../utils/request';
-import { fetchAuditList } from '../../service/audit';
-import { delay } from '../../utils/tools';
+import { fetchAuditList } from '../../service/auditask';
+import { delay, getRoleInfo } from '../../utils/tools';
+
+// 获取角色类型
+const { roleAllObject } = getRoleInfo();
 
 Page({
 	data: {
@@ -8,8 +11,9 @@ Page({
 		currentPage: 1,
 		dataList: [],
 		unAuditCount: 0, // 未审核总数
+		roleAllObject: roleAllObject,
 		// tabs
-		activeStatus: 3, // 0: 待审核; 1: 已通过; 2: 已拒绝; 3 全部; 4: 已通过+已拒绝
+		activeStatus: 4, // 0: 待审核; 1: 已通过; 2: 已拒绝; 3 已通过+已拒绝; 4: 全部
 		// 下拉刷新
 		downStatus: false, // 组件状态，值为 true 表示下拉状态，值为 false 表示收起状态
 		loadingProps: { size: '20px' }, // 设置 loading 大小
@@ -67,9 +71,9 @@ Page({
 	},
 	// 审核
 	onAudit(e) {
-		const { id, role, status } = e.currentTarget.dataset;
+		const { id } = e.currentTarget.dataset;
 		wx.navigateTo({ 
-			url: `/pages/audit/detail/detail?id=${id}&roleType=${role}&status=${status}`,
+			url: `/pages/auditask/detail/detail?id=${id}`,
 			events: { // 注册事件监听器
 				acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
 					const { dataList } = this.data;

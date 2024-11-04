@@ -1,0 +1,37 @@
+<view class="audit-detail-box">
+	<navigation-bar title="{{title}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+	<view class="mainbox">
+        <view class="innerbox">
+            <view wx:if="{{defaultValues['status'] == 1}}" class="status"><image mode="aspectFill" src="../../../assets/agress.png" /></view>
+            <view wx:if="{{defaultValues['status'] == 2}}" class="status"><image mode="aspectFill" src="../../../assets/refuse.png" /></view>
+			<block wx:if="{{defaultValues['type'] == 1}}">
+				<view class="myFormViewbox">
+					<view class="formItem required"><text class="labelText">任务名称</text>{{defaultValues['task_detail']['name']}}</view>
+					<view class="formItem required"><text class="labelText">操作人</text>{{defaultValues['task_detail']['receive_username']}} {{defaultValues['task_detail']['receive_user_phone']}}</view>
+					<view class="formItem required"><text class="labelText">操作人角色类型</text>发货人</view>
+					<view class="formItem required"><text class="labelText">操作时间</text>{{defaultValues['created_at']}}</view>
+					<view class="formItem required"><text class="labelText">取消原因</text>{{defaultValues['task_detail']['cancel_reason']}}</view>
+				</view>
+			</block>
+        </view>
+	</view>
+
+	<block wx:if="{{defaultValues['type'] == 1}}">
+        <fixed-bottom-button>
+            <view class="fixed-bottom-btns">
+                <view class="daishenhe">待审核。。。</view>
+                <t-button t-class="fixedbtn" bind:tap="onAgreeRefuse" data-status="{{1}}" theme="primary" shape="round">同 意</t-button>
+            </view>
+        </fixed-bottom-button>
+    </block>
+
+    <!-- <block wx:if="{{status == 0}}">
+        <fixed-bottom-button>
+            <view class="fixed-bottom-btns">
+                <view class="daishenhe">待审核。。。</view>
+                <t-button t-class="fixedbtn" bind:tap="onAgreeRefuse" data-status="{{1}}" theme="primary" shape="round">同 意</t-button>
+                <t-button t-class="fixedbtn" bind:tap="onAgreeRefuse" data-status="{{2}}" theme="danger" shape="round" variant="outline">拒 绝</t-button>
+            </view>
+        </fixed-bottom-button>
+    </block> -->
+</view>
