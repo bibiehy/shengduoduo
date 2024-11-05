@@ -1,5 +1,7 @@
 {
 	"usingComponents": {
-		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button"
+        "fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+        "t-textarea": "tdesign-miniprogram/textarea/textarea",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog"
 	}
 }

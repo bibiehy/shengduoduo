@@ -5,8 +5,31 @@ import { form, delay, createGuid } from '../../../utils/tools';
 Page({
 	data: {
 		title: '',
-		defaultValues: {}, // 查看时候使用
-	},
+        defaultValues: {}, // 查看时候使用
+        // 弹窗
+        actionStatus: '', // 1 同意; 2 拒绝
+        confirmTitle: '',
+        placeholder: '',
+		showConfirm: false,
+        confirmBtn: { content: '确定', variant: 'base', loading: false },
+        textareaValue: '',
+    },
+    onShowDialog(e) { // 显示弹窗
+        const { status, type } = e.currentTarget.dataset;
+        const confirmTitle = type == 1 ? '您确认要退款嘛？' : (type == 2 ? '您确认审核通过嘛？' : '您确认要拒绝嘛？');
+        const placeholder = type == 3 ? '请输入拒绝原因' : '请输入备注信息';
+        this.setData({ actionStatus: status, confirmTitle, placeholder, showConfirm: true });
+    },
+    onChangeTextarea(e) {
+        const detailValue = e.detail.value;
+        this.setData({ textareaValue: detailValue });
+    },
+    async onSureDialog() { // 弹窗确认
+        
+    },
+    onCancelDialog() { // 弹窗取消
+        this.setData({ showConfirm: false });
+    },
 	async onAgreeRefuse(e) { // 同意/拒绝
 		const { status } = e.currentTarget.dataset;
         const { defaultValues } = this.data;
