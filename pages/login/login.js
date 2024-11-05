@@ -48,7 +48,7 @@ Page({
 				}
 			},
 			fail: () => {
-				wx.showToast({ title: '授权失败，请重试' })
+				wx.showToast({ title: '授权失败' })
 			}
 		});
 	},

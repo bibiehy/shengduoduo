@@ -2,7 +2,6 @@
 .page-scroll { flex:1; padding:10px 10px 60px; overflow-y:auto; }
 .page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
 .page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
-.page-scroll .listitem .mainbox {  }
 .page-scroll .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .page-scroll .listitem .mainbox .psname .actype { color:#1677ff; }
 .page-scroll .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }

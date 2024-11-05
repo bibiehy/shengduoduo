@@ -29,15 +29,15 @@
 						<block wx:if="{{item['type'] == 1}}">
 							<view class="psname"><text class="actype">[取消任务]</text> - 发货人</view>
 							<view class="psinfo">任务名称：{{item['task_detail']['name']}}</view>
-							<view class="psinfo">操作人：{{item['task_detail']['receive_username']}} {{item['task_detail']['receive_user_phone']}}</view>
+							<view class="psinfo">操作人：{{item['user']['username']}} {{item['user']['phone']}}</view>
 							<view class="psinfo">操作时间：{{item['created_at']}}</view>
 							<view class="psinfo">取消原因：{{item['task_detail']['cancel_reason']}}</view>
 						</block>
 						<block wx:else>
-							<view class="psname" wx:if="{{item['type'] == 2}}"><text class="actype">[数量异常上报]</text> - {{item['role_type']}}</view>
-							<view class="psname" wx:elif="{{item['type'] == 3}}"><text class="actype">[规格异常上报]</text> - {{item['role_type']}}</view>
+							<view class="psname" wx:if="{{item['type'] == 2}}"><text class="actype">[数量异常上报]</text> - {{roleAllObject[item['user']['role_type']]}}</view>
+							<view class="psname" wx:elif="{{item['type'] == 3}}"><text class="actype">[规格异常上报]</text> - {{roleAllObject[item['user']['role_type']]}}</view>
 							<view class="psinfo">任务名称：{{item['task_detail']['name']}}</view>
-							<view class="psinfo">上报人：{{item['task_detail']['receive_username']}} {{item['task_detail']['receive_user_phone']}}</view>
+							<view class="psinfo">上报人：{{item['user']['username']}} {{item['user']['phone']}}</view>
 							<view class="psinfo">上报时间：{{item['created_at']}}</view>
 						</block>
 					</view>

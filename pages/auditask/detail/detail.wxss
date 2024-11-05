@@ -1,26 +1,30 @@
 .audit-detail-box { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
 .audit-detail-box .mainbox { flex:1; width:calc(100% + 20px); padding:10px 30px 180px 10px; overflow-y:auto; }
 .audit-detail-box .mainbox .innerbox { position:relative; min-height:100%; background-color:#fff; border-radius:8px; padding:10px 10px 0; overflow:hidden; }
-.audit-detail-box .mainbox .innerbox .status { position:absolute; right:0; top:0; width:86px; height:86px; }
+.audit-detail-box .mainbox .innerbox .status { z-index:100; position:absolute; right:0; top:0; width:86px; height:86px; }
 .audit-detail-box .mainbox .innerbox .status image { display:block; width:100%; height:100%; }
 
-.fixed-bottom-btns { display:flex; align-items:center; justify-content:flex-end; }
+.fixed-bottom-btns { display:flex; align-items:center; justify-content:space-around; }
 .fixed-bottom-btns .daishenhe { flex:1; text-align:center; color:#1677ff; font-size:20px; }
-.fixed-bottom-btns .fixedbtn { padding:0 30px; margin:0 10px; }
-.fixed-bottom-btns .tongji { flex:1; display:flex; align-items:flex-end; font-size:13px; padding:10px; }
+.fixed-bottom-btns .fixedbtn { margin:0 20px; }
+.fixed-bottom-btns .tongji { flex:1; display:flex; align-items:flex-end; font-size:14px; padding:10px; }
 .fixed-bottom-btns .tongji .total { color:#ff3b30; padding:0 3px; }
 .fixed-bottom-btns .tongji .fuhao { color:#ff3b30; }
-.fixed-bottom-btns .tongji .count { color:#ff3b30; font-size:16px; margin-bottom:-1px; }
+.fixed-bottom-btns .tongji .count { color:#ff3b30; font-size:20px; margin-bottom:-1px; }
 
 .tablebox { padding-bottom:50px; margin-top:2px; }
 .tablebox .throw { display:flex; align-items:center; width:100%; height:42px; text-align:center; font-size:16px; background-color:#f3f3f3; border-radius:5px; }
 .tablebox .tdrow { display:flex; align-items:center; width:100%; height:42px; text-align:center; font-size:14px; border-bottom:solid 1px #f3f3f3; }
-.tablebox .throw .cell_1, .tablebox .tdrow .cell_1 { width:110px; }
-.tablebox .throw .cell_2, .tablebox .tdrow .cell_2 { width:110px; }
+.tablebox .throw .cell_1, .tablebox .tdrow .cell_1 { width:33%; }
+.tablebox .throw .cell_2, .tablebox .tdrow .cell_2 { width:33%; }
 .tablebox .throw .cell_3, .tablebox .tdrow .cell_3 { flex:1; display:flex; justify-content:center; }
+.tablebox .tongji { display:flex; justify-content:flex-end; align-items:flex-end; font-size:14px; padding:10px; }
+.tablebox .tongji .total { color:#ff3b30; font-size:15px; padding:0 3px; }
+.tablebox .tongji .fuhao { color:#ff3b30; }
+.tablebox .tongji .count { color:#ff3b30; font-size:20px; margin-bottom:-1px; }
 
-.dialog-wrapper { border:solid 5px #fafafa; } /* color:#bfbfbf; color:#989898; */
-.dialog-wrapper .clstextarea { --td-textarea-text-color:rgba(0, 0, 0, 0.65); font-size:13px; height:120px; padding:15px; }
+.dialog-wrapper { border:solid 6px #fafafa; border-radius:5px; margin-top:12px; overflow:hidden; } /* color:#bfbfbf; color:#989898; */
+.dialog-wrapper .clstextarea { --td-textarea-text-color:rgba(0, 0, 0, 0.65); font-size:13px; height:120px; padding:10px !important; }
 
 
 

@@ -76,11 +76,11 @@ Page({
 			url: `/pages/auditask/detail/detail?id=${id}`,
 			events: { // 注册事件监听器
 				acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
-					const { dataList } = this.data;
+					const { dataList, unAuditCount } = this.data;
 					const findIndex = dataList.findIndex((item) => item['id'] == formValues['id']);
 					if(findIndex >= 0) {
 						dataList.splice(findIndex, 1, formValues);
-						this.setData({ dataList });
+						this.setData({ dataList, unAuditCount: unAuditCount - 1 });
 					}
 				}
 			}

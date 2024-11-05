@@ -14,7 +14,7 @@
 				<view class="tablebox">
 					<view class="throw">
 						<view class="cell_1">规格</view>
-						<view class="cell_2">基础运费/份</view>
+						<view class="cell_2">基础运费/件</view>
 						<view class="cell_3">件数</view>
 					</view>
 					<view class="tdrow" wx:for="{{guigeList}}" wx:key="id">

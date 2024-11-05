@@ -2,6 +2,7 @@
 	<navigation-bar title="{{roleType == 1 ? '发货人信息审核' : '干线司机信息审核'}}" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
 	<view class="mainbox">
 		<view wx:if="{{status == 0}}" class="innerbox">
+			<view class="status"><image mode="aspectFill" src="../../../assets/auditing.png" /></view>
 			<block wx:if="{{roleType == 1}}">
 				<tmpl-fahuoren id="templateFahuoren" actionType="audit" fromto="audit" />
 			</block>
@@ -66,9 +67,8 @@
     <block wx:if="{{status == 0}}">
         <fixed-bottom-button>
             <view class="fixed-bottom-btns">
-                <view class="daishenhe">待审核。。。</view>
-                <t-button t-class="fixedbtn" bind:tap="onAgree" theme="primary" shape="round">同 意</t-button>
-                <t-button t-class="fixedbtn" bind:tap="onRefuse" theme="danger" shape="round" variant="outline">拒 绝</t-button>
+                <t-button t-class="fixedbtn" bind:tap="onRefuse" theme="danger" shape="round" variant="outline" block>拒 绝</t-button>
+                <t-button t-class="fixedbtn" bind:tap="onAgree" theme="primary" shape="round" block>同 意</t-button>
             </view>
         </fixed-bottom-button>
     </block>
