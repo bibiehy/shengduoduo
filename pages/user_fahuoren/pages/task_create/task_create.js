@@ -18,7 +18,7 @@ Page({
 		name: '', // 任务名字
 		center_id: '', // 集货中心ID
 		center_name: '', // --集货中心名字
-		estimate_time: '', // 预估送达集货中心的时间
+		estimate_time: '', // --预估送达集货中心的时间
 		receive_user_id: '', // 收货人ID
 		receive_username: '', // 收货人姓名
 		receive_user_phone: '', // 收货人手机号
@@ -26,19 +26,21 @@ Page({
 		pickup_id: '', // 提货点ID
 		goods_type: '', // 规格类型ID
 		code: '', // 辅助标识，发货人标识 + 提货点标识 + 收货人标识
-		// spec_list: [], // 规格列表 { spec, num }
+		create_freight: '', // 发货人系数
+		pickup_freight: '', // 提货点规格系数
+		// spec_list: [], // 规格列表 { spec, spec_name, freight, num }
 		// total_number: '', // 总数量
 		// total_freight_front: '', // 总运费
 		// 运费支付方
 		paytypeOptions: [{ label: '发货人', value: 1 }, { label: '收货人', value: 2 }],
-		// 根据集货中心ID获取提货点
-		pointItem: {}, // 选择的提货点信息，用于提交时的判断，和计算运费
-		pointList: [], // { label, value, code }
-		pointOriginList: [], // 设置的提货点信息和规格分类运费系数
 		// 收货人
 		shouhuorenCode: '', // 选择的收货人辅助标识code
 		shouhuorenOrigin: [], // 格式化前的值
 		shouhuorenList: [], // 格式化后的值，集货中心下收货人列表
+		// 根据集货中心ID获取提货点
+		pointItem: {}, // 选择的提货点信息，用于提交时的判断，和计算运费
+		pointList: [], // { label, value, code }
+		pointOriginList: [], // 设置的提货点信息和规格分类运费系数
 		// 规格信息
 		guigeTypeList: [], // 素有规格类别 { label, value }，格式化后的值，即所有类别, value是规格类型ID
 		guigeList: [], // 根据规格类别ID获取的其规格数据，用于渲染 Table
@@ -49,36 +51,118 @@ Page({
 	async getTaskDetail(taskId) {
 		const result = await useRequest(() => fetchTaskDetail({ id: taskId }));
         if(result) {
-			const resultGuige = (await useRequest(() => fetchGuigeByTypeId({ id: result['goods_type'] }))) || [];
-			const defaults = {
-				name: result['name'], // 任务名字
-				center_id: result['center_id'], // 集货中心ID
-				center_name: result['center_name'], // --集货中心名字
-				estimate_time: result['estimate_time'], // 预估送达集货中心的时间
-				receive_user_id: result['receive_user_id'], // 收货人ID
-				receive_username: result['receive_username'], // 收货人姓名
-				receive_user_phone: result['receive_user_phone'], // 收货人手机号
-				pay_type: result['pay_type'] || 1, // 运费支付方，默认发货人
-				pickup_id: result['pickup_id'], // 提货点ID
-				goods_type: result['goods_type'], // 规格类型ID
-				code: result['code'], // 辅助标识，发货人标识 + 提货点标识 + 收货人标识
-				shouhuorenCode: result['code'].split('-').pop(), // 数组的最后一项
-				totalNumber: result['total_number'],
-				totalMoney: result['total_freight_front'] || '0.00',
-			};
+			//
+			const { actionType, shouhuorenOrigin, pointOriginList, guigeTypeList } = this.data;
 
-			// 根据提货点ID获取其提货点信息，用于运费计算
-			const { pointOriginList } = this.data;
-			const pointItem = pointOriginList.find((item) => item['point_id'] == result['pickup_id']);
+			// 编辑
+			if(actionType == 'edit') {
+				// 判断收货人信息是否存在
+				const shouhuorenItem = shouhuorenOrigin.find((item) => item['id'] == result['receive_user_id']);
+				if(!shouhuorenItem) {
+					wx.showToast({ title: '收货人信息丢失，请从新选择', duration: 3500, icon: 'none' });
+					this.setData({ name: result['name'] });
+					this.getGuigeByTypeId(userInfo['type']); // 根据默认规格类别ID获取其规格列表
+					return false;
+				}
 
-			// 规格列表
-			const guigeList = resultGuige.map((guigeItem) => {
-				const thisItem = result['task_spec_list'].find((subItem) => subItem['spec'] == guigeItem['id']);
-				return { ...guigeItem, number: thisItem['num'] };
-			});
+				// 判断提货点信息是否存在
+				const shouhuorenCode = shouhuorenItem['code'];
+				const pointItem = pointOriginList.find((item) => item['point_id'] == result['pickup_id']);
+				if(!pointItem) {
+					wx.showToast({ title: '提货点信息丢失，请从新选择', duration: 3500, icon: 'none' });
+					this.setData({ name: result['name'], receive_user_id: result['receive_user_id'], receive_username: result['receive_username'], receive_user_phone: result['receive_user_phone'], pay_type: result['pay_type'] || 1, shouhuorenCode });
+					this.getGuigeByTypeId(userInfo['type']); // 根据默认规格类别ID获取其规格列表
+					return false;
+				}
 
-			this.setData({ pointItem, guigeList, ...defaults });
+				// 判断规格类别是否存在
+				const newCode = `${userInfo['code']}-${pointItem['code']}-${shouhuorenItem['code']}`; // 发货人标识+提货点标识+收货人标识
+				const guigeTypeItem = guigeTypeList.find((item) => item['value'] == result['goods_type']);
+				if(!guigeTypeItem) {
+					wx.showToast({ title: '规格类型信息丢失，已切换为默认类型', duration: 3500, icon: 'none' });
+					this.setData({ name: result['name'], receive_user_id: result['receive_user_id'], receive_username: result['receive_username'], receive_user_phone: result['receive_user_phone'], pay_type: result['pay_type'] || 1, pickup_id: result['pickup_id'], code: newCode, shouhuorenCode, pointItem });
+					this.getGuigeByTypeId(userInfo['type']); // 根据默认规格类别ID获取其规格列表
+					return false;
+				}
+
+				// 正常情况
+				const defaults = {
+					name: result['name'], // 任务名字
+					// center_id: result['center_id'], // 集货中心ID
+					// center_name: result['center_name'], // --集货中心名字
+					// estimate_time: result['estimate_time'], // 预估送达集货中心的时间
+					receive_user_id: result['receive_user_id'], // 收货人ID
+					receive_username: result['receive_username'], // 收货人姓名
+					receive_user_phone: result['receive_user_phone'], // 收货人手机号
+					pay_type: result['pay_type'] || 1, // 运费支付方，默认发货人
+					pickup_id: result['pickup_id'], // 提货点ID
+					goods_type: result['goods_type'], // 规格类型ID
+					code: newCode, // 辅助标识，发货人标识 + 提货点标识 + 收货人标识
+					shouhuorenCode,
+					// totalNumber: result['total_number'],
+					// totalMoney: result['total_freight_front'] || '0.00',
+				};
+
+				// 规格列表
+				const resultGuige = (await useRequest(() => fetchGuigeByTypeId({ id: result['goods_type'] }))) || [];
+				const guigeList = resultGuige.map((guigeItem) => {
+					const thisItem = result['task_spec_list'].find((subItem) => subItem['spec'] == guigeItem['id']) || { num: 0 };
+					return { ...guigeItem, number: thisItem['num'] };
+				});
+
+				this.setData({ pointItem, guigeList, ...defaults });
+
+				// 重新计算
+				this.getTotalCost();
+			}else{ // view 查看
+				// const defaults = {
+				// 	name: result['name'], // 任务名字
+				// 	center_id: result['center_id'], // 集货中心ID
+				// 	center_name: result['center_name'], // --集货中心名字
+				// 	estimate_time: result['estimate_time'], // 预估送达集货中心的时间
+				// 	receive_user_id: result['receive_user_id'], // 收货人ID
+				// 	receive_username: result['receive_username'], // 收货人姓名
+				// 	receive_user_phone: result['receive_user_phone'], // 收货人手机号
+				// 	pay_type: result['pay_type'] || 1, // 运费支付方，默认发货人
+				// 	pickup_id: result['pickup_id'], // 提货点ID
+				// 	goods_type: result['goods_type'], // 规格类型ID
+				// 	code: newCode, // 辅助标识，发货人标识 + 提货点标识 + 收货人标识
+				// 	shouhuorenCode,
+				// 	totalNumber: result['total_number'],
+				// 	totalMoney: result['total_freight_front'] || '0.00',
+				// };
+
+				this.setData({ ...result });
+			}			
         }
+	},
+	// 收货人
+	async getShouhuorenList() { // 获取发货人下所有收货人
+		const result = await useRequest(() => fetchAllShouhuoren({ id: userInfo['id'] }));
+		if(result) {
+			const newList = result.map((item) => ({ label: `${item['username']} ${item['phone']}`, value: item['id'] }));
+			this.setData({ shouhuorenOrigin: result, shouhuorenList: newList });
+		}
+	},
+	// 选择收货人后设置其相关默认信息
+	onSelectShuohuoren(e) {
+		const { shouhuorenOrigin, pointOriginList } = this.data;
+		const detailValue = e.detail.value;
+		const shouhuorenItem = shouhuorenOrigin.find((item) => item['id'] == detailValue);
+		const pointItem = pointOriginList.find((item) => item['point_id'] == shouhuorenItem['point_id']);
+		const newValues = {  // 设置默认信息
+			receive_user_id: detailValue,
+			receive_username: shouhuorenItem['username'], 
+			receive_user_phone: shouhuorenItem['phone'], 
+			pay_type: shouhuorenItem['pay_type'], // 运费支付方
+			pickup_id: shouhuorenItem['point_id'], // 提货点	
+			code: `${userInfo['code']}-${pointItem['code']}-${shouhuorenItem['code']}` // 发货人标识+提货点标识+收货人标识
+		};
+
+		this.setData({ shouhuorenCode: shouhuorenItem['code'], pointItem, ...newValues });
+
+		// 改变收货人 -> 改变提货点 -> 规格运费费率变了，需从新计算价钱
+		this.getTotalCost();
 	},
 	// 提货点
 	async getPointsFromCenter() { // 根据集货中心ID获取提货点
@@ -99,15 +183,7 @@ Page({
 
 		// 提货点改变了 -> 对应的规格运费费率也变了，需要重新计算运费
 		this.getTotalCost();
-	},
-	// 收货人
-	async getShouhuorenList() { // 获取发货人下所有收货人
-		const result = await useRequest(() => fetchAllShouhuoren({ id: userInfo['id'] }));
-		if(result) {
-			const newList = result.map((item) => ({ label: `${item['username']} ${item['phone']}`, value: item['id'] }));
-			this.setData({ shouhuorenOrigin: result, shouhuorenList: newList });
-		}
-	},
+	},	
 	// 规格
 	async getAllGuigeType() { // 获取所有规格类型
 		const result = await useRequest(() => fetchAllGuige());
@@ -124,26 +200,6 @@ Page({
 		const result = await useRequest(() => fetchGuigeByTypeId({ id: typeId }));
 		this.setData({ guigeList: result || [], goods_type: typeId, totalNumber: 0, totalMoney: '0.00' }); // 重置
 	},	
-	// 选择收货人后设置其相关默认信息
-	onSelectShuohuoren(e) {
-		const { shouhuorenOrigin, pointOriginList } = this.data;
-		const detailValue = e.detail.value;
-		const shouhuorenItem = shouhuorenOrigin.find((item) => item['id'] == detailValue);
-		const pointItem = pointOriginList.find((item) => item['point_id'] == shouhuorenItem['point_id']);
-		const newValues = {  // 设置默认信息
-			receive_user_id: detailValue,
-			receive_username: shouhuorenItem['username'], 
-			receive_user_phone: shouhuorenItem['phone'], 
-			pay_type: shouhuorenItem['pay_type'], // 运费支付方
-			pickup_id: shouhuorenItem['point_id'], // 提货点			
-			code: `${userInfo['code']}-${pointItem['code']}-${shouhuorenItem['code']}` // 发货人标识+提货点标识+收货人标识
-		};
-
-		this.setData({ shouhuorenCode: shouhuorenItem['code'], pointItem, ...newValues });
-
-		// 改变收货人 -> 改变提货点 -> 规格运费费率变了，需从新计算价钱
-		this.getTotalCost();
-	},
 	onChangeStepper(e) { // 件数
 		const { guigeList } = this.data;
 		const thisValue = e.detail.value;
@@ -168,12 +224,12 @@ Page({
 			});
 
 			totalMoney = fmtThousands((totalMoney/10000), 2); // 千分位
-			this.setData({ totalNumber, totalMoney });
+			this.setData({ totalNumber, totalMoney, create_freight: userInfo['wages'], pickup_freight: thisRateItem['freight_rate'] });
 		}
 	},
 	// 数据提交
 	async onSubmit() {
-		const { actionType, taskId, pointItem, center_id, receive_username, receive_user_phone, totalNumber, totalMoney, guigeList } = this.data;
+		const { actionType, taskId, pointItem, center_id, receive_username, receive_user_phone, totalNumber, totalMoney, guigeList, create_freight, pickup_freight } = this.data;
 		const formValues = form.validateFields(this);
 		if(formValues) {
 			// 是否关闭收单
@@ -201,8 +257,8 @@ Page({
 				formValues['id'] = taskId;
 			}
 
-			const spec_list = guigeList.map((item) => ({ spec: item['id'], num: item['number'] || 0 }));
-			const newValues = { ...formValues, center_id, receive_username, receive_user_phone, spec_list, total_number: totalNumber, total_freight_front: totalMoney };
+			const spec_list = guigeList.map((item) => ({ spec: item['id'], spec_name: item['name'], freight: item['freight'], weight: item['weight'], num: item['number'] || 0 }));
+			const newValues = { ...formValues, center_id, receive_username, receive_user_phone, spec_list, create_freight, pickup_freight, total_number: totalNumber, total_freight_front: totalMoney };
 			const result = actionType == 'edit' ? (await useRequest(() => fetchTaskEdit(newValues))) : (await useRequest(() => fetchTaskCreate(newValues)));
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });
@@ -218,16 +274,16 @@ Page({
 		const { type, strItem } = options;
 		const jsonItem = strItem ? JSON.parse(strItem) : {};
 		const { center_id, center_name } = userInfo;
-        this.setData({ actionType: type, taskId: jsonItem['id'], center_id, center_name });
+		this.setData({ actionType: type, taskId: jsonItem['id'], center_id, center_name });
+		
+		// 获取发货人下所有收货人
+		await this.getShouhuorenList();
 
         // 根据集货中心ID获取提货点
 		await this.getPointsFromCenter();
 
-		// 获取发货人下所有收货人
-		this.getShouhuorenList();
-
 		// 获取所有规格类型
-		this.getAllGuigeType();
+		await this.getAllGuigeType();
 
 		if(type == 'create') { // 添加
 			this.getGuigeByTypeId(userInfo['type']); // 根据规格类别ID获取其规格列表

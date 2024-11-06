@@ -13,3 +13,5 @@
 .tablebox .tongji .fuhao { color:#ff3b30; }
 .tablebox .tongji .count { color:#ff3b30; font-size:20px; margin-bottom:-1px; }
 
+.myFormViewbox .tablebox .throw .cell_1, .myFormViewbox .tablebox .tdrow .cell_1 { width:33%; }
+.myFormViewbox .tablebox .throw .cell_2, .myFormViewbox .tablebox .tdrow .cell_2 { width:33%; }
