@@ -54,6 +54,8 @@ Page({
 			//
 			const { actionType, shouhuorenOrigin, pointOriginList, guigeTypeList } = this.data;
 
+			result['pickup_id'] = 1000;
+
 			// 编辑
 			if(actionType == 'edit') {
 				// 判断收货人信息是否存在
@@ -201,7 +203,14 @@ Page({
 		this.setData({ guigeList: result || [], goods_type: typeId, totalNumber: 0, totalMoney: '0.00' }); // 重置
 	},	
 	onChangeStepper(e) { // 件数
-		const { guigeList } = this.data;
+		const { pointItem, guigeList } = this.data;
+
+		// 判断提货点是否选择
+		if(Object.keys(pointItem).length <= 0) {
+			wx.showToast({ title: '请选择提货点', duration: 3500, icon: 'error' });
+			return false;
+		}
+
 		const thisValue = e.detail.value;
 		const thisId = e.target.dataset.id;
 		const thisIndex = guigeList.findIndex((item) => item['id'] == thisId);

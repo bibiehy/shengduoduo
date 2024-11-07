@@ -1,0 +1,11 @@
+{
+	"component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "t-search": "tdesign-miniprogram/search/search",
+		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-picker": "tdesign-miniprogram/picker/picker",
+    	"t-picker-item": "tdesign-miniprogram/picker-item/picker-item"
+    }
+}

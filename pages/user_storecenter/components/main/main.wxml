@@ -1,0 +1,75 @@
+<view class="mainbox-wrapper global-pagebg">
+	<!-- <navigation-bar extClass="global-pagebg" title="集货中心" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar> -->
+	<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
+		<view class="global-navigation-bar">
+			<view class="main-searchbox">
+				<t-search disabled="{{true}}" shape="round" placeholder="任务查询" />
+			</view>
+		</view>
+	</navigation-bar>
+	<view class="innerscroll">
+		<view class="quick-entry">
+			<view class="entryitem">
+				<view class="itemicon"><t-icon name="tree-round-dot" size="38px" bind:click="onIconTap" /></view>
+				<view class="itemname">
+					<view class="cn">创建任务</view>
+					<view class="en">CREATE TASK</view>
+				</view>
+			</view>
+			<view class="entryitem">
+				<view class="itemicon"><t-icon name="truck" prefix="iconfont" size="38px" bind:click="onIconTap" /></view>
+				<view class="itemname">
+					<view class="cn">添加司机</view>
+					<view class="en">ADD DRIVER</view>
+				</view>
+			</view>
+		</view>	
+		<view class="main-process">
+			<view class="header">
+				<view class="title">最近一周的任务<text class="number">({{dataList.length}})</text></view>
+				<view class="refresh" bind:tap="getLastestTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+			</view>
+			<!-- <block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>	
+			</block>
+			<block wx:else>
+				<view class="listitem">
+					<t-tag class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
+					<view class="mainbox">
+						<view class="psname">任务名字任务名字</view>
+						<view class="pstime">2024-11-01 15:30:20</view>
+						<view class="psinfo">发货人：朱晓明 18066552211</view>
+						<view class="psinfo">类别：蔬菜类</view>
+						<view class="psinfo">总件数：100件</view>
+						<view class="psinfo">提货点：测试专用提货点</view>
+						<view class="psinfo">预计送达时间：2024-11-02 15:30:20</view>
+					</view>
+					<view class="psbtns">
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+						<view class="xuhao">1107001</view>
+					</view>
+				</view>
+			</block> -->
+
+			<view class="listitem">
+				<t-tag class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
+				<view class="mainbox">
+					<view class="psname">任务名字任务名字</view>
+					<view class="pstime">2024-11-01 15:30:20</view>
+					<view class="psinfo">发货人：朱晓明 18066552211</view>
+					<view class="psinfo">类别：蔬菜类</view>
+					<view class="psinfo">总件数：100件</view>
+					<view class="psinfo">提货点：测试专用提货点</view>
+					<view class="psinfo">预计送达时间：2024-11-02 15:30</view>
+				</view>
+				<view class="psbtns">
+					<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+				</view>
+				<view class="biaoqianhao">
+					<view class="bqhvalue">1107001</view>
+					<view class="bqhlabel">标签号</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

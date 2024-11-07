@@ -12,6 +12,8 @@ export const getUserAndGoRolePage = async (app, delay) => {
 		wx.reLaunch({ url: '/pages/user_shouhuoren/index' });
 	}else if(roleType == 3) { // 干线司机
 		wx.reLaunch({ url: '/pages/user_driver/index' });
+	}else if([5, 6, 7].includes(roleType)) { // 5: 集货中心负责人; 6: 集货中心主管; 7: 分拣员;
+		wx.reLaunch({ url: '/pages/user_storecenter/index' });
 	}else if(roleType == 8) { // 干线调度
 		wx.reLaunch({ url: '/pages/drivers/drivers' });
 	}else if(roleType == 12) { // 超级管理员

@@ -29,7 +29,8 @@
 		"pages/user_fahuoren/index",
 		"pages/user_fahuoren/pages/personal_edit/personal_edit",
 		"pages/user_fahuoren/pages/shouhuoren_create/shouhuoren_create",
-		"pages/user_fahuoren/pages/task_create/task_create"		
+		"pages/user_fahuoren/pages/task_create/task_create",
+		"pages/user_storecenter/index"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

@@ -2,7 +2,6 @@
 	"usingComponents": {
 		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
 		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
-		
 		"main": "/pages/user_fahuoren/components/main/main",
 		"shouhuoren": "/pages/user_fahuoren/components/shouhuoren/shouhuoren",
 		"task": "/pages/user_fahuoren/components/task/task",
