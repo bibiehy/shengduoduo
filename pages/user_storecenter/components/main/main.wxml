@@ -8,26 +8,29 @@
 		</view>
 	</navigation-bar>
 	<view class="innerscroll">
-		<view class="quick-entry">
-			<view class="entryitem">
-				<view class="itemicon"><t-icon name="tree-round-dot" size="38px" bind:click="onIconTap" /></view>
-				<view class="itemname">
-					<view class="cn">创建任务</view>
-					<view class="en">CREATE TASK</view>
-				</view>
-			</view>
-			<view class="entryitem">
-				<view class="itemicon"><t-icon name="truck" prefix="iconfont" size="38px" bind:click="onIconTap" /></view>
-				<view class="itemname">
-					<view class="cn">添加司机</view>
-					<view class="en">ADD DRIVER</view>
-				</view>
-			</view>
-		</view>	
+        <view class="statistical-info">
+            <view class="statitem">
+                <view class="statnum color01">6,200</view>
+                <view class="statname">今日总订单</view>
+            </view>
+            <view class="statitem">
+                <view class="statnum color02">5,200</view>
+                <view class="statname">今日已揽件</view>
+            </view>
+            <view class="statitem">
+                <view class="statnum color03">3,200</view>
+                <view class="statname">今日已分拣</view>
+            </view>
+        </view>
+
 		<view class="main-process">
 			<view class="header">
-				<view class="title">最近一周的任务<text class="number">({{dataList.length}})</text></view>
-				<view class="refresh" bind:tap="getLastestTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+				<view class="title">待揽件任务<text class="number">({{dataList.length}})</text></view>
+                <view class="extrabox">
+                    <view class="actbtn" bind:tap="getLastestTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+                    <view class="line"></view>
+                    <view class="actbtn" bind:tap="onShowPopup"><t-icon name="filter" size="14px" style="margin-right: 4px;" />过滤</view>
+                </view>
 			</view>
 			<!-- <block wx:if="{{dataList.length <= 0}}">
 				<view class="nodata"><empty /></view>	

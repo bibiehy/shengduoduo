@@ -20,7 +20,10 @@ Component({
 			if(result) {
 				this.setData({ dataList: result });
 			}
-		},
+        },
+        onShowPopup() {
+
+        },
 	},
 	// 自定义组件内的生命周期
     lifetimes: {
