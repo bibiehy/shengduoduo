@@ -1,2 +1,17 @@
-<!--pages/user_storecenter/components/personal/personal.wxml-->
-<text>pages/user_storecenter/components/personal/personal.wxml</text>
+<tmpl-personal bind:callback="onEditUser" defaultValues="{{defaultValues}}">
+	<!-- <view style="display:flex; align-items:center; justify-content:center; height:350px;">
+		<empty description="暂无内容" />
+	</view> -->
+	<view class="personal-center">
+		<view class="modules">
+			<view class="moditem">
+				<view class="modicon"><t-icon name="zhifu" prefix="iconfont" size="32px" /></view>
+				<view class="modtitle">支付记录</view>
+			</view>
+			<view class="moditem">
+				<view class="modicon"><t-icon name="notification" size="32px" /></view>
+				<view class="modtitle">消息提醒</view>
+			</view>
+		</view>
+	</view>	
+</tmpl-personal>

@@ -90,7 +90,7 @@ Page({
 				// 
 				if([4, 5].includes(result['role_type'])) {
 					result = result['extra'];
-				}else if(result['role_type'] == 6) {
+				}else if(result['role_type'] == 6 || result['role_type'] == 7) {
 					result['address'] = result['extra']['address'];
 					result['region'] = result['extra']['region'];
 					result['center_name'] = result['extra']['name'];

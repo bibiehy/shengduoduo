@@ -122,13 +122,15 @@ Component({
 			if(result['code'] == 0) {
 				this.setData({ showConfirm: '' }); // 关闭弹窗
 				wx.requestPayment({ ...result['data'], complete: (res) => {
+					console.log('res', res);
 					if(res['errMsg'] == 'requestPayment:ok') {
 						this.setData({ showConfirm: 'paysuccess' });
 					}else{ // requestPayment:fail (detail message) 其中 detail message 为后台返回的详细失败原因
 						const message = res['errMsg'] == 'requestPayment:fail cancel' ? '您已取消支付' : '支付失败';
 						const statusValue = res['errMsg'] == 'requestPayment:fail cancel' ? 3 : 2;
 						wx.showToast({ title: message, duration: 2500, icon: 'error' });
-						useRequest(() => fetchTaskPay({ id: actionItem['id'], status: statusValue, estimate_time: '', remark: res['errMsg'] }));
+						// 记录失败原因，是取消支付还是支付失败
+						useRequest(() => fetchTaskPay(false, { id: actionItem['id'], status: statusValue, estimate_time: '', remark: res['errMsg'] }));
 					}
 				}});
 			}else{
@@ -153,7 +155,7 @@ Component({
             }
 
             // 调用支付 + 确认发送
-            const result = await useRequest(() => fetchTaskPay({ id: actionItem['id'], status: 1, estimate_time: datetimeValue, remark: 'requestPayment:ok' }));
+            const result = await useRequest(() => fetchTaskPay(true, { id: actionItem['id'], status: 1, estimate_time: datetimeValue, remark: 'requestPayment:ok' }));
             if(result['code'] == 0) {
                 const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
                 dataList[findIndex]['is_pay'] = 1; // 已支付

@@ -1,7 +1,9 @@
 /************************** 主页 ***********************/
 // 待揽件列表 - 改为全部
-export const fetchMainList = (params) => ({ url: '/collectCenter/getWaitingTaskList', method: 'get', loading: false });
+export const fetchMainList = (params) => ({ url: '/collectCenter/getWaitingTaskList', method: 'get', data: params || {}, loading: false });
 
+// 确认揽件 params: { id }
+export const fetchSureLanjian = (params) => ({ url: '/collectCenter/conformCollecting', method: 'post', data: params, loading: true, delay: 800 });
 
 /************************** 分拣员 ***********************/
 // 获取分拣员列表
@@ -38,3 +40,21 @@ export const fetchFenjianSave = (params) => ({ url: `/collectCenter/sorter`, met
 
 // 分拣完成
 export const fetchFenjianFinish = (params) => ({ url: `/collectCenter/finish`, method: 'post', loading: true, delay: 500 });
+
+// 根据任务ID获取其选择的提货点下设置的卡板数量
+export const fetchKabanList = (params) => ({ url: `/collectCenter/getCardNoList/${params['id']}` });
+
+// 点击分拣判断当前任务是否有人正在分拣，没有人分拣 data: null 程序直接锁，有人在分拣返回分拣人信息
+export const fetchIsFenjian = (params) => ({ url: `/collectCenter/getLastSorter/${params['id']}`, loading: true, delay: 500 });
+
+// 锁任务/解开任务 params: { id, status }  status: 1 锁任务，2 解开锁(保存或分拣完成自动解锁，如果页面关闭也要解锁)
+export const fetchTaskJieSuo = (params) => ({ url: `/collectCenter/occupySorter`, method: 'post', data: params });
+
+
+
+
+
+
+
+
+

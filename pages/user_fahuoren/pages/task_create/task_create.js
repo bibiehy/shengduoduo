@@ -54,8 +54,6 @@ Page({
 			//
 			const { actionType, shouhuorenOrigin, pointOriginList, guigeTypeList } = this.data;
 
-			result['pickup_id'] = 1000;
-
 			// 编辑
 			if(actionType == 'edit') {
 				// 判断收货人信息是否存在
@@ -238,7 +236,7 @@ Page({
 	},
 	// 数据提交
 	async onSubmit() {
-		const { actionType, taskId, pointItem, center_id, receive_username, receive_user_phone, totalNumber, totalMoney, guigeList, create_freight, pickup_freight } = this.data;
+		const { actionType, taskId, guigeTypeList, pointItem, center_id, center_name, receive_username, receive_user_phone, totalNumber, totalMoney, guigeList, create_freight, pickup_freight } = this.data;
 		const formValues = form.validateFields(this);
 		if(formValues) {
 			// 是否关闭收单
@@ -266,8 +264,9 @@ Page({
 				formValues['id'] = taskId;
 			}
 
+			const guigeTypeItem = guigeTypeList.find((item) => item['value'] == formValues['goods_type']);
 			const spec_list = guigeList.map((item) => ({ spec: item['id'], spec_name: item['name'], freight: item['freight'], weight: item['weight'], num: item['number'] || 0 }));
-			const newValues = { ...formValues, center_id, receive_username, receive_user_phone, spec_list, create_freight, pickup_freight, total_number: totalNumber, total_freight_front: totalMoney };
+			const newValues = { ...formValues, center_id, center_name, pickup_name: pointItem['point_name'], goods_type_name: guigeTypeItem['label'], receive_username, receive_user_phone, spec_list, create_freight, pickup_freight, total_number: totalNumber, total_freight_front: totalMoney };
 			const result = actionType == 'edit' ? (await useRequest(() => fetchTaskEdit(newValues))) : (await useRequest(() => fetchTaskCreate(newValues)));
 			if(result) {
 				wx.showToast({ title: '操作成功', icon: 'success' });

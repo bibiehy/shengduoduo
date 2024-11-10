@@ -3,6 +3,8 @@
 		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
 		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
 		"main": "/pages/user_storecenter/components/main/main",
+		"task": "/pages/user_storecenter/components/task/task",
+		"fenjianyuan": "/pages/user_storecenter/components/fenjianyuan/fenjianyuan",
 		"personal": "/pages/user_storecenter/components/personal/personal"
 	}
 }

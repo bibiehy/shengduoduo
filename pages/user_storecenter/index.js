@@ -1,3 +1,7 @@
+
+// 获取 app 实例
+const app = getApp();
+
 Page({
 	data: {
 		// 底部 tabbar
@@ -19,7 +23,15 @@ Page({
 
 		this.setData({ tabbarActive: value });
 	},
+	onSearchBar(e) { // Main 子组件调用
+		this.setData({ tabbarActive: 'task' });
+	},
 	onLoad(options) {
-		
+		// 分拣员
+		if(app['userInfo']['role_type'] == 7) {
+			const { tabbarList } = this.data;
+			tabbarList.splice(2, 1);
+			this.setData({ tabbarList });
+		}
 	}
 });

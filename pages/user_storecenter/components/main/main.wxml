@@ -2,23 +2,23 @@
 	<!-- <navigation-bar extClass="global-pagebg" title="集货中心" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar> -->
 	<navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
 		<view class="global-navigation-bar">
-			<view class="main-searchbox">
+			<view class="main-searchbox" bind:tap="onSearchBar">
 				<t-search disabled="{{true}}" shape="round" placeholder="任务查询" />
 			</view>
 		</view>
 	</navigation-bar>
 	<view class="innerscroll">
         <view class="statistical-info">
-            <view class="statitem">
-                <view class="statnum color01">6,200</view>
+            <view class="statitem item01">
+                <view class="statnum">6,200</view>
                 <view class="statname">今日总订单</view>
             </view>
-            <view class="statitem">
-                <view class="statnum color02">5,200</view>
+            <view class="statitem item02">
+                <view class="statnum">5,200</view>
                 <view class="statname">今日已揽件</view>
             </view>
-            <view class="statitem">
-                <view class="statnum color03">3,200</view>
+            <view class="statitem item03">
+                <view class="statnum">3,200</view>
                 <view class="statname">今日已分拣</view>
             </view>
         </view>
@@ -27,52 +27,63 @@
 			<view class="header">
 				<view class="title">待揽件任务<text class="number">({{dataList.length}})</text></view>
                 <view class="extrabox">
-                    <view class="actbtn" bind:tap="getLastestTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+                    <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
                     <view class="line"></view>
-                    <view class="actbtn" bind:tap="onShowPopup"><t-icon name="filter" size="14px" style="margin-right: 4px;" />过滤</view>
+                    <view class="actbtn" bind:tap="onShowPopup"><t-icon name="filter" size="15px" style="margin-right: 4px;" />过滤</view>
                 </view>
 			</view>
-			<!-- <block wx:if="{{dataList.length <= 0}}">
+			<block wx:if="{{dataList.length <= 0}}">
 				<view class="nodata"><empty /></view>	
 			</block>
 			<block wx:else>
-				<view class="listitem">
-					<t-tag class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
+					<t-tag wx:if="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
 					<view class="mainbox">
-						<view class="psname">任务名字任务名字</view>
-						<view class="pstime">2024-11-01 15:30:20</view>
-						<view class="psinfo">发货人：朱晓明 18066552211</view>
-						<view class="psinfo">类别：蔬菜类</view>
-						<view class="psinfo">总件数：100件</view>
-						<view class="psinfo">提货点：测试专用提货点</view>
-						<view class="psinfo">预计送达时间：2024-11-02 15:30:20</view>
+						<view class="psname">{{item['name']}}</view>
+						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
+						<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+						<view class="psinfo">总件数：{{item['total_number']}}件</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
+						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
 					</view>
-					<view class="psbtns">
-						<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
-						<view class="xuhao">1107001</view>
+					<view class="psbtns" wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}">
+						<t-tag bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+					</view>
+					<view class="biaoqianhao">
+						<view class="bqhvalue">{{item['task_no']}}</view>
+						<view class="bqhlabel">标签号</view>
 					</view>
 				</view>
-			</block> -->
-
-			<view class="listitem">
-				<t-tag class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
-				<view class="mainbox">
-					<view class="psname">任务名字任务名字</view>
-					<view class="pstime">2024-11-01 15:30:20</view>
-					<view class="psinfo">发货人：朱晓明 18066552211</view>
-					<view class="psinfo">类别：蔬菜类</view>
-					<view class="psinfo">总件数：100件</view>
-					<view class="psinfo">提货点：测试专用提货点</view>
-					<view class="psinfo">预计送达时间：2024-11-02 15:30</view>
-				</view>
-				<view class="psbtns">
-					<t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
-				</view>
-				<view class="biaoqianhao">
-					<view class="bqhvalue">1107001</view>
-					<view class="bqhlabel">标签号</view>
-				</view>
-			</view>
+			</block>
 		</view>
 	</view>
 </view>
+
+<!-- // 显示筛选条件 -->
+<popup title="过滤待揽件任务" visible="{{visible}}" bind:callback="onFilter">
+	<view class="popup-forms">
+		<view class="inner">
+			<form-input class="FORM_INPUT" label="发货人手机号" name="create_phone" type="phone" placeholder="请输入发货人手机号" required="{{false}}" />
+			<form-input class="FORM_INPUT" label="发货人姓名" name="create_username" type="text" placeholder="请输入发货人姓名" required="{{false}}" />
+			<form-input class="FORM_INPUT" label="标签号" name="task_no" type="number" placeholder="请输入标签号" required="{{false}}" />
+			<form-input class="FORM_INPUT" label="提货点名称" name="pickup_name" type="text" placeholder="请输入提货点名称" required="{{false}}" />
+		</view>
+	</view>
+</popup>
+
+<!-- // 确认揽件 -->
+<t-dialog
+	visible="{{showConfirm}}"
+	title="确定要揽件嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onSureDialog"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-sending" slot="content">
+		<view class="diaitem">任务名：{{actionItem['name']}}</view>
+		<view class="diaitem">发货人：{{actionItem['create_username']}} {{actionItem['create_phone']}}</view>
+	</view>
+</t-dialog>

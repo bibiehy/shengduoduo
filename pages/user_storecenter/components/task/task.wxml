@@ -1,0 +1,76 @@
+<view class="task-box">
+	<navigation-bar title="任务管理" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="发货人姓名/手机号/标签号/提货点" />
+		<!-- <view class="pageline"></view>
+		<view class="pageaddbtn"><t-icon name="filter" size="20" /> 过滤</view> -->
+	</view>
+	<view class="task-tabs">
+		<t-tabs bind:change="onTabsChange" value="{{tabsActive}}" defaultValue="-1" theme="tag">
+			<t-tab-panel label="全部" value="{{-1}}" />
+			<t-tab-panel label="待揽件" value="{{2}}" />
+			<t-tab-panel label="已揽件" value="{{10}}" />
+			<t-tab-panel label="已分拣" value="{{20}}" />
+		</t-tabs>
+	</view>
+	
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>	
+			</block>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" key="{{item['id']}}">
+					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
+					<t-tag wx:elif="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
+					<t-tag wx:elif="{{item['status'] == 20}}" class="status" variant="light" theme="success" size="small">已分拣</t-tag>
+					<view class="mainbox">
+						<view class="psname">{{item['name']}}</view>
+						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
+						<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+						<view class="psinfo">总件数：{{item['total_number']}}件</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
+						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
+					</view>
+					<view class="psbtns" wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}">
+						<t-tag bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+					</view>
+					<view class="biaoqianhao">
+						<view class="bqhvalue">{{item['task_no']}}</view>
+						<view class="bqhlabel">标签号</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
+</view>
+
+<!-- // 确认揽件 -->
+<t-dialog
+	visible="{{showConfirm}}"
+	title="确定要揽件嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onSureDialog"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-sending" slot="content">
+		<view class="diaitem">任务名：{{actionItem['name']}}</view>
+		<view class="diaitem">发货人：{{actionItem['create_username']}} {{actionItem['create_phone']}}</view>
+	</view>
+</t-dialog>
+

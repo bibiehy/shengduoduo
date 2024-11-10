@@ -7,12 +7,12 @@
 			<form-provincecity class="FORM_PROVINCECITY" label="所在地区" name="address" value="{{defaultValues['address']}}" placeholder="请选择所在地区" required="{{true}}" />
 			<form-input class="FORM_INPUT" label="详细地址" name="region" value="{{defaultValues['region']}}" placeholder="请输入详细地址" required="{{true}}" />
 			<form-input class="FORM_INPUT" label="负责人姓名" name="head_user" value="{{defaultValues['head_user']}}" placeholder="请输入负责人姓名" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="负责人联系电话" name="head_phone" value="{{defaultValues['head_phone']}}" type="phone" placeholder="请输入负责人联系电话" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="分成比例" name="divide_rate" value="{{defaultValues['divide_rate']}}" remark="如：10、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入分成比例" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="负责人联系电话" name="head_phone" value="{{defaultValues['head_phone']}}" type="phone" placeholder="请输入负责人联系电话" required="{{true}}" disabled="{{fromto == 'personal'}}" />
+			<form-input class="FORM_INPUT" label="分成比例" name="divide_rate" value="{{defaultValues['divide_rate']}}" remark="如：10、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入分成比例" required="{{true}}" disabled="{{fromto == 'personal'}}" />
 			<form-input class="FORM_INPUT" label="分拣员分成比例" name="sorter_rate" value="{{defaultValues['sorter_rate']}}" remark="如：10、10.58 等格式" suffix="%" type="digit" min="{{0}}" max="{{100}}" placeholder="请输入分拣员分成比例" required="{{true}}" />
-			<form-input class="FORM_INPUT" label="负责人所属银行" name="bank" value="{{defaultValues['bank']}}" remark="如：中国农业银行" placeholder="请输入银行名字" required="{{false}}" />
-			<form-input class="FORM_INPUT" label="负责人银行卡号" name="card_no" value="{{defaultValues['card_no']}}" type="bankcard" placeholder="请输入银行卡号" required="{{false}}" />
-			<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
+			<form-input class="FORM_INPUT" label="负责人所属银行" name="bank" value="{{defaultValues['bank']}}" remark="如：中国农业银行" placeholder="请输入银行名字" required="{{false}}" disabled="{{fromto == 'personal'}}" />
+			<form-input class="FORM_INPUT" label="负责人银行卡号" name="card_no" value="{{defaultValues['card_no']}}" type="bankcard" placeholder="请输入银行卡号" required="{{false}}" disabled="{{fromto == 'personal'}}" />
+			<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" disabled="{{fromto == 'personal'}}" />
 		</view>
 		<view class="zhuguan-listbox">
 			<view class="listtitle">主管信息管理</view>
@@ -37,9 +37,11 @@
 			<view class="listitem" wx:for="{{tihuodianList}}" wx:key="id">
 				<view class="subheader">
 					<view class="subtitle">{{item['point_name']}}</view>
-					<view class="editbtn" bind:tap="onEditTihuodian" data-item="{{item}}">编辑</view>
-					<view class="line"></view>
-					<view class="delbtn" bind:tap="onDeleteTihuodian" data-id="{{item}}">删除</view>
+					<block wx:if="{{!fromto}}">
+						<view class="editbtn" bind:tap="onEditTihuodian" data-item="{{item}}">编辑</view>
+						<view class="line"></view>
+						<view class="delbtn" bind:tap="onDeleteTihuodian" data-id="{{item}}">删除</view>
+					</block>
 				</view>
 				<view class="subbody">
 					<view class="subitem">
@@ -64,10 +66,12 @@
 					</view>
 				</view>
 			</view>
-			<view class="addbtn" bind:tap="onAddTihuodian">
-				<t-icon name="add" />
-				<text>添加提货点</text>
-			</view>
+			<block wx:if="{{!fromto}}">
+				<view class="addbtn" bind:tap="onAddTihuodian">
+					<t-icon name="add" />
+					<text>添加提货点</text>
+				</view>
+			</block>
 		</view>
 	</view>
 	<fixed-bottom-button bind:callback="onSave" title="确认提交" />

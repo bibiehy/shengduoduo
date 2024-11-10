@@ -1,0 +1,9 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"form-input": "/components/form-input/form-input",
+        "form-select": "/components/form-select/form-select",
+        "form-upload": "/components/form-upload/form-upload",
+        "form-radio": "/components/form-radio/form-radio"
+	}
+}

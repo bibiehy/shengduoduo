@@ -17,6 +17,7 @@ import { form, delay, createGuid, goBackAndRefresh } from '../../../utils/tools'
 Page({
 	data: { // 以下所有格式化数据都同接口返回 keyName 保持一直
 		type: '', // create/edit
+		fromto: '', // 值为 personal 表示个人中心编辑资料，否则就是不存在
 		defaultValues: {}, // 赋值，除主管信息和提货点信息		
 		// 所有提货点、所有规格
 		allPickupList: [], // 添加过的需禁用 { label: '高州新城', value: 1, disabled: false }
@@ -210,7 +211,7 @@ Page({
 			}
 		}
 	},
-	async onLoad({ type, strItem }) { // type: create/edit
+	async onLoad({ type, strItem, fromto }) { // type: create/edit; fromto 值存在表示从集货中心负责人登录->个人中心->编辑资料跳过来，否则不存在
 		if(type == 'edit') {
 			const jsonItem = JSON.parse(strItem);
 			const result = await useRequest(() => fetchStoreCenterDetail({ id: jsonItem['id'] }));
@@ -222,7 +223,7 @@ Page({
 				const zhuguanList = result['director_list'];
 				const tihuodianList = result['pickup_points'];
 
-				this.setData({ type, defaultValues: result, zhuguanList, tihuodianList });
+				this.setData({ type, defaultValues: result, zhuguanList, tihuodianList, fromto });
 				this.onAllList(type, result); // 获取提货点和规格下拉列表数据
 			}
 		}else{
