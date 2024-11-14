@@ -10,6 +10,7 @@
 .page-scroll .listitem .mainbox .psinfo { display:flex; align-items:center; font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
 .page-scroll .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
 .page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
+.page-scroll .listitem .psbtns .pstips { font-size:14px; color:#ff3b30; }
 .page-scroll .listitem .biaoqianhao { position:absolute; right:12px; bottom:15px; text-align:center; color:#ff3b30; }
 .page-scroll .listitem .biaoqianhao .bqhvalue { font-size:18px; font-weight:600; }
 .page-scroll .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; }

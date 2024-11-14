@@ -39,7 +39,7 @@
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
 					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
 					<t-tag wx:if="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
-					<view class="mainbox">
+					<view class="mainbox" bind:tap="onDetail" data-item="{{item}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>

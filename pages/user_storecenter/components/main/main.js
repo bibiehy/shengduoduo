@@ -48,13 +48,19 @@ Component({
 			this.setData({ showConfirm: false });
 		},
 		async onSureDialog() {
-			const { dataList, actionItem } = this.data;
+			const { actionItem } = this.data;
 			const result = await useRequest(() => fetchSureLanjian({ id: actionItem['id'] }));
 			if(result) {
-				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
-				dataList[findIndex]['status'] = 10; // 改为已揽件
-				this.setData({ showConfirm: false, dataList, actionItem: {} });
+				this.setData({ showConfirm: false, actionItem: {} });
 				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
+				this.getDailjTask();
+			}
+		},
+		// 查看详情
+		onDetail(e) {
+			const { item } = e.currentTarget.dataset;
+			if(item['status'] == 2) {
+				wx.navigateTo({ url: `/pages/user_storecenter/pages/fenjian_detail/fenjian_detail?actionType=view&id=${item['id']}` });
 			}
 		}
 	},

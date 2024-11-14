@@ -33,7 +33,8 @@
 					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
 					<t-tag wx:elif="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
 					<t-tag wx:elif="{{item['status'] == 20}}" class="status" variant="light" theme="success" size="small">已分拣</t-tag>
-					<view class="mainbox">
+					<t-tag wx:elif="{{item['status'] == 21}}" class="status" variant="light" theme="warning" size="small">调度中</t-tag>
+					<view class="mainbox" bind:tap="onDetail" data-item="{{item}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
@@ -42,8 +43,15 @@
 						<view class="psinfo">提货点：{{item['point_name']}}</view>
 						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
 					</view>
-					<view class="psbtns" wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}">
-						<t-tag bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+					<view class="psbtns">
+						<t-tag wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}" bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+						<t-tag wx:if="{{item['status'] >= 11}}" bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">分拣明细</t-tag>
+						<view wx:if="{{item['lock_info']}}" class="pstips">{{item['lock_info']['create_username']}}正在分拣中。。。</view>
+						<block wx:else>
+							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
+							<t-tag wx:if="{{item['status'] == 11}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">继续分拣</t-tag><!-- 已揽件任务有分拣记录 -->
+							<t-tag wx:if="{{item['status'] >= 20 && item['status'] <= 21}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改入库卡位</t-tag>
+						</block>
 					</view>
 					<view class="biaoqianhao">
 						<view class="bqhvalue">{{item['task_no']}}</view>

@@ -13,7 +13,7 @@
 .main-process .header .refresh { display:flex; align-items:center; font-size:16px; color:#1677ff; }
 .main-process .listitem { position:relative; border:solid 1px #ebebeb; background-color:#fff; border-radius:8px; padding:10px 12px; margin-top:8px; margin-bottom:10px; }
 .main-process .listitem .status { position:absolute; right:12px; top:12px; }
-.main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); padding-bottom:1px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .main-process .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
 .main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }

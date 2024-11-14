@@ -23,11 +23,11 @@ Page({
 
 		this.setData({ tabbarActive: value });
 	},
-	onSearchBar(e) { // Main 子组件调用
+	onSearchBar() { // Main 子组件调用
 		this.setData({ tabbarActive: 'task' });
 	},
 	onLoad(options) {
-		// 分拣员
+		// 分拣员隐藏分拣员Tab
 		if(app['userInfo']['role_type'] == 7) {
 			const { tabbarList } = this.data;
 			tabbarList.splice(2, 1);

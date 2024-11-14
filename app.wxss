@@ -168,7 +168,7 @@ page {
 .myFormViewbox .formAvatar { position:relative; width:100%; border-bottom:solid 1px #f0f0f0; padding:16px 20px; }
 .myFormViewbox .formAvatar.required::before { position:absolute; left:6px; top:12px; font-size:17px; color:#d54941; content:"*"; font-family:SimSun,sans-serif; }
 .myFormViewbox .formAvatar .avatarImage { width:110px; height:110px; border:solid 1px #f0f0f0; border-radius:6px; overflow:hidden; }
-.myFormViewbox .formItem { position:relative; width:100%; font-size:17px; color:rgba(0, 0, 0, 0.65); border-bottom:solid 1px #f0f0f0; padding:16px 20px; }
+.myFormViewbox .formItem { position:relative; width:100%; font-size:17px; color:rgba(0, 0, 0, 0.45); border-bottom:solid 1px #f0f0f0; padding:16px 20px; }
 .myFormViewbox .formItem.required::before { position:absolute; left:6px; top:12px; font-size:17px; color:#d54941; content:"*"; font-family:SimSun,sans-serif; }
 .myFormViewbox .formItem .labelText { color:rgba(0, 0, 0, 0.9); padding-right:15px; }
 .myFormViewbox .loopBox { border:solid 1rpx #f3f3f3; border-radius:8px; padding-bottom:10px; margin-top:10px; }

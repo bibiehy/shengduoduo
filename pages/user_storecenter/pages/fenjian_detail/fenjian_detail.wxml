@@ -1,0 +1,50 @@
+<view class="detail-box">
+    <navigation-bar title="任务分拣详情" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+            <view class="myFormViewbox">
+				<view class="formItem required"><text class="labelText">任务名字</text>{{detailInfo['name']}}</view>
+				<view class="formItem required"><text class="labelText">任务创建时间</text>{{detailInfo['created_at']}}</view>
+				<view class="formItem required"><text class="labelText">预估送达时间</text>{{detailInfo['estimate_time']}}</view>
+				<view class="formItem required"><text class="labelText">标签号</text>{{detailInfo['task_no']}}</view>
+				<view class="formItem required"><text class="labelText">发货人</text>{{detailInfo['create_username']}} {{detailInfo['create_phone']}}</view>
+				<view class="formItem required"><text class="labelText">提货点名称</text>{{detailInfo['point_name']}}</view>
+				<view class="formItem required"><text class="labelText">规格类型</text>{{detailInfo['goods_type_name']}}</view>
+			</view>
+			<view class="rukukaweibox">
+				<view class="kwchkbox">
+					<view class="kwlabel">入库卡位</view>
+					<view class="kwtips">
+						<view class="kwvalue">请选择入库卡位</view>
+						<t-icon name="chevron-right" size="48rpx" />
+					</view>
+				</view>
+			</view>
+			<view class="tablebox">
+				<view class="throw">
+					<view class="cell_1">规格</view>
+					<view class="cell_2">来货数</view>
+					<view class="cell_3">签收数</view>
+					<view class="cell_4">操作</view>
+				</view>
+				<view class="tdrow" wx:for="{{detailInfo['task_spec_list'] || []}}" wx:key="id">
+					<view class="cell_1">{{item['spec_name']}}</view>
+					<view class="cell_2">{{item['num']}}</view>
+					<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-row="{{item}}" min="{{item['sign_num']}}" max="{{item['num']}}" value="{{item['num']}}" theme="filled" /></view>
+					<view class="cell_4">
+						<view class="ebtn">上报</view>
+						<t-checkbox label="" icon="rectangle" checked="{{false}}" />
+					</view>
+				</view>
+			</view>	
+        </view>
+	</view>
+	<block wx:if="{{actionType == 'fenjian'}}">
+		<fixed-bottom-button>
+			<view class="fixed-bottom-btns">
+				<t-button bind:tap="onSave" t-class="fixedbtn" theme="default" shape="round" block>数据保存</t-button>
+				<t-button bind:tap="onFinish" t-class="fixedbtn" theme="primary" shape="round" block>完成分拣</t-button>
+			</view>
+		</fixed-bottom-button>
+	</block>
+</view>

@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchTaskList, fetchSureLanjian, fetchIsFenjian } from '../../../../service/user_storecenter';
+import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo } from '../../../../service/user_storecenter';
 
 // 获取 app 实例
 const app = getApp();
@@ -64,7 +64,6 @@ Component({
 		onTabsChange(e) {
 			const tabsActive = e.detail.value;
 			this.setData({ tabsActive, currentPage: 1 });
-
 			wx.showLoading();
 			this.onAjaxList(1);
 		},
@@ -93,6 +92,47 @@ Component({
 				this.setData({ showConfirm: false, dataList, actionItem: {} });
 				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
 			}
+		},
+		// 去分拣、继续分拣
+		async onFenjian(e) {
+			const { id } = e.currentTarget.dataset;
+			const { dataList } = this.data;
+			const result = await useRequest(() => fetchIsFenjian({ id }));
+			if(result) {
+				if(typeof result == 'object') { // 有人正在分拣
+					const findIndex = dataList.findIndex((item) => item['id'] == id);
+					dataList[findIndex]['lock_info'] = { ...result }; // 改为分拣中状态
+					this.setData({ dataList });
+				}else{ // 去分拣
+					wx.navigateTo({
+						url: `/pages/user_storecenter/pages/fenjian_detail/fenjian_detail?actionType=fenjian&id=${id}`,
+						events: { // 注册事件监听器
+							acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
+								const { dataList } = this.data;
+								const findIndex = dataList.findIndex((listItem) => listItem['id'] == id);
+								if(findIndex >= 0) {
+									dataList.splice(findIndex, 1, formValues);
+									this.setData({ dataList });
+								}						
+							}
+						}
+					});
+				}
+			}
+		},
+		onDetail(e) {
+			const { item } = e.currentTarget.dataset;
+
+			// 有人正在分拣中
+			if(item['lock_info']) {
+				return false;
+			}
+
+			if(item['status'] >= 10 && item['status'] < 20) { // 分拣、去分拣
+				this.onFenjian({ currentTarget: { dataset: { id: item['id'] } } });
+			}else{ // 确认揽件、调度中等，只能查看
+				wx.navigateTo({ url: `/pages/user_storecenter/pages/fenjian_detail/fenjian_detail?actionType=view&id=${item['id']}` });
+			}
 		}
 	},
 	lifetimes: {
@@ -100,6 +140,8 @@ Component({
 			this.setData({ roleType: app['userInfo']['role_type'] });
 			wx.showLoading();
 			this.onAjaxList(1);
+
+			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

@@ -41,8 +41,8 @@ export const fetchFenjianSave = (params) => ({ url: `/collectCenter/sorter`, met
 // 分拣完成
 export const fetchFenjianFinish = (params) => ({ url: `/collectCenter/finish`, method: 'post', loading: true, delay: 500 });
 
-// 根据任务ID获取其选择的提货点下设置的卡板数量
-export const fetchKabanList = (params) => ({ url: `/collectCenter/getCardNoList/${params['id']}` });
+// 根据集货中心ID和提货点ID获取其卡板列表
+export const fetchKabanList = (params) => ({ url: `/collectCenter/getCardNoList/${params['centerId']}/${params['pointId']}` });
 
 // 点击分拣判断当前任务是否有人正在分拣，没有人分拣 data: null 程序直接锁，有人在分拣返回分拣人信息
 export const fetchIsFenjian = (params) => ({ url: `/collectCenter/getLastSorter/${params['id']}`, loading: true, delay: 500 });
