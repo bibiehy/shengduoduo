@@ -29,7 +29,7 @@
 				<view class="nodata"><empty /></view>	
 			</block>
 			<block wx:else>
-				<view class="listitem" wx:for="{{dataList}}" key="{{item['id']}}">
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
 					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
 					<t-tag wx:elif="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
 					<t-tag wx:elif="{{item['status'] == 20}}" class="status" variant="light" theme="success" size="small">已分拣</t-tag>
@@ -50,7 +50,7 @@
 						<block wx:else>
 							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
 							<t-tag wx:if="{{item['status'] == 11}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">继续分拣</t-tag><!-- 已揽件任务有分拣记录 -->
-							<t-tag wx:if="{{item['status'] >= 20 && item['status'] <= 21}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改入库卡位</t-tag>
+							<t-tag wx:if="{{item['status'] >= 20 && item['status'] <= 21}}" bind:tap="onUpdateKaban" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改卡位</t-tag>
 						</block>
 					</view>
 					<view class="biaoqianhao">
@@ -81,4 +81,7 @@
 		<view class="diaitem">发货人：{{actionItem['create_username']}} {{actionItem['create_phone']}}</view>
 	</view>
 </t-dialog>
+
+<!-- // 修改入库卡位 -->
+<popupkaban title="修改入库卡位" visible="{{visibleKaban}}" bind:callback="onUpdateSure" />
 

@@ -23,7 +23,9 @@ Component({
 		// 确认弹窗
 		showConfirm: false,
 		confirmBtn: { content: '确定', variant: 'base', loading: false },
-		actionItem: {},
+        actionItem: {},
+        // 卡板弹窗
+        visibleKaban: false
 	},
 	methods: {
 		// 
@@ -120,7 +122,7 @@ Component({
 				}
 			}
 		},
-		onDetail(e) {
+		onDetail(e) { // 点击item也跳转到分拣页
 			const { item } = e.currentTarget.dataset;
 
 			// 有人正在分拣中
@@ -133,7 +135,14 @@ Component({
 			}else{ // 确认揽件、调度中等，只能查看
 				wx.navigateTo({ url: `/pages/user_storecenter/pages/fenjian_detail/fenjian_detail?actionType=view&id=${item['id']}` });
 			}
-		}
+        },
+        // 修改卡板号
+        onUpdateKaban() {
+           this.setData({ visibleKaban: true });
+        },
+        onUpdateSure() {
+            this.setData({ visibleKaban: false });
+        }
 	},
 	lifetimes: {
 		attached() { // 组件完全初始化完毕
@@ -141,7 +150,7 @@ Component({
 			wx.showLoading();
 			this.onAjaxList(1);
 
-			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
+			useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

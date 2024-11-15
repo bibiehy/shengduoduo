@@ -1,0 +1,12 @@
+<t-popup t-class="myCommonPopupOuter" bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
+    <view class="myCommonPopup">
+        <view class="commonHeader">
+            <view class="myCancelBtn" bind:tap="onHidePopup">取消</view>
+            <view class="myTitle">{{title}}</view>
+            <view class="mySureBtn" bind:tap="onSure">确定</view>
+        </view>
+		<view class="commonScroll">
+			<slot></slot>
+		</view>
+    </view>
+</t-popup>

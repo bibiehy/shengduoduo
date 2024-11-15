@@ -14,7 +14,7 @@
 			<view class="rukukaweibox">
 				<view class="kwchkbox">
 					<view class="kwlabel">入库卡位</view>
-					<view class="kwtips">
+					<view class="kwtips" bind:tap="onUpdateKaban">
 						<view class="kwvalue">请选择入库卡位</view>
 						<t-icon name="chevron-right" size="48rpx" />
 					</view>
@@ -48,3 +48,6 @@
 		</fixed-bottom-button>
 	</block>
 </view>
+
+<!-- // 设置入库卡位 -->
+<popupkaban title="设置入库卡位" visible="{{visibleKaban}}" bind:callback="onUpdateSure" />

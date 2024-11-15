@@ -7,7 +7,9 @@ Page({
 		actionType: '', // fenjian/view
 		detailInfo: {},
 		isClickHide: false, // 是否点击了右上角的关闭
-		kabanList: [], // 卡板数据 { card_no, status: 1：空闲，2：有货  3；已调度 }
+        kabanList: [], // 卡板数据 { card_no, status: 1：空闲，2：有货  3；已调度 }
+        // 卡板弹窗
+        visibleKaban: false
 	},
 	// 获取任务详情
 	async getTaskDetail(id) {
@@ -23,7 +25,14 @@ Page({
 		if(result) {
 			this.setData({ kabanList: result });
 		}
-	},
+    },
+    // 设置卡板号
+    onUpdateKaban() {
+        this.setData({ visibleKaban: true });
+     },
+     onUpdateSure() {
+         this.setData({ visibleKaban: false });
+     },
 	// 签收数
 	onChangeStepper() {
 		

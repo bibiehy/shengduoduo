@@ -13,6 +13,7 @@
 		"t-cell": "tdesign-miniprogram/cell/cell",
 		"t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
 		"t-textarea": "tdesign-miniprogram/textarea/textarea",
-		"popup-select": "/components/popup-select/popup-select"
+        "popup-select": "/components/popup-select/popup-select",
+        "popupkaban": "/pages/user_storecenter/components/popupkaban/popupkaban"
     }
 }

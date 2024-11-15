@@ -27,8 +27,8 @@ Component({
 				this.setData({ dataList: result['content'] });
 			}
         },
-        onShowPopup() {
-			this.setData({ visible: true });
+        onShowPopup() { // 
+            this.setData({ visible: true });
 		},
 		onFilter() {
 			const formValues = form.getFieldsValue(this);
