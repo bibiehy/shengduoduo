@@ -6,7 +6,17 @@
             <view class="mySureBtn" bind:tap="onSure">确定</view>
         </view>
 		<view class="commonScroll">
-			<slot></slot>
+			<block wx:for="{{dataList}}">
+				<block wx:if="{{item['checked'] && item['disabled']}}">
+					<view class="itemcont active disabled" wx:key="id">{{item['id']}}号<view class="itemicon"></view></view>
+				</block>
+				<block wx:elif="{{item['checked'] && item['disabled'] == false}}">
+					<view class="itemcont active" bind:tap="onCardClick" data-item="{{item}}" wx:key="id">{{item['id']}}号<view class="itemicon"></view></view>
+				</block>
+				<block wx:else>
+					<view class="itemcont" bind:tap="onCardClick" data-item="{{item}}" wx:key="id">{{item['id']}}号<view class="itemicon"></view></view>
+				</block>
+			</block>
 		</view>
     </view>
 </t-popup>

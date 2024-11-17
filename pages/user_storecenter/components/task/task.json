@@ -13,6 +13,11 @@
 		"t-cell": "tdesign-miniprogram/cell/cell",
 		"t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker",
 		"t-textarea": "tdesign-miniprogram/textarea/textarea",
+		"t-collapse": "tdesign-miniprogram/collapse/collapse",
+		"t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel",
+		"t-steps": "tdesign-miniprogram/steps/steps",
+    	"t-step-item": "tdesign-miniprogram/step-item/step-item",
+		"popup": "/components/popup/popup",
         "popup-select": "/components/popup-select/popup-select",
         "popupkaban": "/pages/user_storecenter/components/popupkaban/popupkaban"
     }

@@ -3,7 +3,7 @@
 	--td-popup-border-radius:12px;
 	overflow:hidden;
 }
-.myCommonPopup { display:flex; flex-direction:column; width:100%; min-height:30vh; }
+.myCommonPopup { display:flex; flex-direction:column; width:100%; min-height:30vh; max-height:50vh; }
 .myCommonPopup .commonHeader { display:flex; align-items:center; justify-content:space-between; height:52px; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; }
 .myCommonPopup .commonHeader .myCancelBtn { line-height:52px; font-size:16px; color:#1677ff; padding:0 20px; }
 .myCommonPopup .commonHeader .mySureBtn { line-height:52px; font-size:16px; color:#1677ff; padding:0 20px; }

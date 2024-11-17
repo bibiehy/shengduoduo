@@ -3,7 +3,12 @@
         <view class="commonHeader">
             <view class="myCancelBtn" bind:tap="onHidePopup">取消</view>
             <view class="myTitle">{{title}}</view>
-            <view class="mySureBtn" bind:tap="onSure">确定</view>
+			<block wx:if="{{surebtn}}">
+				<view class="mySureBtn" bind:tap="onSure">确定</view>
+			</block>
+            <block wx:else>
+				<view class="mySureBtn" style="opacity: 0; height: 1px !important;">确定</view>
+			</block>
         </view>
 		<view class="commonScroll">
 			<slot></slot>

@@ -10,8 +10,8 @@
 Component({
 	properties: {
 		title: { type: String, value: '' },
-		// height: { type: String, value: '60vh' },
-		visible: { type: Boolean, value: false } // 显示/隐藏
+		visible: { type: Boolean, value: false }, // 显示/隐藏
+		surebtn: { type: Boolean, value: true }, // 显示/隐藏
 	},
 	data: {
 		

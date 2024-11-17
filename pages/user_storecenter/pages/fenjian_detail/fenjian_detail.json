@@ -2,7 +2,8 @@
 	"usingComponents": {
 		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
 		"t-stepper": "tdesign-miniprogram/stepper/stepper",
-        "t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+		"t-checkbox": "tdesign-miniprogram/checkbox/checkbox",
+		"t-dialog": "tdesign-miniprogram/dialog/dialog",
         "popupkaban": "/pages/user_storecenter/components/popupkaban/popupkaban"
 	}
 }

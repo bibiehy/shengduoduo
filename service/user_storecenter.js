@@ -33,13 +33,13 @@ export const fetchTaskList = (params) => ({ url: '/collectCenter/getTaskList', m
 export const fetchTaskDetail = (params) => ({ url: `/collectCenter/getSorterTaskDetail/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
 // 任务异常上报
-export const fetchTaskReport = (params) => ({ url: `/collectCenter/reportException`, method: 'post', loading: true, delay: 500 });
+export const fetchTaskReport = (params) => ({ url: `/collectCenter/reportException`, method: 'post', data: params, loading: true, delay: 500 });
 
 // 分拣数据保存
-export const fetchFenjianSave = (params) => ({ url: `/collectCenter/sorter`, method: 'post', loading: true, delay: 500 });
+export const fetchFenjianSave = (params) => ({ url: `/collectCenter/sorter`, method: 'post', data: params, loading: true, delay: 500 });
 
 // 分拣完成
-export const fetchFenjianFinish = (params) => ({ url: `/collectCenter/finish`, method: 'post', loading: true, delay: 500 });
+export const fetchFenjianFinish = (params) => ({ url: `/collectCenter/finish`, method: 'post', data: params, loading: true, delay: 500 });
 
 // 根据集货中心ID和提货点ID获取其卡板列表
 export const fetchKabanList = (params) => ({ url: `/collectCenter/getCardNoList/${params['centerId']}/${params['pointId']}` });
@@ -50,6 +50,8 @@ export const fetchIsFenjian = (params) => ({ url: `/collectCenter/getLastSorter/
 // 锁任务/解开任务 params: { id, status }  status: 1 锁任务，2 解开锁(保存或分拣完成自动解锁，如果页面关闭也要解锁)
 export const fetchTaskJieSuo = (params) => ({ url: `/collectCenter/occupySorter`, method: 'post', data: params });
 
+// 分拣明细
+export const fetchFenjianDetail = (params) => ({ url: `/collectCenter/getTaskSorterList/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
 
 

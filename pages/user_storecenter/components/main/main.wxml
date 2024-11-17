@@ -43,7 +43,7 @@
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
-						<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+						<view class="psinfo">规格类型：{{item['goods_type_name']}}</view>
 						<view class="psinfo">总件数：{{item['total_number']}}件</view>
 						<view class="psinfo">提货点：{{item['point_name']}}</view>
 						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>

@@ -7,15 +7,30 @@ Page({
 		actionType: '', // fenjian/view
 		detailInfo: {},
 		isClickHide: false, // 是否点击了右上角的关闭
-        kabanList: [], // 卡板数据 { card_no, status: 1：空闲，2：有货  3；已调度 }
+		kabanList: [], // 卡板数据 { card_no, status: 1：空闲，2：有货  3；已调度 }
+		checkedList: [], // 选择的卡板号
+		checkedListString: '',
         // 卡板弹窗
-        visibleKaban: false
+		visibleKaban: false,
+		// 规格确认弹窗
+		visibleConfirm: false,
+		guigeItem: {},
 	},
 	// 获取任务详情
 	async getTaskDetail(id) {
 		const result = await useRequest(() => fetchTaskDetail({ id }));
 		if(result) {
-			this.setData({ detailInfo: result });
+			// stepper_value 为步进器的值，stepper_checked 表示当前规格是否选中，选中后就不允许在操作
+			result['task_spec_list'].forEach((item) => {
+				item['stepper_value'] = item['center_receive_num'];
+				item['stepper_checked'] = item['center_checked'];
+			});
+
+			// 设置卡板号默认值
+			const checkedList = result['card_no'] || [];
+			const checkedListString = checkedList.join(', ');
+
+			this.setData({ detailInfo: result, checkedList, checkedListString });
 			this.getKabanData(result['center_id'], result['pickup_id']);
 		}
 	},
@@ -28,28 +43,96 @@ Page({
     },
     // 设置卡板号
     onUpdateKaban() {
-        this.setData({ visibleKaban: true });
-     },
-     onUpdateSure() {
-         this.setData({ visibleKaban: false });
-     },
+    	this.setData({ visibleKaban: true });
+    },
+    onUpdateSure(e) {
+		const { numList } = e.detail;
+		this.setData({ checkedList: numList, checkedListString: numList.join(', '), visibleKaban: false });
+    },
 	// 签收数
-	onChangeStepper() {
-		
+	onChangeStepper(e) {
+		const { detailInfo } = this.data;
+		const thisValue = e.detail.value;
+		const thisItem = e.currentTarget.dataset.item;
+		const thisIndex = detailInfo['task_spec_list'].findIndex((item) => item['id'] == thisItem['id']);
+		detailInfo['task_spec_list'][thisIndex]['stepper_value'] = thisValue;
+		detailInfo['task_spec_list'][thisIndex]['stepper_checked'] = false; // 防止先点勾选，在点击步数器
+		this.setData({ detailInfo });
+	},
+	// 规格确认勾选
+	onChecked(e) {
+		const { detailInfo } = this.data;
+		const thisChecked = e.detail.checked;
+		const thisItem = e.currentTarget.dataset.item;
+		if(thisChecked && thisItem['stepper_value'] > 0 && thisItem['num'] != thisItem['stepper_value']) {
+			this.setData({ visibleConfirm: true, guigeItem: thisItem });
+		}else{
+			const thisIndex = detailInfo['task_spec_list'].findIndex((item) => item['id'] == thisItem['id']);
+			detailInfo['task_spec_list'][thisIndex]['stepper_checked'] = thisChecked;
+
+			if(thisItem['stepper_value'] == 0) { // 没有点击过进步器，直接点击勾选，需设置 stepper_value 等于来货数
+				detailInfo['task_spec_list'][thisIndex]['stepper_value'] = thisItem['num'];
+			}
+
+			this.setData({ detailInfo });
+		}
+	},
+	onCancelDialog() {
+		this.setData({ visibleConfirm: false });
+	},
+	onSureDialog() { // 确认勾选
+		const { detailInfo, guigeItem } = this.data;
+		const thisIndex = detailInfo['task_spec_list'].findIndex((item) => item['id'] == guigeItem['id']);
+		detailInfo['task_spec_list'][thisIndex]['stepper_checked'] = true;
+		this.setData({ visibleConfirm: false, detailInfo });
 	},
 	// 保存数据
-	onSave() {
-		const { actionType } = this.data;
-		wx.navigateBack({ delta: 1, success: () => {
-			const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
-			if(actionType == 'fenjian') { // 分拣
-				eventChannel.emit('acceptOpenedCreate', {});
-			}					
-		}});
+	async onSave() {
+		const { detailInfo, checkedList } = this.data;
+		const guigeList = [];
+
+		detailInfo['task_spec_list'].forEach((item) => {
+			const thisItem = { task_spec_id: item['id'], spec: item['spec'], center_checked: item['stepper_checked'], before_num: item['center_receive_num'], after_num: item['stepper_value'] };
+			guigeList.push(thisItem);
+		});
+
+		const params = { task_id: detailInfo['id'], card_no: checkedList, sorter_list: guigeList };
+		const result = await useRequest(() => fetchFenjianSave(params));
+		if(result) {
+			wx.navigateBack({ delta: 1, success: () => {
+				const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
+				eventChannel.emit('acceptOpenedData', { id: detailInfo['id'], status: 11 }); // 已揽件任务有分拣记录			
+			}});
+		}
 	},
 	// 完成分拣
-	onFinish() {
+	async onFinish() {
+		const { detailInfo, checkedList } = this.data;
 
+		if(checkedList.length <= 0) {
+			wx.showToast({ title: '请设置入库卡位', duration: 1500, icon: 'error' });
+			return false;
+		}
+
+		if(!detailInfo['task_spec_list'].every((item) => item['stepper_checked'])) {
+			wx.showToast({ title: '存在未确认规格', duration: 1500, icon: 'error' });
+			return false;
+		}
+
+		const guigeList = [];
+		detailInfo['task_spec_list'].forEach((item) => {
+			const thisItem = { task_spec_id: item['id'], spec: item['spec'], center_checked: item['stepper_checked'], before_num: item['center_receive_num'], after_num: item['stepper_value'] };
+			guigeList.push(thisItem);
+		});
+
+		const params = { task_id: detailInfo['id'], card_no: checkedList, sorter_list: guigeList };
+		const result = await useRequest(() => fetchFenjianFinish(params));
+		if(result) {
+			wx.navigateBack({ delta: 1, success: () => {
+				const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
+				eventChannel.emit('acceptOpenedData', { id: detailInfo['id'], status: 20 }); // 已分拣				
+			}});
+		}
 	},
 	// 解锁任务，页面返回或者右上角关闭或者关闭后台
 	onTaskJiesuo() {

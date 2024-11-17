@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo } from '../../../../service/user_storecenter';
+import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo, fetchFenjianDetail } from '../../../../service/user_storecenter';
 
 // 获取 app 实例
 const app = getApp();
@@ -25,7 +25,10 @@ Component({
 		confirmBtn: { content: '确定', variant: 'base', loading: false },
         actionItem: {},
         // 卡板弹窗
-        visibleKaban: false
+		visibleKaban: false,
+		// 分拣明细
+		fenjianList: [],
+		visibleFenjian: false,
 	},
 	methods: {
 		// 
@@ -111,9 +114,9 @@ Component({
 						events: { // 注册事件监听器
 							acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
 								const { dataList } = this.data;
-								const findIndex = dataList.findIndex((listItem) => listItem['id'] == id);
+								const findIndex = dataList.findIndex((listItem) => listItem['id'] == formValues['id']);
 								if(findIndex >= 0) {
-									dataList.splice(findIndex, 1, formValues);
+									dataList.splice(findIndex, 1, { ...dataList[findIndex], status: formValues['status'] });
 									this.setData({ dataList });
 								}						
 							}
@@ -142,7 +145,15 @@ Component({
         },
         onUpdateSure() {
             this.setData({ visibleKaban: false });
-        }
+		},
+		// 分拣明细
+		async onFenjianDetail(e) {
+			const { item } = e.currentTarget.dataset;
+			const result = await useRequest(() => fetchFenjianDetail({ id: item['id'] }));
+			if(result) {
+				this.setData({ fenjianList: result, visibleFenjian: true });
+			}
+		}
 	},
 	lifetimes: {
 		attached() { // 组件完全初始化完毕
@@ -150,7 +161,7 @@ Component({
 			wx.showLoading();
 			this.onAjaxList(1);
 
-			useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
+			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));  
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

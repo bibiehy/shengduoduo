@@ -31,21 +31,24 @@
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
 					<t-tag wx:if="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">待揽件</t-tag>
-					<t-tag wx:elif="{{item['status'] == 10}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
+					<t-tag wx:elif="{{item['status'] >= 10 && item['status'] < 20}}" class="status" variant="light" theme="primary" size="small">已揽件</t-tag>
 					<t-tag wx:elif="{{item['status'] == 20}}" class="status" variant="light" theme="success" size="small">已分拣</t-tag>
-					<t-tag wx:elif="{{item['status'] == 21}}" class="status" variant="light" theme="warning" size="small">调度中</t-tag>
+					<t-tag wx:elif="{{item['status'] >= 21 && item['status'] < 40}}" class="status" variant="light" theme="warning" size="small">待调度</t-tag>
+					<t-tag wx:if="{{item['status'] >= 40 && item['status'] < 60}}" class="status" variant="light" theme="danger" size="small">配送中</t-tag>
+					<t-tag wx:if="{{item['status'] >= 60 && item['status'] < 80}}" class="status" variant="light" theme="warning" size="small">待签收</t-tag>
+					<t-tag wx:if="{{item['status'] == 80}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
 					<view class="mainbox" bind:tap="onDetail" data-item="{{item}}">
 						<view class="psname">{{item['name']}}</view>
 						<view class="pstime">{{item['created_at']}}</view>
 						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
-						<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+						<view class="psinfo">规格类型：{{item['goods_type_name']}}</view>
 						<view class="psinfo">总件数：{{item['total_number']}}件</view>
 						<view class="psinfo">提货点：{{item['point_name']}}</view>
 						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
 					</view>
 					<view class="psbtns">
 						<t-tag wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}" bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
-						<t-tag wx:if="{{item['status'] >= 11}}" bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">分拣明细</t-tag>
+						<t-tag wx:if="{{item['status'] >= 11}}" bind:tap="onFenjianDetail" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">分拣明细</t-tag>
 						<view wx:if="{{item['lock_info']}}" class="pstips">{{item['lock_info']['create_username']}}正在分拣中。。。</view>
 						<block wx:else>
 							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
@@ -85,3 +88,34 @@
 <!-- // 修改入库卡位 -->
 <popupkaban title="修改入库卡位" visible="{{visibleKaban}}" bind:callback="onUpdateSure" />
 
+<!-- // 分拣明细 -->
+<popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}">
+	<view class="popup-fenjian">
+		<t-collapse defaultValue="{{[fenjianList[0]['id']]}}" expandMutex expandIcon>
+			<block wx:for="{{fenjianList}}">
+				<t-collapse-panel value="{{item['id']}}" wx:key="id">
+					<view class="paneltitle" slot="header">
+						<view class="ggename">{{index + 1}}. 规格{{item['spec_name']}}</view>
+						<view class="ggenum">总件数 <text>{{item['num']}}</text></view>
+						<view class="ggenum">已分拣 <text>{{item['center_receive_num']}}</text></view>
+					</view>
+					<block wx:if="{{item['sort_detail_list']}}">
+						<t-steps layout="vertical" theme="dot">
+							<block wx:for="{{item['sort_detail_list']}}" wx:for-item="subItem">
+								<t-step-item wx:key="id" status="finish">
+									<view class="steptitle">
+										<view class="stepdesc">{{subItem['create_username']}}分拣了 <text>{{subItem['num']}}</text> 件</view>
+										<view class="datetime">{{subItem['created_at']}}</view>
+									</view>
+								</t-step-item>								
+							</block>
+						</t-steps>
+					</block>
+					<block wx:else>
+						<view style="color: rgba(0, 0, 0, 0.45); font-size: 14px;">(空)</view>
+					</block>
+				</t-collapse-panel>
+			</block>
+		</t-collapse>
+	</view>
+</popup>
