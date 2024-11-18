@@ -53,7 +53,11 @@ export const fetchTaskJieSuo = (params) => ({ url: `/collectCenter/occupySorter`
 // 分拣明细
 export const fetchFenjianDetail = (params) => ({ url: `/collectCenter/getTaskSorterList/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
+// 把提货点下卡位号设置为待调度
+export const fetchKabanDiaodu = (params) => ({ url: `/collectCenter/updateCardNoList`, method: 'post', data: params, loading: true, delay: 500 });
 
+// 修改卡位号
+export const fetchKabanUpdate = (params) => ({ url: `/collectCenter/updateTaskCardStatus`, method: 'post', data: params, loading: true, delay: 500 });
 
 
 

@@ -1,6 +1,7 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo, fetchFenjianDetail } from '../../../../service/user_storecenter';
+import { fetchPickupFromCenter } from '../../../../service/global';
+import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo, fetchFenjianDetail, fetchKabanList, fetchKabanUpdate, fetchKabanDiaodu } from '../../../../service/user_storecenter';
 
 // 获取 app 实例
 const app = getApp();
@@ -26,6 +27,8 @@ Component({
         actionItem: {},
         // 卡板弹窗
 		visibleKaban: false,
+		kabanList: [],
+		kabanItem: {},
 		// 分拣明细
 		fenjianList: [],
 		visibleFenjian: false,
@@ -140,11 +143,21 @@ Component({
 			}
         },
         // 修改卡板号
-        onUpdateKaban() {
-           this.setData({ visibleKaban: true });
+        async onUpdateKaban(e) {
+			const { item } = e.currentTarget.dataset;
+			const result = await useRequest(() => fetchKabanList({ centerId: item['center_id'], pointId: item['pickup_id'] }));
+			if(result) {
+				this.setData({ kabanList: result, visibleKaban: true, kabanItem: item });
+			}
         },
-        onUpdateSure() {
-            this.setData({ visibleKaban: false });
+        async onUpdateSure(e) {
+			const { kabanItem } = this.data;
+			const { numList } = e.detail;
+			const result = await useRequest(() => fetchKabanUpdate({ id: kabanItem['id'], card_list: numList }));
+			if(result) {
+				this.setData({ visibleKaban: false });
+				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
+			}
 		},
 		// 分拣明细
 		async onFenjianDetail(e) {

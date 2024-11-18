@@ -16,7 +16,9 @@
 		"t-collapse": "tdesign-miniprogram/collapse/collapse",
 		"t-collapse-panel": "tdesign-miniprogram/collapse-panel/collapse-panel",
 		"t-steps": "tdesign-miniprogram/steps/steps",
-    	"t-step-item": "tdesign-miniprogram/step-item/step-item",
+		"t-step-item": "tdesign-miniprogram/step-item/step-item",
+		"t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
+    	"t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
 		"popup": "/components/popup/popup",
         "popup-select": "/components/popup-select/popup-select",
         "popupkaban": "/pages/user_storecenter/components/popupkaban/popupkaban"
