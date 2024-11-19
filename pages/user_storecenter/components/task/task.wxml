@@ -3,10 +3,9 @@
 	<view class="global-page-search" style="padding-right: 5px">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="提货点/标签号/发货人姓名/手机号" />
 		<view class="pageline" style="margin-right: 0;"></view>
-		<!-- <view class="pageaddbtn"><view class="kaban-number-icon"><t-icon name="data-display" color="#fff" size="14" /></view> 卡板调度</view> -->
 		<view class="pageaddbtn">
 			<t-dropdown-menu t-class="kaban-dropdown-box" t-class-label="kaban-dropdown-label" t-class-icon="kaban-dropdown-icon">
-				<t-dropdown-item bind:change="onChangeDropdown" t-class-content="kaban-dropdown-item" options="{{tihuodianList}}" label="设置卡板调度">
+				<t-dropdown-item bind:change="onChangeDropdown" t-class-content="kaban-dropdown-item" options="{{tihuodianList}}" label="设置卡板调度" keys="{{diaoduKeys}}">
 					<view class="kaban-dropdown-tips" slot="footer">* 请先选择提货点，然后设置提货点下可调度卡板。</view>
 				</t-dropdown-item>
 			</t-dropdown-menu>
@@ -96,7 +95,7 @@
 <popupkaban title="修改入库卡位" bind:callback="onUpdateSure" data="{{kabanList}}" type="1" visible="{{visibleKaban}}" />
 
 <!-- // 设置卡位号为待调度 -->
-<popupkaban title="设置卡板为待调度" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
+<popupkaban title="设置可待调度的卡板" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
 
 <!-- // 分拣明细 -->
 <popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}">

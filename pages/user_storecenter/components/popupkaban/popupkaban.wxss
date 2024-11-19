@@ -3,7 +3,7 @@
 	--td-popup-border-radius:12px;
 	overflow:hidden;
 }
-.myCommonPopup { display:flex; flex-direction:column; width:100%; min-height:30vh; max-height:50vh; background-color:#fff; }
+.myCommonPopup { display:flex; flex-direction:column; width:100%; min-height:30vh; max-height:60vh; background-color:#fff; }
 .myCommonPopup .commonHeader { display:flex; align-items:center; justify-content:space-between; height:52px; box-shadow:0 5px 10px #e2e1e1; }
 .myCommonPopup .commonHeader .myCancelBtn { line-height:52px; font-size:16px; color:#1677ff; padding:0 20px; }
 .myCommonPopup .commonHeader .mySureBtn { line-height:52px; font-size:16px; color:#1677ff; padding:0 20px; }
@@ -16,7 +16,8 @@
 .myCommonPopup .commonScroll .itemcont.active.disabled { opacity:0.6; }
 
 
-.myCommonPopup .commonScroll .kabanTipsCheckbox { display:flex; align-items:center; justify-content:space-between; padding:5px 10px; }
-.myCommonPopup .commonScroll .kabanTipsCheckbox .kbtips { font-size:14px; color:#ff8f1f; }
+.myCommonPopup .commonScroll .kabanTipsCheckbox { border-bottom:solid 1px #f3f2f2; padding:0 10px 5px 10px; margin-bottom:5px; --td-checkbox-vertical-padding:0; --td-checkbox-font-size:16px; --td-checkbox-icon-size:24px; }
+.myCommonPopup .commonScroll .kabanTipsCheckbox .kbtips { display:flex; align-items:center; font-size:16px; color:rgba(0, 0, 0, 0.85); }
+.myCommonPopup .commonScroll .kabanTipsCheckbox .kbtips .note { font-size:14px; color:rgba(0, 0, 0, 0.45); margin-left:7px; }
 
 

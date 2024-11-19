@@ -51,8 +51,8 @@ Component({
 			dataList[thisIndex]['checked'] = !thisItem['checked'];
 			this.setData({ dataList });
         },
-        onAllChecked(e) { // 全选
-            const checked = e.detail.value;
+		onAllChecked(e) { // 全选
+            const { checked } = e.detail;
             const { dataList } = this.data;
             dataList.forEach((item) => {
                 if(!item['disabled']) {

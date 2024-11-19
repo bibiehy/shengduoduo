@@ -16,9 +16,8 @@
 .page-scroll .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; }
 .page-scroll .nodata { height:380px; }
 
-.kaban-number-icon { background-color:#1677ff; border-radius:4px; padding:2px; margin-right:2px; }
 .kaban-dropdown-box { --td-dropdown-menu-border-width:0; --td-radio-vertical-padding:10px; height:auto !important; }
-.kaban-dropdown-label, .kaban-dropdown-icon { color:#1677ff !important; }
+/* .kaban-dropdown-label, .kaban-dropdown-icon { color:#1677ff !important; } */
 .kaban-dropdown-item { font-weight:400; --td-radio-font-size:16px; }
 .kaban-dropdown-tips { font-size:15px; color:#ff8f1f; text-align:center; padding:7px 0; }
 

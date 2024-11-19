@@ -32,7 +32,8 @@ Component({
 		// 分拣明细
 		fenjianList: [],
         visibleFenjian: false,
-        // 卡板调度
+		// 卡板调度
+		diaoduKeys: { label: 'point_name', value: 'point_id' },
         tihuodianList: [],
         visibleDiaodu: false,
         diaoduList: [],

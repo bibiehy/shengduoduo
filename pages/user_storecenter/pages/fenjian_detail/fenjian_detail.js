@@ -86,6 +86,18 @@ Page({
 		detailInfo['task_spec_list'][thisIndex]['stepper_checked'] = true;
 		this.setData({ visibleConfirm: false, detailInfo });
 	},
+	// 异常上报
+	onExceptionReport() {
+		console.log(11111);
+		wx.navigateTo({
+			url: `/pages/user_storecenter/pages/exception_report/exception_report`,
+			events: { // 注册事件监听器
+				reportOpenedData: (formValues) => { // 监听由子页面触发的同名事件
+										
+				}
+			}
+		});
+	},
 	// 保存数据
 	async onSave() {
 		const { detailInfo, checkedList } = this.data;
