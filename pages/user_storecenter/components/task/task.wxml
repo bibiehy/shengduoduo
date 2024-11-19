@@ -6,7 +6,7 @@
 		<!-- <view class="pageaddbtn"><view class="kaban-number-icon"><t-icon name="data-display" color="#fff" size="14" /></view> 卡板调度</view> -->
 		<view class="pageaddbtn">
 			<t-dropdown-menu t-class="kaban-dropdown-box" t-class-label="kaban-dropdown-label" t-class-icon="kaban-dropdown-icon">
-				<t-dropdown-item t-class-content="kaban-dropdown-item" options="{{[{ label: '提货单111', value: 1 }, { label: '提货单222', value: 2 }]}}" label="设置卡板调度">
+				<t-dropdown-item bind:change="onChangeDropdown" t-class-content="kaban-dropdown-item" options="{{tihuodianList}}" label="设置卡板调度">
 					<view class="kaban-dropdown-tips" slot="footer">* 请先选择提货点，然后设置提货点下可调度卡板。</view>
 				</t-dropdown-item>
 			</t-dropdown-menu>
@@ -94,6 +94,9 @@
 
 <!-- // 修改入库卡位 -->
 <popupkaban title="修改入库卡位" bind:callback="onUpdateSure" data="{{kabanList}}" type="1" visible="{{visibleKaban}}" />
+
+<!-- // 设置卡位号为待调度 -->
+<popupkaban title="设置卡板为待调度" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
 
 <!-- // 分拣明细 -->
 <popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}">

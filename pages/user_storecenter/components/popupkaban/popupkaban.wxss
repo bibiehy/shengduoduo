@@ -16,7 +16,7 @@
 .myCommonPopup .commonScroll .itemcont.active.disabled { opacity:0.6; }
 
 
-
-
+.myCommonPopup .commonScroll .kabanTipsCheckbox { display:flex; align-items:center; justify-content:space-between; padding:5px 10px; }
+.myCommonPopup .commonScroll .kabanTipsCheckbox .kbtips { font-size:14px; color:#ff8f1f; }
 
 

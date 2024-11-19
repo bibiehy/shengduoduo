@@ -31,7 +31,12 @@ Component({
 		kabanItem: {},
 		// 分拣明细
 		fenjianList: [],
-		visibleFenjian: false,
+        visibleFenjian: false,
+        // 卡板调度
+        tihuodianList: [],
+        visibleDiaodu: false,
+        diaoduList: [],
+        diaoduTihuoId: ''
 	},
 	methods: {
 		// 
@@ -166,13 +171,40 @@ Component({
 			if(result) {
 				this.setData({ fenjianList: result, visibleFenjian: true });
 			}
-		}
+        },
+        // 设置卡板调度
+        async getTihuodianList() { // 获取集货中心下的提货点
+            const centerId = app['userInfo']['center_id'];
+			const result = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
+			if(result) {
+				this.setData({ tihuodianList: result });
+			}
+        },
+        async onChangeDropdown(e) { // 根据选择的提货点，获取其卡板号
+            const centerId = app['userInfo']['center_id'];
+            const pointId = e.detail.value;
+            const result = await useRequest(() => fetchKabanList({ centerId, pointId }));
+			if(result) {
+				this.setData({ diaoduList: result, visibleDiaodu: true, diaoduTihuoId: pointId });
+            }
+        },
+        async onDiaoduSure(e) {
+			const { diaoduTihuoId } = this.data;
+            const { numList } = e.detail;
+            const centerId = app['userInfo']['center_id'];
+			const result = await useRequest(() => fetchKabanDiaodu({ point_id: diaoduTihuoId, center_id: centerId, card_list: numList }));
+			if(result) {
+				this.setData({ visibleDiaodu: false });
+				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
+			}
+		},
 	},
 	lifetimes: {
 		attached() { // 组件完全初始化完毕
 			this.setData({ roleType: app['userInfo']['role_type'] });
 			wx.showLoading();
-			this.onAjaxList(1);
+            this.onAjaxList(1); // 全部
+            this.getTihuodianList(); // 提货点
 
 			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));  
         },

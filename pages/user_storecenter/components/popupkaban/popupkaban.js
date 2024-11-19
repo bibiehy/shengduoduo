@@ -31,7 +31,8 @@ Component({
         }
     },
 	data: {
-		dataList: [], // { id: 1, checked: false, disabled: false }
+        dataList: [], // { id: 1, checked: false, disabled: false }
+        allChecked: false, // 全选
 	},
 	methods: {
 		onShowPopup() {
@@ -49,7 +50,18 @@ Component({
 			const thisIndex = dataList.findIndex((item) => item['id'] == thisItem['id']);
 			dataList[thisIndex]['checked'] = !thisItem['checked'];
 			this.setData({ dataList });
-		},
+        },
+        onAllChecked(e) { // 全选
+            const checked = e.detail.value;
+            const { dataList } = this.data;
+            dataList.forEach((item) => {
+                if(!item['disabled']) {
+                    item['checked'] = checked;
+                }
+            });
+
+            this.setData({ allChecked: checked, dataList });
+        },
 		onSure() {
 			const { dataList } = this.data;
 			const numList = [];

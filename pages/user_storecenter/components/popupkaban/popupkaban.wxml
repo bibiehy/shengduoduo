@@ -6,6 +6,10 @@
             <view class="mySureBtn" bind:tap="onSure">确定</view>
         </view>
 		<view class="commonScroll">
+            <view class="kabanTipsCheckbox">
+                <view class="kbtips">* 只显示有货的入库卡位</view>
+                <t-checkbox bind:change="onAllChecked" label="全选" icon="rectangle" checked="{{allChecked}}" />
+            </view>
 			<block wx:for="{{dataList}}">
 				<block wx:if="{{item['checked'] && item['disabled']}}">
 					<view class="itemcont active disabled" wx:key="id">{{item['id']}}号<view class="itemicon"></view></view>
