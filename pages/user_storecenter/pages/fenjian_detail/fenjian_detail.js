@@ -14,7 +14,9 @@ Page({
 		visibleKaban: false,
 		// 规格确认弹窗
 		visibleConfirm: false,
-		guigeItem: {},
+        guigeItem: {},
+        // 上报时发生跳转后，页面隐藏触发了解锁
+        isSkipReport: false
 	},
 	// 获取任务详情
 	async getTaskDetail(id) {
@@ -87,13 +89,18 @@ Page({
 		this.setData({ visibleConfirm: false, detailInfo });
 	},
 	// 异常上报
-	onExceptionReport() {
-		console.log(11111);
+	onExceptionReport(e) {
+        //
+        this.setData({ isSkipReport: true });
+
+        const { detailInfo } = this.data;
+        const dataItem = e.currentTarget.dataset.item;
+        const strItem = JSON.stringify(dataItem);
 		wx.navigateTo({
-			url: `/pages/user_storecenter/pages/exception_report/exception_report`,
+			url: `/pages/user_storecenter/pages/exception_report/exception_report?strItem=${strItem}&&guigeTypeId=${detailInfo['goods_type']}`,
 			events: { // 注册事件监听器
 				reportOpenedData: (formValues) => { // 监听由子页面触发的同名事件
-										
+                    this.setData({ isSkipReport: false });
 				}
 			}
 		});
@@ -155,10 +162,12 @@ Page({
 		this.setData({ actionType });
 		this.getTaskDetail(id);
 	},
-	onHide() { // 监听页面隐藏，页面点击了右上角的关闭，此时需跳转到首页并解锁任务
-		this.setData({ isClickHide: true });
-		this.onTaskJiesuo();
-		wx.reLaunch({ url: '/pages/user_storecenter/index' });
+    onHide() { // 监听页面隐藏，页面点击了右上角的关闭，此时需跳转到首页并解锁任务
+        if(isSkipReport == false) {
+            this.setData({ isClickHide: true });
+            this.onTaskJiesuo();
+            wx.reLaunch({ url: '/pages/user_storecenter/index' });
+        }		
 	},
 	onUnload() { // 监听页面卸载，点击返回或者上滑关闭或保存下面的按钮
 		const { isClickHide } = this.data;

@@ -1,0 +1,31 @@
+<view class="exception-report">
+    <navigation-bar title="规格异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+            <t-notice-bar visible="{{true}}" theme="warning" content="只上报类别差异，数量差异不上报。"></t-notice-bar>
+            <view class="reportbox">
+                <view class="tname">来货信息</view>
+                <view class="myFormViewbox">
+					<view class="formItem required"><text class="labelText">规格类别</text>{{guigeInfo['spec_name']}}</view>
+					<view class="formItem required"><text class="labelText">规格数量</text>{{guigeInfo['num']}}件</view>
+				</view>
+            </view>
+            <view class="reportbox">
+                <view class="tname">签收信息</view>
+                <view class="guigeitem">
+                    <form-select class="FORM_SELECT" label="规格类别" name="guige_type" options="{{guigeList}}" layout="horizontal" placeholder="请选择规格类别" required="{{true}}" />
+                    <form-input class="FORM_INPUT" label="规格数量" name="number" layout="horizontal" placeholder="请输入规格数量" required="{{true}}" suffix="件" />
+                </view>
+                <view class="addbtn">
+                    <t-icon name="add" />
+                    <text>添加</text>
+                </view>
+            </view>
+            <view class="reportbox">
+                <form-upload class="FORM_UPLOAD" label="异常图片上传" name="err_img" limit="{{10240}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
+                <form-textarea class="FORM_TEXTAREA" label="异常描述" name="desc" placeholder="请输入异常描述信息" required="{{true}}" />
+            </view>
+        </view>
+    </view>
+    <fixed-bottom-button bind:callback="onSubmit" title="确认上报" />
+</view>

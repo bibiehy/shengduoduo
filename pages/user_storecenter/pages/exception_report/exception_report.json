@@ -1,0 +1,10 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+        "form-input": "/components/form-input/form-input",
+        "form-select": "/components/form-select/form-select",
+        "form-upload": "/components/form-upload/form-upload",
+        "form-textarea": "/components/form-textarea/form-textarea",
+        "t-notice-bar": "tdesign-miniprogram/notice-bar/notice-bar"
+	}
+}

@@ -52,7 +52,7 @@
 								<view class="cell_2">{{item['num']}}</view>
 								<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-item="{{item}}" min="{{item['center_receive_num']}}" max="{{item['num']}}" value="{{item['stepper_value'] || item['num']}}" theme="filled" /></view>
 								<view class="cell_4">
-									<view class="ebtn" bind:tap="onExceptionReport">上报</view>
+									<view class="ebtn" bind:tap="onExceptionReport" data-item="{{item}}">上报</view>
 									<t-checkbox bind:change="onChecked" checked="{{item['stepper_checked']}}" data-item="{{item}}" label="" icon="rectangle" />
 								</view>
 							</view>
