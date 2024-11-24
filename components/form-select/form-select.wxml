@@ -1,4 +1,4 @@
-<view class="myFormVertical myFormSelect">
+<view class="{{layout == 'vertical' ? 'myFormVertical myFormSelect' : 'myFormHorizontal myFormSelect'}}">
     <view class="{{required ? 'myLabel required' : 'myLabel'}}">{{label}}<text class="myLabelText" wx:if="{{remark}}">{{remark}}</text></view>
     <view class="{{disabled ? 'myFormBox disabled' : 'myFormBox'}}" bind:tap="onShowPopup">
         <view class="myFormItem">

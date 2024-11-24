@@ -59,7 +59,8 @@
 						<block wx:else>
 							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
 							<t-tag wx:if="{{item['status'] == 11}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">继续分拣</t-tag><!-- 已揽件任务有分拣记录 -->
-							<t-tag wx:if="{{item['status'] >= 20 && item['status'] <= 21}}" bind:tap="onUpdateKaban" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改卡位</t-tag>
+							<t-tag wx:if="{{item['status'] >= 20 && item['status'] < 21}}" bind:tap="onUpdateKaban" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改卡位</t-tag>
+							<t-tag wx:if="{{item['status'] >= 11 && item['status'] < 21}}" bind:tap="onUpdateFenjianNumber" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改数量</t-tag>
 						</block>
 					</view>
 					<view class="biaoqianhao">

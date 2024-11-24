@@ -1,0 +1,81 @@
+<view class="exception-report">
+    <navigation-bar title="查看异常上报信息" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox" wx:if="{{qianshouList.length > 0}}">
+        <view class="innerbox">
+            <view class="wenxintips">温馨提示：显示该规格下所有的上报信息！</view>
+			<view class="myFormViewbox">
+				<view class="formItem required"><text class="labelText">任务名字</text>{{taskInfo['name']}}</view>
+				<view class="formItem required"><text class="labelText">标签号</text>{{taskInfo['task_no']}}</view>
+				<view class="formItem required"><text class="labelText">发货人</text>{{taskInfo['create_username']}} {{taskInfo['create_phone']}}</view>
+				<view class="formItem required"><text class="labelText">集货中心</text>{{taskInfo['center_name']}}</view>
+				<view class="formItem required"><text class="labelText">提货点</text>{{taskInfo['point_name']}}</view>
+			</view>
+			<view class="viewdetail-box">
+				<view class="viewitem">
+					<view class="viewname">
+						<view class="vntitle">来货信息</view>
+					</view>
+					<view class="viewcontent">
+						<view class="subitem">规格类别：{{taskInfo['goods_type_name']}}</view>
+						<view class="subitem">来货规格：<text class="guige">{{laihuoInfo['spec_name']}}/{{laihuoInfo['num']}}件</text></view>
+					</view>
+				</view>
+				<view class="viewitem">
+					<view class="viewname">
+						<view class="vntitle">签收信息</view>
+						<view class="vntips">(分拣员上报)</view>
+					</view>
+					<view class="viewcontent" wx:for="{{qianshouList}}" wx:key="created_at">
+						<view class="subitem">上报人：{{item['create_username']}}</view>
+						<view class="subitem">上报时间：{{item['created_at']}}</view>
+						<view class="subitem">
+							上报规格：
+							<block wx:for="{{item['confirm_list']}}" wx:key="spec" wx:for-item="subItem" wx:for-index="subIndex">
+								<text class="guige">{{subItem['spec_name']}}/{{subItem['num']}}件</text>
+								<block wx:if="{{subIndex != item['confirm_list'].length - 1}}">、</block>
+							</block>
+						</view>
+						<view class="subimgs" wx:if="{{item['img'].length > 0}}">
+							<block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
+								<image class="repimg" bind:tap="onViewImage" data-type="qianshou" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
+							</block>
+						</view>
+						<view class="subitem">{{item['desc']}}</view>
+						<view wx:if="{{index > 0 && index < qianshouList.length - 1}}" class="line"></view>
+					</view>
+				</view>
+				<view class="viewitem" wx:if="{{querenList.length > 0}}">
+					<view class="viewname">
+						<view class="vntitle">确认信息</view>
+						<view class="vntips">(提货点上报)</view>
+					</view>
+					<view class="viewcontent" wx:for="{{querenList}}" wx:key="created_at">
+						<view class="subitem">确认人：{{item['create_username']}}</view>
+						<view class="subitem">确认时间：{{item['created_at']}}</view>
+						<view class="subitem">
+							确认规格：
+							<block wx:for="{{item['confirm_list']}}" wx:key="spec" wx:for-item="subItem" wx:for-index="subIndex">
+								<text class="guige">{{subItem['spec_name']}}/{{subItem['num']}}件</text>
+								<block wx:if="{{subIndex != item['confirm_list'].length - 1}}">、</block>
+							</block>
+						</view>
+						<view class="subimgs" wx:if="{{item['img'].length > 0}}">
+							<block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
+								<image class="repimg" bind:tap="onViewImage" data-type="queren" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
+							</block>
+						</view>
+						<view class="subitem">{{item['desc']}}</view>
+						<view wx:if="{{index > 0 && index < qianshouList.length - 1}}" class="line"></view>
+					</view>
+				</view>
+			</view>
+        </view>
+    </view>
+</view>
+
+<t-image-viewer
+	visible="{{visible}}"
+	showIndex="{{showIndex}}"
+	images="{{originFiles}}"
+	bind:close="onClose"
+/>

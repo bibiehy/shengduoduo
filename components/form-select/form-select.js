@@ -13,7 +13,8 @@ Component({
         required: { type: Boolean, value: true }, // 是否必填
         message: { type: String, value: '' }, // 必填后的错误提示内容
         remark: { type: String, value: '' }, // 对 label 字段的补充
-        options: { type: Array, value: [] }, // { label: '', value: '', content: '', disabled: false }
+		options: { type: Array, value: [] }, // { label: '', value: '', content: '', disabled: false }
+		layout: { type: String, value: 'vertical' }, // 布局方式，可选项：vertical/horizontal
     },
     data: {
         formValue: '', // option.value 用于表单提交和组件显示

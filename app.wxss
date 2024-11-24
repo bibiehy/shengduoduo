@@ -2,7 +2,7 @@ page, view, image, text, textarea, swiper, swiper-item { margin:0; padding:0; he
 page { 
 	--td-brand-color: #1677ff; /* 主题色 */
 	--td-success-color: #00b578; /* 成功 */
-	--td-warning-color: #ff8f1f; /* 警告 */
+	--td-warning-color: #ff8f1f; /* 警告，背景#fdf8de  */
 	--td-error-color: #ff3b30; /* 失败 */
 	width:100vw;
 	height:100vh;

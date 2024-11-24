@@ -6,7 +6,6 @@
 		"t-tag": "tdesign-miniprogram/tag/tag",
 		"t-loading": "tdesign-miniprogram/loading/loading",
 		"t-dialog": "tdesign-miniprogram/dialog/dialog",
-
 		"t-picker": "tdesign-miniprogram/picker/picker",
     	"t-picker-item": "tdesign-miniprogram/picker-item/picker-item"
 	}

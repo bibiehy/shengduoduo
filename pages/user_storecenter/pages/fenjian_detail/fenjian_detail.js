@@ -94,12 +94,29 @@ Page({
         this.setData({ isSkipReport: true });
 
         const { detailInfo } = this.data;
-        const dataItem = e.currentTarget.dataset.item;
-        const strItem = JSON.stringify(dataItem);
+        const itemId = e.currentTarget.dataset.id;
+		const strOriginList = JSON.stringify(detailInfo['task_spec_list']);
 		wx.navigateTo({
-			url: `/pages/user_storecenter/pages/exception_report/exception_report?strItem=${strItem}&&guigeTypeId=${detailInfo['goods_type']}`,
+			url: `/pages/user_storecenter/pages/exception_report/exception_report?itemId=${itemId}&strOriginList=${strOriginList}&fromto=1`,
 			events: { // 注册事件监听器
-				reportOpenedData: (formValues) => { // 监听由子页面触发的同名事件
+				reportOpenedData: () => { // 监听由子页面触发的同名事件
+					const thisIndex = detailInfo['task_spec_list'].findIndex((listItem) => listItem['id'] == itemId);
+					detailInfo['task_spec_list'][thisIndex]['is_exception'] = 1;
+                    this.setData({ detailInfo, isSkipReport: false });
+				}
+			}
+		});
+	},
+	// 查看任务异常上报
+	onViewReport(e) {
+		//
+		this.setData({ isSkipReport: true });
+		
+		const { id, spec } = e.currentTarget.dataset;
+		wx.navigateTo({
+			url: `/pages/user_storecenter/pages/exception_view/exception_view?taskId=${id}&guigeId=${spec}&fromto=1`,
+			events: { // 注册事件监听器
+				viewOpenedData: () => { // 监听由子页面触发的同名事件
                     this.setData({ isSkipReport: false });
 				}
 			}
@@ -162,7 +179,8 @@ Page({
 		this.setData({ actionType });
 		this.getTaskDetail(id);
 	},
-    onHide() { // 监听页面隐藏，页面点击了右上角的关闭，此时需跳转到首页并解锁任务
+	onHide() { // 监听页面隐藏，页面点击了右上角的关闭，此时需跳转到首页并解锁任务
+		const { isSkipReport } = this.data;
         if(isSkipReport == false) {
             this.setData({ isClickHide: true });
             this.onTaskJiesuo();

@@ -19,7 +19,7 @@
 .tablebox .tdrow .rowinfo .t-checkbox__icon--left { margin:0 !important; }
 .tablebox .tdrow .rowinfo .ebtn { font-size:15px; color:#ff3b30; padding:4px 12px; }
 .tablebox .tdrow .rowinfo .ebtn.disabled { color:rgba(0, 0, 0, 0.26); }
-.tablebox .tdrow .exception { display:inline-block; font-size:13px; background-color:#fdf7d7; color:#000; border-radius:2px; padding:0 5px; margin-left:18px; margin-top:6px; }
+.tablebox .tdrow .exception { display:inline-block; font-size:13px; background-color:#fdf8de; color:#000; border-radius:2px; padding:0 5px; margin-left:18px; margin-top:6px; }
 
 .beizhubox { font-size:13px; color:#ff8f1f; padding:5px 0 50px 20px; }
 .beizhubox .desc { margin-bottom:2px; }

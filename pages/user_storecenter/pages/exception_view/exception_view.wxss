@@ -1,0 +1,29 @@
+.exception-report { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+.exception-report .mainbox { flex:1; width:calc(100% + 20px); padding:8px 28px 180px 8px; overflow-y:auto; }
+.exception-report .mainbox .innerbox { position:relative; min-height:100%; background-color:#fff; border-radius:8px; padding:45px 8px 50px; overflow:hidden; }
+.exception-report .mainbox .wenxintips { position:absolute; left:2px; top:2px; width:calc(100% - 4px); font-size:15px; background-color:#fdf8de; text-align:center; font-weight:600; padding:12px 0; }
+.viewdetail-box { margin-top:3px; }
+.viewdetail-box .viewitem { display:flex; align-items:center; border:solid 1px #e8e8e8; background-color:#f0f0f0; margin-top:-1px; }
+.viewdetail-box .viewitem .viewname { width:94px; text-align:center; border-right:solid 1px #e8e8e8; }
+.viewdetail-box .viewitem .viewname .vntitle { font-size:15px; }
+.viewdetail-box .viewitem .viewname .vntips { font-size:13px; color:rgba(0, 0, 0, 0.45); }
+.viewdetail-box .viewitem .viewcontent { flex:1; height:100%; background-color:#fff; padding:8px; }
+.viewdetail-box .viewitem .viewcontent .subitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:2px 0; }
+.viewdetail-box .viewitem .viewcontent .subitem .guige { color:#1677ff; }
+.viewdetail-box .viewitem .viewcontent .subimgs { display:flex; flex-wrap:wrap; padding:2px 0; }
+.viewdetail-box .viewitem .viewcontent .subimgs .repimg { display:block; width:72px; height:72px; border:solid 1px #e8e8e8; border-radius:3px; padding:2px; margin-right:5px; }
+.viewdetail-box .viewitem .viewcontent .line { width:90%; height:1px; background-color:#e8e8e8; margin:10px 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
