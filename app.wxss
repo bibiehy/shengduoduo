@@ -179,3 +179,11 @@ page {
 .myFormViewbox .loopBox .loopBody .loopitem .loopname { font-size:16px; color:rgba(0, 0, 0, 0.9); background-color:#f0f0f0; padding:12px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .myFormViewbox .loopBox .loopBody .loopitem::last-child { margin-bottom:0; }
 
+/* 没有验证的日期选择 */
+.myDatepickerNoVerify { display:flex; align-items:center; font-size:16px; line-height:24px; }
+.myDatepickerNoVerify .myItemName { color:rgba(0, 0, 0, 0.7); }
+.myDatepickerNoVerify .myItemPlaceholder { color:rgba(0, 0, 0, 0.4); }
+
+.myRangepickerNoVerify { display:flex; align-items:center; font-size:16px; line-height:24px; }
+.myRangepickerNoVerify .myItemName { color:rgba(0, 0, 0, 0.7); }
+.myRangepickerNoVerify .myItemPlaceholder { color:rgba(0, 0, 0, 0.4); }

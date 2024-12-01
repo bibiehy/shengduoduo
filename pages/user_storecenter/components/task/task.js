@@ -1,7 +1,7 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
 import { fetchPickupFromCenter } from '../../../../service/global';
-import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo, fetchFenjianDetail, fetchKabanList, fetchKabanUpdate, fetchKabanDiaodu } from '../../../../service/user_storecenter';
+import { fetchTaskList, fetchSureLanjian, fetchIsFenjian, fetchTaskJieSuo, fetchFenjianDetail, fetchKabanList, fetchKabanUpdate, fetchKabanDiaodu, fetchGuigeTotal, fetchUpdateFenjianNumber } from '../../../../service/user_storecenter';
 
 // 获取 app 实例
 const app = getApp();
@@ -37,7 +37,11 @@ Component({
         tihuodianList: [],
         visibleDiaodu: false,
         diaoduList: [],
-        diaoduTihuoId: ''
+		diaoduTihuoId: '',
+		// 修改分拣员分拣数量
+		visibleFenjianNumber: false,
+		taskSpecId: '', // 按钮[修改]改为[取消，确定]
+		fenjianNumberList: [],
 	},
 	methods: {
 		// 
@@ -199,6 +203,45 @@ Component({
 				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
 			}
 		},
+		// 修改分拣员分拣数量
+		async onUpdateFenjianNumber (e) {
+			const { item } = e.currentTarget.dataset;
+			const result = await useRequest(() => fetchGuigeTotal({ id: item['id'] }));
+			if(result) {
+				this.setData({ fenjianNumberList: result, visibleFenjianNumber: true, kabanItem: item });
+			}
+		},
+		onUpdateGuige(e) { // 修改
+			const { id } = e.currentTarget.dataset;
+			this.setData({ taskSpecId: id });
+		},
+		onChangeStepper(e) {
+			const { fenjianNumberList, taskSpecId } = this.data;
+			const thisValue = e.detail.value;
+			const thisIndex = e.currentTarget.dataset.index;
+			const parIndex = fenjianNumberList.findIndex((numItem) => numItem['task_spec_id'] == taskSpecId);
+			fenjianNumberList[parIndex]['list'][thisIndex]['step_value'] = thisValue;
+			this.setData({ fenjianNumberList });
+		},
+		onCancelGuige() { // 取消
+			this.setData({ taskSpecId: '', kabanItem: {} });
+		},
+		async onSureGuige() { // 确定
+			const { fenjianNumberList, taskSpecId, kabanItem } = this.data;
+			const thisItem = fenjianNumberList.find((numItem) => numItem['task_spec_id'] == taskSpecId);
+			const newValues = [];
+			thisItem['list'].forEach((item) => {
+				const afterNum = item['step_value'] === undefined ? item['num'] : item['step_value'];
+				newValues.push({ before_num: item['num'], after_num: item['step_value'] || afterNum, spec: item['spec'], spec_name: item['spec_name'], create_user: item['create_user'] });
+			});
+
+			const params = { task_id: kabanItem['id'], task_spec_id: taskSpecId, sorter_list: newValues };
+			const result = await useRequest(() => fetchUpdateFenjianNumber(params));
+			if(result) {
+				this.setData({ visibleFenjianNumber: false, taskSpecId: '', kabanItem: {} });
+				wx.showToast({ title: '修改成功', icon: 'success' });
+			}
+		}
 	},
 	lifetimes: {
 		attached() { // 组件完全初始化完毕
@@ -207,7 +250,7 @@ Component({
             this.onAjaxList(1); // 全部
             this.getTihuodianList(); // 提货点
 
-			useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));  
+			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

@@ -6,6 +6,7 @@ Component({
 
 	},
 	data: {
+		roleType: '',
         defaultValues: {}, // 编辑后的信息，用于改变基本信息
 	},
 	methods: {
@@ -42,11 +43,15 @@ Component({
 					}
 				});
 			}
-        }
+		},
+		onViewProfit() { // 查看收益
+			wx.navigateTo({ url: '/pages/user_storecenter/pages/profit/profit' });
+		}
     },
     lifetimes: {
 		attached() { // 组件完全初始化完毕
-			
+			const userInfo = app.userInfo;
+			this.setData({ roleType: userInfo['role_type'] });
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

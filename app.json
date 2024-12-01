@@ -35,7 +35,8 @@
 		"pages/user_storecenter/pages/fenjianyuan_create/fenjianyuan_create",
 		"pages/user_storecenter/pages/fenjian_detail/fenjian_detail",
 		"pages/user_storecenter/pages/exception_report/exception_report",
-		"pages/user_storecenter/pages/exception_view/exception_view"
+		"pages/user_storecenter/pages/exception_view/exception_view",
+		"pages/user_storecenter/pages/profit/profit"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

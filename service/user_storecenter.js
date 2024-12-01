@@ -65,9 +65,13 @@ export const fetchKabanUpdate = (params) => ({ url: `/collectCenter/updateTaskCa
 // 规格分拣汇总，任务id
 export const fetchGuigeTotal = (params) => ({ url: `/collectCenter/getTaskSorterNum/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
-// 修改规格分拣数量
-export const fetchGuigeTotalUpdate = (params) => ({ url: `/collectCenter/updateTaskSorterNum`, method: 'post', data: params, loading: true, delay: 500 });
+// 修改分拣员分拣数量
+export const fetchUpdateFenjianNumber = (params) => ({ url: `/collectCenter/updateTaskSorterNum`, method: 'post', data: params, loading: true, delay: 500 });
 
+// 获取所有分拣员
+export const fetchAllFenjianyuan = (params) => ({ url: `/collectCenter/getAllUser`, method: 'get', loading: false });
 
+// 收益列表
+export const fetchProfitList = (params) => ({ url: `/collectCenter/getProfitList`, method: 'get', data: params, loading: true, delay: 500 });
 
 

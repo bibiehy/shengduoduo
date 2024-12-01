@@ -20,7 +20,9 @@ Component({
         showWeek: { type: Boolean, value: false }, // 是否在日期旁边显示周几（如周一，周二，周日等）
         steps: { type:Object, value: {} }, // 时间间隔步数，示例：{ minute: 5 }
         cancelBtn: { type: String, value: '取消', optionalTypes: [Object, Boolean] },
-        confirmBtn: { type: String, value: '确定', optionalTypes: [Object, Boolean] },
+		confirmBtn: { type: String, value: '确定', optionalTypes: [Object, Boolean] },
+		// 新增
+		verify: { type: Boolean, value: true }, // false 时候为非表单形式
     },
     data: {
         formValue: '', // 用于设置组件选中和表单提交
@@ -52,7 +54,8 @@ Component({
         },
         onSure(e) {
             const { value } = e.detail;
-            this.setData({ formValue: value, showTime: value, errTips: '' });
+			this.setData({ formValue: value, showTime: value, errTips: '' });
+			this.triggerEvent('callback', { value });
         },
         // 以下是对外的方法
         getFieldVerify() { // 获取校验后的表单值

@@ -1,0 +1,15 @@
+{
+	"disableScroll": true,
+	"usingComponents": {
+		"t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-loading": "tdesign-miniprogram/loading/loading",
+		"t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
+		"t-radio": "tdesign-miniprogram/radio/radio",
+		"t-picker": "tdesign-miniprogram/picker/picker",
+    	"t-picker-item": "tdesign-miniprogram/picker-item/picker-item",
+		"form-datepicker": "/components/form-datepicker/form-datepicker",
+		"form-rangepicker": "/components/form-rangepicker/form-rangepicker",
+		"popup-select": "/components/popup-select/popup-select"
+	}
+}

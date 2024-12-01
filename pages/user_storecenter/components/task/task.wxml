@@ -60,7 +60,9 @@
 							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
 							<t-tag wx:if="{{item['status'] == 11}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">继续分拣</t-tag><!-- 已揽件任务有分拣记录 -->
 							<t-tag wx:if="{{item['status'] >= 20 && item['status'] < 21}}" bind:tap="onUpdateKaban" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改卡位</t-tag>
-							<t-tag wx:if="{{item['status'] >= 11 && item['status'] < 21}}" bind:tap="onUpdateFenjianNumber" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改数量</t-tag>
+							<block wx:if="{{roleType == 5 || roleType == 6}}">
+								<t-tag wx:if="{{item['status'] >= 11 && item['status'] < 21}}" bind:tap="onUpdateFenjianNumber" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改数量</t-tag>	
+							</block>
 						</block>
 					</view>
 					<view class="biaoqianhao">
@@ -101,7 +103,7 @@
 <!-- // 分拣明细 -->
 <popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}">
 	<view class="popup-fenjian">
-		<t-collapse defaultValue="{{[fenjianList[0]['id']]}}" expandMutex expandIcon>
+		<t-collapse defaultValue="{{[fenjianList[0]['id']]}}" expandMutex expandIcon default-expand-all="{{true}}">
 			<block wx:for="{{fenjianList}}">
 				<t-collapse-panel value="{{item['id']}}" wx:key="id">
 					<view class="paneltitle" slot="header">
@@ -109,13 +111,48 @@
 						<view class="ggenum">总件数 <text>{{item['num']}}</text></view>
 						<view class="ggenum">已分拣 <text>{{item['center_receive_num']}}</text></view>
 					</view>
-					<block wx:if="{{item['sort_detail_list']}}">
+					<block wx:if="{{item['sort_detail_list'] && item['sort_detail_list'].length > 0}}">
 						<t-steps layout="vertical" theme="dot">
 							<block wx:for="{{item['sort_detail_list']}}" wx:for-item="subItem">
 								<t-step-item wx:key="id" status="finish">
 									<view class="steptitle">
-										<view class="stepdesc">{{subItem['create_username']}}分拣了 <text>{{subItem['num']}}</text> 件</view>
+										<view class="stepdesc"><text>{{subItem['create_username']}}</text>分拣了 <text>{{subItem['num']}}</text> 件</view>
 										<view class="datetime">{{subItem['created_at']}}</view>
+									</view>
+								</t-step-item>								
+							</block>
+						</t-steps>
+					</block>
+					<block wx:else>
+						<view style="color: rgba(0, 0, 0, 0.45); font-size: 14px;">(空)</view>
+					</block>
+				</t-collapse-panel>
+			</block>
+		</t-collapse>
+	</view>
+</popup>
+
+<!-- // 修改分拣员分拣数量 -->
+<popup title="修改分拣数量" visible="{{visibleFenjianNumber}}" surebtn="{{false}}">
+	<view class="popup-fenjian">
+		<t-collapse expandMutex expandIcon>
+			<block wx:for="{{fenjianNumberList}}">
+				<t-collapse-panel value="{{item['spec']}}" wx:key="spec">
+					<view class="paneltitle" slot="header">
+						<view class="ggename">{{index + 1}}. 规格{{item['spec_name']}}</view>
+						<block wx:if="{{taskSpecId == item['task_spec_id']}}">
+							<t-tag catch:tap="onCancelGuige" variant="light-outline">取消</t-tag>
+							<t-tag catch:tap="onSureGuige" theme="primary" style="margin-left: 10px;">确定</t-tag>
+						</block>
+						<t-tag wx:else catch:tap="onUpdateGuige" data-id="{{item['task_spec_id']}}" variant="light-outline" theme="primary">修改</t-tag>
+					</view>
+					<block wx:if="{{item['list'] && item['list'].length > 0}}">
+						<t-steps layout="vertical" theme="dot">
+							<block wx:for="{{item['list']}}" wx:for-item="subItem" wx:for-index="subIndex">
+								<t-step-item wx:key="id" status="finish">
+									<view class="steptitle">
+										<view class="stepdesc"><text>{{subItem['create_username']}}</text>共分拣了 <text>{{subItem['num']}}</text> 件</view>
+										<view wx:if="{{taskSpecId == item['task_spec_id']}}" class="stepinput">,修改为<t-stepper bind:change="onChangeStepper" data-index="{{subIndex}}" value="{{subItem['step_value'] || subItem['num']}}" min="0" theme="filled" style="margin-left: 4px;" /></view>
 									</view>
 								</t-step-item>								
 							</block>

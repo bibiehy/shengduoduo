@@ -25,12 +25,14 @@
 .dialog-sending .diaitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:3px 0; }
 .dialog-sending .diaitem .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
 
-.popup-fenjian { padding:10px; --td-cell-vertical-padding:14px; }
+.popup-fenjian { padding:8px; --td-cell-vertical-padding:14px; }
 .popup-fenjian .paneltitle { display:flex; align-items:center; }
-.popup-fenjian .paneltitle .ggename { font-size:16px; padding-right:10px; }
+.popup-fenjian .paneltitle .ggename { font-size:16px; padding-right:15px; }
 .popup-fenjian .paneltitle .ggenum { color:rgba(0, 0, 0, 0.45); font-size:14px; margin-right:10px; }
 .popup-fenjian .paneltitle .ggenum text { color:#16ff; }
+.popup-fenjian .paneltitle .ggeedit { color:#16ff; }
 .popup-fenjian .steptitle { display:flex; align-items:center; }
 .popup-fenjian .steptitle .stepdesc { font-size:14px; color:rgba(0, 0, 0, 0.85); }
 .popup-fenjian .steptitle .stepdesc text { color:#16ff; }
 .popup-fenjian .steptitle .datetime { color:rgba(0, 0, 0, 0.45); font-size:12px; margin-left:10px; }
+.popup-fenjian .steptitle .stepinput { display:flex; align-items:center; }

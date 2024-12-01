@@ -4,9 +4,9 @@
 	</view> -->
 	<view class="personal-center">
 		<view class="modules">
-			<view class="moditem">
+			<view class="moditem" bind:tap="onViewProfit">
 				<view class="modicon"><t-icon name="zhifu" prefix="iconfont" size="32px" /></view>
-				<view class="modtitle">支付记录</view>
+				<view class="modtitle">{{roleType == 7 ? '我的收益' : '收益中心'}}</view>
 			</view>
 			<view class="moditem">
 				<view class="modicon"><t-icon name="notification" size="32px" /></view>
