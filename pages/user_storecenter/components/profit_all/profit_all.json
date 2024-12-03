@@ -1,0 +1,9 @@
+{
+	"component": true,
+    "styleIsolation": "apply-shared",
+	"usingComponents": {
+		"t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-loading": "tdesign-miniprogram/loading/loading",
+		"t-tag": "tdesign-miniprogram/tag/tag"
+	}
+}

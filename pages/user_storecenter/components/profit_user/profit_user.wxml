@@ -1,0 +1,21 @@
+<t-pull-down-refresh
+	show-scrollbar="{{false}}"
+	enhanced="{{true}}"
+	value="{{downStatus}}"
+	lowerThreshold="{{50}}"
+	loadingProps="{{loadingProps}}"
+	loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+	bind:refresh="onRefresh"
+	bind:scrolltolower="onPullUpLoaded"
+>
+	<view class="page-scroll">
+		<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+		<view wx:else>
+			显示个人的收益
+		</view>
+		<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+			<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+			<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+		</view>
+	</view>
+</t-pull-down-refresh>

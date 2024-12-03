@@ -6,7 +6,7 @@ Component({
 
 	},
 	data: {
-		roleType: '',
+		roleType: '', // 角色类型，5 集货中心负责人；6 集货中心主管；7 分拣员
         defaultValues: {}, // 编辑后的信息，用于改变基本信息
 	},
 	methods: {
@@ -45,7 +45,7 @@ Component({
 			}
 		},
 		onViewProfit() { // 查看收益
-			wx.navigateTo({ url: '/pages/user_storecenter/pages/profit/profit' });
+			wx.navigateTo({ url: '/pages/user_storecenter/pages/profit/profit' });			
 		}
     },
     lifetimes: {

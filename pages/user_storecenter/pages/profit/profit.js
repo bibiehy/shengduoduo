@@ -16,61 +16,11 @@ Page({
 		userId: 'all',
 		userName: '全部',
 		allUsers: [], // 所有分拣员
-		//
+		// 总件数、总收益
 		allJianshu: '-/-',
 		allProfit: '-/-',
-		currentPage: 1,
-		dataList: [],
-		// 下拉刷新
-		downStatus: false, // 组件状态，值为 true 表示下拉状态，值为 false 表示收起状态
-		loadingProps: { size: '20px' }, // 设置 loading 大小
-		// 上拉加载
-		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
 	},
-	// 列表请求
-	async onAjaxList(thisPage, callback) {
-		const { radioValue, monthValue, qujianValue, userId, dataList, upStatus } = this.data;
-		const params = { page: thisPage, sorter: userId == 'all' ? null : userId };
-
-		if(radioValue == 'month') {
-			params['month'] = monthValue;
-		}else if(radioValue == 'range') {
-			params['beginTime'] = qujianValue[0];
-			params['endTime'] = qujianValue[1];
-		}
-
-		const result = await useRequest(() => fetchProfitList(params));
-		if(result) {
-			// upStatus == 2 表示上拉加载，数据许合并
-			const allJianshu = result['custom_data']['total_num'];
-			const allProfit = result['custom_data']['total_profit'];
-			const newList = upStatus == 2 ? [].concat(dataList, result['content']) : result['content'];
-			this.setData({ allJianshu, allProfit, currentPage: thisPage, dataList: newList });
-
-			if(Object.prototype.toString.call(callback) == '[object Function]') {
-				callback(result['content']);
-			}
-		}
-	},	
-	onRefresh() { // 下拉刷新
-		this.setData({ downStatus: true });
-		this.onAjaxList(1, async () => {
-			await delay(500);
-			this.setData({ downStatus: false });
-		});
-	},
-	onPullUpLoaded(e) { // 上拉加载
-		const { currentPage, upStatus } = this.data;
-		if(upStatus == 2 || upStatus == 3) { // 加载中或已全部加载
-			return false;
-		}
-
-		const nextPage = currentPage + 1;
-		this.setData({ upStatus: 2 });
-		this.onAjaxList(nextPage, (currentList) => {
-			this.setData({ upStatus: currentList.length <= 0 ? 3 : 1 });
-		});
-	},
+	
 	// 获取所有的分拣员
 	async getAllUsers() {
 		const { roleType } = this.data;
@@ -85,6 +35,15 @@ Page({
 			this.setData({ allUsers: newList });
 		}
 	},
+	// 调用子组件方法
+	childComponentCallback() {
+		const { roleType, userId } = this.data;
+		const childComponentId = roleType == 7 ? '#templateProfitUser' : (userId == 'all' ? '#templateProfitAll' : '#templateProfitUser');
+		const childComponent = this.selectComponent(childComponentId);
+		childComponent.onAjaxList(1, (params) => {
+			this.setData({ allJianshu: params['allJianshu'], allProfit: params['allProfit'] });
+		});		
+	},
 	// 筛选条件
 	onRadioChange(e) {
 		const { value } = e.detail;
@@ -93,25 +52,31 @@ Page({
 	onMonth(e) { // 月份选择的回调
 		const { value } = e.detail;
 		this.setData({ monthValue: value });
-		this.onAjaxList(1);
+
+		// 调用子组件方法
+		this.childComponentCallback();
 	},
 	onQujian(e) { // 月份选择的回调
 		const { value } = e.detail;
 		this.setData({ qujianValue: value });
-		this.onAjaxList(1);
+		
+		// 调用子组件方法
+		this.childComponentCallback();
 	},
-	onSelectUser(e) {
+	onSelectUser(e) { // 选择分拣员
 		const { label, value } = e.detail;
 		this.setData({ userId: value, userName: label });
-		this.onAjaxList(1);
+		
+		// 调用子组件方法
+		this.childComponentCallback();
 	},	
 	onLoad(options) {
 		const userInfo = app.userInfo;
 		const currentMonth = getCurrentDateTime('YYYY-MM');
 		this.setData({ roleType: userInfo['role_type'], monthValue: currentMonth });
 
-		// 列表请求
-		this.onAjaxList(1);
+		// 列表请求 - 调用子组件方法，子组件 lifetimes.attached 先执行父组件 onLoad 后执行
+		this.childComponentCallback();
 
 		// 5 集货中心负责人；6 集货中心主管
 		if([5, 6].includes(userInfo['role_type'])) {

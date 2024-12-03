@@ -2,8 +2,8 @@
     <navigation-bar title="{{roleType == 7 ? '我的收益' : '收益中心'}}" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="profit-search">
 		<view class="tongji">
-			<view class="countnum">总件数：{{allJianshu}}</view>
-			<view class="countnum">总收益：{{allProfit}}</view>
+			<view class="countnum">件数总计：{{allJianshu}}</view>
+			<view class="countnum">收益总计：{{allProfit}}</view>
 		</view>
 		<view class="formsearch">
 			<view class="filter">
@@ -24,40 +24,13 @@
 			</view>
 		</view>		
 	</view>
-    <t-pull-down-refresh
-		show-scrollbar="{{false}}"
-		enhanced="{{true}}"
-		value="{{downStatus}}"
-		lowerThreshold="{{50}}"
-		loadingProps="{{loadingProps}}"
-		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
-		bind:refresh="onRefresh"
-		bind:scrolltolower="onPullUpLoaded"
-	>
-		<view class="page-scroll">
-			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
-			<block wx:else>
-				<!-- <view class="listitem" wx:for="{{dataList}}" wx:key="id">
-                    <t-tag wx:if="{{item['disabled'] == 2}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
-					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
-						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
-						<view class="rightbox">
-							<view class="psname">{{item['nickname']}}</view>
-							<view class="pstime">{{item['createTime']}}</view>
-							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
-						</view>
-					</view>
-					<view class="psbtns">
-                        <t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-						<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
-						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
-					</view>
-				</view> -->
-			</block>
-			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
-				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
-				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
-			</view>
-		</view>
-	</t-pull-down-refresh>
+	<view class="profit-scroll">
+		<block wx:if="{{roleType == 7}}">
+			<profit-user id="templateProfitUser" radioValue="{{radioValue}}" monthValue="{{monthValue}}" qujianValue="{{qujianValue}}" userId="{{userId}}" />
+		</block>
+		<block wx:else>
+			<profit-all wx:if="{{userId == 'all'}}" id="templateProfitAll" radioValue="{{radioValue}}" monthValue="{{monthValue}}" qujianValue="{{qujianValue}}" />
+			<profit-user wx:else id="templateProfitUser" radioValue="{{radioValue}}" monthValue="{{monthValue}}" qujianValue="{{qujianValue}}" userId="{{userId}}" />
+		</block>
+	</view>
 </view>

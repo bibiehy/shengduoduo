@@ -8,6 +8,8 @@
 		"t-radio": "tdesign-miniprogram/radio/radio",
 		"form-datepicker": "/components/form-datepicker/form-datepicker",
 		"form-rangepicker": "/components/form-rangepicker/form-rangepicker",
-		"popup-select": "/components/popup-select/popup-select"
+		"popup-select": "/components/popup-select/popup-select",
+		"profit-all": "/pages/user_storecenter/components/profit_all/profit_all",
+		"profit-user": "/pages/user_storecenter/components/profit_user/profit_user"
 	}
 }
