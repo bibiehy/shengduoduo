@@ -2,45 +2,29 @@
     <navigation-bar title="{{roleType == 7 ? '我的收益' : '收益中心'}}" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="profit-search">
 		<view class="tongji">
-			<view class="countnum">总件数：12500</view>
-			<view class="countnum">总收益：102500</view>
+			<view class="countnum">总件数：{{allJianshu}}</view>
+			<view class="countnum">总收益：{{allProfit}}</view>
 		</view>
-		<view>
+		<view class="formsearch">
 			<view class="filter">
 				类型：
-				<t-radio-group default-value="month" borderless="{{true}}">
+				<t-radio-group bind:change="onRadioChange" value="{{radioValue}}" borderless="{{true}}">
 					<t-radio block="{{false}}" label="月份" value="month" />
 					<t-radio block="{{false}}" label="区间" value="range" />
 				</t-radio-group>
 			</view>
 			<view class="filter" style="margin: 5px 0;">
-				<form-datepicker wx:if="{{pickerValue == 'month'}}" title="月份选择" bind:callback="onMonth" value="2024-12" placeholder="请选择月份" mode="month" format="YYYY-MM" verify="{{false}}" style="margin-left: 10px;" />
-				<form-rangepicker wx:if="{{pickerValue == 'range'}}" title="区间选择" bind:callback="onQujian" value="{{[]}}" placeholder="请选择区间" mode="date" format="YYYY-MM-DD" verify="{{false}}" style="margin-left: 10px;" />
+				<form-datepicker wx:if="{{radioValue == 'month'}}" title="月份选择" bind:callback="onMonth" value="{{monthValue}}" placeholder="请选择月份" mode="month" format="YYYY-MM" verify="{{false}}" />
+				<form-rangepicker wx:if="{{radioValue == 'range'}}" title="区间选择" bind:callback="onQujian" value="{{qujianValue}}" placeholder="请选择区间" mode="date" format="YYYY-MM-DD" verify="{{false}}" />
 			</view>
-			<view class="filter">
-				<popup-select showInput="{{false}}">
-					<view class="dropdown" style="margin-left: 10px;">全部<t-icon name="caret-down-small" size="24px" color="rgba(0, 0, 0, 0.6)" /></view>
+			<view class="filter" wx:if="{{roleType == 5 || roleType == 6}}">
+				<popup-select bind:callback="onSelectUser" value="{{userId}}" options="{{allUsers}}" showInput="{{false}}">
+					<view class="dropdown" style="margin-left: 10px;">{{userName}}<t-icon name="caret-down-small" size="24px" color="rgba(0, 0, 0, 0.6)" /></view>
 				</popup-select>
 			</view>
-		</view>
-		
-
-
-		<!-- <view class="filter">
-			<t-radio-group default-value="month" borderless="{{true}}">
-				<t-radio block="{{false}}" label="月份" value="month" />
-				<t-radio block="{{false}}" label="区间" value="range" />
-			</t-radio-group>
-			<view class="dropdown" bind:tap="onShowPicker">{{pickerValue == 'month' ? '按月份' : '按区间'}}<t-icon name="caret-down-small" size="24px" color="rgba(0, 0, 0, 0.6)" /></view>
-			<form-datepicker wx:if="{{pickerValue == 'month'}}" title="月份选择" bind:callback="onMonth" value="2024-12" placeholder="请选择月份" mode="month" format="YYYY-MM" verify="{{false}}" style="margin-left: 10px;" />
-			<form-rangepicker wx:if="{{pickerValue == 'range'}}" title="区间选择" bind:callback="onQujian" value="{{[]}}" placeholder="请选择区间" mode="date" format="YYYY-MM-DD" verify="{{false}}" style="margin-left: 10px;" />
-			<popup-select showInput="{{false}}">
-				<view class="dropdown" style="margin-left: 10px;">全部<t-icon name="caret-down-small" size="24px" color="rgba(0, 0, 0, 0.6)" /></view>
-			</popup-select>
-		</view> -->
-		
+		</view>		
 	</view>
-    <!-- <t-pull-down-refresh
+    <t-pull-down-refresh
 		show-scrollbar="{{false}}"
 		enhanced="{{true}}"
 		value="{{downStatus}}"
@@ -53,7 +37,7 @@
 		<view class="page-scroll">
 			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 			<block wx:else>
-				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+				<!-- <view class="listitem" wx:for="{{dataList}}" wx:key="id">
                     <t-tag wx:if="{{item['disabled'] == 2}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
 					<view class="mainbox" bind:tap="onCreate" data-type="edit" data-item="{{item}}">
 						<view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
@@ -68,25 +52,12 @@
 						<t-tag t-class="listag" bind:tap="onCreate" data-type="edit" data-item="{{item}}" variant="light-outline" shape="round">编 辑</t-tag>
 						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
 					</view>
-				</view>
+				</view> -->
 			</block>
 			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
 				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
 				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
 			</view>
 		</view>
-	</t-pull-down-refresh> -->
+	</t-pull-down-refresh>
 </view>
-
-<!-- <t-picker
-	visible="{{pickerVisible}}"
-	value="{{pickerValue}}"
-	data-key="city"
-	title="日期筛选类型"
-	cancelBtn="取消"
-	confirmBtn="确认"
-	bind:confirm="onPickerConfirm"
-	bind:cancel="onPickerCancel"
->
-	<t-picker-item options="{{datePickerOptions}}"></t-picker-item>
-</t-picker> -->

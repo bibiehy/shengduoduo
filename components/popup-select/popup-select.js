@@ -1,6 +1,6 @@
 // /components/popup-select/popup-select
 // 对外绑定事件
-// bind:callback 回调函数，参数为 e, e.detail.value = { label, value }
+// bind:callback 回调函数，参数为 e, e.detail = { label, value }
 
 Component({
     properties: {
@@ -25,7 +25,12 @@ Component({
             this.setData({ selectValue: thisOption['value'], selectLabel: thisOption['label'] });
         },
         options: function(newOptions) {
-            this.setData({ searchOptions: newOptions });
+			const { value } = this.data;
+			const thisOption = newOptions.find((item) => item['value'] == value) || { label: '', value: '', content: '' };
+
+			console.log();
+
+            this.setData({ searchOptions: newOptions, selectValue: thisOption['value'], selectLabel: thisOption['label'] });
         }
     },
     methods: {

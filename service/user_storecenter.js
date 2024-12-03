@@ -72,6 +72,8 @@ export const fetchUpdateFenjianNumber = (params) => ({ url: `/collectCenter/upda
 export const fetchAllFenjianyuan = (params) => ({ url: `/collectCenter/getAllUser`, method: 'get', loading: false });
 
 // 收益列表
-export const fetchProfitList = (params) => ({ url: `/collectCenter/getProfitList`, method: 'get', data: params, loading: true, delay: 500 });
+export const fetchProfitList = (params) => ({ url: `/collectCenter/getSorterProfitPage`, method: 'get', data: { size: 20, ...params }, loading: true, delay: 500 });
 
+// 收益面板
+export const fetchProfitPanel = (params) => ({ url: `/collectCenter/getSorterProfitPanel`, method: 'get', loading: false });
 

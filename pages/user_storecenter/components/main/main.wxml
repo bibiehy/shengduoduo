@@ -10,16 +10,16 @@
 	<view class="innerscroll">
         <view class="statistical-info">
             <view class="statitem item01">
-                <view class="statnum">6,200</view>
-                <view class="statname">今日总订单</view>
+                <view class="statnum">{{todaySummary['total_profit']}}</view>
+                <view class="statname">今日总收益</view>
             </view>
             <view class="statitem item02">
-                <view class="statnum">5,200</view>
-                <view class="statname">今日已揽件</view>
+                <view class="statnum">{{weekSummary['total_profit']}}</view>
+                <view class="statname">本周总收益</view>
             </view>
             <view class="statitem item03">
-                <view class="statnum">3,200</view>
-                <view class="statname">今日已分拣</view>
+                <view class="statnum">{{monthSummary['total_profit']}}</view>
+                <view class="statname">本月总收益</view>
             </view>
         </view>
 

@@ -101,7 +101,7 @@
 <popupkaban title="设置可待调度的卡板" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
 
 <!-- // 分拣明细 -->
-<popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}">
+<popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}" canceltxt="关闭">
 	<view class="popup-fenjian">
 		<t-collapse defaultValue="{{[fenjianList[0]['id']]}}" expandMutex expandIcon default-expand-all="{{true}}">
 			<block wx:for="{{fenjianList}}">

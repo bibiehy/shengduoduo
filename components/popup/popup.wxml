@@ -1,7 +1,7 @@
 <t-popup t-class="myCommonPopupOuter" bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom">
     <view class="myCommonPopup">
         <view class="commonHeader">
-            <view class="myCancelBtn" bind:tap="onHidePopup">取消</view>
+            <view class="myCancelBtn" bind:tap="onHidePopup">{{canceltxt}}</view>
             <view class="myTitle">{{title}}</view>
 			<block wx:if="{{surebtn}}">
 				<view class="mySureBtn" bind:tap="onSure">确定</view>
@@ -10,8 +10,11 @@
 				<view class="mySureBtn" style="opacity: 0; height: 1px !important;">确定</view>
 			</block>
         </view>
-		<view class="commonScroll">
+		<scroll-view scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}" style="min-height:30vh; max-height:70vh;">
 			<slot></slot>
-		</view>
+		</scroll-view>
+		<!-- <view class="commonScroll">
+			<slot></slot>	
+		</view> -->
     </view>
 </t-popup>

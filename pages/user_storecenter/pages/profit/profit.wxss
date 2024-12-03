@@ -1,24 +1,14 @@
 .profit-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
-/* .profit-search { background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
-.profit-search .filter { display:flex; align-items:center; justify-content:flex-end; --td-radio-font-size:15px; --td-radio-icon-size:22px; }
-.profit-search .filter .t-radio { margin-right:5px; }
-.profit-search .filter .t-radio__icon { margin-right:3px; }
-.profit-search .filter .myDatepickerNoVerify { font-size:15px; }
-.profit-search .filter .myRangepickerNoVerify { font-size:15px; }
-.profit-search .filter .dropdown { display:flex; align-items:center; color:rgba(0, 0, 0, 0.7); font-size:15px; }
-.profit-search .tongji { display:flex; align-items:center; justify-content:flex-end; color:#ff3b30; font-size:14px; padding:5px 10px; }
-.profit-search .tongji .countnum { margin-left:20px; } */
-
-.profit-search { display:flex; align-items:center; justify-content:space-between; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
-.profit-search .filter { display:flex; align-items:center; justify-content:flex-end; --td-radio-font-size:15px; --td-radio-icon-size:22px; }
-.profit-search .filter .t-radio { margin-right:5px; }
-.profit-search .filter .t-radio__icon { margin-right:3px; }
-.profit-search .filter .myDatepickerNoVerify { font-size:15px; }
-.profit-search .filter .myRangepickerNoVerify { font-size:15px; }
-.profit-search .filter .dropdown { display:flex; align-items:center; color:rgba(0, 0, 0, 0.7); font-size:15px; }
+.profit-search { display:flex; align-items:flex-end; justify-content:space-between; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
 .profit-search .tongji { color:#ff3b30; font-size:15px; padding:5px 10px; }
 .profit-search .tongji .countnum { margin:5px 0; }
-
+.profit-search .formsearch { flex:1; --td-radio-font-size:15px; --td-radio-icon-size:22px; }
+.profit-search .formsearch .filter { display:flex; align-items:center; justify-content:flex-end; }
+.profit-search .formsearch .filter .t-radio { margin-right:5px; }
+.profit-search .formsearch .filter .t-radio__icon { margin-right:3px; }
+.profit-search .formsearch .filter .myDatepickerNoVerify { font-size:15px; }
+.profit-search .formsearch .filter .myRangepickerNoVerify { font-size:15px; }
+.profit-search .formsearch .filter .dropdown { display:flex; align-items:center; color:rgba(0, 0, 0, 0.7); font-size:15px; }
 
 .page-scroll { flex:1; padding:10px 10px 80px; overflow-y:auto; }
 .page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }

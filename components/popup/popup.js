@@ -12,6 +12,7 @@ Component({
 		title: { type: String, value: '' },
 		visible: { type: Boolean, value: false }, // 显示/隐藏
 		surebtn: { type: Boolean, value: true }, // 显示/隐藏
+		canceltxt: { type: String, value: '' }, // 取消
 	},
 	data: {
 		
