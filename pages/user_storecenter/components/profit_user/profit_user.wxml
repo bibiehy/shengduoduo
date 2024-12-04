@@ -12,6 +12,8 @@
 		<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 		<view wx:else>
 			<view class="listitem">
+				<t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
+				<t-tag class="status" variant="light" theme="primary" size="small">进行中</t-tag>
                 <view class="psname">任务名字任务名字</view>
                 <view class="pstime">2024-12-01 12:30:30</view>
                 <view class="psinfo">发货人：张三 18012345678</view>
@@ -20,23 +22,23 @@
                 <view class="moneybox">
                     <view class="price"><text class="CNY">￥</text>6.00</view>
                     <view class="pricetxt">预估收益</view>
-                    <t-tag t-class="listag" variant="light-outline" shape="round">收益详情</t-tag>
+                    <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
                 </view>
             </view>
             <view class="listitem">
                 <t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="primary" size="small">审核中</t-tag>
                 <t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
-                <t-tag wx:elif="{{item['status'] == 3}}" class="status" variant="light" theme="success" size="small">已同意</t-tag>
+                <t-tag class="status" variant="light" theme="success" size="small">已同意</t-tag>
                 <view class="psname">规格异常上报收益</view>
                 <view class="pstime">2024-12-01 12:30:30</view>
                 <view class="psinfo">任务名：任务名字任务名字</view>
                 <view class="psinfo">上报类别：瓜果蔬菜</view>
                 <view class="psinfo">上报规格：11-20斤</view>
-                <view class="psinfo">拒绝原因：原因原因原因原因原因原因</view>
+                <view class="psreason">拒绝原因：原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因</view>
                 <view class="moneybox">
                     <view class="price"><text class="CNY">￥</text>6.00</view>
                     <view class="pricetxt">预估收益</view>
-                    <t-tag t-class="listag" variant="light-outline" shape="round">收益详情</t-tag>
+                    <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
                 </view>
             </view>
 		</view>

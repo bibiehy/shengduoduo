@@ -17,6 +17,16 @@ Component({
 		loadingProps: { size: '20px' }, // 设置 loading 大小
 		// 上拉加载
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
+
+		testItem: {
+			id: 10,
+			avatar: 'https://sddwl.oss-cn-guangzhou.aliyuncs.com/uploads/2024/09/11/1726064447_27b07ab29fdc60_3_01.jpg',
+			username: '分拣员1号',
+			phone: 18069760000,
+			total_num: 123456,
+			total_profit: 12345,
+			user_id: 49
+		}
 	},
 	methods: {
 		// 列表请求
@@ -63,6 +73,13 @@ Component({
 				this.setData({ upStatus: currentList.length <= 0 ? 3 : 1 });
 			});
 		},
+		// 全部 - 点击查看个人
+		onViewSingle(e) {
+			const { radioValue, monthValue, qujianValue } = this.data;
+			const targetDataset = e.currentTarget.dataset;
+			const strItem = JSON.stringify({ ...targetDataset['item'], radioValue, monthValue, qujianValue });
+			wx.navigateTo({ url: `/pages/user_storecenter/pages/profit_single/profit_single?strItem=${strItem}` });
+		}
 	},
 	lifetimes: {
 		attached() { // 组件完全初始化完毕

@@ -11,9 +11,3 @@
 .pageall-box .nodata { height:500px; }
 
 
-/* .pageall-box .listitem .status { position:absolute; right:15px; top:15px; }
-.pageall-box .listitem .psbtns { display:flex; padding-top:8px; }
-.pageall-box .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:12px; }
-.pageall-box .nodata { height:500px; } */
-
-

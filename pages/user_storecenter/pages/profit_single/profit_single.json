@@ -1,0 +1,6 @@
+{
+	"disableScroll": true,
+	"usingComponents": {
+		"profit-user": "/pages/user_storecenter/components/profit_user/profit_user"
+	}
+}

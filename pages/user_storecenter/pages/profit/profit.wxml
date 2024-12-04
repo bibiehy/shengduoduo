@@ -3,7 +3,7 @@
 	<view class="profit-search">
 		<view class="tongji">
 			<view class="countnum">件数总计：{{allJianshu}}</view>
-			<view class="countnum">收益总计：{{allProfit}}</view>
+			<view class="countnum">收益总计：￥{{allProfit}}</view>
 		</view>
 		<view class="formsearch">
 			<view class="filter">

@@ -1,0 +1,13 @@
+<view class="profit-box">
+    <navigation-bar title="{{title}}" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="profit-baseinfo">
+		<view class="baseitem">统计时间：<text class="itemvalue">{{tongjiDate || '-/-'}}</text></view>
+		<view class="totalnumber">
+			<view class="baseitem">件数总计：<text class="itemvalue">{{baseInfo['total_num'] || '-/-'}}</text></view>
+			<view class="baseitem">收益总计：<text class="itemvalue">￥{{baseInfo['total_profit'] || '-/-'}}</text></view>
+		</view>
+	</view>
+	<view class="profit-scroll">
+		<profit-user id="templateProfitUser" radioValue="{{radioValue}}" monthValue="{{monthValue}}" qujianValue="{{qujianValue}}" userId="{{userId}}" />
+	</view>
+</view>

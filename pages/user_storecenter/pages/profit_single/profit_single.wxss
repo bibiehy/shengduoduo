@@ -1,0 +1,9 @@
+.profit-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
+.profit-baseinfo { background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
+.profit-baseinfo .baseitem { font-size:15px; color:rgba(0, 0, 0, 0.55); padding:2px 15px; }
+.profit-baseinfo .baseitem .itemvalue { color:#ff3b30; }
+.profit-baseinfo .totalnumber { display:flex; align-items:center; }
+.profit-scroll { flex:1; padding:10px 10px 80px; }
+
+
+
