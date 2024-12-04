@@ -8,10 +8,37 @@
 	bind:refresh="onRefresh"
 	bind:scrolltolower="onPullUpLoaded"
 >
-	<view class="page-scroll">
+    <view class="pageuser-box">
 		<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 		<view wx:else>
-			显示个人的收益
+			<view class="listitem">
+                <view class="psname">任务名字任务名字</view>
+                <view class="pstime">2024-12-01 12:30:30</view>
+                <view class="psinfo">发货人：张三 18012345678</view>
+                <view class="psinfo">类别：瓜果蔬菜</view>
+                <view class="psinfo">总件数：100件</view>
+                <view class="moneybox">
+                    <view class="price"><text class="CNY">￥</text>6.00</view>
+                    <view class="pricetxt">预估收益</view>
+                    <t-tag t-class="listag" variant="light-outline" shape="round">收益详情</t-tag>
+                </view>
+            </view>
+            <view class="listitem">
+                <t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="primary" size="small">审核中</t-tag>
+                <t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
+                <t-tag wx:elif="{{item['status'] == 3}}" class="status" variant="light" theme="success" size="small">已同意</t-tag>
+                <view class="psname">规格异常上报收益</view>
+                <view class="pstime">2024-12-01 12:30:30</view>
+                <view class="psinfo">任务名：任务名字任务名字</view>
+                <view class="psinfo">上报类别：瓜果蔬菜</view>
+                <view class="psinfo">上报规格：11-20斤</view>
+                <view class="psinfo">拒绝原因：原因原因原因原因原因原因</view>
+                <view class="moneybox">
+                    <view class="price"><text class="CNY">￥</text>6.00</view>
+                    <view class="pricetxt">预估收益</view>
+                    <t-tag t-class="listag" variant="light-outline" shape="round">收益详情</t-tag>
+                </view>
+            </view>
 		</view>
 		<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
 			<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
