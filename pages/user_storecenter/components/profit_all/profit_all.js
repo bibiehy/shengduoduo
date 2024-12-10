@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay } from '../../../../utils/tools';
-import { fetchProfitList } from '../../../../service/user_storecenter';
+import { fetchProfitAll } from '../../../../service/user_storecenter';
 
 Component({
 	properties: {
@@ -17,22 +17,12 @@ Component({
 		loadingProps: { size: '20px' }, // 设置 loading 大小
 		// 上拉加载
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
-
-		testItem: {
-			id: 10,
-			avatar: 'https://sddwl.oss-cn-guangzhou.aliyuncs.com/uploads/2024/09/11/1726064447_27b07ab29fdc60_3_01.jpg',
-			username: '分拣员1号',
-			phone: 18069760000,
-			total_num: 123456,
-			total_profit: 12345,
-			user_id: 49
-		}
 	},
 	methods: {
 		// 列表请求
 		async onAjaxList(thisPage, callback) {
 			const { radioValue, monthValue, qujianValue, dataList, upStatus } = this.data;
-			const params = { page: thisPage, sorter: null };
+			const params = { page: thisPage };
 
 			if(radioValue == 'month') {
 				params['month'] = monthValue;
@@ -41,7 +31,7 @@ Component({
 				params['endTime'] = qujianValue[1];
 			}
 
-			const result = await useRequest(() => fetchProfitList(params));
+			const result = await useRequest(() => fetchProfitAll(params));
 			if(result) {
 				// upStatus == 2 表示上拉加载，数据许合并
 				const allJianshu = result['custom_data']['total_num'];
@@ -76,8 +66,8 @@ Component({
 		// 全部 - 点击查看个人
 		onViewSingle(e) {
 			const { radioValue, monthValue, qujianValue } = this.data;
-			const targetDataset = e.currentTarget.dataset;
-			const strItem = JSON.stringify({ ...targetDataset['item'], radioValue, monthValue, qujianValue });
+			const thisItem = e.currentTarget.dataset.item;
+			const strItem = JSON.stringify({ ...thisItem, radioValue, monthValue, qujianValue });
 			wx.navigateTo({ url: `/pages/user_storecenter/pages/profit_single/profit_single?strItem=${strItem}` });
 		}
 	},

@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay } from '../../../../utils/tools';
-import { fetchProfitList } from '../../../../service/user_storecenter';
+import { fetchProfitUser } from '../../../../service/user_storecenter';
 
 Component({
 	properties: {
@@ -18,20 +18,11 @@ Component({
 		loadingProps: { size: '20px' }, // 设置 loading 大小
 		// 上拉加载
 		upStatus: 1, // 1.无状态；2.加载中；3.已全部加载
-
-		testItem: {
-			type: '', // 区分是分拣收益还是异常上报
-			status: '', // 1.分拣收益时为任务的状态 2.异常收益时为审核状态(审核中/已拒绝/已同意)
-			name: '', // 任务名字
-			created_at: '', // 1.分拣收益时为创建任务时间 2.异常收益时为异常上报时间
-			create_username: '', // 发货人姓名
-			create_phone: '', // 发货人电话
-			goods_type_name: '', // 规格类别，如蔬菜类，指任务规格类别或异常上报类别
-			spec_name: '', // 异常上报规格，如1-10斤
-			total_num: '', // 分拣收益总件数
-			total_profit: '', // 预估总收益，指分拣收益或异常收益
-			reason: '', // 异常上报管理拒绝原因或通过描述
-		}
+		// 收益弹窗
+		popupType: '', // fenjian、report
+		actionItem: {},
+		visibleFenjian: false,
+		visibleReport: false
 	},
 	methods: {
 		// 列表请求
@@ -46,7 +37,7 @@ Component({
 				params['endTime'] = qujianValue[1];
 			}
 
-			const result = await useRequest(() => fetchProfitList(params));
+			const result = await useRequest(() => fetchProfitUser(params));
 			if(result) {
 				// upStatus == 2 表示上拉加载，数据许合并
 				const allJianshu = result['custom_data']['total_num'];
@@ -77,6 +68,12 @@ Component({
 			this.onAjaxList(nextPage, ({ currentList }) => {
 				this.setData({ upStatus: currentList.length <= 0 ? 3 : 1 });
 			});
+		},
+		// 查看收益
+		onShowDialog(e) {
+			const { item, type} = e.currentTarget.dataset;
+			const visible = type == 'fenjian' ? 'visibleFenjian' : 'visibleReport';
+			this.setData({ [visible]: true, actionItem: item });
 		},
 	},
 	lifetimes: {

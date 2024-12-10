@@ -2,14 +2,17 @@
 	<navigation-bar title="任务管理" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="global-page-search" style="padding-right: 5px">
 		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="提货点/标签号/发货人姓名/手机号" />
-		<view class="pageline" style="margin-right: 0;"></view>
-		<view class="pageaddbtn">
+		<view class="pageline"></view>
+		<popup-select bind:callback="getSelectTihuodian" options="{{tihuodianList}}" placeholder="请先选择提货点">
+			<view class="pageaddbtn">卡板调度<t-icon name="caret-down-small" size="24px" /></view>
+		</popup-select>
+		<!-- <view class="pageaddbtn">
 			<t-dropdown-menu t-class="kaban-dropdown-box" t-class-label="kaban-dropdown-label" t-class-icon="kaban-dropdown-icon">
 				<t-dropdown-item bind:change="onChangeDropdown" t-class-content="kaban-dropdown-item" options="{{tihuodianList}}" label="设置卡板调度" keys="{{diaoduKeys}}">
 					<view class="kaban-dropdown-tips" slot="footer">* 请先选择提货点，然后设置提货点下可调度卡板。</view>
 				</t-dropdown-item>
 			</t-dropdown-menu>
-		</view>
+		</view> -->
 	</view>
 	<view class="task-tabs">
 		<t-tabs bind:change="onTabsChange" value="{{tabsActive}}" defaultValue="-1" theme="tag">
@@ -59,10 +62,13 @@
 						<block wx:else>
 							<t-tag wx:if="{{item['status'] == 10}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">去分拣</t-tag>
 							<t-tag wx:if="{{item['status'] == 11}}" bind:tap="onFenjian" data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">继续分拣</t-tag><!-- 已揽件任务有分拣记录 -->
-							<t-tag wx:if="{{item['status'] >= 20 && item['status'] < 21}}" bind:tap="onUpdateKaban" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改卡位</t-tag>
+							<t-tag wx:if="{{item['status'] >= 20 && item['status'] < 21}}" bind:tap="onUpdateKaban" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">入库卡位</t-tag>
 							<block wx:if="{{roleType == 5 || roleType == 6}}">
-								<t-tag wx:if="{{item['status'] >= 11 && item['status'] < 21}}" bind:tap="onUpdateFenjianNumber" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">修改数量</t-tag>	
+								<t-tag wx:if="{{item['status'] >= 11 && item['status'] < 21}}" bind:tap="onUpdateFenjianNumber" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="primary">分拣数量</t-tag>	
 							</block>
+							<popup-print bind:callback="onPrint" taskId="1">
+								<t-tag data-id="{{item['id']}}" t-class="listag" variant="light-outline" shape="round" theme="primary">标签打印</t-tag>
+							</popup-print>
 						</block>
 					</view>
 					<view class="biaoqianhao">
@@ -94,11 +100,11 @@
 	</view>
 </t-dialog>
 
+<!-- // 先选择集货中心下提货点，再设置提货点下卡位号为待调度 -->
+<popupkaban title="设置可待调度的卡板" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
+
 <!-- // 修改入库卡位 -->
 <popupkaban title="修改入库卡位" bind:callback="onUpdateSure" data="{{kabanList}}" type="1" visible="{{visibleKaban}}" />
-
-<!-- // 设置卡位号为待调度 -->
-<popupkaban title="设置可待调度的卡板" bind:callback="onDiaoduSure" data="{{diaoduList}}" type="2" visible="{{visibleDiaodu}}" />
 
 <!-- // 分拣明细 -->
 <popup title="规格分拣明细" visible="{{visibleFenjian}}" surebtn="{{false}}" canceltxt="关闭">
@@ -133,7 +139,7 @@
 </popup>
 
 <!-- // 修改分拣员分拣数量 -->
-<popup title="修改分拣数量" visible="{{visibleFenjianNumber}}" surebtn="{{false}}">
+<popup title="修改分拣数量" visible="{{visibleFenjianNumber}}" surebtn="{{false}}" background="#fff" margin="10px">
 	<view class="popup-fenjian">
 		<t-collapse expandMutex expandIcon>
 			<block wx:for="{{fenjianNumberList}}">

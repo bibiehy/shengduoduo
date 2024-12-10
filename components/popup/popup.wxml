@@ -10,7 +10,7 @@
 				<view class="mySureBtn" style="opacity: 0; height: 1px !important;">确定</view>
 			</block>
         </view>
-		<scroll-view scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}" style="min-height:30vh; max-height:70vh;">
+		<scroll-view scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}" style="background-color: {{background}}; margin: {{margin}}; min-height:30vh; max-height:70vh; width: auto;">
 			<slot></slot>
 		</scroll-view>
 		<!-- <view class="commonScroll">

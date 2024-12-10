@@ -77,3 +77,10 @@ export const fetchProfitList = (params) => ({ url: `/collectCenter/getSorterProf
 // 收益面板
 export const fetchProfitPanel = (params) => ({ url: `/collectCenter/getSorterProfitPanel`, method: 'get', loading: false });
 
+// 收益中心 - 全部人员
+export const fetchProfitAll = (params) => ({ url: `/collectCenter/getAllSorterProfitByPage`, method: 'get', data: { size: 20, ...params }, loading: true, delay: 500 });
+
+// 收益中心 - 单个人收益
+export const fetchProfitUser = (params) => ({ url: `/collectCenter/getSorterProfitByUser`, method: 'get', data: { size: 20, ...params }, loading: true, delay: 500 });
+
+

@@ -1,0 +1,48 @@
+<view style="position: relative; display: {{display}};">
+    <view bind:tap="onShowPopup" style="z-index: 20; position: absolute; left: 0; top: 0; width: 100%; height: 100%; "></view>
+    <slot></slot>
+</view>
+<t-popup bind:visible-change="onVisibleChange" visible="{{visible}}" placement="bottom" style="background-color: #f3f3f3;">
+    <view class="popup-printbox">
+        <view class="printheader">
+            <view class="cancelbtn" bind:tap="onHidePopup">取消</view>
+            <view class="poptitle">{{title}}</view>
+            <view class="surebtn" bind:tap="onSure">确定</view>
+        </view>
+        <view class="printsearch">
+            <t-search bind:blur="onSearch" placeholder="请输入规格名，如：1-10斤" clearable="{{false}}" />
+        </view>
+		<scroll-view class="print-scroll" scroll-y="{{true}}" show-scrollbar="{{false}}" enhanced="{{true}}" style="min-height:30vh; max-height:70vh; width: auto;">
+			<empty wx:if="{{searchOptions.length <= 0}}" />
+			<block wx:else>
+				<view class="collapseitem" wx:for="{{searchOptions}}" wx:key="spec">
+					<view class="collheader">
+						<view class="guigename">{{index + 1}}. 规格{{item['spec_name']}}</view>
+						<view class="actionbox" wx:if="{{item['spec'] == showSpecId}}">
+							<t-checkbox t-class="chkedbox" catch:change="onAllChecked" label="全选" icon="rectangle" block="{{false}}" />
+							<view class="line"></view>
+							<t-icon bind:tap="onArrow" data-id="{{item['spec']}}" name="chevron-up" size="24px" color="#b3b2b2" style="padding: 10px;" />
+						</view>
+						<view class="actionbox" wx:else>
+							<t-icon bind:tap="onArrow" data-id="{{item['spec']}}" name="chevron-down" size="24px" color="#b3b2b2" style="padding: 10px;" />
+						</view>
+					</view>
+					<view wx:if="{{item['spec'] == showSpecId}}" class="collbody">
+						<block wx:for="{{item['card_no']}}" wx:key="*this" wx:for-item="subItem">
+							<view class="subcont" bind:tap="onCardClick" data-item="{{subItem}}">
+								{{subItem}}
+								<view class="subicon"></view>
+							</view>
+						</block>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+        <!-- <view class="myScrollBox">
+            <empty wx:if="{{searchOptions.length <= 0}}" />
+            <t-radio-group wx:else value="{{selectValue}}" bind:change="onRadioChange">
+                <t-radio wx:for="{{searchOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" disabled="{{item['disabled']}}" />
+            </t-radio-group>
+        </view>         -->
+    </view>
+</t-popup>

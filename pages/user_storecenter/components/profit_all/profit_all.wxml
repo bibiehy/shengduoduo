@@ -11,21 +11,12 @@
 	<view class="pageall-box">
 		<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 		<block wx:else>			
-			<view class="listitem" bind:tap="onViewSingle" data-item="{{testItem}}">
-				<view class="avatar"><image src="" /></view>
+			<view class="listitem" wx:for="{{dataList}}" wx:key="sorter" bind:tap="onViewSingle" data-item="{{item}}">
+				<view class="avatar"><image src="{{item['avator']}}" mode="aspectFill" /></view>
 				<view class="mainbox">
-					<view class="username">朱小明 <text class="txtphone">(18069880000)</text></view>
-					<view class="statinfo">分拣总件数：<text class="txtcount">123456</text></view>
-					<view class="statinfo">预估总收益：<text class="txtcount">123456</text></view>
-					<view class="wenxintips">注：总收益 = 分拣收益 + 异常上报收益。</view>
-				</view>
-			</view>
-			<view class="listitem" bind:tap="onViewSingle" data-item="{{testItem}}">
-				<view class="avatar"><image src="" /></view>
-				<view class="mainbox">
-					<view class="username">朱小明 <text class="txtphone">(18069880000)</text></view>
-					<view class="statinfo">分拣总件数：<text class="txtcount">123456</text></view>
-					<view class="statinfo">预估总收益：<text class="txtcount">123456</text></view>
+					<view class="username">{{item['username']}} <text class="txtphone">({{item['phone']}})</text></view>
+					<view class="statinfo">分拣总件数：<text class="txtcount">{{item['total_num']}}</text></view>
+					<view class="statinfo">预估总收益：<text class="txtcount">￥{{item['total_profit']}}</text></view>
 					<view class="wenxintips">注：总收益 = 分拣收益 + 异常上报收益。</view>
 				</view>
 			</view>

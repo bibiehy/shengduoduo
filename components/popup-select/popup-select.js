@@ -27,9 +27,6 @@ Component({
         options: function(newOptions) {
 			const { value } = this.data;
 			const thisOption = newOptions.find((item) => item['value'] == value) || { label: '', value: '', content: '' };
-
-			console.log();
-
             this.setData({ searchOptions: newOptions, selectValue: thisOption['value'], selectLabel: thisOption['label'] });
         }
     },

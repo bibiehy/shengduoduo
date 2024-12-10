@@ -21,7 +21,8 @@
 		"t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
 		"t-stepper": "tdesign-miniprogram/stepper/stepper",
 		"popup": "/components/popup/popup",
-        "popup-select": "/components/popup-select/popup-select",
+		"popup-select": "/components/popup-select/popup-select",
+		"popup-print": "/pages/user_storecenter/components/print/print",
         "popupkaban": "/pages/user_storecenter/components/popupkaban/popupkaban"
     }
 }

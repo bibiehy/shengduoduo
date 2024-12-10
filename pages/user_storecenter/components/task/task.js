@@ -182,10 +182,11 @@ Component({
             const centerId = app['userInfo']['center_id'];
 			const result = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
 			if(result) {
-				this.setData({ tihuodianList: result });
+				const newList = result.map((item) => ({ label: item['point_name'], value: item['point_id'] }));
+				this.setData({ tihuodianList: newList });
 			}
-        },
-        async onChangeDropdown(e) { // 根据选择的提货点，获取其卡板号
+		},
+		async getSelectTihuodian(e) { // 根据选择的提货点，获取其卡板号
             const centerId = app['userInfo']['center_id'];
             const pointId = e.detail.value;
             const result = await useRequest(() => fetchKabanList({ centerId, pointId }));
@@ -193,6 +194,14 @@ Component({
 				this.setData({ diaoduList: result, visibleDiaodu: true, diaoduTihuoId: pointId });
             }
         },
+        // async onChangeDropdown(e) { // 根据选择的提货点，获取其卡板号
+        //     const centerId = app['userInfo']['center_id'];
+        //     const pointId = e.detail.value;
+        //     const result = await useRequest(() => fetchKabanList({ centerId, pointId }));
+		// 	if(result) {
+		// 		this.setData({ diaoduList: result, visibleDiaodu: true, diaoduTihuoId: pointId });
+        //     }
+        // },
         async onDiaoduSure(e) {
 			const { diaoduTihuoId } = this.data;
             const { numList } = e.detail;
@@ -241,6 +250,10 @@ Component({
 				this.setData({ visibleFenjianNumber: false, taskSpecId: '', kabanItem: {} });
 				wx.showToast({ title: '修改成功', icon: 'success' });
 			}
+		},
+		// 标签打印
+		onPrint() {
+			
 		}
 	},
 	lifetimes: {

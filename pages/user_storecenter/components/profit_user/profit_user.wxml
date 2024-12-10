@@ -11,36 +11,39 @@
     <view class="pageuser-box">
 		<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 		<view wx:else>
-			<view class="listitem">
-				<t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
-				<t-tag class="status" variant="light" theme="primary" size="small">进行中</t-tag>
-                <view class="psname">任务名字任务名字</view>
-                <view class="pstime">2024-12-01 12:30:30</view>
-                <view class="psinfo">发货人：张三 18012345678</view>
-                <view class="psinfo">类别：瓜果蔬菜</view>
-                <view class="psinfo">总件数：100件</view>
-                <view class="moneybox">
-                    <view class="price"><text class="CNY">￥</text>6.00</view>
-                    <view class="pricetxt">预估收益</view>
-                    <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
-                </view>
-            </view>
-            <view class="listitem">
-                <t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="primary" size="small">审核中</t-tag>
-                <t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
-                <t-tag class="status" variant="light" theme="success" size="small">已同意</t-tag>
-                <view class="psname">规格异常上报收益</view>
-                <view class="pstime">2024-12-01 12:30:30</view>
-                <view class="psinfo">任务名：任务名字任务名字</view>
-                <view class="psinfo">上报类别：瓜果蔬菜</view>
-                <view class="psinfo">上报规格：11-20斤</view>
-                <view class="psreason">拒绝原因：原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因原因</view>
-                <view class="moneybox">
-                    <view class="price"><text class="CNY">￥</text>6.00</view>
-                    <view class="pricetxt">预估收益</view>
-                    <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
-                </view>
-            </view>
+			<block wx:for="{{dataList}}">
+				<view wx:if="{{item['type'] == 0}}" wx:key="task_id" class="listitem">
+					<t-tag wx:if="{{item['status'] == 80}}" class="status" variant="light" theme="success" size="small">已签收</t-tag>
+					<t-tag wx:else class="status" variant="light" theme="primary" size="small">进行中</t-tag>
+					<view class="psname">{{item['task_name']}}</view>
+					<view class="pstime">{{item['created_at']}}</view>
+					<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
+					<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+					<view class="psinfo">分拣总件数：{{item['total_num']}}件</view>
+					<view class="moneybox" bind:tap="onShowDialog" data-item="{{item}}" data-type="fenjian">
+						<view class="price"><text class="CNY">￥</text>{{item['total_profit']}}</view>
+						<view class="pricetxt">{{item['status'] == 80 ? '分拣收益' : '预估收益'}}</view>
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
+					</view>
+				</view>
+				<view wx:if="{{item['type'] == 1}}" wx:key="task_id" class="listitem">
+					<t-tag wx:if="{{item['status'] == 1}}" class="status" variant="light" theme="success" size="small">已同意</t-tag>
+					<t-tag wx:elif="{{item['status'] == 2}}" class="status" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag wx:else class="status" variant="light" theme="primary" size="small">审核中</t-tag>
+					<view class="psname">规格异常上报收益</view>
+					<view class="pstime">{{item['created_at']}}</view>
+					<view class="psinfo">任务名：{{item['task_name']}}</view>
+					<view class="psinfo">异常类别：{{item['goods_type_name']}}</view>
+					<view class="psinfo">异常规格：{{item['spec_name']}}</view>
+					<view class="psreason" wx:if="{{item['status'] == 1 && item['remark']}}">备注信息：{{item['remark']}}</view>
+					<view class="psreason" wx:if="{{item['status'] == 2 && item['remark']}}">拒绝原因：{{item['remark']}}</view>
+					<view class="moneybox" bind:tap="onShowDialog" data-item="{{item}}" data-type="report">
+						<view class="price"><text class="CNY">￥</text>{{item['total_profit']}}</view>
+						<view class="pricetxt">{{item['status'] == 0 ? '预估收益' : '上报收益'}}</view>
+						<t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
+					</view>
+				</view>
+			</block>
 		</view>
 		<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
 			<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
@@ -48,3 +51,57 @@
 		</view>
 	</view>
 </t-pull-down-refresh>
+
+
+<!-- // 查看分拣收益 -->
+<popup title="{{actionItem['task_name']}}" visible="{{visibleFenjian}}" surebtn="{{false}}" canceltxt="关闭" background="#fff" margin="10px">
+	<view class="popup-profit">
+		<block wx:for="{{actionItem['detail_list']}}">
+			<view class="fenjianitem" wx:key="spec">{{item['spec_name']}}，共分拣<text class="huizong">{{item['num']}}</text>件，收益<text class="huizong">￥{{item['profit']}}</text></view>
+		</block>
+	</view>
+</popup>
+
+<!-- // 查看异常上报收益 -->
+<popup title="{{actionItem['task_name']}}" visible="{{visibleReport}}" surebtn="{{false}}" canceltxt="关闭">
+	<view class="popup-profit02">
+		<view class="reportitem">
+			<view class="viewname">来货信息</view>
+			<view class="viewcontent">
+				<!-- <view class="subitem">规格类别：{{taskInfo['goods_type_name']}}</view>
+				<view class="subitem">来货规格：<text class="guige">{{laihuoInfo['spec_name']}}/{{laihuoInfo['num']}}件</text></view> -->
+				<view class="subitem">规格类别：蔬菜瓜果</view>
+				<view class="subitem">来货规格：<text class="guige">11-20斤/50件</text></view>
+			</view>
+		</view>
+		<view class="reportitem">
+			<view class="viewname">
+				上报信息
+				<view class="tongji">总计：<text class="money">￥3.12</text></view>
+			</view>
+			<view class="viewcontent">
+				<view class="subitem">上报时间：2024-12-05 20:30:30</view>
+				<view class="subitem02">
+					<view class="sublabel">上报规格：</view>
+					<view class="subvalue">
+						<view class="profile">11-20斤/30件，预估收益<text class="huizong">￥1.56</text></view>
+						<view class="profile">21-30斤/20件，预估收益<text class="huizong">￥1.56</text></view>
+					</view>
+				</view>
+				<view class="subitem02">
+					<view class="sublabel">异常图片：</view>
+					<view class="subimgs">
+						<image class="repimg" mode="aspectFill" src="/" />
+						<image class="repimg" mode="aspectFill" src="/" />
+					</view>
+					<!-- <view class="subimgs" wx:if="{{item['img'].length > 0}}">
+						<block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
+							<image class="repimg" bind:tap="onViewImage" data-type="qianshou" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
+						</block>
+					</view> -->
+				</view>
+				<view class="subitem">备注信息：描述信息描述信息描述信息描述信息描述信息</view>
+			</view>
+		</view>
+	</view>
+</popup>

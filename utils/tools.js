@@ -6,6 +6,7 @@ export const getUserAndGoRolePage = async (app, delay) => {
 	const result = await useRequest(() => fetchGetUserInfo({ delay })); // 请求用户信息
 	const roleType = result['role_type']; // 获取角色类型
 	app.userInfo = result; // 把用户信息保存到全局
+	
 	if(roleType == 1) { // 发货人
 		wx.reLaunch({ url: '/pages/user_fahuoren/index' });
 	}else if(roleType == 2) { // 收货人

@@ -4,6 +4,8 @@
 	"usingComponents": {
 		"t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
 		"t-loading": "tdesign-miniprogram/loading/loading",
+		"popup": "/components/popup/popup",
+		"t-image-viewer": "tdesign-miniprogram/image-viewer/image-viewer",
 		"t-tag": "tdesign-miniprogram/tag/tag"
 	}
 }
