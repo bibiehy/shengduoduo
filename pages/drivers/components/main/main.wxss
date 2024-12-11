@@ -11,15 +11,22 @@
 .task-fenjian-status { background-color:#fff; border-radius:8px; padding:12px; margin:10px; }
 .task-fenjian-status .header { display:flex; align-items:center; justify-content:space-between; }
 .task-fenjian-status .header .title { color:rgba(0, 0, 0, 0.75); font-size:17px; font-weight:600; padding-left:8px; }
-.task-fenjian-status .header .selectbox { display:flex; align-items:center; max-width:220px; font-size:15px; color:rgba(0, 0, 0, 0.65); border:solid 1px #ebebeb; border-radius:4px; padding:4px 4px 4px 10px; }
-.task-fenjian-status .header .selectbox .jihzxname { flex:1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.task-fenjian-status .header .filterbox { display:flex; flex-direction:column; align-items:flex-end; }
+.task-fenjian-status .header .filterbox .selectbox { display:flex; align-items:center; max-width:220px; font-size:15px; color:rgba(0, 0, 0, 0.65); border:solid 1px #ebebeb; border-radius:4px; padding:4px 4px 4px 10px; }
+.task-fenjian-status .header .filterbox .selectbox .jihzxname { flex:1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.task-fenjian-status .header .filterbox .searchinput { --td-search-height:30px; --td-search-bg-color:#fcf9f9; --td-search-font-size:16px; --td-search-padding:0 12px 2px; --td-search-icon-font-size:20px; }
+/* .task-fenjian-status .header .filterbox .searchinput .t-icon-search { font-size:20px; margin-top:2px; } */
 .task-fenjian-status .listitem { border:solid 1px #ebebeb; border-radius:8px; margin-top:10px; overflow:hidden; }
 .task-fenjian-status .listitem .headbox { display:flex; align-items:center; justify-content:space-between; font-size:17px; color:rgba(0, 0, 0, 0.75); background-color:#f0f0f0; padding:5px 15px; }
 .task-fenjian-status .listitem .headbox .status01 { color:#1677ff; font-size:14px; }
 .task-fenjian-status .listitem .headbox .status02 { color:#2ba471; font-size:14px; }
+.task-fenjian-status .listitem .headbox .status {}
 .task-fenjian-status .listitem .bodybox { padding:5px 15px; }
 .task-fenjian-status .listitem .bodybox .profile { font-size:15px; color:rgba(0, 0, 0, 0.55); margin:8px 0; }
 .task-fenjian-status .listitem .bodybox .profile text { color:#ff3b30; }
+.task-fenjian-status .listitem .bodybox .profile01 { display:flex; align-items:center; font-size:15px; color:rgba(0, 0, 0, 0.85); margin:8px 0; }
+.task-fenjian-status .listitem .bodybox .profile01 .pnum { display:flex; align-items:center; color:#ff3b30; margin-right:20px; }
+.task-fenjian-status .listitem .bodybox .profile01 .pnum .tips { font-size:13px; color:rgba(0, 0, 0, 0.45); }
 
 .task-in-process { background-color:#fff; border-radius:8px; padding:15px 20px; margin:0 10px; }
 .task-in-process .title { color:rgba(0, 0, 0, 0.75); font-size:17px; font-weight:600; }

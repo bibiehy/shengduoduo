@@ -21,17 +21,29 @@
 		<view class="task-fenjian-status">
 			<view class="header">
 				<view class="title">提货点分拣概况</view>
-				<view class="selectbox">
-					<view class="jihzxname">粤西农批57号仓粤西农批57号仓</view>
-					<t-icon name="chevron-down-s" size="24px" />
-				</view>
+                <view class="filterbox">
+                    <view class="selectbox">
+                        <view class="jihzxname">粤西农批57号仓粤西农批57号仓</view>
+                        <t-icon name="chevron-down-s" size="24px" />
+                    </view>
+                    <t-search t-class="searchinput" placeholder="请输入提货点名字" />
+                </view>				
 			</view>
 			<view class="listitem">
 				<view class="headbox">
 					<view class="tihdname">高州新城</view>
-					<view class="status01">分拣中</view>
+					<t-tag class="status" variant="light" theme="primary" size="small">创建调度</t-tag>
 				</view>
 				<view class="bodybox">
+                    <view class="profile01">
+                        任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+                    </view>
+                    <view class="profile01">
+                        商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+                    </view>
+                    <view class="profile01">
+                        卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+                    </view>
 					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
 					<view class="profile">已分拣/未分拣的商品件数：<text>20/100</text></view>
 					<view class="profile">可调度的卡板编号数：<text>30</text></view>
@@ -40,7 +52,7 @@
 			<view class="listitem">
 				<view class="headbox">
 					<view class="tihdname">化州</view>
-					<view class="status02">已分拣</view>
+					<t-tag class="status" variant="light" theme="primary" size="small">创建调度</t-tag>
 				</view>
 				<view class="bodybox">
 					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
