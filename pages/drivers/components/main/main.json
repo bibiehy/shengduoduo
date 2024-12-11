@@ -1,10 +1,13 @@
 {
 	"component": true,
+	"disableScroll": true,
     "styleIsolation": "apply-shared",
     "usingComponents": {
+		"t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
         "t-search": "tdesign-miniprogram/search/search",
 		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-        "t-tag": "tdesign-miniprogram/tag/tag",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet",
 		"t-picker": "tdesign-miniprogram/picker/picker",
     	"t-picker-item": "tdesign-miniprogram/picker-item/picker-item"
     }

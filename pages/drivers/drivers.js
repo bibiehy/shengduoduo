@@ -12,7 +12,7 @@ Page({
 		tabbarActive: 'main',
 		tabbarList: [
 			{ value: 'main', label: '主页', icon: 'home' },
-			{ value: 'task', label: '任务管理', icon: 'tree-round-dot' },
+			{ value: 'task', label: '调度管理', icon: 'tree-round-dot' },
 			{ value: 'driver', label: '司机管理', icon: { name: 'truck', prefix: 'iconfont' } },
 			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],

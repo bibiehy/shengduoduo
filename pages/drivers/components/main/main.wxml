@@ -17,63 +17,128 @@
 				</view>
 			</view>
 		</view>	
-
+		
 		<view class="task-fenjian-status">
 			<view class="header">
 				<view class="title">提货点分拣概况</view>
-                <view class="filterbox">
-                    <view class="selectbox">
-                        <view class="jihzxname">粤西农批57号仓粤西农批57号仓</view>
-                        <t-icon name="chevron-down-s" size="24px" />
-                    </view>
-                    <t-search t-class="searchinput" placeholder="请输入提货点名字" />
-                </view>				
-			</view>
-			<view class="listitem">
-				<view class="headbox">
-					<view class="tihdname">高州新城</view>
-					<t-tag class="status" variant="light" theme="primary" size="small">创建调度</t-tag>
-				</view>
-				<view class="bodybox">
-                    <view class="profile01">
-                        任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
-                    </view>
-                    <view class="profile01">
-                        商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
-                    </view>
-                    <view class="profile01">
-                        卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
-                    </view>
-					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
-					<view class="profile">已分拣/未分拣的商品件数：<text>20/100</text></view>
-					<view class="profile">可调度的卡板编号数：<text>30</text></view>
+				<view class="filterbox">
+					<view class="selectbox" bind:tap="onShowCenter">
+						<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
+						<t-icon name="chevron-down-s" size="26px" />
+					</view>
+					<t-search t-class="searchinput" clearable="{{false}}" placeholder="请输入提货点" />
 				</view>
 			</view>
-			<view class="listitem">
-				<view class="headbox">
-					<view class="tihdname">化州</view>
-					<t-tag class="status" variant="light" theme="primary" size="small">创建调度</t-tag>
-				</view>
-				<view class="bodybox">
-					<view class="profile">已分拣/未分拣的任务数：<text>20/100</text></view>
-					<view class="profile">已分拣/未分拣的商品件数：<text>20/100</text></view>
-					<view class="profile">可调度的卡板编号数：<text>30</text></view>
-				</view>
-			</view>
+			<t-pull-down-refresh
+				show-scrollbar="{{false}}"
+				enhanced="{{true}}"
+				value="{{downStatus}}"
+				lowerThreshold="{{50}}"
+				loadingProps="{{loadingProps}}"
+				loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+				bind:refresh="onRefresh"
+				bind:scrolltolower="onPullUpLoaded"
+			>
+				<view class="mainbody">
+					<view class="listitem">
+						<view class="headbox">
+							<view class="tihdname">高州新城</view>
+							<t-tag class="status" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						</view>
+						<view class="bodybox">
+							<view class="profile">
+								任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+							</view>
+						</view>
+					</view>
+					<view class="listitem">
+						<view class="headbox">
+							<view class="tihdname">化州</view>
+							<t-tag class="status" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						</view>
+						<view class="bodybox">
+							<view class="profile">
+								任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+							</view>
+						</view>
+					</view>
+					<view class="listitem">
+						<view class="headbox">
+							<view class="tihdname">化州</view>
+							<t-tag class="status" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						</view>
+						<view class="bodybox">
+							<view class="profile">
+								任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+							</view>
+						</view>
+					</view>
+					<view class="listitem">
+						<view class="headbox">
+							<view class="tihdname">化州</view>
+							<t-tag class="status" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						</view>
+						<view class="bodybox">
+							<view class="profile">
+								任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+							</view>
+						</view>
+					</view>
+					<view class="listitem">
+						<view class="headbox">
+							<view class="tihdname">化州</view>
+							<t-tag class="status" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						</view>
+						<view class="bodybox">
+							<view class="profile">
+								任务数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								商品件数：<view class="pnum">20<text class="tips">(已分拣)</text></view><view class="pnum">100<text class="tips">(待分拣)</text></view>
+							</view>
+							<view class="profile">
+								卡板编号数：<view class="pnum">20<text class="tips">(可调度)</text></view><view class="pnum">30<text class="tips">(已调度)</text></view>
+							</view>
+						</view>
+					</view>
+				</view>				
+			</t-pull-down-refresh>			
 		</view>
+		
 
-		<view class="task-in-process">
+		<!-- <view class="task-in-process">
 			<view class="title">配送中的任务<text class="number">(10)</text></view>
 			<view class="nodata">
 				<empty description="暂无任务" />
 			</view>
-			<!-- <view class="listbox">
-				
-			</view> -->
-		</view>
-
+			
+		</view> -->
 		
-		
-		
-	</view>
+	</view>	
 </view>
+
+<t-action-sheet id="jihuoCenterActionSheet" bind:selected="onCenterSelected" />
