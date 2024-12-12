@@ -32,6 +32,8 @@
     </block>
     
 	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
 		value="{{downStatus}}"
 		lowerThreshold="{{50}}"
 		loadingProps="{{loadingProps}}"

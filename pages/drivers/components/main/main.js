@@ -2,7 +2,7 @@ import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/
 
 Component({
 	properties: {
-		isShowBack: { type: Boolean, value: false }
+		
 	},
 	data: {
 		centerSelected: { label: '粤西农批57号仓', value: 57 },

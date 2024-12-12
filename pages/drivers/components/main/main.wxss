@@ -1,22 +1,51 @@
-.driversmain-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
-.driversmain-wrapper .innerscroll { flex:1; width:calc(100% + 20px); padding-bottom:140px; padding-right:20px; overflow-y:auto; }
+.drivers-box { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+.drivers-box .formbox { padding:0 18px 5px; }
+.drivers-box .formbox .formitem { display:flex; align-items:center; }
+.drivers-box .formbox .formitem .itemlabel { font-size:15px; color:rgba(255, 255, 255, 0.8); padding-left:4px; }
+.drivers-box .formbox .formitem .itemradio { --td-radio-bg-color:transform; --td-radio-icon-size:21px; --td-radio-font-size:15px; --td-font-gray-1:rgba(255, 255, 255, 0.8); }
+.drivers-box .formbox .formitem .itemradio .innerradio { margin-right:10px !important; --td-radio-border-color:transform; --td-radio-icon-checked-color:#fff; }
+.drivers-box .formbox .formitem .itemradio .iconradio { margin-right:5px !important; }
+.drivers-box .formbox .formitem02 { display:flex; align-items:center; justify-content:space-between; margin-top:7px; }
+.drivers-box .formbox .formitem02 .selectbox { display:flex; align-items:center; width:calc(50% - 5px); height:34px; font-size:15px; color:rgba(0, 0, 0, 0.65); border:solid 1px #ebebeb; border-radius:7px; background-color:#fff; padding:0 4px 0 10px; margin-right:10px; }
+.drivers-box .formbox .formitem02 .selectbox .jihzxname { flex:1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.drivers-box .formbox .formitem02 .searchinput { width:calc(50% - 5px); border:solid 1px #ebebeb; border-radius:7px; --td-search-height:32px; --td-search-bg-color:#fff; --td-search-font-size:16px; --td-search-padding:0 8px 2px; --td-search-icon-font-size:13px; --td-search-text-color:rgba(0, 0, 0, 0.65); }
 
-.quick-entry { display:flex; justify-content:space-around; padding:40px 20px; }
+.drivers-box .mainbody { flex:1; padding:10px 10px 120px; }
+.drivers-box .mainbody .nodata { height:380px; }
+.drivers-box .mainbody .listitem { background-color:#fff; border:solid 1px #ebebeb; border-radius:8px; margin-bottom:10px; overflow:hidden; }
+.drivers-box .mainbody .listitem .headbox { display:flex; align-items:center; justify-content:space-between; background-color:#faf9f9; border-bottom:solid 1px #ebebeb; padding:8px 0; }
+.drivers-box .mainbody .listitem .headbox .tihdname { font-size:17px; color:rgba(0, 0, 0, 0.75); padding-left:12px; }
+.drivers-box .mainbody .listitem .headbox .status01 { color:#1677ff; font-size:14px; }
+.drivers-box .mainbody .listitem .headbox .status02 { color:#2ba471; font-size:14px; }
+.drivers-box .mainbody .listitem .headbox .status { margin-right:8px; }
+.drivers-box .mainbody .listitem .bodybox { padding:5px 15px; }
+.drivers-box .mainbody .listitem .bodybox .profile { display:flex; align-items:center; font-size:15px; color:rgba(0, 0, 0, 0.72); margin:8px 0; }
+.drivers-box .mainbody .listitem .bodybox .profile .pnum { display:flex; align-items:center; color:#ff3b30; margin-right:15px; }
+.drivers-box .mainbody .listitem .bodybox .profile .pnum .tips { display:block; font-size:12px; color:rgba(0, 0, 0, 0.45); margin-left:2px; }
+
+.driver-action-sheet { --td-action-sheet-list-item-height:54px; }
+
+
+
+/* 
+.driversmain-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; padding-bottom:130px; overflow:hidden; }
+
+.quick-entry { display:flex; justify-content:space-around; padding:10px 20px; }
 .quick-entry .entryitem { display:flex; align-items:center; }
 .quick-entry .entryitem .itemicon {  color:rgba(255, 255, 255, 0.75); margin-right:10px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
 .quick-entry .entryitem .itemname { color:rgba(255, 255, 255, 0.85); }
-.quick-entry .entryitem .itemname .cn { font-size:20px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
+.quick-entry .entryitem .itemname .cn { font-size:18px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
 .quick-entry .entryitem .itemname .en { font-size:12px; padding-left:2px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
 
-.task-fenjian-status { display:flex; flex-direction:column; height:calc(100vh - 112px - 140px); background-color:#fff; border-radius:8px; padding-bottom:10px; margin:10px; overflow:hidden; }
-.task-fenjian-status .header { border-bottom:solid 1px #ebebeb; background-color:#faf9f9; padding:12px 10px 8px; margin-bottom:10px; }
+.task-fenjian-status { flex:1; display:flex; flex-direction:column; background-color:#fff; border-radius:8px; padding-bottom:10px; margin:10px; overflow:hidden; }
+.task-fenjian-status .header { border-bottom:solid 1px #e0e0e0; background-color:#faf9f9; padding:12px 10px 8px; }
 .task-fenjian-status .header .title { position:relative; color:rgba(0, 0, 0, 0.75); font-size:18px; font-weight:600; padding-left:4px; }
 .task-fenjian-status .header .title::after { position:absolute; left:4px; bottom:0; width:126px; height:7px; background-color:#1677ff; content:""; opacity:0.42; }
 .task-fenjian-status .header .filterbox { display:flex; align-items:center; justify-content:space-between; margin-top:8px; }
 .task-fenjian-status .header .filterbox .selectbox { display:flex; align-items:center; width:calc(50% - 5px); height:34px; font-size:15px; color:rgba(0, 0, 0, 0.65); border:solid 1px #ebebeb; border-radius:4px; background-color:#fff; padding:0 4px 0 10px; margin-right:10px; }
 .task-fenjian-status .header .filterbox .selectbox .jihzxname { flex:1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .task-fenjian-status .header .filterbox .searchinput { width:calc(50% - 5px); border:solid 1px #ebebeb; border-radius:4px; --td-search-height:32px; --td-search-bg-color:#fff; --td-search-font-size:16px; --td-search-padding:0 8px 2px; --td-search-icon-font-size:13px; --td-search-text-color:rgba(0, 0, 0, 0.65); }
-.task-fenjian-status .mainbody { flex:1; }
+.task-fenjian-status .mainbody { flex:1; padding-top:10px; }
 .task-fenjian-status .mainbody .nodata { height:380px; }
 .task-fenjian-status .listitem { border:solid 1px #ebebeb; border-radius:8px; margin:0 10px 10px; overflow:hidden; }
 .task-fenjian-status .listitem .headbox { display:flex; align-items:center; justify-content:space-between; background-color:#faf9f9; border-bottom:solid 1px #ebebeb; padding:8px 0; }
@@ -37,4 +66,4 @@
 .task-in-process .listbox { }
 
 
-
+ */

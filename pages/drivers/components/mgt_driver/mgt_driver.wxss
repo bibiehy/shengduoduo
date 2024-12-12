@@ -13,7 +13,7 @@
 .peisong-conditions .allbox { margin-left:10px; --td-radio-vertical-padding:0 !important; --td-radio-icon-size:19px !important; --td-radio-font-size:14px !important; --td-font-gray-1:rgba(0, 0, 0, 0.65) !important; }
 
 
-.page-scroll { flex:1; padding:10px 10px 80px; overflow-y:auto; }
+.page-scroll { flex:1; padding:10px 10px 120px; overflow-y:auto; }
 .page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
 .page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
 .page-scroll .listitem .mainbox { display:flex; }
