@@ -23,9 +23,47 @@
         </view>
         <view class="myPopupScrollbox">
             <empty wx:if="{{formOptions.length <= 0}}" />
-            <t-radio-group wx:else value="{{formValue}}" bind:change="onRadioChange">
-                <t-radio wx:for="{{formOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" disabled="{{item['disabled'] || false}}" />
+			<t-radio-group wx:elif="{{dispatcher}}" value="{{formValue}}" bind:change="onRadioChange">
+				<t-radio wx:for="{{formOptions}}" wx:key="value" label="" value="{{item['value']}}" disabled="{{item['disabled'] || false}}">
+					<view class="form-driver-diaodu">
+						<view class="formaininfo">
+							<view class="contact">{{item['label']}}</view>
+							<t-tag wx:if="{{item['status'] == 1}}" variant="light" theme="primary" size="small">待通知({{item['usedNum']}}/{{item['totalNum']}})</t-tag>
+							<t-tag wx:elif="{{item['status'] == 2}}" variant="light" theme="warning" size="small">已通知</t-tag>
+							<t-tag wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
+							<t-tag wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+							<t-tag wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+						</view>
+						<view class="isused" wx:if="{{item['isOftenUsed']}}">经常使用</view>
+					</view>
+				</t-radio>
+			</t-radio-group>
+			<t-radio-group wx:else value="{{formValue}}" bind:change="onRadioChange">				
+				<t-radio wx:for="{{formOptions}}" wx:key="value" label="{{item['label']}}" value="{{item['value']}}" content="{{item['content']}}" disabled="{{item['disabled'] || false}}" />
+			</t-radio-group>
+        </view>
+
+		<!-- <view class="myPopupScrollbox">
+            <t-radio-group bind:change="onRadioChange">
+				<t-radio>
+					<view class="form-driver-diaodu">
+						<view class="formaininfo">
+							<view class="contact">张三四(18069860000)</view>
+							<t-tag variant="light" theme="primary" size="small">待配送(8/12)</t-tag>
+						</view>
+						<view class="isused">上次使用</view>
+					</view>
+				</t-radio>
+				<t-radio>
+					<view class="form-driver-diaodu">
+						<view class="formaininfo">
+							<view class="contact">张三四(18069860000)</view>
+							<t-tag variant="light" theme="warning" size="small">配送中</t-tag>
+						</view>
+						<view class="isused">上次使用</view>
+					</view>
+				</t-radio>
             </t-radio-group>
-        </view>        
+        </view> -->
     </view>
 </t-popup>

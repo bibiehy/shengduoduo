@@ -12,7 +12,7 @@ Page({
 		tabbarActive: 'main',
 		tabbarList: [
 			{ value: 'main', label: '主页', icon: 'home' },
-			{ value: 'task', label: '调度管理', icon: 'tree-round-dot' },
+			{ value: 'diaodu', label: '调度管理', icon: 'tree-round-dot' },
 			{ value: 'driver', label: '司机管理', icon: { name: 'truck', prefix: 'iconfont' } },
 			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],
@@ -25,11 +25,7 @@ Page({
 			return false;
 		}
 
-		if(['task'].includes(value)) {
-			wx.showToast({ icon: 'warn', title: '暂未开放' })
-		}else{
-			this.setData({ tabbarActive: value });
-		}
+		this.setData({ tabbarActive: value });
 	},
 	onLoad(options) {
 		// 从超管页面调过来，需显示回退图标

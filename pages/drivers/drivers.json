@@ -5,6 +5,7 @@
 		
 		"main": "/pages/drivers/components/main/main",
 		"mgt_driver": "/pages/drivers/components/mgt_driver/mgt_driver",
+		"mgt_diaodu": "/pages/drivers/components/mgt_diaodu/mgt_diaodu",
 		"personal": "/pages/drivers/components/personal/personal"
 	}
 }

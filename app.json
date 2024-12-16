@@ -22,8 +22,8 @@
 		"pages/user_driver/index",
 		"pages/user_shouhuoren/index",
 		"pages/drivers/drivers",
-		"pages/drivers/pages/edit/edit",
-		"pages/drivers/pages/adddriver/adddriver",
+		"pages/drivers/pages/personal_edit/edit",
+		"pages/drivers/pages/mgt_add_driver/adddriver",
 		"pages/globalchufa/globalchufa",
 		"pages/globalbanner/globalbanner",
 		"pages/user_fahuoren/index",
@@ -37,7 +37,8 @@
 		"pages/user_storecenter/pages/exception_report/exception_report",
 		"pages/user_storecenter/pages/exception_view/exception_view",
 		"pages/user_storecenter/pages/profit/profit",
-		"pages/user_storecenter/pages/profit_single/profit_single"
+		"pages/user_storecenter/pages/profit_single/profit_single",
+		"pages/drivers/pages/mgt_add_diaodu/index"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

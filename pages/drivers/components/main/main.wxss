@@ -14,7 +14,8 @@
 .drivers-box .mainbody .nodata { height:380px; }
 .drivers-box .mainbody .listitem { background-color:#fff; border:solid 1px #ebebeb; border-radius:8px; margin-bottom:10px; overflow:hidden; }
 .drivers-box .mainbody .listitem .headbox { display:flex; align-items:center; justify-content:space-between; background-color:#faf9f9; border-bottom:solid 1px #ebebeb; padding:8px 0; }
-.drivers-box .mainbody .listitem .headbox .tihdname { font-size:17px; color:rgba(0, 0, 0, 0.75); padding-left:12px; }
+.drivers-box .mainbody .listitem .headbox .tihdname { display:flex; align-items:center; font-size:17px; color:rgba(0, 0, 0, 0.75); padding-left:12px; }
+.drivers-box .mainbody .listitem .headbox .tihdname .jindu { display:block; font-size:14px; color:rgba(0, 0, 0, 0.35); margin-left:5px; }
 .drivers-box .mainbody .listitem .headbox .status01 { color:#1677ff; font-size:14px; }
 .drivers-box .mainbody .listitem .headbox .status02 { color:#2ba471; font-size:14px; }
 .drivers-box .mainbody .listitem .headbox .status { margin-right:8px; }

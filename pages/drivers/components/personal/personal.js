@@ -10,7 +10,7 @@ Component({
         onEditUser() {
             // https://developers.weixin.qq.com/community/develop/article/doc/00048430f146e080cb2e9548456013
             wx.navigateTo({ 
-                url: `/pages/drivers/pages/edit/edit`,
+                url: `/pages/drivers/pages/personal_edit/edit`,
                 events: { // 注册事件监听器
                     acceptOpenedData: (data) => { // 监听由子页面触发的同名事件
                         this.setData({ defaultValues: data });

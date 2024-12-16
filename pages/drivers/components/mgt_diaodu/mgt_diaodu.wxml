@@ -1,0 +1,101 @@
+<view class="diaodu-box">
+	<navigation-bar title="调度管理" placement="left" background="#fff" showBack="{{false}}" boxShadow="none"></navigation-bar>
+	<view class="formbox">
+		<view class="formitem">
+			<view class="itemlabel">调度状态：</view>
+			<t-radio-group t-class="itemradio" bind:change="onRadioChange" value="{{radioValue}}" borderless="{{false}}">
+				<t-radio t-class="innerradio" t-class-icon="iconradio" block="{{false}}" label="待配送" value="{{1}}" />
+				<t-radio t-class="innerradio" t-class-icon="iconradio" block="{{false}}" label="配送中" value="{{2}}" />
+				<t-radio t-class="innerradio" t-class-icon="iconradio" block="{{false}}" label="已送达" value="{{3}}" />
+			</t-radio-group>
+		</view>
+		<view class="formitem02">
+			<view class="selectbox" bind:tap="onShowCenter">
+				<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
+				<t-icon name="chevron-down-s" size="26px" />
+			</view>
+			<t-search t-class="searchinput" clearable="{{false}}" placeholder="提货点或司机" />
+		</view>
+	</view>
+
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{120}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>	
+			</block>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag class="status" wx:if="{{item['status'] == 1}}" variant="light" theme="primary" size="small">待通知</t-tag>
+					<t-tag class="status" wx:elif="{{item['status'] == 2}}" variant="light" theme="warning" size="small">已通知</t-tag>
+					<t-tag class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
+					<t-tag class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<view class="mainbox">
+						<view class="psname">{{item['username']}}({{item['phone']}})</view>
+						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">车辆信息：{{item['car_type_name']}}，{{item['card_no']}}</view>
+						<view class="psinfo">车辆卡板状态：共<text class="tips">{{item['card_info']['total_num']}}</text>个卡板，已使用<text class="tips">{{item['card_info']['use_num']}}</text>个</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
+						<block wx:if="{{item['status'] == 4 || item['status'] == 5}}">
+							<view class="psinfo">预计送达时间：{{item['reach_time']}}</view>
+						</block>
+					</view>
+					<block wx:if="{{item['status'] == 1 || item['status'] == 88}}">
+						<view class="psbtns">
+							<t-tag t-class="listag" bind:tap="onShowDialog" data-item="{{item}}" data-type="delete" variant="light-outline" shape="round" theme="danger">删除</t-tag>
+							<t-tag t-class="listag" bind:tap="onUpdate"  data-item="{{item}}" variant="light-outline" shape="round" theme="primary">修改</t-tag>
+							<t-tag t-class="listag" bind:tap="onShowDialog" data-item="{{item}}" data-type="message" variant="light-outline" shape="round" theme="primary">通知配送</t-tag>
+						</view>
+					</block>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>			
+		</view>
+	</t-pull-down-refresh>
+</view>
+
+<!-- // 集货中心 -->
+<t-action-sheet id="jihuoCenterActionSheet" t-class="driver-action-sheet" bind:selected="onCenterSelected" />
+
+<!-- // 删除 -->
+<t-dialog
+	visible="{{deleteConfirm}}"
+	title="确定要删除嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onDeleteSure"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-wrapper" slot="content">
+		<view class="diaitem">司机：张三(18069866071)</view>
+		<view class="diaitem">提货点：茂南大唐市场门口</view>
+	</view>
+</t-dialog>
+
+<!-- // 通知配送 -->
+<t-dialog
+	visible="{{messageConfirm}}"
+	title="确定要通知配送嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onMessageSure"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-wrapper" slot="content">
+		<view class="diaitem">司机：张三(18069866071)</view>
+		<view class="diaitem">提货点：茂南大唐市场门口</view>
+	</view>
+</t-dialog>

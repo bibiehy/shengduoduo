@@ -15,6 +15,7 @@ Component({
         remark: { type: String, value: '' }, // 对 label 字段的补充
 		options: { type: Array, value: [] }, // { label: '', value: '', content: '', disabled: false }
 		layout: { type: String, value: 'vertical' }, // 布局方式，可选项：vertical/horizontal
+		dispatcher: { type: Boolean, value: false }, // 只在司机调度模块使用
     },
     data: {
         formValue: '', // option.value 用于表单提交和组件显示

@@ -5,7 +5,8 @@
         "t-popup": "tdesign-miniprogram/popup/popup",
         "t-search": "tdesign-miniprogram/search/search",
         "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
-        "t-radio": "tdesign-miniprogram/radio/radio",
+		"t-radio": "tdesign-miniprogram/radio/radio",
+		"t-tag": "tdesign-miniprogram/tag/tag",
         "empty": "../empty/empty"
     }
 }

@@ -1,5 +1,6 @@
 <view class="drivers-outer-wrapper">
 	<main wx:if="{{tabbarActive == 'main'}}" isShowBack="{{isShowBack}}" />
+	<mgt_diaodu wx:elif="{{tabbarActive == 'diaodu'}}" />
 	<mgt_driver wx:elif="{{tabbarActive == 'driver'}}" />
 	<personal wx:elif="{{tabbarActive == 'personal'}}" />
 

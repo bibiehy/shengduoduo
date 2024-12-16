@@ -122,7 +122,7 @@ Component({
         addEditDriver(e) { // 添加/编辑司机
             const { type, id } = e.currentTarget.dataset;
             wx.navigateTo({ 
-                url: `/pages/drivers/pages/adddriver/adddriver?actionType=${type}&id=${id}`,
+                url: `/pages/drivers/pages/mgt_add_driver/adddriver?actionType=${type}&id=${id}`,
                 events: { // 注册事件监听器
                     acceptOpenedData: (formValues) => { // 监听由子页面触发的同名事件
                         if(type == 'create') {

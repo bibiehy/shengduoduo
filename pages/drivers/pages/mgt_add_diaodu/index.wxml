@@ -1,0 +1,31 @@
+<view class="diaodu-addbox">
+    <navigation-bar title="司机调度" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+            <view class="myFormViewbox">
+				<view class="formItem required"><text class="labelText">集货中心</text>{{defaultItem['label']}}</view>
+				<view class="formItem required"><text class="labelText">提货点</text>{{defaultItem['point_name']}}</view>
+			</view>
+			<form-select id="diaoduDriver" label="要调度的司机" name="driver" value="{{defaultItem['driver_id']}}" options="{{driverList}}" dispatcher="{{true}}" placeholder="请选择要调度的司机" required="{{true}}" />
+			<view class="myFormVertical myFormSelect">
+				<view class="myLabel required">给司机设置卡板号<text class="myLabelText">只显示未设置的</text></view>
+				<view class="kabanbox">
+					<block wx:if="{{kabanList.length <= 0}}">
+						<view style="height: 200px;"><empty /></view>	
+					</block>
+					<block wx:else>
+						<block wx:for="{{kabanList}}">
+							<block wx:if="{{item['checked']}}">
+								<view class="itemcont active" bind:tap="onCardClick" data-item="{{item}}" wx:key="number">{{item['number']}}号<view class="itemicon"></view></view>
+							</block>
+							<block wx:else>
+								<view class="itemcont" bind:tap="onCardClick" data-item="{{item}}" wx:key="number">{{item['number']}}号<view class="itemicon"></view></view>
+							</block>
+						</block>
+					</block>
+				</view>
+			</view>
+        </view>
+    </view>
+    <fixed-bottom-button bind:callback="onSubmit" title="确认提交" />
+</view>

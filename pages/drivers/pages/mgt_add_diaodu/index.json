@@ -1,0 +1,6 @@
+{
+	"usingComponents": {
+		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
+		"form-select": "/components/form-select/form-select"
+	}
+}

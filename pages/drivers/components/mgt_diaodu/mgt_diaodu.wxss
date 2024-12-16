@@ -1,0 +1,48 @@
+.diaodu-box { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+.diaodu-box .formbox { background-color:#fff; padding:0 18px 5px; }
+.diaodu-box .formbox .formitem { display:flex; align-items:center; }
+.diaodu-box .formbox .formitem .itemlabel { font-size:15px; color:rgba(0, 0, 0, 0.65); padding-left:4px; }
+.diaodu-box .formbox .formitem .itemradio { --td-radio-icon-size:21px; --td-radio-font-size:15px; }
+.diaodu-box .formbox .formitem .itemradio .innerradio { margin-right:10px !important; }
+.diaodu-box .formbox .formitem .itemradio .iconradio { margin-right:5px !important; }
+.diaodu-box .formbox .formitem02 { display:flex; align-items:center; justify-content:space-between; margin-top:7px; }
+.diaodu-box .formbox .formitem02 .selectbox { display:flex; align-items:center; width:calc(50% - 5px); height:34px; font-size:15px; color:rgba(0, 0, 0, 0.65); border:solid 1px #ebebeb; border-radius:7px; background-color:#fff; padding:0 4px 0 10px; margin-right:10px; }
+.diaodu-box .formbox .formitem02 .selectbox .jihzxname { flex:1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.diaodu-box .formbox .formitem02 .searchinput { width:calc(50% - 5px); border:solid 1px #ebebeb; border-radius:7px; --td-search-height:32px; --td-search-bg-color:#fff; --td-search-font-size:16px; --td-search-padding:0 8px 2px; --td-search-icon-font-size:13px; --td-search-text-color:rgba(0, 0, 0, 0.65); }
+
+.page-scroll { flex:1; padding:10px 10px 150px; overflow-y:auto; }
+.page-scroll .listitem { position:relative; border:solid 1px #ebebeb; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:12px; top:12px; }
+.page-scroll .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); padding-bottom:1px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.page-scroll .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
+.page-scroll .listitem .mainbox .psinfo { display:flex; align-items:center; font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
+.page-scroll .listitem .mainbox .psinfo .tips { display:block; color:#1677ff; margin:0 4px; }
+.page-scroll .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
+.page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
+.page-scroll .listitem .psbtns .pstips { font-size:14px; color:#ff3b30; }
+.page-scroll .listitem .biaoqianhao { position:absolute; right:12px; top:125px; text-align:center; color:#ff3b30; }
+.page-scroll .listitem .biaoqianhao .bqhvalue { font-size:18px; font-weight:600; }
+.page-scroll .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; }
+.page-scroll .nodata { height:380px; }
+
+.diaodu-box .mainbody { flex:1; padding:10px 10px 120px; }
+.diaodu-box .mainbody .nodata { height:380px; }
+.diaodu-box .mainbody .listitem { background-color:#fff; border:solid 1px #ebebeb; border-radius:8px; margin-bottom:10px; overflow:hidden; }
+.diaodu-box .mainbody .listitem .headbox { display:flex; align-items:center; justify-content:space-between; background-color:#faf9f9; border-bottom:solid 1px #ebebeb; padding:8px 0; }
+.diaodu-box .mainbody .listitem .headbox .tihdname { display:flex; align-items:center; font-size:17px; color:rgba(0, 0, 0, 0.75); padding-left:12px; }
+.diaodu-box .mainbody .listitem .headbox .tihdname .jindu { display:block; font-size:14px; color:rgba(0, 0, 0, 0.35); margin-left:5px; }
+.diaodu-box .mainbody .listitem .headbox .status01 { color:#1677ff; font-size:14px; }
+.diaodu-box .mainbody .listitem .headbox .status02 { color:#2ba471; font-size:14px; }
+.diaodu-box .mainbody .listitem .headbox .status { margin-right:8px; }
+.diaodu-box .mainbody .listitem .bodybox { padding:5px 15px; }
+.diaodu-box .mainbody .listitem .bodybox .profile { display:flex; align-items:center; font-size:15px; color:rgba(0, 0, 0, 0.72); margin:8px 0; }
+.diaodu-box .mainbody .listitem .bodybox .profile .pnum { display:flex; align-items:center; color:#ff3b30; margin-right:15px; }
+.diaodu-box .mainbody .listitem .bodybox .profile .pnum .tips { display:block; font-size:12px; color:rgba(0, 0, 0, 0.45); margin-left:2px; }
+
+.driver-action-sheet { --td-action-sheet-list-item-height:54px; }
+
+.dialog-wrapper { background-color:#f5f5f5; border-radius:5px; padding:15px; margin-top:15px; }
+.dialog-wrapper .diaitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:3px 0; }
+.dialog-wrapper .diaitem .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
+
+
