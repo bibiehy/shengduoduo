@@ -3,7 +3,8 @@
 	"projectname": "shengduoduo",
 	"setting": {
 		"compileHotReLoad": true,
-		"skylineRenderEnable": false
+		"skylineRenderEnable": false,
+		"urlCheck": false
 	},
 	"libVersion": "development"
 }

@@ -1,0 +1,52 @@
+<view class="peisong-conditions">
+    <view class="selectbox" bind:tap="onShowCenter">
+        <view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
+        <t-icon name="chevron-down-s" size="24px" />
+    </view>
+    <view class="datebox" bind:tap="onPeisongRadio" data-value="date">
+        <t-radio checked="{{radioChecked == 'date'}}" />
+        <view class="showdate">
+            <view class="datevalue">{{monthValue}}</view>
+            <t-icon name="calendar-event" size="16px" />
+        </view>
+    </view>
+    <view class="allbox" bind:tap="onPeisongRadio" data-value="all">
+        <t-radio checked="{{radioChecked == 'all'}}" label="全部" />
+    </view>
+</view>
+
+<view class="overview-header">
+    <view class="cell_1">司机</view>
+    <view class="cell_2">运输次数</view>
+    <view class="cell_3">送达率</view>
+</view>
+<view class="overview-body">
+    <view class="viewitem">
+        <view class="cell_1">张三(18069880000)</view>
+        <view class="cell_2">1234</view>
+        <view class="cell_3">90%</view>
+    </view>
+    <view class="viewitem">
+        <view class="cell_1">张三(18069880000)</view>
+        <view class="cell_2">1234</view>
+        <view class="cell_3">90%</view>
+    </view>
+    <view class="viewitem">
+        <view class="cell_1">张三(18069880000)</view>
+        <view class="cell_2">1234</view>
+        <view class="cell_3">90%</view>
+    </view>
+</view>
+
+<!-- // 集货中心 -->
+<t-action-sheet id="jihuoCenterActionSheet" t-class="driver-action-sheet" bind:selected="onCenterSelected" />
+<!-- // 日期选择 -->
+<t-date-time-picker
+    title="选择日期"
+    visible="{{monthVisible}}"
+    mode="month"
+    value="{{monthValue}}"
+    format="YYYY-MM"
+    bind:change="onConfirmMonth"
+    bind:cancel="onHideMonth"
+/>

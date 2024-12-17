@@ -80,8 +80,8 @@
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">司机：张三(18069866071)</view>
-		<view class="diaitem">提货点：茂南大唐市场门口</view>
+		<view class="diaitem">司机：{{item['username']}}({{item['phone']}})</view>
+		<view class="diaitem">提货点：{{item['point_name']}}</view>
 	</view>
 </t-dialog>
 
@@ -95,7 +95,7 @@
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">司机：张三(18069866071)</view>
-		<view class="diaitem">提货点：茂南大唐市场门口</view>
+		<view class="diaitem">司机：{{item['username']}}({{item['phone']}})</view>
+		<view class="diaitem">提货点：{{item['point_name']}}</view>
 	</view>
 </t-dialog>

@@ -144,7 +144,7 @@ Component({
 				const thisIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList[thisIndex]['status'] = 2; // 已通知
 				this.setData({ dataList, deleteConfirm: false, actionItem: {} });
-				wx.showToast({ title: '通知成功', duration: 1500, icon: 'success' });
+				wx.showToast({ title: '已通知配送', duration: 1500, icon: 'success' });
 			}
 		},
 	},

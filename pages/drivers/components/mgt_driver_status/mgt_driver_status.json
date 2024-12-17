@@ -1,0 +1,15 @@
+{
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "disableScroll": true,
+	"usingComponents": {
+        "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-search": "tdesign-miniprogram/search/search",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-loading": "tdesign-miniprogram/loading/loading",
+        "t-dialog": "tdesign-miniprogram/dialog/dialog",
+        "t-radio": "tdesign-miniprogram/radio/radio",
+        "t-action-sheet": "tdesign-miniprogram/action-sheet/action-sheet",
+        "t-date-time-picker": "tdesign-miniprogram/date-time-picker/date-time-picker"
+    }
+}

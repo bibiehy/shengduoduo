@@ -34,11 +34,11 @@ Page({
 	},
 	async onLoad(options) {
         //
-        const { actionType, id } = options;
+        const { actionType, id, centerId } = options;
         this.setData({ id, actionType });
 
         if(actionType == 'create') {
-            this.selectComponent('#templateDrivers').getPageRequest({});
+            this.selectComponent('#templateDrivers').getPageRequest({ center_id: centerId });
         }else{ // edit
             const result = await useRequest(() => fetchUserDetail({ id }));
             if(result) {
