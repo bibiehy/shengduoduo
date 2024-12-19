@@ -66,6 +66,7 @@ Component({
 		onRadioChange(e) {
 			const { value } = e.detail;
 			this.setData({ radioValue: value });
+			this.onAjaxList(1);
 		},
 		// 搜索
 		onSearchChange(e) { // 更新搜索关键字

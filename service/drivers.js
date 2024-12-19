@@ -27,6 +27,8 @@ export const fetchDiaoduNotice = (params) => ({ url: `/dispatcher/notice/${param
 
 /*************************** 司机管理 *************************/
 
-// 列表 params = { page, size, keyword }
+// 司机列表 params = { page, size, keyword }
 export const fetchDriverList = (params) => ({ url: '/dispatcher/getDriverList', method: 'get', data: { size: 20, ...params } });
 
+// 配送概况 params = { page, size, keyword }
+export const fetchDiverGaikuang = (params) => ({ url: '/dispatcher/getDriverSummary', method: 'get', data: { size: 20, ...params } });

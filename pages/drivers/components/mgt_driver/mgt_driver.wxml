@@ -6,10 +6,10 @@
         </view>
     </navigation-bar>
     <block wx:if="{{tabActive == 'list'}}">
-        <mgt-driver-list />
+        <mgt-driver-list style="flex: 1;" />
     </block>
     <block wx:if="{{tabActive == 'status'}}">
-        <mgt-driver-status />
+        <mgt-driver-status style="flex: 1;" />
     </block>
 </view> 
 

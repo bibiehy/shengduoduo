@@ -42,10 +42,10 @@
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/audit_task.png" /></view>
 				<view class="modname">任务审核</view>
 			</view>
-			<view class="moditem">
+			<!-- <view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/drivers.png" /></view>
 				<view class="modname">干线调度</view>
-			</view>
+			</view> -->
 			<view class="moditem">
 				<view class="modimg"><image mode="widthFix" src="../../../../assets/finance.png" /></view>
 				<view class="modname">财务管理</view>

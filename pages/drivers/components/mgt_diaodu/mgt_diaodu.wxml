@@ -12,9 +12,9 @@
 		<view class="formitem02">
 			<view class="selectbox" bind:tap="onShowCenter">
 				<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
-				<t-icon name="chevron-down-s" size="26px" />
+				<t-icon name="chevron-down-s" size="26px" color="rgba(0, 0, 0, 0.45)" />
 			</view>
-			<t-search t-class="searchinput" clearable="{{false}}" placeholder="提货点或司机" />
+			<t-search t-class="searchinput" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="提货点或司机" />
 		</view>
 	</view>
 
@@ -34,12 +34,12 @@
 			</block>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
-					<t-tag class="status" wx:if="{{item['status'] == 1}}" variant="light" theme="primary" size="small">待通知</t-tag>
-					<t-tag class="status" wx:elif="{{item['status'] == 2}}" variant="light" theme="warning" size="small">已通知</t-tag>
-					<t-tag class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
-					<t-tag class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
-					<t-tag class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
-					<t-tag class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<t-tag t-class="status" wx:if="{{item['status'] == 1}}" variant="light" theme="primary" size="small">待通知</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 2}}" variant="light" theme="warning" size="small">已通知</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
 					<view class="mainbox">
 						<view class="psname">{{item['username']}}({{item['phone']}})</view>
 						<view class="pstime">{{item['created_at']}}</view>
@@ -80,8 +80,8 @@
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">司机：{{item['username']}}({{item['phone']}})</view>
-		<view class="diaitem">提货点：{{item['point_name']}}</view>
+		<view class="diaitem">司机：{{actionItem['username']}}({{actionItem['phone']}})</view>
+		<view class="diaitem">提货点：{{actionItem['point_name']}}</view>
 	</view>
 </t-dialog>
 
@@ -95,7 +95,7 @@
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">司机：{{item['username']}}({{item['phone']}})</view>
-		<view class="diaitem">提货点：{{item['point_name']}}</view>
+		<view class="diaitem">司机：{{actionItem['username']}}({{actionItem['phone']}})</view>
+		<view class="diaitem">提货点：{{actionItem['point_name']}}</view>
 	</view>
 </t-dialog>

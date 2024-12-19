@@ -1,41 +1,51 @@
-<view class="peisong-conditions">
-    <view class="selectbox" bind:tap="onShowCenter">
-        <view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
-        <t-icon name="chevron-down-s" size="24px" />
-    </view>
-    <view class="datebox" bind:tap="onPeisongRadio" data-value="date">
-        <t-radio checked="{{radioChecked == 'date'}}" />
-        <view class="showdate">
-            <view class="datevalue">{{monthValue}}</view>
-            <t-icon name="calendar-event" size="16px" />
-        </view>
-    </view>
-    <view class="allbox" bind:tap="onPeisongRadio" data-value="all">
-        <t-radio checked="{{radioChecked == 'all'}}" label="全部" />
-    </view>
-</view>
-
-<view class="overview-header">
-    <view class="cell_1">司机</view>
-    <view class="cell_2">运输次数</view>
-    <view class="cell_3">送达率</view>
-</view>
-<view class="overview-body">
-    <view class="viewitem">
-        <view class="cell_1">张三(18069880000)</view>
-        <view class="cell_2">1234</view>
-        <view class="cell_3">90%</view>
-    </view>
-    <view class="viewitem">
-        <view class="cell_1">张三(18069880000)</view>
-        <view class="cell_2">1234</view>
-        <view class="cell_3">90%</view>
-    </view>
-    <view class="viewitem">
-        <view class="cell_1">张三(18069880000)</view>
-        <view class="cell_2">1234</view>
-        <view class="cell_3">90%</view>
-    </view>
+<view class="drivers-status">
+	<view class="peisong-conditions">
+		<view class="selectbox" bind:tap="onShowCenter">
+			<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
+			<t-icon name="chevron-down-s" size="24px" />
+		</view>
+		<view class="datebox" bind:tap="onPeisongRadio" data-value="date">
+			<t-radio checked="{{radioChecked == 'date'}}" />
+			<view class="showdate">
+				<view class="datevalue">{{monthValue}}</view>
+				<t-icon name="calendar-event" size="16px" />
+			</view>
+		</view>
+		<view class="allbox" bind:tap="onPeisongRadio" data-value="all">
+			<t-radio checked="{{radioChecked == 'all'}}" label="全部" />
+		</view>
+	</view>
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{120}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="overview-box">
+			<view class="overview-header">
+				<view class="cell_1">司机</view>
+				<view class="cell_2">运输次数</view>
+				<view class="cell_3">送达率</view>
+			</view>
+			<view class="overview-body">
+				<block wx:if="{{dataList.length <= 0}}">
+					<view class="nodata"><empty /></view>	
+				</block>
+				<block wx:else>
+					<view class="viewitem" wx:for="{{dataList}}" wx:key="driver_id">
+						<!-- <view class="cell_1">{{item['driver_name']}}({{item['phone']}})<t-tag t-class="status" variant="light" theme="primary" size="small">待通知</t-tag></view> -->
+						<view class="cell_1">{{item['driver_name']}}({{item['phone']}})</view>
+						<view class="cell_2">{{item['total_num']}}</view>
+						<view class="cell_3">{{item['reach_rate']*100}}%</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</t-pull-down-refresh>	
 </view>
 
 <!-- // 集货中心 -->

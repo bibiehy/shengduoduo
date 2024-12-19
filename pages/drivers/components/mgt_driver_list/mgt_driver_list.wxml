@@ -1,46 +1,59 @@
-<view class="global-page-search">
-    <t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="请输入姓名、电话等关键字" />
-    <view class="pageline"></view>
-    <view class="pageaddbtn" bind:tap="addEditDriver" data-type="create" data-id=""><t-icon name="add" size="24" /> 添加司机</view>
+<view class="drivers-listbox">
+	<view class="driver-search">
+		<view class="selectbox" bind:tap="onShowCenter">
+			<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
+			<t-icon name="chevron-down-s" size="26px" color="rgba(0, 0, 0, 0.45)" />
+		</view>
+		<t-search t-class="drsearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="姓名、电话" />
+		<view class="draddbtn" bind:tap="addEditDriver" data-type="create" data-id=""><t-icon name="add" size="24" /> 添加</view>
+	</view>
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag t-class="status" wx:if="{{item['busy'] == 1}}" variant="light" theme="primary" size="small">待通知</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 2}}" variant="light" theme="warning" size="small">已通知</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<view class="mainbox" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}">						
+						<view class="imgbox">
+							<image class="avator" mode="aspectFill" src="{{item['avator']}}" />
+							<t-tag wx:if="{{item['disabled'] == 2}}" t-class="distatus" theme="danger" size="small">已禁用</t-tag>		
+						</view>
+						<view class="rightbox">
+							<view class="psname">{{item['nickname']}}</view>
+							<view class="pstime">{{item['updateTime'] || item['createTime']}}</view>
+							<view class="psinfo">{{item['username']}} {{item['phone']}}</view>
+							<view class="psinfo">集货中心：{{item['center_name']}}</view>
+							<view class="psinfo">车辆信息：{{item['type_name']}}</view>
+						</view>
+					</view>
+					<view class="psbtns">
+						<t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
+						<t-tag t-class="listag" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}" variant="light-outline" shape="round">编 辑</t-tag>
+						<t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
 </view>
-<t-pull-down-refresh
-    show-scrollbar="{{false}}"
-    enhanced="{{true}}"
-    value="{{downStatus}}"
-    lowerThreshold="{{50}}"
-    loadingProps="{{loadingProps}}"
-    loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
-    bind:refresh="onRefresh"
-    bind:scrolltolower="onPullUpLoaded"
->
-    <view class="page-scroll">
-        <view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
-        <block wx:else>
-            <view class="listitem" wx:for="{{dataList}}" wx:key="id">
-                <t-tag wx:if="{{item['disabled'] == 2}}" class="status" variant="light" theme="danger" size="small">已禁用</t-tag>
-                <view class="mainbox" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}">
-                    <view class="imgbox"><image mode="aspectFill" src="{{item['avator']}}" /></view>
-                    <view class="rightbox">
-                        <view class="psname">{{item['nickname']}}</view>
-                        <view class="pstime">{{item['createTime']}}</view>
-                        <view class="psinfo">{{item['username']}} {{item['phone']}}</view>
-                        <view class="psinfo">{{item['center_name']}}</view>
-                        <view class="psinfo">{{item['type_name']}}</view>
-                    </view>
-                </view>
-                <view class="psbtns">
-                    <t-tag t-class="listag" bind:tap="onDisabled" data-id="{{item['id']}}" data-status="{{item['disabled']}}" data-index="{{index}}" variant="light-outline" shape="round">{{item['disabled'] == 1 ? '禁 用' : '启 用'}}</t-tag>
-                    <t-tag t-class="listag" bind:tap="addEditDriver" data-type="edit" data-id="{{item['id']}}" variant="light-outline" shape="round">编 辑</t-tag>
-                    <t-tag t-class="listag" bind:tap="onDelete" data-item="{{item}}" variant="light-outline" shape="round" theme="danger">删 除</t-tag>
-                </view>
-            </view>
-        </block>
-        <view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
-            <t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
-            <view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
-        </view>
-    </view>
-</t-pull-down-refresh>
 
 <!-- // 集货中心 -->
 <t-action-sheet id="jihuoCenterActionSheet" t-class="driver-action-sheet" bind:selected="onCenterSelected" />

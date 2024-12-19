@@ -94,7 +94,7 @@ Page({
 	// 所属提货点事件
 	onAddTihuodian() {
 		const { allGuigeList } = this.data;
-		const newActionItem = { spec_rate_list: allGuigeList };
+		const newActionItem = { actype: 'create', spec_rate_list: allGuigeList };
 		this.setData({ visible: true, actionItem: newActionItem });
 	},
 	onEditTihuodian(e) {
@@ -114,7 +114,7 @@ Page({
 			item['spec_rate_list'] = newList;
 		}
 
-		this.setData({ visible: true, actionItem: item });
+		this.setData({ visible: true, actionItem: { ...item, actype: 'edit', } });
 	},
 	onPopupSure() { // 添加/编辑提货点弹窗确认动作
 		//

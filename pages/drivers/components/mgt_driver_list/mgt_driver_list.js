@@ -30,8 +30,8 @@ Component({
 	methods: {
         // 列表
         async onAjaxList(thisPage, callback) { // 列表请求
-            const { keyword, dataList, upStatus } = this.data;
-            const result = await useRequest(() => fetchDriverList({ page: thisPage, keyword }));
+            const { centerSelected, keyword, dataList, upStatus } = this.data;
+            const result = await useRequest(() => fetchDriverList({ page: thisPage, center_id: centerSelected['value'], keyword }));
             if(result) {
                 // upStatus == 2 表示上拉加载，数据许合并
                 const newList = result['content'];

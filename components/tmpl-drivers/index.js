@@ -181,18 +181,29 @@ Component({
 			// 编辑、审核时需根据集货中心ID获取其下提货点，格式化路线信息
 			const routeList = detailInfo['expect_route_list'] || []; // 期望路线信息
 			const pickupOptions = []; // 提货点信息
-			if(['audit', 'edit', 'signupAgain'].includes(actionType)) {
-				const centerId = detailInfo['center_id'];
+			const centerId = detailInfo['center_id'];
+			if(centerId) { // 创建和注册时候为空，选择提货点后会加载提货点
 				const dataList = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
 				if(dataList) { // 格式化成 { label: '', value: '' }
 					dataList.forEach((item) => {
 						const findItem = routeList.find((listItem) => listItem['point_id'] == item['point_id']);
-						if(!findItem) {
-							pickupOptions.push({ label: item['point_name'], value: item['point_id'] });
-						}
+						pickupOptions.push({ label: item['point_name'], value: item['point_id'], disabled: findItem ? true : false });
 					});
 				}
 			}
+			
+			// if(['audit', 'edit', 'signupAgain'].includes(actionType)) { // 创建和注册时候为空，选择提货点后会加载提货点
+			// 	const centerId = detailInfo['center_id'];
+			// 	const dataList = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
+			// 	if(dataList) { // 格式化成 { label: '', value: '' }
+			// 		dataList.forEach((item) => {
+			// 			const findItem = routeList.find((listItem) => listItem['point_id'] == item['point_id']);
+			// 			if(!findItem) {
+			// 				pickupOptions.push({ label: item['point_name'], value: item['point_id'] });
+			// 			}
+			// 		});
+			// 	}
+			// }
 
 			// 支付类型
 			const payType = detailInfo['pay_type'] || 1;

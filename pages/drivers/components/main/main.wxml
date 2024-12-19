@@ -14,7 +14,7 @@
 				<view class="jihzxname">{{centerSelected['label'] || '请选择集货中心'}}</view>
 				<t-icon name="chevron-down-s" size="26px" />
 			</view>
-			<t-search t-class="searchinput" clearable="{{false}}" placeholder="请输入提货点" />
+			<t-search t-class="searchinput" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="请输入提货点" />
 		</view>
 	</view>
 	<t-pull-down-refresh

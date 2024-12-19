@@ -80,7 +80,12 @@
 <popup title="提货点信息设置" visible="{{visible}}" bind:callback="onPopupSure" close-on-overlay-click="{{false}}">
 	<scroll-view class="popup-scrollviewbox" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
 		<view class="popupinner">
-			<form-select id="formInputTihuodian" label="所属提货点" name="point_id" value="{{actionItem['point_id']}}" placeholder="请选择所属提货点" required="{{true}}" options="{{allPickupList}}" />
+			<block wx:if="{{actionItem['actype'] == 'create'}}">
+				<form-select id="formInputTihuodian" label="所属提货点" name="point_id" placeholder="请选择所属提货点" required="{{true}}" options="{{allPickupList}}" />
+			</block>
+			<block wx:else>
+				<form-select id="formInputTihuodian" label="所属提货点" name="point_id" value="{{actionItem['point_id']}}" placeholder="请选择所属提货点" required="{{true}}" options="{{allPickupList}}" />
+			</block>
 			<form-input id="formInputReachTime" label="预估送达时长" name="reach_time" value="{{actionItem['reach_time']}}" remark="如：36、36.5 等小时制" suffix="小时" type="digit" placeholder="请输入预估送达时长" required="{{true}}" />
 			<form-radio id="formInputClosed" label="是否关闭收单" name="closed" value="{{actionItem['closed'] || 0}}" options="{{radioOptions}}" layout="horizontal" required="{{true}}" />
 			<form-input id="formInputCardNum" label="卡板数量" name="card_num" value="{{actionItem['card_num']}}" remark="如：12、18 的整数" suffix="个" type="number" placeholder="请输入卡板数量" required="{{true}}" />

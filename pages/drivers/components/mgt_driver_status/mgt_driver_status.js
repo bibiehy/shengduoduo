@@ -1,6 +1,6 @@
 import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
 import useRequest from '../../../../utils/request';
-import { fetchDriverList } from '../../../../service/drivers';
+import { fetchDiverGaikuang } from '../../../../service/drivers';
 import { form, delay, getCurrentDateTime } from '../../../../utils/tools';
 
 // 获取 app 实例
@@ -28,16 +28,17 @@ Component({
         // 列表请求
 		async onAjaxList(thisPage, callback) {
 			const { centerSelected, radioChecked, monthValue, dataList, upStatus } = this.data;
-			// const result = await useRequest(() => fetchMainList({ page: thisPage, progress: radioValue, center_id: centerSelected['value'], keyword }));
-			// if(result) {
-			// 	// upStatus == 2 表示上拉加载，数据许合并
-			// 	const newList = result['content'];
-			// 	this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
+			const dateMonth = radioChecked == 'date' ? monthValue : ''; // all 时传空
+			const result = await useRequest(() => fetchDiverGaikuang({ page: thisPage, center_id: centerSelected['value'], month: dateMonth }));
+			if(result) {
+				// upStatus == 2 表示上拉加载，数据许合并
+				const newList = result['content'];
+				this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
 
-			// 	if(Object.prototype.toString.call(callback) == '[object Function]') {
-			// 		callback(newList);
-			// 	}
-			// }
+				if(Object.prototype.toString.call(callback) == '[object Function]') {
+					callback(newList);
+				}
+			}
 		},	
 		onRefresh() { // 下拉刷新
 			this.setData({ downStatus: true });
@@ -108,6 +109,7 @@ Component({
             const thisMonth = getCurrentDateTime('YYYY-MM');
 			
 			this.setData({ centerList, centerSelected: defaultCenter, monthValue: thisMonth });
+			this.onAjaxList(1);
         },
         detached() { // 组件实例被从页面节点树移除时执行
 
