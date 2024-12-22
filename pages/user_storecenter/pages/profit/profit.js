@@ -19,8 +19,7 @@ Page({
 		// 总件数、总收益
 		allJianshu: '-/-',
 		allProfit: '-/-',
-	},
-	
+	},	
 	// 获取所有的分拣员
 	async getAllUsers() {
 		const { roleType } = this.data;

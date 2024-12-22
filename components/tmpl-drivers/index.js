@@ -28,7 +28,7 @@ Component({
 	properties: {
 		actionType: { type: String, value: 'signup' }, // 注册(signup/signupAgain)/审核(audit)/创建(create)/编辑(edit)
 		phone: { type: String, value: '' }, // 只有 signup/signupAgain 时使用
-		// 来自哪个页面，总共分2类，一个是注册，一个是审核列表，发货人个人中心，调度管理页面添加司机(此时需禁用集货中心选择)
+		// 来自哪个页面，总共分4类，1 注册，2 审核列表，3 个人中心，4 调度，调度管理页面添加司机(此时需禁用集货中心选择)
 		fromto: { type: String, value: '' }, // signup / audit / personal / dispatcher
 	},
 	data: {
@@ -56,7 +56,7 @@ Component({
 		},
 		onAddSure(e) { // 添加路线
 			const { label, value } = e.detail;
-			const { pickupOptions, routeList } = this.data;
+			const { pickupOptions, routeList, fromto } = this.data;
 			const thisIndex = pickupOptions.findIndex((item) => item['value'] == value);
 			const thisItem = pickupOptions[thisIndex];
 
@@ -64,7 +64,7 @@ Component({
 			pickupOptions.splice(thisIndex, 1);
 
 			// 添加路线信息
-			routeList.push({ point_id: thisItem['value'], point_name: thisItem['label'], cost: '' });
+			routeList.push({ point_id: thisItem['value'], point_name: thisItem['label'], cost: fromto == 'dispatcher' ? 0 : '' });
 
 			this.setData({ pickupOptions, routeList });
 		},

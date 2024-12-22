@@ -6,7 +6,7 @@ import { form, delay, createGuid } from '../../../../utils/tools';
 Page({
 	data: {
         id: '',
-        actionType: '',
+        actionType: '', // create / edit
     },
     async onSubmit() { // 确认提交
 		const { actionType, id } = this.data;
@@ -17,7 +17,7 @@ Page({
 			formValues['role_type'] = 3;
 
 			if(actionType == 'edit') {
-				formValues['id'] = id;
+				formValues['id'] = Number(id);
 			}
 	
 			const result = await useRequest(() => fetchRequest({ ...formValues }));

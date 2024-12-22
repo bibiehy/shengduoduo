@@ -57,13 +57,13 @@ export const fetchTaskJieSuo = (params) => ({ url: `/collectCenter/occupySorter`
 export const fetchFenjianDetail = (params) => ({ url: `/collectCenter/getTaskSorterList/${params['id']}`, method: 'get', loading: true, delay: 500 });
 
 // 把提货点下卡位号设置为待调度
-export const fetchKabanDiaodu = (params) => ({ url: `/collectCenter/updateCardNoList`, method: 'post', data: params, loading: true, delay: 500 });
+export const fetchKabanDiaodu = (params) => ({ url: `/collectCenter/updateCardStatus`, method: 'post', data: params, loading: true, delay: 500 });
 
 // 修改卡位号
 export const fetchKabanUpdate = (params) => ({ url: `/collectCenter/updateTaskCardStatus`, method: 'post', data: params, loading: true, delay: 500 });
 
 // 规格分拣汇总，任务id
-export const fetchGuigeTotal = (params) => ({ url: `/collectCenter/getTaskSorterNum/${params['id']}`, method: 'get', loading: true, delay: 500 });
+export const fetchGuigeTotal = (params) => ({ url: `/collectCenter/getTaskSorterNum/${params['id']}`, method: 'get', loading: false });
 
 // 修改分拣员分拣数量
 export const fetchUpdateFenjianNumber = (params) => ({ url: `/collectCenter/updateTaskSorterNum`, method: 'post', data: params, loading: true, delay: 500 });

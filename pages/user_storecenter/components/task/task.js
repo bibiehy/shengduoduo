@@ -210,6 +210,8 @@ Component({
 			if(result) {
 				this.setData({ visibleDiaodu: false });
 				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
+				await delay(1000);
+				this.onAjaxList(1);
 			}
 		},
 		// 修改分拣员分拣数量
@@ -263,7 +265,7 @@ Component({
             this.onAjaxList(1); // 全部
             this.getTihuodianList(); // 提货点
 
-			// useRequest(() => fetchTaskJieSuo({ id: 10, status: 2 }));
+			// useRequest(() => fetchTaskJieSuo({ id: 14, status: 2 }));
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

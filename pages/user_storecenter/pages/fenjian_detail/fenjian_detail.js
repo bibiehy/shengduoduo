@@ -23,10 +23,15 @@ Page({
 		const result = await useRequest(() => fetchTaskDetail({ id }));
 		if(result) {
 			// stepper_value 为步进器的值，stepper_checked 表示当前规格是否选中，选中后就不允许在操作
+			const newSpecList = [];
 			result['task_spec_list'].forEach((item) => {
-				item['stepper_value'] = item['center_receive_num'];
-				item['stepper_checked'] = item['center_checked'];
+				if(item['num'] > 0) {
+					item['stepper_value'] = item['center_receive_num'];
+					item['stepper_checked'] = item['center_checked'];
+					newSpecList.push(item);
+				}				
 			});
+			result['task_spec_list'] = newSpecList;
 
 			// 设置卡板号默认值
 			const checkedList = result['card_no'] || [];
@@ -149,7 +154,7 @@ Page({
 			wx.showToast({ title: '请设置入库卡位', duration: 1500, icon: 'error' });
 			return false;
 		}
-
+		
 		if(!detailInfo['task_spec_list'].every((item) => item['stepper_checked'])) {
 			wx.showToast({ title: '存在未确认规格', duration: 1500, icon: 'error' });
 			return false;

@@ -150,7 +150,7 @@
 							<t-tag catch:tap="onCancelGuige" variant="light-outline">取消</t-tag>
 							<t-tag catch:tap="onSureGuige" theme="primary" style="margin-left: 10px;">确定</t-tag>
 						</block>
-						<t-tag wx:else catch:tap="onUpdateGuige" data-id="{{item['task_spec_id']}}" variant="light-outline" theme="primary">修改</t-tag>
+						<t-tag wx:else catch:tap="onUpdateGuige" data-id="{{item['task_spec_id']}}" variant="light-outline" theme="primary" size="large" style="background-color: transparent; border: none;">修改</t-tag>
 					</view>
 					<block wx:if="{{item['list'] && item['list'].length > 0}}">
 						<t-steps layout="vertical" theme="dot">

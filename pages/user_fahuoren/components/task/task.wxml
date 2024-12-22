@@ -144,7 +144,7 @@
 	</t-dialog>
 </block>
 
-<!-- // 收货人确认配送 -->
+<!-- // 确认配送 -->
 <block wx:if="{{showConfirm == 'sending'}}">
 	<t-dialog
 		visible="{{true}}"

@@ -6,11 +6,11 @@
             <view class="mySureBtn" bind:tap="onSure">确定</view>
         </view>
 		<view class="commonScroll">
-            <view class="kabanTipsCheckbox">
-                <t-checkbox bind:change="onAllChecked" icon="rectangle" checked="{{allChecked}}" borderless="{{true}}">
-					<view class="kbtips" slot="label">全选<view class="note">(只显示有货的入库卡位)</view></view>
+			<view class="kabanTipsCheckbox" wx:if="{{type == 2}}">
+				<t-checkbox bind:change="onAllChecked" icon="rectangle" checked="{{allChecked}}" borderless="{{true}}">
+					<view class="kbtips" slot="label">全选<view class="note">(只显示已分拣的入库卡位号)</view></view>
 				</t-checkbox>
-            </view>
+			</view>
 			<block wx:if="{{dataList.length <= 0}}">
 				<view style="padding-top: 30px;"><empty /></view>
 			</block>

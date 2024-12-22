@@ -31,35 +31,33 @@
 					<view class="cell_4">操作</view>
 				</view>
 				<block wx:for="{{detailInfo['task_spec_list'] || []}}">
-					<block wx:if="{{item['num'] > 0}}">
-						<block wx:if="{{item['center_checked'] || actionType == 'view'}}">
-							<view class="tdrow" wx:key="id">
-								<view class="rowinfo">
-									<view class="cell_1">{{item['spec_name']}}</view>
-									<view class="cell_2">{{item['num']}}</view>
-									<view class="cell_3"><t-stepper disabled="{{true}}" value="{{item['stepper_value']}}" theme="filled" /></view>
-									<view class="cell_4">
-										<view class="ebtn disabled">上报</view>
-										<t-checkbox label="" icon="rectangle" disabled="{{true}}" checked="{{item['stepper_checked']}}" />
-									</view>
+					<block wx:if="{{item['center_checked'] || actionType == 'view'}}">
+						<view class="tdrow" wx:key="id">
+							<view class="rowinfo">
+								<view class="cell_1">{{item['spec_name']}}</view>
+								<view class="cell_2">{{item['num']}}</view>
+								<view class="cell_3"><t-stepper disabled="{{true}}" value="{{item['stepper_value']}}" theme="filled" /></view>
+								<view class="cell_4">
+									<view class="ebtn disabled">上报</view>
+									<t-checkbox label="" icon="rectangle" disabled="{{true}}" checked="{{item['stepper_checked']}}" />
 								</view>
-								<view wx:if="{{item['is_exception'] == 1}}" class="exception">注：有规格异常上报信息，<text bind:tap="onViewReport" data-id="{{detailInfo['id']}}" data-spec="{{item['spec']}}">点击查看</text></view>
 							</view>
-						</block>
-						<block wx:else>
-							<view class="tdrow" wx:key="id">
-								<view class="rowinfo">
-									<view class="cell_1">{{item['spec_name']}}</view>
-									<view class="cell_2">{{item['num']}}</view>
-									<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-item="{{item}}" min="{{item['center_receive_num']}}" value="{{item['stepper_value'] || item['num']}}" theme="filled" /></view>
-									<view class="cell_4">
-										<view class="ebtn" bind:tap="onExceptionReport" data-id="{{item['id']}}">上报</view>
-										<t-checkbox bind:change="onChecked" checked="{{item['stepper_checked']}}" data-item="{{item}}" label="" icon="rectangle" />
-									</view>
+							<view wx:if="{{item['is_exception'] == 1}}" class="exception">注：有规格异常上报信息，<text bind:tap="onViewReport" data-id="{{detailInfo['id']}}" data-spec="{{item['spec']}}">点击查看</text></view>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="tdrow" wx:key="id">
+							<view class="rowinfo">
+								<view class="cell_1">{{item['spec_name']}}</view>
+								<view class="cell_2">{{item['num']}}</view>
+								<view class="cell_3"><t-stepper bind:change="onChangeStepper" data-item="{{item}}" min="{{item['center_receive_num']}}" value="{{item['stepper_value'] || item['num']}}" theme="filled" /></view>
+								<view class="cell_4">
+									<view class="ebtn" bind:tap="onExceptionReport" data-id="{{item['id']}}">上报</view>
+									<t-checkbox bind:change="onChecked" checked="{{item['stepper_checked']}}" data-item="{{item}}" label="" icon="rectangle" />
 								</view>
-								<view wx:if="{{item['is_exception'] == 1}}" class="exception">注：有规格异常上报信息，<text bind:tap="onViewReport" data-id="{{detailInfo['id']}}" data-spec="{{item['spec']}}">点击查看</text></view>
 							</view>
-						</block>
+							<view wx:if="{{item['is_exception'] == 1}}" class="exception">注：有规格异常上报信息，<text bind:tap="onViewReport" data-id="{{detailInfo['id']}}" data-spec="{{item['spec']}}">点击查看</text></view>
+						</view>
 					</block>					
 				</block>				
 			</view>

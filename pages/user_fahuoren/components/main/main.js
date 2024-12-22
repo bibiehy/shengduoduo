@@ -106,7 +106,7 @@ Component({
                 this.onPaySuccess();
 			}else if(actionType == 'gosetime') { // 发货人已支付，支付成功关闭页面再次点击确认配送
 				this.onPaySuccess();
-			}else if(actionType == 'sending') { // 收货人确认配送
+			}else if(actionType == 'sending') { // 确认配送
 				this.onTaskSendingShouhuoren();
 			}else if(actionType == 'delete') { // 删除任务
 				this.onTaskDelete();
@@ -183,7 +183,7 @@ Component({
 				return false;
             }
 
-			const result = await useRequest(() => fetchTaskSend({ id: actionItem['id'] }));
+			const result = await useRequest(() => fetchTaskSend({ id: actionItem['id'], estimate_time: datetimeValue }));
 			if(result) {
 				const findIndex = dataList.findIndex((item) => item['id'] == actionItem['id']);
 				dataList[findIndex]['status'] = 2; // 待配送

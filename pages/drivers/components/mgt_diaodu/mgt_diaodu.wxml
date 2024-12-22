@@ -43,9 +43,9 @@
 					<view class="mainbox">
 						<view class="psname">{{item['username']}}({{item['phone']}})</view>
 						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
 						<view class="psinfo">车辆信息：{{item['car_type_name']}}，{{item['card_no']}}</view>
 						<view class="psinfo">车辆卡板状态：共<text class="tips">{{item['card_info']['total_num']}}</text>个卡板，已使用<text class="tips">{{item['card_info']['use_num']}}</text>个</view>
-						<view class="psinfo">提货点：{{item['point_name']}}</view>
 						<block wx:if="{{item['status'] == 4 || item['status'] == 5}}">
 							<view class="psinfo">预计送达时间：{{item['reach_time']}}</view>
 						</block>

@@ -40,7 +40,7 @@
 					<view class="moneybox" bind:tap="onShowDialog" data-item="{{item}}" data-type="report">
 						<view class="price"><text class="CNY">￥</text>{{item['total_profit']}}</view>
 						<view class="pricetxt">{{item['status'] == 0 ? '预估收益' : '上报收益'}}</view>
-						<t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag>
+						<!-- <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag> -->
 					</view>
 				</view>
 			</block>

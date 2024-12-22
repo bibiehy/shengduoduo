@@ -4,7 +4,7 @@
 		<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" type="nickname" placeholder="请输入用户昵称" required="{{true}}" />
 	</block>
 	<block wx:else>
-		<form-upload class="FORM_UPLOAD" label="头像上传" remark="注：请上传10M以内的正方形图片(.jpg或.png)" name="avator" value="{{defaultValues['avator']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传头像" required="{{true}}" />
+		<form-upload class="FORM_UPLOAD" label="头像" remark="注：请上传10M以内的正方形图片(.jpg或.png)" name="avator" value="{{defaultValues['avator']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传头像" required="{{true}}" />
 		<form-input class="FORM_INPUT" label="用户昵称" name="nickname" value="{{defaultValues['nickname']}}" placeholder="请输入用户昵称" required="{{true}}" />
 	</block>
 	<form-input class="FORM_INPUT" label="用户姓名" name="username" value="{{defaultValues['username']}}" placeholder="请输入用户姓名" required="{{true}}" />
@@ -15,14 +15,104 @@
 	<form-input class="FORM_INPUT" label="最大载重" name="max_number" value="{{defaultValues['max_number']}}" placeholder="请输入车辆最大载重" type="number" remark="如：1150" suffix="千克(kg)" required="{{true}}" />
 	<form-input class="FORM_INPUT" label="可装卡板数量" name="can_card_num" value="{{defaultValues['can_card_num']}}" placeholder="请输入可装卡板最大数量" type="number" remark="如：12" suffix="个" required="{{true}}" />
 	<form-carnumber class="FORM_CARNUMBER" label="车牌号码" name="card_no" value="{{defaultValues['card_no']}}" placeholder="请添加车牌号码" required="{{true}}" />	
-	<block wx:if="{{fromto == 'dispatcher'}}">
+
+	<block wx:if="{{fromto == 'signup'}}">
+		<form-select class="FORM_SELECT" bind:callback="onSelectCenter" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" remark="注意：切换此值路线信息会被清空" options="{{centerOptions}}" placeholder="请选择集货中心" required="{{true}}" />
+		<view class="runRouteBox">
+			<view class="header">请添加想跑的路线</view>
+			<view class="routeBody">
+				<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+				<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
+					<view class="subheader">
+						<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
+						<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
+					</view>
+					<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元(RMB)" placeholder="请输入费用" required="{{true}}" />
+				</view>
+			</view>
+			<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
+				<view class="routeAddBtn">
+					<t-icon name="add" />
+					<text>添加路线</text>
+				</view>
+			</popup-select>
+		</view>
+	</block>
+	<block wx:elif="{{fromto == 'audit'}}">
+		<form-select class="FORM_SELECT" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" options="{{centerOptions}}" disabled="{{true}}" placeholder="请选择集货中心" required="{{true}}" />
+		<view class="runRouteBox">
+			<view class="header">请添加想跑的路线</view>
+			<view class="routeBody">
+				<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+				<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
+					<view class="subheader">
+						<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
+						<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
+					</view>
+					<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元(RMB)" placeholder="请输入费用" required="{{true}}" disabled="{{true}}" />
+				</view>
+			</view>
+		</view>
+		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
+		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" remark="单趟费用" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
+		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" remark="如：10、10.5、10.58 等格式" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
+		<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
+		<form-textarea class="FORM_TEXTAREA" label="审核意见" name="remark" value="{{defaultValues['remark']}}" placeholder="请输入审核意见" required="{{false}}" />
+	</block>
+	<block wx:elif="{{fromto == 'personal'}}">
+		<form-select class="FORM_SELECT" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" options="{{centerOptions}}" disabled="{{true}}" placeholder="请选择集货中心" required="{{true}}" />
+		<view class="runRouteBox">
+			<view class="header">我跑的路线</view>
+			<view class="routeBody">
+				<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+				<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
+					<view class="subheader">
+						<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
+					</view>
+					<!-- <view>提货点地址</view> -->
+				</view>
+			</view>
+		</view>
+		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" disabled="{{true}}" />
+		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" remark="单趟费用" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" disabled="{{true}}" />
+		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" remark="如：10、10.5、10.58 等格式" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" disabled="{{true}}" />
+	</block>
+	<block wx:elif="{{fromto == 'dispatcher'}}">
+		<form-select class="FORM_SELECT" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" options="{{centerOptions}}" disabled="{{true}}" placeholder="请选择集货中心" required="{{true}}" />
+		<view class="runRouteBox">
+			<view class="header">请添加想跑的路线</view>
+			<view class="routeBody">
+				<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
+				<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
+					<view class="subheader">
+						<view class="subname">{{index + 1}}. {{item['point_name']}}</view>
+						<t-icon bind:tap="onActionSheet" data-id="{{item['point_id']}}" data-name="{{item['point_name']}}" data-index="{{index}}" name="ellipsis" size="20px" color="#1677ff" />
+					</view>
+					<!-- <view>提货点地址</view> -->
+				</view>
+			</view>
+			<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
+				<view class="routeAddBtn">
+					<t-icon name="add" />
+					<text>添加路线</text>
+				</view>
+			</popup-select>
+		</view>
+		<form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
+		<form-input wx:if="{{payType == 1}}" class="FORM_INPUT" label="固定工价" remark="单趟费用" name="wages" value="{{defaultValues['wages'] || ''}}" placeholder="请输入固定工价" type="number" suffix="元(RMB)" required="{{true}}" />
+		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages'] || ''}}" placeholder="请输入运费系数" remark="如：10、10.5、10.58 等格式" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
+		<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
+	</block>
+
+
+	<!-- <block wx:if="{{fromto == 'dispatcher' || fromto == 'personal'}}">
 		<form-select class="FORM_SELECT" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" options="{{centerOptions}}" disabled="{{true}}" placeholder="请选择集货中心" required="{{true}}" />
 	</block>
 	<block wx:else>
 		<form-select class="FORM_SELECT" bind:callback="onSelectCenter" label="集货中心" name="center_id" value="{{defaultValues['center_id']}}" remark="注意：切换此值路线信息会被清空" options="{{centerOptions}}" placeholder="请选择集货中心" required="{{true}}" />
 	</block>
 	<view class="runRouteBox">
-		<view class="header">请添加您想跑的路线信息</view>
+		<view class="header">请添加想跑的路线</view>
 		<view class="routeBody">
 			<view class="routetips">* 越靠前的路线权重越高，会被先选择派遣。</view>
 			<view class="routeitem" wx:for="{{routeList}}" wx:key="point_id">
@@ -32,13 +122,15 @@
 				</view>
 				<form-input bind:onblur="onBlurCost" label="期望单趟费用" layout="horizontal" placement="right" name="{{item['point_id']}}__cost" value="{{item['cost']}}" type="number" suffix="元(RMB)" placeholder="请输入费用" required="{{true}}" />
 			</view>
-		</view>		
-		<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
-			<view class="routeAddBtn">
-				<t-icon name="add" />
-				<text>添加路线</text>
-			</view>
-		</popup-select>
+		</view>
+		<block wx:if="{{fromto == 'signup'}}">
+			<popup-select bind:callback="onAddSure" options="{{pickupOptions}}" display="block" placeholder="请选择提货点">
+				<view class="routeAddBtn">
+					<t-icon name="add" />
+					<text>添加路线</text>
+				</view>
+			</popup-select>
+		</block>
 	</view>
     <block wx:if="{{actionType == 'audit'}}">
         <form-radio class="FORM_RADIO" bind:callback="onPaytype" label="支付类型" name="pay_type" value="{{payType}}" options="{{paytypeOptions}}" required="{{true}}" />
@@ -46,6 +138,6 @@
 		<form-input wx:if="{{payType == 2}}" class="FORM_INPUT" label="运费系数" name="wages" value="{{defaultValues['wages']}}" placeholder="请输入运费系数" remark="如：10、10.5、10.58 等格式" type="digit" min="{{0}}" max="{{100}}" suffix="%" required="{{true}}" />
 		<form-upload class="FORM_UPLOAD" label="微信收款码" remark="注：请上传10M以内的收款码" name="payment_code" value="{{defaultValues['payment_code']}}" max="{{1}}" limit="{{10240}}" placeholder="请上传微信收款码" required="{{true}}" />
 		<form-textarea class="FORM_TEXTAREA" label="审核意见" name="remark" value="{{defaultValues['remark']}}" placeholder="请输入审核意见" required="{{false}}" />
-	</block>
+	</block> -->
 </view>
 <t-action-sheet id="actionSheetDrivers" bind:selected="onHandlerSelected" />

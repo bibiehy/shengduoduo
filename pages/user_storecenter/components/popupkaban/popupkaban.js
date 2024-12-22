@@ -15,7 +15,7 @@ Component({
 
 			if(type == 1) {
 				list.forEach((item) => {
-					const newItem = { id: item['card_no'], checked: item['status'] >= 2, disabled: false };
+					const newItem = { id: item['card_no'], checked: item['status'] >= 2, disabled: item['status'] >= 3 };
 					newList.push(newItem);
 				});
 			}else{ // 2
