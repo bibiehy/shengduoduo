@@ -1,0 +1,96 @@
+<view class="mainbox-wrapper global-pagebg">
+	<navigation-bar extClass="global-pagebg" title="浙A12345" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar>
+	<!-- <navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
+		<view class="global-navigation-bar">
+			<view class="main-searchbox" bind:tap="onSearchBar">
+				<t-search disabled="{{true}}" shape="round" placeholder="任务查询" />
+			</view>
+		</view>
+	</navigation-bar> -->
+	<view class="innerscroll">
+        <view class="statistical-info">
+            <view class="statitem item01">
+                <view class="statnum">{{weekSummary['total_profit']}}</view>
+                <view class="statname">本周预估收益</view>
+            </view>
+            <view class="statitem item02">
+                <view class="statnum">{{monthSummary['total_profit']}}</view>
+                <view class="statname">本月预估收益</view>
+            </view>
+        </view>
+
+		<view class="main-process">
+			<view class="header">
+				<view class="title">当前货物信息</view>
+                <view class="extrabox">
+                    <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+                </view>
+			</view>
+            <view class="listitem">
+                <t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已接受</t-tag>
+                <t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+                <t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+                <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+                <view class="mainbox">
+                    <view class="psname">集货中心名字</view>
+                    <view class="pstime">2024-12-20 08:30:30</view>
+                    <view class="psinfo">货品类型：蔬菜类</view>
+                    <view class="psinfo">所在入库卡位：1、2、3</view>
+                    <view class="psinfo">提货点：粤西农批7号仓</view>
+                    <view class="psinfo">提货点详细地址提货点详细地址提货点详细地址</view>
+                    <!-- <view class="psinfo">预计送达时间：{{item['estimate_time']}}</view> -->
+                </view>
+                <view class="psbtns">
+                    <t-tag t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+                </view>
+                <view class="biaoqianhao">
+                    <view class="bqhvalue">{{item['task_no']}}</view>
+                    <view class="bqhlabel">标签号</view>
+                </view>
+            </view>
+
+			<!-- <block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>
+			</block>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已接受</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<view class="mainbox" bind:tap="onDetail" data-item="{{item}}">
+						<view class="psname">{{item['name']}}</view>
+						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
+						<view class="psinfo">规格类型：{{item['goods_type_name']}}</view>
+						<view class="psinfo">总件数：{{item['total_number']}}件</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
+						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
+					</view>
+					<view class="psbtns" wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}">
+						<t-tag bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
+					</view>
+					<view class="biaoqianhao">
+						<view class="bqhvalue">{{item['task_no']}}</view>
+						<view class="bqhlabel">标签号</view>
+					</view>
+				</view>
+			</block> -->
+		</view>
+	</view>
+</view>
+
+<!-- // 拒绝 -->
+<t-dialog
+	visible="{{showConfirm}}"
+	title="确定要拒绝嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onSureDialog"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-sending" slot="content">
+		<view class="diaitem">任务名：{{actionItem['name']}}</view>
+		<view class="diaitem">发货人：{{actionItem['create_username']}} {{actionItem['create_phone']}}</view>
+	</view>
+</t-dialog>

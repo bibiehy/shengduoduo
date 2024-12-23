@@ -1,2 +1,10 @@
-<!--pages/user_driver/index.wxml-->
-<text>干线司机</text>
+<view class="layout-wrapper">
+	<main wx:if="{{tabbarActive == 'main'}}" />
+	<profit wx:elif="{{tabbarActive == 'profit'}}" />
+	<personal wx:elif="{{tabbarActive == 'personal'}}" />
+	<t-tab-bar value="{{tabbarActive}}" bind:change="onTabbar" fixed="{{true}}" theme="normal" split="{{false}}">
+		<t-tab-bar-item wx:for="{{tabbarList}}" wx:key="value" value="{{item.value}}" icon="{{item.icon}}">
+			{{item.label}}
+		</t-tab-bar-item>
+	</t-tab-bar>
+</view>

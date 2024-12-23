@@ -19,7 +19,6 @@
 .main-process .header .extrabox { display:flex; align-items:center; }
 .main-process .header .extrabox .actbtn { display:flex; align-items:center; font-size:16px; color:#1677ff; }
 .main-process .header .extrabox .line { width:1px; height:12px; background-color:#8d8c8c; margin:0 10px; }
-
 .main-process .listitem { position:relative; border:solid 1px #ebebeb; background-color:#fff; border-radius:8px; padding:10px 12px; margin-top:8px; margin-bottom:10px; }
 .main-process .listitem .status { position:absolute; right:12px; top:12px; }
 .main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); padding-bottom:1px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }

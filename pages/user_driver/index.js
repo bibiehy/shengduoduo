@@ -1,66 +1,28 @@
-// pages/user_driver/index.js
+
+// 获取 app 实例
+const app = getApp();
+
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
-
+		// 底部 tabbar
+		tabbarActive: 'main',
+		tabbarList: [
+			{ value: 'main', label: '主页', icon: 'home' },
+			{ value: 'profit', label: '我的收益', icon: 'wealth' },
+			{ value: 'personal', label: '个人中心', icon: 'user' },
+		],
 	},
+	onTabbar(e) {
+		const { tabbarActive } = this.data;
+		const { value } = e.detail;
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
+		if(tabbarActive == value) {
+			return false;
+		}
+
+		this.setData({ tabbarActive: value });
+	},
 	onLoad(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage() {
-
+		
 	}
-})
+});
