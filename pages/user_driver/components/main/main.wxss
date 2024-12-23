@@ -1,16 +1,23 @@
 .mainbox-wrapper { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
 .mainbox-wrapper .innerscroll { flex:1; width:calc(100% + 20px); height:100%; padding-bottom:150px; padding-right:20px; overflow-y:auto; }
 
-.statistical-info { display:flex; justify-content:space-between; padding:40px 20px 20px; }
-.statistical-info .statitem { width:30%; text-align:center; border-radius:8px; padding:12px 0; }
+/* .statistical-info { display:flex; justify-content:space-around; padding:20px; }
+.statistical-info .statitem { width:40%; text-align:center; border-radius:8px; padding:12px 0; }
 .statistical-info .statitem .statnum { font-size:22px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
 .statistical-info .statitem .statname { font-size:14px; color:rgba(0, 0, 0, 0.65); margin-top:5px; }
-.statistical-info .statitem.item01 { background-color:rgba(255, 242, 240, 0.6); } /* #fff2f0 */
+.statistical-info .statitem.item01 { background-color:rgba(255, 242, 240, 0.6); }
 .statistical-info .statitem.item01 .statnum { color:#ff4d4f; }
-.statistical-info .statitem.item02 { background-color:rgba(230, 244, 255, 0.6); } /* #e6f4ff */
+.statistical-info .statitem.item02 { background-color:rgba(230, 244, 255, 0.6); }
 .statistical-info .statitem.item02 .statnum { color:#1677ff; }
-.statistical-info .statitem.item03 { background-color:rgba(246, 255, 237, 0.6); } /* #52c41a */
-.statistical-info .statitem.item03 .statnum { color:#52c41a; }
+.statistical-info .statitem.item03 { background-color:rgba(246, 255, 237, 0.6); }
+.statistical-info .statitem.item03 .statnum { color:#52c41a; } */
+
+.statistical-info { display:flex; justify-content:space-around; padding:20px; }
+.statistical-info .statitem { width:40%; text-align:center; }
+.statistical-info .statitem .statnum { font-size:24px; text-shadow:1px 1px 2px rgba(0, 0, 0, 0.35); }
+.statistical-info .statitem .statname { font-size:16px; color:rgba(255, 255, 255, 0.65); margin-top:5px; }
+.statistical-info .statitem.item01 .statnum { color:#1677ff; }
+.statistical-info .statitem.item02 .statnum { color:#ff4d4f; }
 
 .main-process { background-color:#fff; border-radius:8px; padding:12px; margin:10px 10px 0; }
 .main-process .header { display:flex; align-items:center; justify-content:space-between; padding:0 5px; }
@@ -24,8 +31,14 @@
 .main-process .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); padding-bottom:1px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
 .main-process .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
+.main-process .listitem .mainbox .psinfo .special { color:#1677ff; }
+
+.main-process .listitem .mainbox .shouhuoinfo { background-color:#f7f7f7; padding:8px 12px; margin-top:7px; }
+.main-process .listitem .mainbox .shouhuoinfo .shname { font-size:14px; font-weight:600; color:rgba(0, 0, 0, 0.75); }
+
+
 .main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
-.main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; }
+.main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
 .main-process .listitem .biaoqianhao { position:absolute; right:12px; bottom:15px; text-align:center; color:#ff3b30; }
 .main-process .listitem .biaoqianhao .bqhvalue { font-size:18px; font-weight:600; }
 .main-process .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; }

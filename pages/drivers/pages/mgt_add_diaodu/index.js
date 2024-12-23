@@ -4,7 +4,7 @@ import { form, delay } from '../../../../utils/tools';
 
 Page({
 	data: {
-		defaultItem: {},
+		defaultItem: {}, // defaultItem['id'] 存在表示编辑
 		driverList: [],
 		kabanList: []
 	},
@@ -33,13 +33,18 @@ Page({
 		if(result) {
 			const kabanList = [];
 			result.forEach((item) => {
-				if(defaultItem['id']) { // 编辑
-					const isExsit = defaultItem['card_list'].includes(item['card_no']);
-					kabanList.push({ number: item['card_no'], checked: isExsit });
-				}else{
-					kabanList.push({ number: item['card_no'], checked: false });
-				}				
+				kabanList.push({ number: item['card_no'], checked: false });			
 			});
+
+			// 编辑
+			if(defaultItem['id']) {
+				defaultItem['card_list'].forEach((number) => {
+					kabanList.push({ number, checked: true });
+				});
+
+				// 从小到大排序
+				kabanList.sort((a, b) => a['number'] - b['number']);
+			}
 
 			this.setData({ kabanList });
 		}

@@ -7,6 +7,7 @@ const app = getApp();
 
 Component({
 	data: {
+		userInfo: {},
 		dataList: [],
 		weekSummary: { total_num: 0, total_profit: 0 }, // 本周收益
 		monthSummary: { total_num: 0, total_profit: 0 }, // 本月收益
@@ -65,6 +66,7 @@ Component({
 	// 自定义组件内的生命周期
     lifetimes: {
 		attached(options) { // 组件完全初始化完毕
+			this.setData({ userInfo: app['userInfo'] });
 			// this.getProfitPanel();
 			// this.getDailjTask();
         },

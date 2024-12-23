@@ -112,6 +112,7 @@ Component({
 						const { dataList } = this.data;
 						const findIndex = dataList.findIndex((listItem) => listItem['id'] == data['id']);
 						if(findIndex >= 0) {
+							dataList[findIndex]['card_list'] = data['card_list'];
 							dataList[findIndex]['card_info']['use_num'] = data['card_list'].length;
 							this.setData({ dataList });
 						}

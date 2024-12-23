@@ -47,7 +47,7 @@ Page({
 					getUserAndGoRolePage(app, 0); // 获取用户信息保存到全局且跳到角色对应的页面
 				}
 			},
-			fail: () => {
+			fail: (a) => {
 				wx.showToast({ title: '授权失败' })
 			}
 		});
@@ -162,7 +162,7 @@ Page({
 
 		const result = await useRequest(() => fetchPhoneLogin({ phone: phoneNumber, code: verifycode })); // 返回角色信息
 		if(result) {
-			const state = result['type'] // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 审核不通过;
+			const state = result['type']; // 1: 无角色; 2: 单角色; 3: 多角色; 4: 正在审核中; 5: 审核不通过;
 			const roleList = result['data'];
 			if(state == 2 && roleList.length == 1) { // 单角色，获取token后直接跳转到首页
 				this.onGetToken(result['phone'], roleList[0]['type']);

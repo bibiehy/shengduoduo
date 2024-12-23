@@ -8,7 +8,7 @@
 			</view>
 			<form-select id="diaoduDriver" label="要调度的司机" name="driver" value="{{defaultItem['driver_id']}}" options="{{driverList}}" dispatcher="{{true}}" placeholder="请选择要调度的司机" required="{{true}}" />
 			<view class="myFormVertical myFormSelect">
-				<view class="myLabel required">给司机设置卡板号<text class="myLabelText">只显示未设置的</text></view>
+				<view class="myLabel required">给司机设置卡板号<text class="myLabelText" wx:if="{{!defaultItem['id']}}">只显示未设置的</text></view>
 				<view class="kabanbox">
 					<block wx:if="{{kabanList.length <= 0}}">
 						<view style="height: 200px;"><empty /></view>	
