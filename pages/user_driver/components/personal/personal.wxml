@@ -8,10 +8,10 @@
 				<view class="modicon"><t-icon name="zhifu" prefix="iconfont" size="32px" /></view>
 				<view class="modtitle">支付记录</view>
 			</view>
-			<view class="moditem">
+			<!-- <view class="moditem">
 				<view class="modicon"><t-icon name="notification" size="32px" /></view>
 				<view class="modtitle">消息提醒</view>
-			</view>
+			</view> -->
 		</view>
 	</view>	
 </tmpl-personal>

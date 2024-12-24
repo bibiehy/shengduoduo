@@ -13,7 +13,7 @@
 	<form-input class="FORM_INPUT" label="紧急联系人手机号码" name="urgent_user_phone" value="{{defaultValues['urgent_user_phone']}}" type="phone" placeholder="请输入紧急联系人手机号码" required="{{true}}" />
 	<form-picker class="FORM_PICKER" label="车辆类型" name="type" value="{{defaultValues['type']}}" options="{{carOptions}}" placeholder="请选择车辆类型" required="{{true}}" cancelBtn="取消" confirmBtn="确定" />
 	<form-input class="FORM_INPUT" label="最大载重" name="max_number" value="{{defaultValues['max_number']}}" placeholder="请输入车辆最大载重" type="number" remark="如：1150" suffix="千克(kg)" required="{{true}}" />
-	<form-input class="FORM_INPUT" label="可装卡板数量" name="can_card_num" value="{{defaultValues['can_card_num']}}" placeholder="请输入可装卡板最大数量" type="number" remark="如：12" suffix="个" required="{{true}}" />
+	<form-input class="FORM_INPUT" label="可装卡板数量" name="can_card_num" value="{{defaultValues['can_card_num']}}" placeholder="请输入可装卡板最大数量" type="number" remark="如：12" suffix="个" disabled="{{actionType == 'edit'}}" required="{{true}}" />
 	<form-carnumber class="FORM_CARNUMBER" label="车牌号码" name="card_no" value="{{defaultValues['card_no']}}" placeholder="请添加车牌号码" required="{{true}}" />	
 
 	<block wx:if="{{fromto == 'signup'}}">

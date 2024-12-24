@@ -102,20 +102,29 @@ Component({
 		},
 		// 修改
 		onUpdate(e) {
-			const { centerSelected } = this.data;
+			const { dataList, centerSelected } = this.data;
 			const { item } = e.currentTarget.dataset;
 			const strItem = JSON.stringify({ ...centerSelected, ...item });
 			wx.navigateTo({
 				url: `/pages/drivers/pages/mgt_add_diaodu/index?strItem=${strItem}`,
 				events: { // 注册事件监听器
 					acceptOpenedData: (data) => { // 编辑: 监听由子页面触发的同名事件
-						const { dataList } = this.data;
-						const findIndex = dataList.findIndex((listItem) => listItem['id'] == data['id']);
-						if(findIndex >= 0) {
-							dataList[findIndex]['card_list'] = data['card_list'];
-							dataList[findIndex]['card_info']['use_num'] = data['card_list'].length;
-							this.setData({ dataList });
-						}
+						const filterItems = dataList.filter((listItem) => listItem['phone'] == item['phone']);
+						filterItems.forEach((fiItem) => {
+							//
+							const findIndex = dataList.findIndex((listItem) => listItem['id'] == fiItem['id']);
+							const thisItem = dataList[findIndex];
+
+							// 修改所有司机已使用卡板数
+							dataList[findIndex]['card_info']['use_num'] = item['card_info']['use_num'] + (data['card_list'].length - item['card_list'].length);
+
+							// 修改当前选择的卡板号信息
+							if(thisItem['id'] == item['id']) {
+								dataList[findIndex]['card_list'] = data['card_list'];
+							}
+						});
+
+						this.setData({ dataList });
 					}
 				}
 			});

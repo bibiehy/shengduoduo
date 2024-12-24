@@ -14,7 +14,7 @@ Page({
 		const formValues = childComponent.getFormValues(); // 需要验证
 		if(formValues) {
 			formValues['role_type'] = 3;
-            formValues['id'] = userInfo['id'];
+            formValues['id'] = app['userInfo']['id'];
 	
 			const result = await useRequest(() => fetchEditDriver({ ...formValues }));
 			if(result) {

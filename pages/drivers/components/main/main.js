@@ -97,10 +97,20 @@ Component({
 		},
 		// 创建调度
 		onCreateDiaodu(e) {
-			const { centerSelected } = this.data;
+			const { centerSelected, dataList } = this.data;
 			const { item } = e.currentTarget.dataset;
 			const strItem = JSON.stringify({ ...centerSelected, ...item });
-			wx.navigateTo({ url: `/pages/drivers/pages/mgt_add_diaodu/index?strItem=${strItem}` });
+			wx.navigateTo({
+				url: `/pages/drivers/pages/mgt_add_diaodu/index?strItem=${strItem}`,
+				events: { // 注册事件监听器
+					acceptOpenedData: (data) => { // 编辑: 监听由子页面触发的同名事件
+						const findIndex = dataList.findIndex((listItem) => listItem['point_id'] == item['point_id']);
+						const needNumber = dataList[findIndex]['need_dispatcher_card_num'];
+						dataList[findIndex]['need_dispatcher_card_num'] = needNumber - data['card_list'].length;
+						this.setData({ dataList });
+					}
+				}
+			});
 		}
 	},
 	// 自定义组件内的生命周期

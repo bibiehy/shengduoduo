@@ -35,7 +35,8 @@
 				<view class="listitem" wx:for="{{dataList}}" wx:key="point_id">
 					<view class="headbox">
 						<view class="tihdname">{{item['point_name']}}<text class="jindu">({{item['task_percent']}})</text></view>
-						<t-tag class="status" bind:tap="onCreateDiaodu" data-item="{{item}}" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
+						<t-tag wx:if="{{item['need_dispatcher_card_num'] <= 0}}" class="status" disabled="{{true}}" variant="light-outline" theme="default" size="small">创建调度</t-tag>
+						<t-tag wx:else class="status" bind:tap="onCreateDiaodu" data-item="{{item}}" variant="light-outline" theme="primary" size="small">创建调度</t-tag>
 					</view>
 					<view class="bodybox">
 						<view class="profile">

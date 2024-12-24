@@ -88,14 +88,10 @@ Page({
 		if(result) {
 			wx.showToast({ title: '操作成功', icon: 'success' });
 			await delay(500);
-			if(defaultItem['id']) { // 编辑
-				wx.navigateBack({ delta: 1, success: () => {
-					const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
-					eventChannel.emit('acceptOpenedData', params);
-				}});
-			}else{
-				wx.navigateBack({ delta: 1 });
-			}			
+			wx.navigateBack({ delta: 1, success: () => {
+				const eventChannel = this.getOpenerEventChannel(); // 获取事件监听对象
+				eventChannel.emit('acceptOpenedData', params);
+			}});			
 		}
 	},
 	onLoad({ strItem }) {
