@@ -1,1 +1,10 @@
-/* pages/user_driver/components/personal/personal.wxss */
+@import "../../../../utils/iconfont.wxss";
+
+.personal-center { min-width:320px; }
+.personal-center .modules { display:flex; padding:0 10px; }
+.personal-center .modules .moditem { display:flex; flex-direction:column; align-items:center; width:25%; padding-top:10px; }
+.personal-center .modules .moditem .modicon { display:flex; align-items:center; height:54px; color:#1677ff; }
+.personal-center .modules .moditem .modtitle { font-size:15px; color:rgba(0, 0, 0, 0.65); }
+
+
+

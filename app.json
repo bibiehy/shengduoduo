@@ -38,7 +38,9 @@
 		"pages/user_storecenter/pages/exception_view/exception_view",
 		"pages/user_storecenter/pages/profit/profit",
 		"pages/user_storecenter/pages/profit_single/profit_single",
-		"pages/drivers/pages/mgt_add_diaodu/index"
+		"pages/drivers/pages/mgt_add_diaodu/index",
+		"pages/user_driver/pages/personal_edit/personal_edit",
+		"pages/user_driver/pages/profit/profit"
 	],
 	"usingComponents": {
 		"navigation-bar": "/components/navigation-bar/navigation-bar",

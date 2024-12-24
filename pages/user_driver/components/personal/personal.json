@@ -1,4 +1,8 @@
 {
 	"component": true,
-	"usingComponents": {}
+	"styleIsolation": "apply-shared",
+	"usingComponents": {
+		"tmpl-personal": "../../../../components/tmpl-personal/index"
+	}
 }
+

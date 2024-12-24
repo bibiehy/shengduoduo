@@ -3,7 +3,7 @@
 		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
 		"t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item",
 		"main": "/pages/user_driver/components/main/main",
-		"profit": "/pages/user_driver/components/profit/profit",
+		"history": "/pages/user_driver/components/history/history",
 		"personal": "/pages/user_driver/components/personal/personal"
 	}
 }

@@ -33,9 +33,14 @@
 .main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo .special { color:#1677ff; }
 
+.main-process .listitem .mainbox .fahuoinfo { padding:8px 12px; }
 .main-process .listitem .mainbox .shouhuoinfo { background-color:#f7f7f7; padding:8px 12px; margin-top:7px; }
 .main-process .listitem .mainbox .shouhuoinfo .shname { font-size:14px; font-weight:600; color:rgba(0, 0, 0, 0.75); }
 
+.main-process .listitem .popover { position:absolute; right:12px; top:60px; background-color:#fff; box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.93); padding:10px; }
+.main-process .listitem .popover .arrow { position:absolute; right:20px; top:-24px; width:0; height:0; border-bottom:5px solid #fff; border-left:0 solid transparent; border-right:0 solid transparent; }
+.main-process .listitem .popover .popitem { font-size:15px; text-align:center; color:#1677ff; border-bottom:solid 1px #f0f0f0; padding:10px 0; }
+.main-process .listitem .popover .popitem:last-child { border-bottom:0; }
 
 .main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
 .main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }

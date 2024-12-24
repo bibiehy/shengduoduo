@@ -8,7 +8,7 @@ Page({
 		tabbarActive: 'main',
 		tabbarList: [
 			{ value: 'main', label: '主页', icon: 'home' },
-			{ value: 'profit', label: '我的收益', icon: 'wealth' },
+			{ value: 'history', label: '历史记录', icon: 'history' },
 			{ value: 'personal', label: '个人中心', icon: 'user' },
 		],
 	},

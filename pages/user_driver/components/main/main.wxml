@@ -1,5 +1,5 @@
 <view class="mainbox-wrapper global-pagebg">
-	<navigation-bar extClass="global-pagebg" title="{{userInfo['card_no']}}" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar>
+	<navigation-bar extClass="global-pagebg" title="干线司机({{userInfo['card_no']}})" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar>
 	<!-- <navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
 		<view class="global-navigation-bar">
 			<view class="main-searchbox" bind:tap="onSearchBar">
@@ -31,29 +31,34 @@
                 <t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
                 <t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
                 <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
+
+                <view class="popover">
+                    <view class="arrow"></view>
+                    <view class="popitem">接受</view>
+                    <view class="popitem">拒绝</view>
+                </view>
+
                 <view class="mainbox">
-                    <view class="psname">集货中心名字</view>
+                    <!-- <view class="psname">集货中心名字</view>
                     <view class="pstime">2024-12-20 08:30:30</view>
-                    <!-- <view class="psinfo">货品类型：蔬菜类</view>
+                    <view class="psinfo">货品类型：蔬菜类</view>
 					<view class="psinfo">预估重量：5000kg</view>
 					<view class="psinfo">标签号：<text class="special">24001</text></view>
                     <view class="psinfo">所在入库卡位：<text class="special">1、2、3</text></view> -->
 
-					<view class="shouhuoinfo">
-						<view class="shname">发货信息</view>
-						<view class="psinfo">品类型：蔬菜类</view>
-						<view class="psinfo">预估重量：5000kg</view>
+					<view class="fahuoinfo">
+                        <view class="psname">集货中心名字</view>
+                        <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
+						<view class="psinfo">货品类型：蔬菜类，预估 5000kg</view>
 						<view class="psinfo">标签号：<text class="special">24001</text></view>
 						<view class="psinfo">所在入库卡位：<text class="special">1、2、3</text></view>
 					</view>
-
 					<view class="shouhuoinfo">
 						<view class="shname">收货信息</view>
 						<view class="psinfo">提货点：粤西农批7号仓</view>
 						<view class="psinfo">负责人：王德龙(18069881234)</view>
 						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
 					</view>
-                    <!-- <view class="psinfo">预计送达时间：{{item['estimate_time']}}</view> -->
                 </view>
                 <view class="psbtns">
                     <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary">接 受</t-tag>
