@@ -59,7 +59,7 @@
 						<view class="psinfo">货品类型：蔬菜类</view>
 						<view class="psinfo">预估重量：5000kg</view>
 						<view class="psinfo">标签号：<text class="special">24001</text></view>
-						<view class="psinfo">所在入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
 					<view class="shouhuoinfo">
 						<view class="shname">收货地址</view>
@@ -69,6 +69,29 @@
 					</view>
                 </view>
             </view>
+			<view class="listitem">
+				<view class="popover">
+					<t-tag variant="light" theme="warning" size="small">待发车</t-tag>
+					<t-tag t-class="listag" theme="danger">发车</t-tag>
+                </view>
+                <view class="mainbox">
+					<view class="fahuoinfo">
+                        <view class="psname">发货信息</view>
+                        <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
+                        <view class="psinfo">集货中心：集货中心名字</view>
+						<view class="psinfo">货品类型：蔬菜类</view>
+						<view class="psinfo">预估重量：5000kg</view>
+						<view class="psinfo">标签号：<text class="special">24001</text></view>
+						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+					</view>
+					<view class="shouhuoinfo">
+						<view class="shname">收货地址</view>
+						<view class="psinfo">提货点：粤西农批7号仓</view>
+						<view class="psinfo">负责人：王德龙(18069881234)</view>
+						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+					</view>
+                </view>
+			</view>
 
 			<!-- <block wx:if="{{dataList.length <= 0}}">
 				<view class="nodata"><empty description="暂无通知消息" /></view>

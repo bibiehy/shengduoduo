@@ -12,7 +12,7 @@ Component({
 	data: {
         keyword: '',
 		currentPage: 1,
-		dataList: [],
+		dataList: [{ status: 3 }],
         // 下拉刷新
 		downStatus: false, // 组件状态，值为 true 表示下拉状态，值为 false 表示收起状态
 		loadingProps: { size: '20px' }, // 设置 loading 大小

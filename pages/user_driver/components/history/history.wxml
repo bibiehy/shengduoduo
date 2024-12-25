@@ -1,13 +1,13 @@
 <view class="history-box">
 	<navigation-bar title="历史记录" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
     <view class="history-search">
-        <popup-select bind:callback="onSelectPoint" options="{{pointOptions}}" value="{{pointSelected['value']}}" placeholder="请选择提货点">
+        <popup-select bind:callback="onSelectPoint" options="{{pointOptions}}" value="{{pointSelected['value']}}" display="block" placeholder="请选择提货点">
             <view class="selectbox">
                 <view class="jihzxname">{{pointSelected['label'] || '请选择提货点'}}</view>
                 <t-icon name="chevron-down-s" size="26px" color="rgba(0, 0, 0, 0.45)" />
             </view>
         </popup-select>
-		<t-search t-class="drsearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="标签号/发货人姓名/电话" />
+		<t-search t-class="historysearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="标签号/发货人姓名/电话" />
 	</view>
     <t-pull-down-refresh
 		show-scrollbar="{{false}}"
@@ -32,7 +32,7 @@
                         <view class="pstime">2024-12-20 08:30:30</view>
                         <view class="psinfo">货品类型：蔬菜类，预估 5000kg</view>
                         <view class="psinfo">标签号：<text class="special">24001</text></view>
-						<view class="psinfo">所在入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
                     <view class="shouhuoinfo">
 						<view class="shname">收货地址</view>

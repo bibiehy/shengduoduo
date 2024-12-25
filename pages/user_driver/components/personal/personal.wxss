@@ -1,4 +1,3 @@
-@import "../../../../utils/iconfont.wxss";
 
 .personal-center { min-width:320px; }
 .personal-center .modules { display:flex; padding:0 10px; }

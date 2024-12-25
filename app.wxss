@@ -1,3 +1,5 @@
+@import "./utils/iconfont.wxss";
+
 page, view, image, text, textarea, swiper, swiper-item { margin:0; padding:0; height:auto; box-sizing:border-box; -webkit-text-size-adjust:100%; }
 page { 
 	--td-brand-color: #1677ff; /* 主题色 */
