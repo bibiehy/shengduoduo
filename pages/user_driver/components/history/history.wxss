@@ -1,1 +1,21 @@
-/* pages/user_driver/components/history/history.wxss */
+.history-box{ display:flex; flex-direction:column; width:100vw; height:100vh; }
+.history-search { display:flex; align-items:center; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 0 8px 12px; margin-top:-1px; }
+.history-search .selectbox { flex:1; display:flex; align-items:center; height:34px; background-color:#f3f3f3; border-radius:6px; padding:0 5px 0 10px; margin-right:5px; }
+.history-search .selectbox .jihzxname { flex:1; font-size:16px; color:rgba(0, 0, 0, 0.65); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.history-search .drsearch { display:flex; align-items:center; background-color:#fff; padding:0; --td-search-height:34px !important; --td-search-padding:0 10px 0 5px; --td-search-icon-font-size:18px; --td-search-font-size:16px; --td-search-text-color:rgba(0, 0, 0, 0.65); }
+
+.page-scroll { flex:1; padding:10px 10px 120px; }
+.page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:8px 10px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
+.page-scroll .listitem .psname { width:80%; font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.page-scroll .listitem .pstime { font-size:13px; color:rgba(0, 0, 0, 0.45); }
+.page-scroll .listitem .psinfo { font-size:15px; color:rgba(0, 0, 0, 0.65); }
+.page-scroll .listitem .psinfo .special { color:#1677ff; }
+.page-scroll .listitem .fahuoinfo { padding:4px 8px; }
+.main-process .listitem .mainbox .shouhuoinfo { background-color:#f9f9f9; padding:8px 12px; margin-top:5px; }
+.main-process .listitem .mainbox .shouhuoinfo .shname { font-size:15px; font-weight:600; color:rgba(0, 0, 0, 0.65); }
+
+.page-scroll .listitem .psbtns { position:relative; display:flex; padding-top:8px; }
+.page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:16px; }
+.page-scroll .listitem .psbtns .status { position:absolute; right:0; }
+.page-scroll .nodata { height:500px; }

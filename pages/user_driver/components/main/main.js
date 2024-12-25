@@ -25,7 +25,7 @@ Component({
 				this.setData({ todaySummary: result['today_summary'], weekSummary: result['week_summary'], monthSummary: result['month_summary'] });
 			}
 		},
-		// 待揽件任务列表
+		// 获取当前任务
         async getDailjTask(params) {
 			wx.showLoading();
 			await delay(500);

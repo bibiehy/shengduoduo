@@ -1,2 +1,51 @@
-<!--pages/user_driver/components/history/history.wxml-->
-<text>pages/user_driver/components/history/history.wxml</text>
+<view class="history-box">
+	<navigation-bar title="历史记录" placement="left" showBack="{{false}}" background="#fff" boxShadow="none"></navigation-bar>
+    <view class="history-search">
+        <popup-select bind:callback="onSelectPoint" options="{{pointOptions}}" value="{{pointSelected['value']}}" placeholder="请选择提货点">
+            <view class="selectbox">
+                <view class="jihzxname">{{pointSelected['label'] || '请选择提货点'}}</view>
+                <t-icon name="chevron-down-s" size="26px" color="rgba(0, 0, 0, 0.45)" />
+            </view>
+        </popup-select>
+		<t-search t-class="drsearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="标签号/发货人姓名/电话" />
+	</view>
+    <t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag t-class="status" wx:if="{{item['status'] == 3}}" variant="light" theme="primary" size="small">待发车</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['busy'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<view class="fahuoinfo">
+						<view class="psname">发货信息</view>
+                        <view class="pstime">2024-12-20 08:30:30</view>
+                        <view class="psinfo">货品类型：蔬菜类，预估 5000kg</view>
+                        <view class="psinfo">标签号：<text class="special">24001</text></view>
+						<view class="psinfo">所在入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+					</view>
+                    <view class="shouhuoinfo">
+						<view class="shname">收货地址</view>
+						<view class="psinfo">提货点：粤西农批7号仓</view>
+						<view class="psinfo">负责人：王德龙(18069881234)</view>
+						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
+</view> 

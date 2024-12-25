@@ -1,4 +1,12 @@
 {
-	"component": true,
-	"usingComponents": {}
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "disableScroll": true,
+	"usingComponents": {
+        "t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-search": "tdesign-miniprogram/search/search",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+        "t-loading": "tdesign-miniprogram/loading/loading",
+        "popup-select": "/components/popup-select/popup-select"
+    }
 }

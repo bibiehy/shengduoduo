@@ -21,7 +21,7 @@
 
 		<view class="main-process">
 			<view class="header">
-				<view class="title">最近一周送货信息</view>
+				<view class="title">当前送货概况</view>
                 <view class="extrabox">
                     <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
                 </view>
@@ -47,21 +47,22 @@
 				<!-- <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
 
                 <view class="popover">
-					<t-tag variant="light" theme="warning" size="small">通知消息</t-tag>
+					<t-tag variant="light" theme="warning" size="small">送货通知</t-tag>
 					<t-tag t-class="listag" theme="primary">接受</t-tag>
 					<t-tag t-class="listag" theme="danger">拒绝</t-tag>
                 </view>
                 <view class="mainbox">
 					<view class="fahuoinfo">
-                        <view class="psname">集货中心名字</view>
+                        <view class="psname">发货信息</view>
                         <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
+                        <view class="psinfo">集货中心：集货中心名字</view>
 						<view class="psinfo">货品类型：蔬菜类</view>
 						<view class="psinfo">预估重量：5000kg</view>
 						<view class="psinfo">标签号：<text class="special">24001</text></view>
 						<view class="psinfo">所在入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
 					<view class="shouhuoinfo">
-						<view class="shname">收货信息</view>
+						<view class="shname">收货地址</view>
 						<view class="psinfo">提货点：粤西农批7号仓</view>
 						<view class="psinfo">负责人：王德龙(18069881234)</view>
 						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
@@ -70,7 +71,7 @@
             </view>
 
 			<!-- <block wx:if="{{dataList.length <= 0}}">
-				<view class="nodata"><empty /></view>
+				<view class="nodata"><empty description="暂无通知消息" /></view>
 			</block>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
