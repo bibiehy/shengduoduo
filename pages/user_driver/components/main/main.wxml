@@ -86,11 +86,15 @@
                 </view>
 			</view>
             <view class="actionbox">
-                <t-button theme="primary">接受送货</t-button>
-                <t-button theme="danger" style="margin-left: 15px;">拒绝送货</t-button>
+                <t-button theme="primary" size="small">接受送货</t-button>
+                <t-button theme="danger" size="small" style="margin-left: 10px;">拒绝送货</t-button>
             </view>
+			<!-- <view class="actionbox">
+                <t-button theme="danger" size="small">即刻发车</t-button>
+				<view class="actips">注：确保货物已全部装车</view>
+            </view> -->
             <view class="reportbox">
-                <view class="retips">突发状况？<text>货物损坏或不能到达等，可点此上报</text></view>
+                <view class="retips">突发状况？损坏或无法到达等<text>点此上报</text></view>
             </view>
 
 			<!-- <block wx:if="{{dataList.length <= 0}}">
