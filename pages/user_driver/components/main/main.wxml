@@ -1,12 +1,5 @@
 <view class="mainbox-wrapper global-pagebg">
 	<navigation-bar extClass="global-pagebg" title="{{userInfo['card_no']}}" placement="center" showBack="{{false}}" boxShadow="none"></navigation-bar>
-	<!-- <navigation-bar extClass="global-pagebg" showBack="{{false}}" boxShadow="none">
-		<view class="global-navigation-bar">
-			<view class="main-searchbox" bind:tap="onSearchBar">
-				<t-search disabled="{{true}}" shape="round" placeholder="任务查询" />
-			</view>
-		</view>
-	</navigation-bar> -->
 	<view class="innerscroll">
         <view class="statistical-info">
             <view class="statitem item01">
@@ -37,9 +30,9 @@
 					<t-tag t-class="listag" theme="danger">发车</t-tag>
                 </view> -->
 
-				<!-- <t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag> -->
+				<!-- <t-tag bind:tap="onShowDialog" data-type="refused" t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag> -->
 
-				<!-- <view class="popover" wx:if="4">
+				<!-- <view class="popover" wx:if="4" bind:tap="onShowDialog" data-type="completed">
 					<t-tag variant="light" theme="primary" size="small">配送中</t-tag>
 					<t-tag t-class="listag" theme="danger">确认送达</t-tag>
                 </view> -->
@@ -92,6 +85,13 @@
 					</view>
                 </view>
 			</view>
+            <view class="actionbox">
+                <t-button theme="primary">接受送货</t-button>
+                <t-button theme="danger" style="margin-left: 15px;">拒绝送货</t-button>
+            </view>
+            <view class="reportbox">
+                <view class="retips">突发状况？<text>货物损坏或不能到达等，可点此上报</text></view>
+            </view>
 
 			<!-- <block wx:if="{{dataList.length <= 0}}">
 				<view class="nodata"><empty description="暂无通知消息" /></view>
@@ -124,17 +124,18 @@
 	</view>
 </view>
 
-<!-- // 拒绝 -->
+<!-- // 拒绝、确认送达 -->
 <t-dialog
 	visible="{{showConfirm}}"
-	title="确定要拒绝嘛？"
+	title="{{actionType == 'refused' ? '确定要拒绝嘛？' : '确定已送达了嘛？'}}"
 	confirmBtn="{{confirmBtn}}"
 	cancelBtn="取消"
 	bind:confirm="onSureDialog"
 	bind:cancel="onCancelDialog"
 >
-	<view class="dialog-sending" slot="content">
-		<view class="diaitem">任务名：{{actionItem['name']}}</view>
-		<view class="diaitem">发货人：{{actionItem['create_username']}} {{actionItem['create_phone']}}</view>
+	<view class="dialog-wrapper" slot="content">
+		<view class="diaitem">标签号：26002</view>
+		<view class="diaitem">提货点：粤西农批58号仓</view>
+        <view class="diaitem">负责人：王德龙(18069881234)</view>
 	</view>
 </t-dialog>

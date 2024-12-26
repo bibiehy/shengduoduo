@@ -1,2 +1,62 @@
-<!--pages/user_driver/pages/profit/profit.wxml-->
-<text>pages/user_driver/pages/profit/profit.wxml</text>
+<view class="profit-box">
+    <navigation-bar title="我的收益" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="profit-search">
+		<view class="tongji">
+			<view class="countnum">送货次数总计：{{allCishu}}</view>
+			<view class="countnum">预估收益总计：￥{{allProfit}}</view>
+		</view>
+		<view class="formsearch">
+			<view class="filter">
+				类型：
+				<t-radio-group bind:change="onRadioChange" value="{{radioValue}}" borderless="{{true}}">
+					<t-radio block="{{false}}" label="月份" value="month" />
+					<t-radio block="{{false}}" label="区间" value="range" />
+				</t-radio-group>
+			</view>
+			<view class="filter" style="margin: 5px 0;">
+				<form-datepicker wx:if="{{radioValue == 'month'}}" title="月份选择" bind:callback="onMonth" value="{{monthValue}}" placeholder="请选择月份" mode="month" format="YYYY-MM" verify="{{false}}" />
+				<form-rangepicker wx:if="{{radioValue == 'range'}}" title="区间选择" bind:callback="onQujian" value="{{qujianValue}}" placeholder="请选择区间" mode="date" format="YYYY-MM-DD" verify="{{false}}" />
+			</view>
+		</view>		
+	</view>
+	<t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+        <view class="page-scroll">
+			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+                    <view class="moneybox">
+						<view class="price"><text class="CNY">￥</text>{{item['total_profit']}}</view>
+						<view class="pricetxt">{{item['status'] == 5 ? '本次收益' : '预估收益'}}</view>
+						<!-- <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag> -->
+					</view>
+					<view class="fahuoinfo">
+						<view class="psname">发货信息</view>
+                        <view class="pstime">2024-12-20 08:30:30</view>
+                        <view class="psinfo">货品类型：蔬菜类，预估 5000kg</view>
+                        <view class="psinfo">标签号：<text class="special">24001</text></view>
+						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+					</view>
+                    <view class="shouhuoinfo">
+						<view class="shname">收货地址</view>
+						<view class="psinfo">提货点：粤西农批7号仓</view>
+						<view class="psinfo">负责人：王德龙(18069881234)</view>
+						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+    </t-pull-down-refresh>
+</view>

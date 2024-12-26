@@ -1,1 +1,31 @@
-/* pages/user_driver/pages/profit/profit.wxss */
+.profit-box { display:flex; flex-direction:column; width:100vw; height:100vh; }
+.profit-search { display:flex; align-items:flex-end; justify-content:space-between; background-color:#fff; box-shadow:0 5px 10px #e2e1e1; padding:8px 15px 5px; margin-top:-1px; }
+.profit-search .tongji { color:#ff3b30; font-size:15px; padding:5px 10px; }
+.profit-search .tongji .countnum { margin:5px 0; }
+.profit-search .formsearch { flex:1; --td-radio-font-size:15px; --td-radio-icon-size:22px; }
+.profit-search .formsearch .filter { display:flex; align-items:center; justify-content:flex-end; }
+.profit-search .formsearch .filter .t-radio { margin-right:5px; }
+.profit-search .formsearch .filter .t-radio__icon { margin-right:3px; }
+.profit-search .formsearch .filter .myDatepickerNoVerify { font-size:15px; }
+.profit-search .formsearch .filter .myRangepickerNoVerify { font-size:15px; }
+.profit-search .formsearch .filter .dropdown { display:flex; align-items:center; color:rgba(0, 0, 0, 0.7); font-size:15px; }
+
+.page-scroll { flex:1; padding:10px 10px 120px; }
+.page-scroll .listitem { position:relative; background-color:#fff; border-radius:8px; padding:8px 10px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:15px; top:15px; }
+.page-scroll .listitem .psname { width:80%; font-size:17px; color:rgba(0, 0, 0, 0.9); font-weight:600; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.page-scroll .listitem .pstime { font-size:13px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
+.page-scroll .listitem .psinfo { font-size:15px; color:rgba(0, 0, 0, 0.65); margin-top:4px; }
+.page-scroll .listitem .psinfo .special { color:#1677ff; }
+.page-scroll .listitem .fahuoinfo { padding:4px 8px; }
+.page-scroll .listitem .shouhuoinfo { background-color:#f9f9f9; padding:8px 12px; margin-top:5px; }
+.page-scroll .listitem .shouhuoinfo .shname { font-size:15px; font-weight:600; color:rgba(0, 0, 0, 0.65); }
+.page-scroll .listitem .moneybox { position:absolute; right:15px; top:60px; text-align:center; }
+.page-scroll .listitem .moneybox .price { display:flex; align-items:flex-end; color:#ff3b30; font-size:20px; font-weight:600; }
+.page-scroll .listitem .moneybox .price .CNY { display:block; font-size:12px; padding-bottom:2px; }
+.page-scroll .listitem .moneybox .pricetxt { font-size:12px; margin-bottom:4px; }
+.page-scroll .listitem .moneybox .listag { display:flex; justify-content:center; min-width:60px !important; margin:0 auto; }
+.page-scroll .nodata { height:500px; }
+
+
+

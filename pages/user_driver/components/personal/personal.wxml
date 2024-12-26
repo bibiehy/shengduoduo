@@ -4,11 +4,11 @@
 	</view> -->
     <view class="personal-center">
 		<view class="modules">
-			<view class="moditem">
+			<view class="moditem" bind:tap="onPageView" data-type="profit">
 				<view class="modicon"><t-icon name="zhifu" prefix="iconfont" size="32px" /></view>
 				<view class="modtitle">我的收益</view>
 			</view>
-			<view class="moditem">
+			<view class="moditem" bind:tap="onPageView" data-type="report">
 				<view class="modicon"><t-icon name="notification-error" size="32px" /></view>
 				<view class="modtitle">我的上报</view>
 			</view>

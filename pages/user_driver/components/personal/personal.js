@@ -17,6 +17,14 @@ Component({
                     }
                 }
             });
+        },
+        onPageView(e) {
+            const { type } = e.currentTarget.dataset;
+            if(type == 'profit') {
+                wx.navigateTo({ url: `/pages/user_driver/pages/profit/profit` });
+            }else if(type == 'report') {
+                wx.navigateTo({ url: `/pages/user_driver/pages/profit/profit` });
+            }
         }
     },
     lifetimes: {

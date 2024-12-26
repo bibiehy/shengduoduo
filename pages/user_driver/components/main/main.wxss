@@ -32,6 +32,7 @@
 .main-process .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo { font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
 .main-process .listitem .mainbox .psinfo .special { color:#1677ff; }
+.main-process .nodata { height:380px; }
 
 .main-process .listitem .mainbox .fahuoinfo { padding:4px 8px; }
 .main-process .listitem .mainbox .shouhuoinfo { background-color:#f9f9f9; padding:8px 12px; margin-top:5px; }
@@ -41,16 +42,18 @@
 .main-process .listitem .popover .listag { display:flex; align-items:center; justify-content:center; margin-top:6px; }
 .main-process .listitem .popover .poptips { font-size:12px; color:rgba(0, 0, 0, 0.45); }
 
-.main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
+.main-process .listitem .actionbox { display:flex; justify-content:flex-end; padding:15px; }
+.main-process .listitem .reportbox { display:flex; justify-content:flex-end; color:#d54941; font-size:16px; font-weight:600; padding:0 15px 15px; }
+.main-process .listitem .reportbox text { display:block; }
+
+/* .main-process .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
 .main-process .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
 .main-process .listitem .biaoqianhao { position:absolute; right:12px; bottom:15px; text-align:center; color:#ff3b30; }
 .main-process .listitem .biaoqianhao .bqhvalue { font-size:18px; font-weight:600; }
-.main-process .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; }
-.main-process .nodata { height:380px; }
+.main-process .listitem .biaoqianhao .bqhlabel { font-size:12px; padding-top:2px; padding-right:2px; } */
 
-.popup-forms { padding:10px; }
-.popup-forms .inner { background-color:#fff; padding:10px 10px 60px; }
 
-.dialog-sending { background-color:#f5f5f5; border-radius:5px; padding:15px; margin-top:15px; }
-.dialog-sending .diaitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:3px 0; }
-.dialog-sending .diaitem .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
+
+.dialog-wrapper { background-color:#f5f5f5; border-radius:5px; padding:15px; margin-top:15px; }
+.dialog-wrapper .diaitem { font-size:15px; color:rgba(0, 0, 0, 0.65); padding:3px 0; }
+.dialog-wrapper .diaitem .diatext { font-size:18px; font-weight:600; color:#ff3b30; }
