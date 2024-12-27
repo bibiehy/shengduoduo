@@ -1,2 +1,39 @@
-<!--pages/user_driver/pages/exception_list/exception_list.wxml-->
-<text>pages/user_driver/pages/exception_list/exception_list.wxml</text>
+<view class="exception-listbox">
+    <navigation-bar title="异常上报列表" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
+	<view class="global-page-search">
+		<t-search t-class="pagesearch" bind:change="onSearchChange" bind:submit="onSearch" shape="round" clearable="{{false}}" placeholder="提货点/负责人姓名/手机号" />
+	</view>
+    <t-pull-down-refresh
+		show-scrollbar="{{false}}"
+		enhanced="{{true}}"
+		value="{{downStatus}}"
+		lowerThreshold="{{50}}"
+		loadingProps="{{loadingProps}}"
+		loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+		bind:refresh="onRefresh"
+		bind:scrolltolower="onPullUpLoaded"
+	>
+		<view class="page-scroll">
+			<block wx:if="{{dataList.length <= 0}}">
+				<view class="nodata"><empty /></view>	
+			</block>
+			<block wx:else>
+				<view class="listitem" wx:for="{{dataList}}" key="{{item['id']}}">
+					<view class="mainbox" bind:tap="onViewDetail" data-item="{{item}}">
+						<view class="psname">{{item['name']}}</view>
+						<view class="pstime">{{item['created_at']}}</view>
+						<view class="psinfo">收货人：{{item['receive_username']}} {{item['receive_user_phone']}}</view>
+						<view class="psinfo">类别：{{item['goods_type_name']}}</view>
+						<view class="psinfo">总件数：{{item['total_number']}}件</view>
+						<view class="psinfo">运费支付方：{{item['pay_type'] == 1 ? '发货人' : '收货人'}}</view>
+						<view class="psinfo">辅助标识：{{item['code']}}</view>
+					</view>
+				</view>
+			</block>
+			<view wx:if="{{upStatus == 2 || upStatus == 3}}" style="display: flex; justify-content: center; --td-loading-text-color: rgba(0, 0, 0, 0.3); color: rgba(0, 0, 0, 0.3); margin-top: 25px;">
+				<t-loading wx:if="{{upStatus == 2}}" theme="circular" size="20px" text="努力加载中..." />
+				<view wx:else style="display: inline-block; font-size: 13px;">~哇哦，已全部加载</view>
+			</view>
+		</view>
+	</t-pull-down-refresh>
+</view>

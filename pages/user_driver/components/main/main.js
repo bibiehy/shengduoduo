@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
-import { delay, form, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchProfitPanel, fetchMainList, fetchSureLanjian } from '../../../../service/user_storecenter';
+import { delay, form } from '../../../../utils/tools';
+import { fetchCurrentTask, fetchAcceptTask, fetchRefuseTask, fetchFache, fetchTaskComplete } from '../../../../service/user_driver';
 
 // 获取 app 实例
 const app = getApp();
@@ -13,9 +13,9 @@ Component({
 		weekSummary: { total_num: 0, total_profit: 0 }, // 本周收益
 		monthSummary: { total_num: 0, total_profit: 0 }, // 本月收益
         // 确认弹窗
-		showConfirm: false,
-        confirmBtn: { content: '确定', variant: 'base', loading: false },
+        textareaValue: '',
         actionType: '', // refused/completed
+        confirmBtn: { content: '确定', variant: 'base', loading: false },
 		// actionItem: {},
 	},
 	methods: {
@@ -36,19 +36,23 @@ Component({
 				this.setData({ dataList: result['content'] });
 			}
         },
-		// 弹窗：拒绝、确认送达
+        // 弹窗：拒绝、确认送达
+        onChangeTextarea(e) {
+			const detailValue = e.detail.value;
+			this.setData({ textareaValue: detailValue });
+		},
 		onShowDialog(e) {
 			const { type } = e.currentTarget.dataset;
-			this.setData({ showConfirm: true, actionType: type });
+			this.setData({ actionType: type });
 		},
 		onCancelDialog() {
-			this.setData({ showConfirm: false, actionType: '' });
+			this.setData({ actionType: '' });
 		},
-		async onSureDialog() {
-			const { actionItem } = this.data;
+		async onSureDialog() { // 拒绝、确认送达
+			const { actionItem, textareaValue } = this.data;
 			const result = await useRequest(() => fetchSureLanjian({ id: actionItem['id'] }));
 			if(result) {
-				this.setData({ showConfirm: false, actionType: '' });
+				this.setData({ actionType: '' });
 				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
 				this.getDailjTask();
 			}

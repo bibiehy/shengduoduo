@@ -1,1 +1,19 @@
-/* pages/user_driver/pages/exception_list/exception_list.wxss */
+.exception-listbox { display:flex; flex-direction:column; width:100vw; height:100vh; overflow:hidden; }
+
+.page-scroll { flex:1; padding:10px 10px 50px; overflow-y:auto; }
+.page-scroll .listitem { position:relative; border:solid 1px #ebebeb; background-color:#fff; border-radius:8px; padding:12px 15px; margin-bottom:10px; }
+.page-scroll .listitem .status { position:absolute; right:12px; top:12px; }
+.page-scroll .listitem .mainbox .psname { width:80%; font-size:16px; color:rgba(0, 0, 0, 0.85); padding-bottom:1px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+.page-scroll .listitem .mainbox .pstime { font-size:12px; color:rgba(0, 0, 0, 0.45); margin-top:4px; }
+.page-scroll .listitem .mainbox .psinfo { display:flex; align-items:center; font-size:14px; color:rgba(0, 0, 0, 0.55); margin-top:4px; }
+.page-scroll .listitem .psbtns { display:flex; align-items:center; padding-top:8px; }
+.page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:10px; }
+.page-scroll .listitem .yunfei { position:absolute; right:12px; bottom:15px; text-align:right; color:#ff3b30; }
+.page-scroll .listitem .yunfei .money { display:flex; align-items:flex-end; font-size:20px; font-weight:600; }
+.page-scroll .listitem .yunfei .money .fuhao { display:block; font-size:12px; padding-bottom:2px; }
+.page-scroll .listitem .yunfei .paystate { font-size:12px; padding-top:2px; padding-right:2px; }
+.page-scroll .nodata { height:380px; }
+
+
+
+

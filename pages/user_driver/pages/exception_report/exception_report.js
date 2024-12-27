@@ -1,66 +1,28 @@
-// pages/user_driver/pages/exception_report/exception_report.js
+import useRequest from '../../../../utils/request';
+import { delay, createGuid, form } from '../../../../utils/tools';
+import { fetchExceptionReport } from '../../../../service/user_driver';
+
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
-
+        kabanList: [{ checked: false, number: 1 }, { checked: false, number: 2 }, { checked: false, number: 3 }]
+    },
+	onCardClick(e) { // 点击卡板
+		const { kabanList } = this.data;
+		const thisItem = e.currentTarget.dataset.item;
+		const thisIndex = kabanList.findIndex((item) => item['number'] == thisItem['number']);
+		kabanList[thisIndex]['checked'] = !thisItem['checked'];
+		this.setData({ kabanList });
 	},
-
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
+	async onSubmit() {
+        const driverId = form.getFieldValue(this, 'diaoduDriver');
+		const result = await useRequest(() => fetchTaskReport(params));
+        if(result) {
+            wx.showToast({ title: '上报成功', icon: 'success' });
+            await delay(500);
+            wx.navigateBack({ delta: 1 });
+        }
+	},
 	onLoad(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage() {
-
+		
 	}
 })

@@ -1,3 +1,8 @@
 {
-	"usingComponents": {}
+	"disableScroll": true,
+	"usingComponents": {
+		"t-pull-down-refresh": "tdesign-miniprogram/pull-down-refresh/pull-down-refresh",
+		"t-tag": "tdesign-miniprogram/tag/tag",
+		"t-loading": "tdesign-miniprogram/loading/loading"		
+	}
 }

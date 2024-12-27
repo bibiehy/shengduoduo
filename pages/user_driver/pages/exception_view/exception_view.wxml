@@ -1,2 +1,55 @@
-<!--pages/user_driver/pages/exception_view/exception_view.wxml-->
-<text>pages/user_driver/pages/exception_view/exception_view.wxml</text>
+<view class="exception-report">
+    <navigation-bar title="查看商品异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <view class="mainbox">
+        <view class="innerbox">
+            <view class="reportbox">
+                <view class="tname">司机基本信息</view>
+                <view class="myFormViewbox">
+					<view class="formItem required"><text class="labelText">姓名</text>王德龙(18069881234)</view>
+                    <view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
+                    <view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
+				</view>
+            </view>
+            <view class="reportbox">
+                <view class="tname">粤西农批7号仓</view>
+                <view class="myFormViewbox">
+					<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
+                    <view class="formItem required"><text class="labelText">提货点负责人</text>王德龙(18069881234)</view>
+                    <view class="formItem required"><text class="labelText">详细地址</text>提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+                    <view class="formItem required"><text class="labelText">所属集货中心</text>集货中心名字</view>
+                    <view class="formItem required"><text class="labelText">货品类型</text>蔬菜类，预估 5000kg</view>
+                    <view class="formItem required"><text class="labelText">标签号</text>24001</view>
+                    <view class="myFormVertical myFormSelect">
+                        <view class="myLabel required">已损坏的入库卡位</view>
+                        <view class="kabanbox">
+                            <block wx:for="{{kabanList}}">
+                                <block wx:if="{{item['checked']}}">
+                                    <view class="itemcont active" bind:tap="onCardClick" data-item="{{item}}" wx:key="number">{{item['number']}}号<view class="itemicon"></view></view>
+                                </block>
+                                <block wx:else>
+                                    <view class="itemcont" bind:tap="onCardClick" data-item="{{item}}" wx:key="number">{{item['number']}}号<view class="itemicon"></view></view>
+                                </block>
+                            </block>
+                        </view>
+                    </view>
+                    <view style="margin-top: 20px;">
+                        <!-- <view class="subimgs" wx:if="{{item['img'].length > 0}}">
+							<block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
+								<image class="repimg" bind:tap="onViewImage" data-type="queren" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
+							</block>
+						</view> -->
+                        <view class="formItem"><text class="labelText">异常描述</text>异常描述异常描述异常描述异常描述异常描述异常描述</view>
+                    </view>
+				</view>
+            </view>
+            
+        </view>
+    </view>
+</view>
+
+<t-image-viewer
+	visible="{{visible}}"
+	showIndex="{{showIndex}}"
+	images="{{originFiles}}"
+	bind:close="onClose"
+/>

@@ -1,66 +1,27 @@
-// pages/user_driver/pages/exception_view/exception_view.js
+import useRequest from '../../../../utils/request';
+import { delay, createGuid, form } from '../../../../utils/tools';
+import { fetchExceptionView } from '../../../../service/user_driver';
+
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
-
+        kabanList: [{ checked: false, number: 1 }, { checked: false, number: 2 }, { checked: false, number: 3 }],
+        // 图片
+		visible: false,
+		originFiles: [],
+		showIndex: 0,
+    },
+    // 查看大图
+	onViewImage(e) {
+		const { qianshouList, querenList } = this.data;
+		const { type, id, index } = e.currentTarget.dataset;
+		const newList = type == 'qianshou' ? qianshouList : querenList;
+		const thisItem = newList.find((item) => item['id'] == id);
+		this.setData({ visible: true, originFiles: thisItem['img'], showIndex: index });
 	},
-
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
+	onClose() {
+		this.setData({ visible: false });
+	},
 	onLoad(options) {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide() {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload() {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh() {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom() {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage() {
-
+		
 	}
 })

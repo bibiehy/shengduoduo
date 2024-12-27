@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchAllFenjianyuan, fetchProfitList } from '../../../../service/user_storecenter';
+import { fetchProfitList } from '../../../../service/user_driver';
 
 // 获取 app 实例
 const app = getApp();

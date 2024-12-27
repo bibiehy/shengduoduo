@@ -1,5 +1,5 @@
 import useRequest from '../../../../utils/request';
-import { fetchDriverList } from '../../../../service/drivers';
+import { fetchHistoryList } from '../../../../service/user_driver';
 import { form, delay } from '../../../../utils/tools';
 
 // 获取 app 实例

@@ -3,7 +3,8 @@
     "styleIsolation": "apply-shared",
     "usingComponents": {
         "t-search": "tdesign-miniprogram/search/search",
-		"t-tag": "tdesign-miniprogram/tag/tag",
+        "t-tag": "tdesign-miniprogram/tag/tag",
+        "t-textarea": "tdesign-miniprogram/textarea/textarea",
 		"t-dialog": "tdesign-miniprogram/dialog/dialog"
     }
 }

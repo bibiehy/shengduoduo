@@ -14,7 +14,7 @@
 
 		<view class="main-process">
 			<view class="header">
-				<view class="title">当前送货概况</view>
+				<view class="title">当前进行中的任务概况</view>
                 <view class="extrabox">
                     <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
                 </view>
@@ -128,10 +128,27 @@
 	</view>
 </view>
 
-<!-- // 拒绝、确认送达 -->
+<!-- // 拒绝 -->
 <t-dialog
-	visible="{{showConfirm}}"
-	title="{{actionType == 'refused' ? '确定要拒绝嘛？' : '确定已送达了嘛？'}}"
+	visible="{{actionType == 'refused'}}"
+	title="确定要拒绝嘛？"
+	confirmBtn="{{confirmBtn}}"
+	cancelBtn="取消"
+	bind:confirm="onSureDialog"
+	bind:cancel="onCancelDialog"
+>
+	<view class="dialog-wrapper" slot="content">
+		<view class="diaitem">标签号：26002</view>
+		<view class="diaitem">提货点：粤西农批58号仓</view>
+        <view class="diaitem">负责人：王德龙(18069881234)</view>
+        <t-textarea t-class="clstextarea" bind:change="onChangeTextarea" value="{{textareaValue}}" placeholder="请输入拒绝原因" disableDefaultPadding="{{true}}" />
+	</view>
+</t-dialog>
+
+<!-- // 确认送达 -->
+<t-dialog
+    visible="{{actionType == 'completed'}}"
+	title="确定已送达了嘛？"
 	confirmBtn="{{confirmBtn}}"
 	cancelBtn="取消"
 	bind:confirm="onSureDialog"
