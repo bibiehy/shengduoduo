@@ -40,9 +40,8 @@
 					</view>
 					<view class="fahuoinfo">
 						<view class="psname">发货信息</view>
-                        <view class="pstime">2024-12-20 08:30:30</view>
-                        <view class="psinfo">货品类型：蔬菜类，预估 5000kg</view>
-                        <view class="psinfo">标签号：<text class="special">24001</text></view>
+                        <view class="psinfo">发车时间：2024-12-20 08:30:30</view>
+                        <view class="psinfo">到达时间：2024-12-20 08:30:30</view>
 						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
                     <view class="shouhuoinfo">

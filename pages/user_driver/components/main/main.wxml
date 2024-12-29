@@ -14,13 +14,13 @@
 
 		<view class="main-process">
 			<view class="header">
-				<view class="title">当前进行中的任务概况</view>
+				<view class="title">当前送货概况</view>
                 <view class="extrabox">
                     <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
                 </view>
 			</view>
             <view class="listitem">
-                <!-- <t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已接受</t-tag>
+                <!-- <t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
                 <t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
                 <t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
                 <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
@@ -32,26 +32,19 @@
 
 				<!-- <t-tag bind:tap="onShowDialog" data-type="refused" t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag> -->
 
-				<!-- <view class="popover" wx:if="4" bind:tap="onShowDialog" data-type="completed">
+				<!-- <view class="popover" wx:if="4" bind:tap="onShowDialog" data-item="{{item}}">
 					<t-tag variant="light" theme="primary" size="small">配送中</t-tag>
 					<t-tag t-class="listag" theme="danger">确认送达</t-tag>
                 </view> -->
 
 				<!-- <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
 
-                <view class="popover">
-					<t-tag variant="light" theme="warning" size="small">送货通知</t-tag>
-					<t-tag t-class="listag" theme="primary">接受</t-tag>
-					<t-tag t-class="listag" theme="danger">拒绝</t-tag>
-                </view>
+                <t-tag t-class="status" variant="light" theme="warning" size="small">送货通知</t-tag>
                 <view class="mainbox">
 					<view class="fahuoinfo">
                         <view class="psname">发货信息</view>
                         <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
                         <view class="psinfo">集货中心：集货中心名字</view>
-						<view class="psinfo">货品类型：蔬菜类</view>
-						<view class="psinfo">预估重量：5000kg</view>
-						<view class="psinfo">标签号：<text class="special">24001</text></view>
 						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
 					<view class="shouhuoinfo">
@@ -63,23 +56,17 @@
                 </view>
             </view>
 			<view class="listitem">
-				<view class="popover">
-					<t-tag variant="light" theme="warning" size="small">待发车</t-tag>
-					<t-tag t-class="listag" theme="danger">发车</t-tag>
-                </view>
+				<t-tag t-class="status" variant="light" theme="warning" size="small">送货通知</t-tag>
                 <view class="mainbox">
 					<view class="fahuoinfo">
                         <view class="psname">发货信息</view>
                         <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
                         <view class="psinfo">集货中心：集货中心名字</view>
-						<view class="psinfo">货品类型：蔬菜类</view>
-						<view class="psinfo">预估重量：5000kg</view>
-						<view class="psinfo">标签号：<text class="special">24001</text></view>
 						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
 					</view>
 					<view class="shouhuoinfo">
 						<view class="shname">收货地址</view>
-						<view class="psinfo">提货点：粤西农批7号仓</view>
+						<view class="psinfo">提货点：粤西农批8号仓</view>
 						<view class="psinfo">负责人：王德龙(18069881234)</view>
 						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
 					</view>
@@ -94,7 +81,7 @@
 				<view class="actips">注：确保货物已全部装车</view>
             </view> -->
             <view class="reportbox">
-                <view class="retips">突发状况？损坏或无法到达等<text>点此上报</text></view>
+                <view class="retips" bind:tap="onReport">突发状况？损坏或无法到达等，<text>点此上报。</text></view>
             </view>
 
 			<!-- <block wx:if="{{dataList.length <= 0}}">
@@ -128,26 +115,9 @@
 	</view>
 </view>
 
-<!-- // 拒绝 -->
-<t-dialog
-	visible="{{actionType == 'refused'}}"
-	title="确定要拒绝嘛？"
-	confirmBtn="{{confirmBtn}}"
-	cancelBtn="取消"
-	bind:confirm="onSureDialog"
-	bind:cancel="onCancelDialog"
->
-	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">标签号：26002</view>
-		<view class="diaitem">提货点：粤西农批58号仓</view>
-        <view class="diaitem">负责人：王德龙(18069881234)</view>
-        <t-textarea t-class="clstextarea" bind:change="onChangeTextarea" value="{{textareaValue}}" placeholder="请输入拒绝原因" disableDefaultPadding="{{true}}" />
-	</view>
-</t-dialog>
-
 <!-- // 确认送达 -->
 <t-dialog
-    visible="{{actionType == 'completed'}}"
+	visible="{{showConfirm}}"
 	title="确定已送达了嘛？"
 	confirmBtn="{{confirmBtn}}"
 	cancelBtn="取消"
@@ -155,7 +125,6 @@
 	bind:cancel="onCancelDialog"
 >
 	<view class="dialog-wrapper" slot="content">
-		<view class="diaitem">标签号：26002</view>
 		<view class="diaitem">提货点：粤西农批58号仓</view>
         <view class="diaitem">负责人：王德龙(18069881234)</view>
 	</view>
