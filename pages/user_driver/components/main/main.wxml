@@ -3,11 +3,11 @@
 	<view class="innerscroll">
         <view class="statistical-info">
             <view class="statitem item01">
-                <view class="statnum">{{weekSummary['total_profit']}}</view>
+                <view class="statnum">{{weekSummary}}</view>
                 <view class="statname">本周预估收益</view>
             </view>
             <view class="statitem item02">
-                <view class="statnum">{{monthSummary['total_profit']}}</view>
+                <view class="statnum">{{monthSummary}}</view>
                 <view class="statname">本月预估收益</view>
             </view>
         </view>
@@ -16,101 +16,48 @@
 			<view class="header">
 				<view class="title">当前送货概况</view>
                 <view class="extrabox">
-                    <view class="actbtn" bind:tap="getDailjTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
+                    <view class="actbtn" bind:tap="getCurrentTask"><t-icon name="refresh" size="14px" style="margin-right: 4px;" />刷新</view>
                 </view>
 			</view>
-            <view class="listitem">
-                <!-- <t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已收到</t-tag>
-                <t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
-                <t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
-                <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
-
-				<!-- <view class="popover" wx:if="3">
-					<t-tag variant="light" theme="warning" size="small">待发车</t-tag>
-					<t-tag t-class="listag" theme="danger">发车</t-tag>
-                </view> -->
-
-				<!-- <t-tag bind:tap="onShowDialog" data-type="refused" t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag> -->
-
-				<!-- <view class="popover" wx:if="4" bind:tap="onShowDialog" data-item="{{item}}">
-					<t-tag variant="light" theme="primary" size="small">配送中</t-tag>
-					<t-tag t-class="listag" theme="danger">确认送达</t-tag>
-                </view> -->
-
-				<!-- <t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag> -->
-
-                <t-tag t-class="status" variant="light" theme="warning" size="small">送货通知</t-tag>
-                <view class="mainbox">
-					<view class="fahuoinfo">
-                        <view class="psname">发货信息</view>
-                        <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
-                        <view class="psinfo">集货中心：集货中心名字</view>
-						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
-					</view>
-					<view class="shouhuoinfo">
-						<view class="shname">收货地址</view>
-						<view class="psinfo">提货点：粤西农批7号仓</view>
-						<view class="psinfo">负责人：王德龙(18069881234)</view>
-						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
-					</view>
-                </view>
-            </view>
-			<view class="listitem">
-				<t-tag t-class="status" variant="light" theme="warning" size="small">送货通知</t-tag>
-                <view class="mainbox">
-					<view class="fahuoinfo">
-                        <view class="psname">发货信息</view>
-                        <view class="psinfo">通知时间：2024-12-20 08:30:30</view>
-                        <view class="psinfo">集货中心：集货中心名字</view>
-						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
-					</view>
-					<view class="shouhuoinfo">
-						<view class="shname">收货地址</view>
-						<view class="psinfo">提货点：粤西农批8号仓</view>
-						<view class="psinfo">负责人：王德龙(18069881234)</view>
-						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
-					</view>
-                </view>
-			</view>
-            <view class="actionbox">
-                <t-button theme="primary" size="small">接受送货</t-button>
-                <t-button theme="danger" size="small" style="margin-left: 10px;">拒绝送货</t-button>
-            </view>
-			<!-- <view class="actionbox">
-                <t-button theme="danger" size="small">即刻发车</t-button>
-				<view class="actips">注：确保货物已全部装车</view>
-            </view> -->
-            <view class="reportbox">
-                <view class="retips" bind:tap="onReport">突发状况？损坏或无法到达等，<text>点此上报。</text></view>
-            </view>
-
-			<!-- <block wx:if="{{dataList.length <= 0}}">
+			<block wx:if="{{dataList.length <= 0}}">
 				<view class="nodata"><empty description="暂无通知消息" /></view>
 			</block>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
-					<t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="success" size="small">已接受</t-tag>
-					<t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
-					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:if="{{item['status'] == 2}}" variant="light" theme="warning" size="small">送货通知</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 3}}" variant="light" theme="danger" size="small">待发车</t-tag>
+					<view class="popover" wx:elif="{{item['status'] == 4}}" bind:tap="onShowDialog" data-item="{{item}}">
+						<t-tag variant="light" theme="primary" size="small">配送中</t-tag>
+						<t-tag t-class="listag" theme="danger">确认送达</t-tag>
+					</view>
 					<t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
-					<view class="mainbox" bind:tap="onDetail" data-item="{{item}}">
-						<view class="psname">{{item['name']}}</view>
-						<view class="pstime">{{item['created_at']}}</view>
-						<view class="psinfo">发货人：{{item['create_username']}} {{item['create_phone']}}</view>
-						<view class="psinfo">规格类型：{{item['goods_type_name']}}</view>
-						<view class="psinfo">总件数：{{item['total_number']}}件</view>
-						<view class="psinfo">提货点：{{item['point_name']}}</view>
-						<view class="psinfo">预计送达时间：{{item['estimate_time']}}</view>
-					</view>
-					<view class="psbtns" wx:if="{{(roleType == 5 || roleType == 6) && item['status'] == 2}}">
-						<t-tag bind:tap="onShowDialog" data-item="{{item}}" t-class="listag" variant="light-outline" shape="round" theme="danger">确认揽件</t-tag>
-					</view>
-					<view class="biaoqianhao">
-						<view class="bqhvalue">{{item['task_no']}}</view>
-						<view class="bqhlabel">标签号</view>
+					<view class="mainbox">
+						<view class="fahuoinfo">
+							<view class="psname">发货信息</view>
+							<view class="psinfo">通知时间：{{item['start_time']}}</view>
+							<view class="psinfo">集货中心：{{item['center_name']}}</view>
+							<view class="psinfo">入库卡位：<text class="special">{{item['card_list'].join('、')}}</text></view>
+						</view>
+						<view class="shouhuoinfo">
+							<view class="shname">收货地址</view>
+							<view class="psinfo">提货点：{{item['point_name']}}</view>
+							<view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
+							<view class="psinfo">{{item['address']}}</view>
+						</view>
 					</view>
 				</view>
-			</block> -->
+				<view wx:if="{{dataList[0]['status'] == 2}}" class="actionbox">
+					<t-button theme="primary" size="small">收到通知</t-button>
+					<view class="actips">注：会通知调度员已收到通知</view>
+				</view>
+				<view wx:elif="{{dataList[0]['status'] == 3}}" class="actionbox">
+					<t-button theme="danger" size="small">即刻发车</t-button>
+					<view class="actips">注：确保货物已全部装车</view>
+				</view>
+				<view class="reportbox">
+					<view class="retips" bind:tap="onReport">突发状况？损坏或无法到达等，<text>点此上报。</text></view>
+				</view>
+			</block>
 		</view>
 	</view>
 </view>

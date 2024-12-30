@@ -194,7 +194,7 @@ Component({
             const lastTime = actionItem['point_relation']['last_time'];
             
             if(!datetimeValue) {
-                wx.showToast({ title: '请选择送达时间1111', duration: 2500, icon: 'error' });
+                wx.showToast({ title: '请选择送达时间', duration: 2500, icon: 'error' });
 				return false;
             }
 

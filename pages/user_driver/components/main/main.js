@@ -1,6 +1,6 @@
 import useRequest from '../../../../utils/request';
 import { delay, form, getCurrentDateTime } from '../../../../utils/tools';
-import { fetchProfitPanel, fetchMainList, fetchSureLanjian } from '../../../../service/user_storecenter';
+import { fetchMainProfit, fetchCurrentTask, fetchAcceptTask, fetchFache, fetchTaskComplete } from '../../../../service/user_driver';
 
 // 获取 app 实例
 const app = getApp();
@@ -8,10 +8,9 @@ const app = getApp();
 Component({
 	data: {
 		userInfo: {},
-        // dataList: [],
-        detailInfo: {},
-		weekSummary: { total_num: 0, total_profit: 0 }, // 本周收益
-		monthSummary: { total_num: 0, total_profit: 0 }, // 本月收益
+		weekSummary: 0, // 本周收益
+		monthSummary: 0, // 本月收益
+		dataList: [],
         // 确认弹窗
 		showConfirm: false,
         confirmBtn: { content: '确定', variant: 'base', loading: false },
@@ -20,21 +19,21 @@ Component({
 	methods: {
 		// 面板收益统计
 		async getProfitPanel() {
-			const result = await useRequest(() => fetchProfitPanel());
+			const result = await useRequest(() => fetchMainProfit());
 			if(result) {
-				this.setData({ todaySummary: result['today_summary'], weekSummary: result['week_summary'], monthSummary: result['month_summary'] });
+				// item['address'] = JSON.parse(item['address']);
+				// item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、');
+				// region
+				this.setData({ weekSummary: result['profit'], monthSummary: result['month_profit'] });
 			}
 		},
 		// 获取当前任务
-        async getDailjTask(params) {
-			wx.showLoading();
-			await delay(500);
-			const result = await useRequest(() => fetchMainList(params));
-			wx.hideLoading();
+        async getCurrentTask() {
+			const result = await useRequest(() => fetchCurrentTask());
 			if(result) {
-				this.setData({ dataList: result['content'] });
+				this.setData({ dataList: result });
 			}
-        },
+		},
 		// 弹窗：确认送达
 		onShowDialog(e) {
 			const { item } = e.currentTarget.dataset;
@@ -61,8 +60,8 @@ Component({
     lifetimes: {
 		attached(options) { // 组件完全初始化完毕
 			this.setData({ userInfo: app['userInfo'] });
-			// this.getProfitPanel();
-			// this.getDailjTask();
+			this.getProfitPanel();
+			this.getCurrentTask();
         },
         detached() { // 组件实例被从页面节点树移除时执行
 

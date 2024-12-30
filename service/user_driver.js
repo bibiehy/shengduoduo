@@ -1,18 +1,18 @@
 /*************************** 主页 *************************/
+// 司机收益，本周和本月
+export const fetchMainProfit = (params) => ({ url: '/dispatcher/getTotalProfit', method: 'get' });
+
 // 获取当前进行中的任务
-export const fetchCurrentTask = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'get', loading: true, delay: 500, data: params });
+export const fetchCurrentTask = (params) => ({ url: '/driver/getNeedTransportList', method: 'get', loading: true, delay: 500, data: params });
 
-// 接受
-export const fetchAcceptTask = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'get', loading: true, delay: 500, data: params });
-
-// 拒绝
-export const fetchRefuseTask = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'get', loading: true, delay: 500, data: params });
+// 已收到通知
+export const fetchAcceptTask = (params) => ({ url: `/driver/accept/${params['id']}`, method: 'post', loading: true, delay: 500 });
 
 // 发车
-export const fetchFache = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'get', loading: true, delay: 500, data: params });
+export const fetchFache = (params) => ({ url: `/driver/depart/${params['id']}`, method: 'post', loading: true, delay: 500 });
 
 // 已送达
-export const fetchTaskComplete = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'get', loading: true, delay: 500, data: params });
+export const fetchTaskComplete = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'post', loading: true, delay: 500, data: params });
 
 /*************************** 异常上报 *************************/
 
@@ -28,9 +28,9 @@ const fetchExceptionView = (params) => ({ url: '/dispatcher/getCollectStaData', 
 /*************************** 历史记录 *************************/
 
 // 列表 params = { page, size, keyword, point_id }
-export const fetchHistoryList = (params) => ({ url: '/dispatcher/getDriverList', method: 'get', data: { size: 20, ...params } });
+export const fetchHistoryList = (params) => ({ url: '/driver/getHistoryList', method: 'get', data: { size: 20, ...params } });
 
 /*************************** 我的收益 *************************/
 
-// 列表 params = { page, size }
-export const fetchProfitList = (params) => ({ url: '/dispatcher/getDriverSummary', method: 'get', data: { size: 20, ...params } });
+// 列表 params = { page, size, beginTime, endTime, month }
+export const fetchProfitList = (params) => ({ url: '/driver/getTransportList', method: 'get', data: { size: 20, ...params } });
