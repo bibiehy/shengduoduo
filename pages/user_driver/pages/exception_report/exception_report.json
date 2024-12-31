@@ -3,6 +3,8 @@
 		"fixed-bottom-button": "/components/fixed-bottom-button/fixed-bottom-button",
         "form-input": "/components/form-input/form-input",
         "form-select": "/components/form-select/form-select",
+        "t-radio": "tdesign-miniprogram/radio/radio",
+        "t-radio-group": "tdesign-miniprogram/radio-group/radio-group",
         "form-upload": "/components/form-upload/form-upload",
         "form-textarea": "/components/form-textarea/form-textarea"
 	}

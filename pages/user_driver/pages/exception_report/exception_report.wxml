@@ -39,5 +39,18 @@
             
         </view>
     </view>
-    <fixed-bottom-button bind:callback="onSubmit" title="确认上报" />
+    <fixed-bottom-button>
+        <view class="report-actions">
+            <view class="radiobox">
+                <view class="radiolabel">能否准时送达：</view>
+                <t-radio-group default-value="1" borderless>
+                    <t-radio block="{{false}}" label="能" value="1" />
+                    <t-radio block="{{false}}" label="否" value="2" />
+                </t-radio-group>
+                <view class="radiotips">指能继续上路并保证最快送达</view>
+                <!-- <view class="radiotips">指车辆损坏严重无法继续上路</view> -->
+            </view>
+            <t-button theme="primary">确认提交</t-button>
+        </view>
+    </fixed-bottom-button>
 </view>

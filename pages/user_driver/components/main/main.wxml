@@ -36,23 +36,23 @@
 							<view class="psname">发货信息</view>
 							<view class="psinfo">通知时间：{{item['start_time']}}</view>
 							<view class="psinfo">集货中心：{{item['center_name']}}</view>
-							<view class="psinfo">入库卡位：<text class="special">{{item['card_list'].join('、')}}</text></view>
+							<view class="psinfo">入库卡位：<text class="special">{{item['cardStr']}}</text></view>
 						</view>
 						<view class="shouhuoinfo">
 							<view class="shname">收货地址</view>
 							<view class="psinfo">提货点：{{item['point_name']}}</view>
 							<view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
-							<view class="psinfo">{{item['address']}}</view>
+							<view class="psinfo">{{item['addressStr']}}</view>
 						</view>
 					</view>
 				</view>
 				<view wx:if="{{dataList[0]['status'] == 2}}" class="actionbox">
-					<t-button theme="primary" size="small">收到通知</t-button>
-					<view class="actips">注：会通知调度员已收到通知</view>
+					<t-button theme="primary" size="small" bind:tap="onReciveMessage">收到通知</t-button>
+					<view class="actips">注：会通知调度管理员您已收到通知</view>
 				</view>
 				<view wx:elif="{{dataList[0]['status'] == 3}}" class="actionbox">
-					<t-button theme="danger" size="small">即刻发车</t-button>
-					<view class="actips">注：确保货物已全部装车</view>
+					<t-button theme="danger" size="small" bind:tap="onFache">即刻发车</t-button>
+					<view class="actips">注：请确保货物已全部装车</view>
 				</view>
 				<view class="reportbox">
 					<view class="retips" bind:tap="onReport">突发状况？损坏或无法到达等，<text>点此上报。</text></view>

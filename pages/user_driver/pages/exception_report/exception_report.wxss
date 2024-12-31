@@ -16,3 +16,8 @@
 .exception-report .mainbox .reportbox .kabanbox .itemcont.active .itemicon { display:block; }
 .exception-report .mainbox .reportbox .kabanbox .itemcont.active.disabled { opacity:0.6; }
 
+.report-actions { display:flex; align-items:center; justify-content:space-between; }
+.report-actions .radiobox { position:relative; display:flex; align-items:center; }
+.report-actions .radiobox .radiolabel { font-size:15px; color:rgba(0, 0, 0, 0.65); }
+.report-actions .radiobox .radiotips { position:absolute; left:0; bottom:-14px; font-size:12px; line-height:12px; color:#ff8f1f; }
+
