@@ -34,7 +34,7 @@
 					<view class="mainbox">
 						<view class="fahuoinfo">
 							<view class="psname">发货信息</view>
-							<view class="psinfo">通知时间：{{item['start_time']}}</view>
+							<view class="psinfo">通知时间：{{item['notice_time']}}</view>
 							<view class="psinfo">集货中心：{{item['center_name']}}</view>
 							<view class="psinfo">入库卡位：<text class="special">{{item['cardStr']}}</text></view>
 						</view>
@@ -48,7 +48,7 @@
 				</view>
 				<view wx:if="{{dataList[0]['status'] == 2}}" class="actionbox">
 					<t-button theme="primary" size="small" bind:tap="onReciveMessage">收到通知</t-button>
-					<view class="actips">注：会通知调度管理员您已收到通知</view>
+					<view class="actips">注：会通知调度管理员您已收到</view>
 				</view>
 				<view wx:elif="{{dataList[0]['status'] == 3}}" class="actionbox">
 					<t-button theme="danger" size="small" bind:tap="onFache">即刻发车</t-button>
@@ -74,5 +74,6 @@
 	<view class="dialog-wrapper" slot="content">
 		<view class="diaitem">提货点：粤西农批58号仓</view>
         <view class="diaitem">负责人：王德龙(18069881234)</view>
+		<view class="diatips">点击确定待提货点负责人来确认收货。</view>
 	</view>
 </t-dialog>

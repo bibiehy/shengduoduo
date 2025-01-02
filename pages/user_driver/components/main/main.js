@@ -38,23 +38,22 @@ Component({
         },
         // 按钮操作
         async onReciveMessage(e) { // 已收到通知
-            const { dataList } = this.data;
-            const result = await useRequest(() => fetchReciveTask());
+			const { dataList } = this.data;
+			const ids = dataList.map((item) => item['id']);
+            const result = await useRequest(() => fetchReciveTask({ ids }));
             if(result) {
+				wx.showToast({ title: '已通知调度员', duration: 1500, icon: 'success' });
+				await delay(1500);
                 this.getCurrentTask();
             }
         },
         async onFache(e) { // 发车
-            const { dataList } = this.data;
-            const result = await useRequest(() => fetchFache());
+			const { dataList } = this.data;
+			const ids = dataList.map((item) => item['id']);
+            const result = await useRequest(() => fetchFache({ ids }));
             if(result) {
-                this.getCurrentTask();
-            }
-        },
-        async onSureSongda(e) { // 确认送达
-            const { dataList } = this.data;
-            const result = await useRequest(() => fetchTaskComplete());
-            if(result) {
+				wx.showToast({ title: '操作成功', duration: 1500, icon: 'success' });
+				await delay(1500);
                 this.getCurrentTask();
             }
         },
@@ -69,6 +68,8 @@ Component({
 			const { actionItem } = this.data;
 			const result = await useRequest(() => fetchTaskComplete({ id: actionItem['id'] }));
 			if(result) {
+				wx.showToast({ title: '已通知', duration: 1500, icon: 'success' });
+				await delay(1500);
 				this.setData({ showConfirm: false, actionItem: '' });
 				this.getCurrentTask();
 			}

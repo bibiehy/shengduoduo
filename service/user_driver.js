@@ -6,13 +6,13 @@ export const fetchMainProfit = (params) => ({ url: '/driver/getTotalProfit', met
 export const fetchCurrentTask = (params) => ({ url: '/driver/getNeedTransportList', method: 'get', loading: true, delay: 500, data: params });
 
 // 已收到通知
-export const fetchReciveTask = (params) => ({ url: `/driver/accept/${params['id']}`, method: 'post', loading: true, delay: 500 });
+export const fetchReciveTask = (params) => ({ url: `/driver/accept`, method: 'post', loading: true, delay: 500, data: params });
 
 // 发车
-export const fetchFache = (params) => ({ url: `/driver/depart/${params['id']}`, method: 'post', loading: true, delay: 500 });
+export const fetchFache = (params) => ({ url: `/driver/depart`, method: 'post', loading: true, delay: 500, data: params });
 
 // 已送达
-export const fetchTaskComplete = (params) => ({ url: '/dispatcher/getCollectStaData', method: 'post', loading: true, delay: 500, data: params });
+export const fetchTaskComplete = (params) => ({ url: `/driver/reachConfirm/${params['id']}`, method: 'post', loading: true, delay: 500 });
 
 /*************************** 异常上报 *************************/
 

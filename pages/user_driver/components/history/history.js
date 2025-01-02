@@ -1,4 +1,5 @@
 import useRequest from '../../../../utils/request';
+import { fetchPickupFromCenter } from '../../../../service/global';
 import { fetchHistoryList } from '../../../../service/user_driver';
 import { form, delay } from '../../../../utils/tools';
 
