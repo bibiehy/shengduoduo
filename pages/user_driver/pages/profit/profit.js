@@ -24,10 +24,20 @@ Page({
     },	
     // 列表
     async onAjaxList(thisPage, callback) { // 列表请求
-        const { dataList, upStatus } = this.data;
-        const result = await useRequest(() => fetchDriverList({ page: thisPage }));
+        const { dataList, upStatus, radioValue, monthValue, qujianValue } = this.data;
+        const params = { page: thisPage };
+        if(radioValue == 'month') {
+            params['month'] = monthValue;
+        }else if(radioValue == 'range') {
+            params['beginTime'] = qujianValue[0];
+            params['endTime'] = qujianValue[1];
+        }
+
+        const result = await useRequest(() => fetchProfitList(params));
         if(result) {
             // upStatus == 2 表示上拉加载，数据许合并
+            // const allJianshu = result['custom_data']['total_num'];
+            // const allProfit = result['custom_data']['total_profit'];
             const newList = result['content'];
             this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
 
@@ -77,6 +87,7 @@ Page({
 	onLoad(options) {
 		const userInfo = app.userInfo;
 		const currentMonth = getCurrentDateTime('YYYY-MM');
-		this.setData({ roleType: userInfo['role_type'], monthValue: currentMonth });
+        this.setData({ roleType: userInfo['role_type'], monthValue: currentMonth });
+        this.onAjaxList(1);
 	}
 })

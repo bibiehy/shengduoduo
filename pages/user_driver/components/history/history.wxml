@@ -7,7 +7,7 @@
                 <t-icon name="chevron-down-s" size="26px" color="rgba(0, 0, 0, 0.45)" />
             </view>
         </popup-select>
-		<t-search t-class="historysearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="标签号/发货人姓名/电话" />
+		<t-search t-class="historysearch" bind:change="onSearchChange" bind:submit="onSearch" clearable="{{false}}" placeholder="提货点负责人姓名/电话" />
 	</view>
     <t-pull-down-refresh
 		show-scrollbar="{{false}}"
@@ -24,20 +24,19 @@
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
 					<t-tag t-class="status" wx:if="{{item['status'] == 3}}" variant="light" theme="primary" size="small">待发车</t-tag>
-					<t-tag t-class="status" wx:elif="{{item['status'] == 88}}" variant="light" theme="danger" size="small">已拒绝</t-tag>
 					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
-					<t-tag t-class="status" wx:elif="{{item['busy'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
 					<view class="fahuoinfo">
 						<view class="psname">发货信息</view>
-                        <view class="psinfo">发车时间：2024-12-20 08:30:30</view>
-                        <view class="psinfo">到达时间：2024-12-20 08:30:30</view>
-						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+                        <view class="psinfo">发车时间：{{item['start_time']}}</view>
+                        <view class="psinfo">到达时间：{{item['reach_time']}}</view>
+                        <view class="psinfo">入库卡位：<text class="special">{{item['cardStr']}}</text></view>
 					</view>
                     <view class="shouhuoinfo">
 						<view class="shname">收货地址</view>
-						<view class="psinfo">提货点：粤西农批7号仓</view>
-						<view class="psinfo">负责人：王德龙(18069881234)</view>
-						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+                        <view class="psinfo">提货点：{{item['point_name']}}</view>
+                        <view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
+                        <view class="psinfo">{{item['addressStr']}}</view>
 					</view>
 				</view>
 			</block>

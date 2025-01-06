@@ -27,10 +27,16 @@ Component({
         // 列表
         async onAjaxList(thisPage, callback) { // 列表请求
             const { pointSelected, keyword, dataList, upStatus } = this.data;
-            const result = await useRequest(() => fetchDriverList({ page: thisPage, point_id: pointSelected['value'], keyword }));
+            const result = await useRequest(() => fetchHistoryList({ page: thisPage, point_id: pointSelected['value'], keyword }));
             if(result) {
                 // upStatus == 2 表示上拉加载，数据许合并
                 const newList = result['content'];
+                newList.forEach((item) => {
+                    item['address'] = JSON.parse(item['address']);
+                    item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、') + item['region'];
+                    item['cardStr'] = item['card_list'].join('、');
+                });
+
                 this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
 
                 if(Object.prototype.toString.call(callback) == '[object Function]') {
@@ -66,11 +72,12 @@ Component({
         },
         // 提货点
         async getPointByUserId() {
-            // const userId = app['userInfo']['id'];
-            // const result = await useRequest(() => fetchDriverList({ id: userId }));
-            // if(result) { // { label: '', value: '', content: '', disabled: false }
-            //     this.setData({ pointOptions: [] });
-            // }
+            const centerId = app['userInfo']['center_id'];
+			const result = await useRequest(() => fetchPickupFromCenter({ id: centerId }));
+			if(result) {
+				const newList = result.map((item) => ({ label: item['point_name'], value: item['point_id'] }));
+				this.setData({ pointOptions: newList });
+			}
         },
 		onSelectPoint(e) {
             const eventDetail = e.detail;
@@ -86,8 +93,8 @@ Component({
     },
     lifetimes: {
         attached() { // 组件完全初始化完毕
-            // this.onAjaxList(1);
-            // this.getPointByUserId();
+            this.onAjaxList(1);
+            this.getPointByUserId();
         },
         detached() { // 组件实例被从页面节点树移除时执行
 
