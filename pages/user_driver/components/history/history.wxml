@@ -25,7 +25,7 @@
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
 					<t-tag t-class="status" wx:if="{{item['status'] == 3}}" variant="light" theme="primary" size="small">待发车</t-tag>
 					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
-					<t-tag t-class="status" wx:elif="{{item['status'] == 5}}" variant="light" theme="success" size="small">已送达</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 5 || item['status'] == 6}}" variant="light" theme="success" size="small">已送达</t-tag>
 					<view class="fahuoinfo">
 						<view class="psname">发货信息</view>
                         <view class="psinfo">发车时间：{{item['start_time']}}</view>
@@ -37,6 +37,7 @@
                         <view class="psinfo">提货点：{{item['point_name']}}</view>
                         <view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
                         <view class="psinfo">{{item['addressStr']}}</view>
+						<t-tag t-class="psbtn" theme="danger">查看异常</t-tag>
 					</view>
 				</view>
 			</block>

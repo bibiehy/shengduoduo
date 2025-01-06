@@ -2,9 +2,6 @@ import useRequest from '../../../../utils/request';
 import { delay, getCurrentDateTime } from '../../../../utils/tools';
 import { fetchProfitList } from '../../../../service/user_driver';
 
-// 获取 app 实例
-const app = getApp();
-
 Page({
 	data: {
         currentPage: 1,
@@ -36,10 +33,15 @@ Page({
         const result = await useRequest(() => fetchProfitList(params));
         if(result) {
             // upStatus == 2 表示上拉加载，数据许合并
-            // const allJianshu = result['custom_data']['total_num'];
-            // const allProfit = result['custom_data']['total_profit'];
+            const allCishu = result['custom_data']['total_num'];
+            const allProfit = result['custom_data']['profit'];
             const newList = result['content'];
-            this.setData({ currentPage: thisPage, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
+			newList.forEach((item) => {
+				item['address'] = JSON.parse(item['address']);
+				item['addressStr'] = (item['address'].map((adItem) => adItem['label'])).join('、') + item['region'];
+				item['cardStr'] = item['card_list'].join('、');
+			});
+            this.setData({ currentPage: thisPage, allCishu, allProfit, dataList: upStatus == 2 ? [].concat(dataList, newList) : newList });
 
             if(Object.prototype.toString.call(callback) == '[object Function]') {
                 callback(newList);
@@ -85,9 +87,8 @@ Page({
 		this.onAjaxList(1);
 	},
 	onLoad(options) {
-		const userInfo = app.userInfo;
 		const currentMonth = getCurrentDateTime('YYYY-MM');
-        this.setData({ roleType: userInfo['role_type'], monthValue: currentMonth });
+        this.setData({ monthValue: currentMonth });
         this.onAjaxList(1);
 	}
 })

@@ -12,8 +12,9 @@
 .page-scroll .listitem .psinfo { font-size:15px; color:rgba(0, 0, 0, 0.65); margin-top:4px; }
 .page-scroll .listitem .psinfo .special { color:#1677ff; }
 .page-scroll .listitem .fahuoinfo { padding:4px 8px; }
-.page-scroll .listitem .shouhuoinfo { background-color:#f9f9f9; padding:8px 12px; margin-top:5px; }
+.page-scroll .listitem .shouhuoinfo { position:relative; background-color:#f9f9f9; padding:8px 12px; margin-top:5px; }
 .page-scroll .listitem .shouhuoinfo .shname { font-size:15px; font-weight:600; color:rgba(0, 0, 0, 0.65); }
+.page-scroll .listitem .shouhuoinfo .psbtn { position:absolute; right:8px; top:8px; }
 
 .page-scroll .listitem .psbtns { position:relative; display:flex; padding-top:8px; }
 .page-scroll .listitem .psbtns .listag { display:flex; justify-content:center; min-width:70px !important; margin-right:16px; }

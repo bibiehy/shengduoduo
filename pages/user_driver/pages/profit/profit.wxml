@@ -34,21 +34,21 @@
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
                     <view class="moneybox">
-						<view class="price"><text class="CNY">￥</text>{{item['total_profit']}}</view>
-						<view class="pricetxt">{{item['status'] == 5 ? '本次收益' : '预估收益'}}</view>
+						<view class="price"><text class="CNY">￥</text>{{item['profit']}}</view>
+						<view class="pricetxt">{{item['status'] == 6 ? '本次收益' : '预估收益'}}</view>
 						<!-- <t-tag t-class="listag" variant="light-outline" shape="round" theme="primary" size="small">收益详情</t-tag> -->
 					</view>
 					<view class="fahuoinfo">
 						<view class="psname">发货信息</view>
-                        <view class="psinfo">发车时间：2024-12-20 08:30:30</view>
-                        <view class="psinfo">到达时间：2024-12-20 08:30:30</view>
-						<view class="psinfo">入库卡位：<text class="special">1、2、3、4、5、6、7、8、9、10</text></view>
+						<view class="psinfo">发车时间：{{item['start_time']}}</view>
+                        <view class="psinfo">到达时间：{{item['reach_time']}}</view>
+                        <view class="psinfo">入库卡位：<text class="special">{{item['cardStr']}}</text></view>
 					</view>
                     <view class="shouhuoinfo">
 						<view class="shname">收货地址</view>
-						<view class="psinfo">提货点：粤西农批7号仓</view>
-						<view class="psinfo">负责人：王德龙(18069881234)</view>
-						<view class="psinfo">提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
+						<view class="psinfo">提货点：{{item['point_name']}}</view>
+                        <view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
+                        <view class="psinfo">{{item['addressStr']}}</view>
 					</view>
 				</view>
 			</block>

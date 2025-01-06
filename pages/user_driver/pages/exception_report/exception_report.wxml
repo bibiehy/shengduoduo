@@ -1,5 +1,5 @@
 <view class="exception-report">
-    <navigation-bar title="商品异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
+    <navigation-bar title="司机异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
             <view class="reportbox">
@@ -31,8 +31,8 @@
                         </view>
                     </view>
                     <view style="margin-top: 20px;">
-                        <form-upload class="FORM_UPLOAD" label="图片上传" name="img" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
-                        <form-textarea class="FORM_TEXTAREA" label="异常描述" name="desc" placeholder="请输入异常描述信息" required="{{true}}" />
+                        <form-upload class="FORM_UPLOAD" label="图片上传" name="img" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{false}}" />
+                        <form-textarea class="FORM_TEXTAREA" label="异常描述" name="desc" placeholder="请输入异常描述信息" required="{{false}}" />
                     </view>
 				</view>
             </view>
