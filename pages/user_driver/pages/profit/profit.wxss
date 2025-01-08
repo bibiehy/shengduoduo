@@ -23,7 +23,7 @@
 .page-scroll .listitem .moneybox { position:absolute; right:15px; top:60px; text-align:center; }
 .page-scroll .listitem .moneybox .price { display:flex; align-items:flex-end; color:#ff3b30; font-size:20px; font-weight:600; }
 .page-scroll .listitem .moneybox .price .CNY { display:block; font-size:12px; padding-bottom:2px; }
-.page-scroll .listitem .moneybox .pricetxt { font-size:12px; margin-bottom:4px; }
+.page-scroll .listitem .moneybox .pricetxt { font-size:12px; padding-left:14px; margin-bottom:4px; }
 .page-scroll .listitem .moneybox .listag { display:flex; justify-content:center; min-width:60px !important; margin:0 auto; }
 .page-scroll .nodata { height:500px; }
 

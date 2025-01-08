@@ -2,16 +2,20 @@
     <navigation-bar title="司机异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
-            <view class="reportbox">
-                <view class="tname">司机基本信息</view>
-                <view class="myFormViewbox">
-					<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
-					<view class="formItem required"><text class="labelText">姓名</text>王德龙(18069881234)</view>
-                    <view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
-                    <view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
-                    <view class="formItem required"><text class="labelText">所属集货中心</text>集货中心名字</view>
-				</view>
-            </view>
+            <view class="myFormViewbox">
+				<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
+				<view class="formItem required"><text class="labelText">司机姓名</text>王德龙(18069881234)</view>
+				<view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
+				<view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
+				<view class="formItem required"><text class="labelText">所属集货中心</text>集货中心名字</view>
+			</view>
+
+			<view class="tabbox">
+				<view class="tabname active">还能继续配送</view>
+				<view class="tabname">无法继续配送</view>
+				<view class="line"></view>
+			</view>
+
             <view class="reportbox">
                 <view class="tname">粤西农批7号仓</view>
                 <view class="myFormViewbox">
@@ -31,8 +35,8 @@
                         </view>
                     </view>
                     <view style="margin-top: 20px;">
-                        <form-upload class="FORM_UPLOAD" label="图片上传" name="img" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{false}}" />
-                        <form-textarea class="FORM_TEXTAREA" label="异常描述" name="desc" placeholder="请输入异常描述信息" required="{{false}}" />
+                        <form-upload class="FORM_UPLOAD" label="图片上传" name="img" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
+                        <form-textarea class="FORM_TEXTAREA" label="异常描述" name="desc" placeholder="请输入异常描述信息" required="{{true}}" />
                     </view>
 				</view>
             </view>

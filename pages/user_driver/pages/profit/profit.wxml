@@ -2,8 +2,8 @@
     <navigation-bar title="我的收益" placement="left" showBack="{{true}}" background="#fff" boxShadow="none"></navigation-bar>
 	<view class="profit-search">
 		<view class="tongji">
-			<view class="countnum">送货次数总计：{{allCishu}}</view>
-			<view class="countnum">预估收益总计：￥{{allProfit}}</view>
+			<view class="countnum">送货总次数：{{allCishu}}</view>
+			<view class="countnum">预估总收益：￥{{allProfit}}</view>
 		</view>
 		<view class="formsearch">
 			<view class="filter">

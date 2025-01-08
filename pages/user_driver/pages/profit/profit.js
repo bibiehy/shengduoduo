@@ -70,7 +70,11 @@ Page({
 	// 筛选条件
 	onRadioChange(e) {
 		const { value } = e.detail;
-		this.setData({ radioValue: value });
+		if(value == 'month') {
+			this.setData({ radioValue: value, monthValue: '' });
+		}else if(value == 'range') {
+			this.setData({ radioValue: value, qujianValue: [] });
+		}
 	},
 	onMonth(e) { // 月份选择的回调
 		const { value } = e.detail;
