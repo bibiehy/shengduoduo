@@ -74,8 +74,10 @@ Component({
 				this.getCurrentTask();
 			}
 		},
-        onReport() { // 异常上报
-			wx.navigateTo({ url: `/pages/user_driver/pages/exception_report/exception_report` });
+		onReport() { // 异常上报
+			const { dataList } = this.data;
+			const jsonStr = JSON.stringify(dataList);
+			wx.navigateTo({ url: `/pages/user_driver/pages/exception_report/exception_report?jsonStr=${jsonStr}` });
 		}
 	},
 	// 自定义组件内的生命周期

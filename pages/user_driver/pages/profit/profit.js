@@ -26,8 +26,8 @@ Page({
         if(radioValue == 'month') {
             params['month'] = monthValue;
         }else if(radioValue == 'range') {
-            params['beginTime'] = qujianValue[0];
-            params['endTime'] = qujianValue[1];
+            params['begin_time'] = qujianValue[0];
+            params['end_time'] = qujianValue[1];
         }
 
         const result = await useRequest(() => fetchProfitList(params));

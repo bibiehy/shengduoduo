@@ -55,7 +55,7 @@
 					<view class="actips">注：请确保货物已全部装车</view>
 				</view>
 				<view class="reportbox">
-					<view class="retips" bind:tap="onReport">突发状况？损坏或无法到达等，<text>点此上报。</text></view>
+					<view class="retips" bind:tap="onReport">突发状况？货物部分或全部损坏时，<text>点此上报。</text></view>
 				</view>
 			</block>
 		</view>

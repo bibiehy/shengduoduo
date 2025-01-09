@@ -33,6 +33,9 @@
 			<view wx:if="{{dataList.length <= 0}}" class="nodata"><empty /></view>
 			<block wx:else>
 				<view class="listitem" wx:for="{{dataList}}" wx:key="id">
+					<t-tag t-class="status" wx:if="{{item['status'] == 3}}" variant="light" theme="primary" size="small">待发车</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 4}}" variant="light" theme="primary" size="small">配送中</t-tag>
+					<t-tag t-class="status" wx:elif="{{item['status'] == 5 || item['status'] == 6}}" variant="light" theme="success" size="small">已送达</t-tag>
                     <view class="moneybox">
 						<view class="price"><text class="CNY">￥</text>{{item['profit']}}</view>
 						<view class="pricetxt">{{item['status'] == 6 ? '本次收益' : '预估收益'}}</view>
@@ -41,7 +44,7 @@
 					<view class="fahuoinfo">
 						<view class="psname">发货信息</view>
 						<view class="psinfo">发车时间：{{item['start_time']}}</view>
-                        <view class="psinfo">到达时间：{{item['reach_time']}}</view>
+                        <view class="psinfo">到达时间：{{item['reach_time'] || '-/-'}}</view>
                         <view class="psinfo">入库卡位：<text class="special">{{item['cardStr']}}</text></view>
 					</view>
                     <view class="shouhuoinfo">
