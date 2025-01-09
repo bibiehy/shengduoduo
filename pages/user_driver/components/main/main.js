@@ -74,7 +74,7 @@ Component({
 				this.getCurrentTask();
 			}
 		},
-		onReport() { // 异常上报
+        onReport() { // 异常上报
 			wx.navigateTo({ url: `/pages/user_driver/pages/exception_report/exception_report` });
 		}
 	},

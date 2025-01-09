@@ -6,6 +6,7 @@
                 <view class="tname">司机基本信息</view>
                 <view class="myFormViewbox">
 					<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
+                    <view class="formItem required"><text class="labelText">上报时间</text>2024-12-21 08:30:30</view>
 					<view class="formItem required"><text class="labelText">姓名</text>王德龙(18069881234)</view>
                     <view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
                     <view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
@@ -15,7 +16,7 @@
             <view class="reportbox">
                 <view class="tname">粤西农批7号仓</view>
                 <view class="myFormViewbox">
-					<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
+                    <view class="formItem required">入库卡位：<text class="special">1、2/3</text></view>
                     <view class="formItem required"><text class="labelText">提货点负责人</text>王德龙(18069881234)</view>
                     <view class="formItem required"><text class="labelText">详细地址</text>提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
                     <view class="myFormVertical myFormSelect">
@@ -31,17 +32,17 @@
                             </block>
                         </view>
                     </view>
-                    <view style="margin-top: 20px;">
+                    <view class="myFormVertical myFormSelect">
+                        <view class="myLabel required">异常图片</view>
                         <!-- <view class="subimgs" wx:if="{{item['img'].length > 0}}">
-							<block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
-								<image class="repimg" bind:tap="onViewImage" data-type="queren" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
-							</block>
-						</view> -->
-                        <view class="formItem"><text class="labelText">异常描述</text>异常描述异常描述异常描述异常描述异常描述异常描述</view>
+                            <block wx:for="{{item['img']}}" wx:for-item="subItem" wx:for-index="subIndex">
+                                <image class="repimg" bind:tap="onViewImage" data-type="queren" data-id="{{item['id']}}" data-index="{{subIndex}}" mode="aspectFill" src="{{subItem}}" />
+                            </block>
+                        </view> -->
                     </view>
+                    <view class="formItem"><text class="labelText">异常描述</text>异常描述异常描述异常描述异常描述异常描述异常描述</view>
 				</view>
             </view>
-            
         </view>
     </view>
 </view>

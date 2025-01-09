@@ -16,3 +16,6 @@
 .exception-report .mainbox .reportbox .kabanbox .itemcont.active .itemicon { display:block; }
 .exception-report .mainbox .reportbox .kabanbox .itemcont.active.disabled { opacity:0.6; }
 
+.exception-report .mainbox .reportbox .subimgs { display:flex; flex-wrap:wrap; padding:2px 0; }
+.exception-report .mainbox .reportbox .subimgs .repimg { display:block; width:72px; height:72px; border:solid 1px #e8e8e8; border-radius:3px; padding:2px; margin-right:5px; }
+
