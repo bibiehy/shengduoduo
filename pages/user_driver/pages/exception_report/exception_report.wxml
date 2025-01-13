@@ -11,45 +11,55 @@
 			</view>
             <view class="reportbox">
                 <view class="tabbox">
-                    <view class="tabname active">继续配送</view>
-                    <view class="tabname">终止配送</view>
+                    <view class="{{tabValue == 1 ? 'tabname active' : 'tabname'}}" bind:tap="onTabsClick" data-value="1">继续配送</view>
+                    <view class="{{tabValue == 2 ? 'tabname active' : 'tabname'}}" bind:tap="onTabsClick" data-value="2">终止配送</view>
                     <view class="line"></view>
                 </view>
-				<block wx:for="{{dataList}}" wx:key="id">
-					<block wx:if="{{item['disabled']}}">
-						<view class="forminfo">
-							<view class="formhead">
-								<view class="tihuodian">{{item['label']}}</view>
-								<block wx:if="{{dataList.length >= 2}}">
-									<t-tag bind:tap="onDelete" data-item="{{item}}" variant="outline" theme="danger">删除</t-tag>
-								</block>
-							</view>
-							<view class="myFormViewbox">
-								<view class="myFormVertical myFormSelect">
-									<view class="myLabel required">设置已损坏的入库卡位</view>
-									<view class="kabanbox">
-										<block wx:for="{{item['kabanList']}}" wx:for-item="subItem">
-											<block wx:if="{{subItem['checked']}}">
-												<view class="itemcont active" bind:tap="onCardClick" data-id="{{item['id']}}" data-item="{{subItem}}" wx:key="number">{{subItem['number']}}号<view class="itemicon"></view></view>
-											</block>
-											<block wx:else>
-												<view class="itemcont" bind:tap="onCardClick" data-id="{{item['id']}}" data-item="{{subItem}}" wx:key="number">{{subItem['number']}}号<view class="itemicon"></view></view>
-											</block>
-										</block>
-									</view>
-								</view>
-								<form-upload class="FORM_UPLOAD" label="图片上传" name="img__{{item['id']}}" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
-								<form-textarea class="FORM_TEXTAREA" label="异常描述" name="remark__{{item['id']}}" placeholder="请输入异常描述信息" required="{{true}}" />
-							</view>
-						</view>
-					</block>
-				</block>				
-				<block wx:if="{{dataList.length >= 2}}">
-					<view class="addbtn" bind:tap="onShowTihuodian">
-						<t-icon name="add" />
-						<text>添加提货点</text>
-					</view>
-				</block>
+                <block wx:if="{{tabValue == 2}}">
+                    <view class="forminfo">
+                        <view class="myFormViewbox">
+                            <form-upload class="FORM_UPLOAD" label="图片上传" name="img" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
+                            <form-textarea class="FORM_TEXTAREA" label="异常描述" name="remark" placeholder="请输入异常描述信息" required="{{true}}" />
+                        </view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <block wx:for="{{dataList}}" wx:key="id">
+                        <block wx:if="{{item['disabled']}}">
+                            <view class="forminfo">
+                                <view class="formhead">
+                                    <view class="tihuodian">{{item['label']}}</view>
+                                    <block wx:if="{{dataList.length >= 2}}">
+                                        <t-tag bind:tap="onDelete" data-item="{{item}}" variant="outline" theme="danger">删除</t-tag>
+                                    </block>
+                                </view>
+                                <view class="myFormViewbox">
+                                    <view class="myFormVertical myFormSelect">
+                                        <view class="myLabel required">设置已损坏的入库卡位</view>
+                                        <view class="kabanbox">
+                                            <block wx:for="{{item['kabanList']}}" wx:for-item="subItem">
+                                                <block wx:if="{{subItem['checked']}}">
+                                                    <view class="itemcont active" bind:tap="onCardClick" data-id="{{item['id']}}" data-item="{{subItem}}" wx:key="number">{{subItem['number']}}号<view class="itemicon"></view></view>
+                                                </block>
+                                                <block wx:else>
+                                                    <view class="itemcont" bind:tap="onCardClick" data-id="{{item['id']}}" data-item="{{subItem}}" wx:key="number">{{subItem['number']}}号<view class="itemicon"></view></view>
+                                                </block>
+                                            </block>
+                                        </view>
+                                    </view>
+                                    <form-upload class="FORM_UPLOAD" label="图片上传" name="img__{{item['id']}}" limit="{{10240}}" max="{{4}}" remark="注：请上传10M以内的图片(.jpg或.png)" placeholder="请上传异常规格图片" required="{{true}}" />
+                                    <form-textarea class="FORM_TEXTAREA" label="异常描述" name="remark__{{item['id']}}" placeholder="请输入异常描述信息" required="{{true}}" />
+                                </view>
+                            </view>
+                        </block>
+                    </block>
+                    <block wx:if="{{dataList.length >= 2}}">
+                        <view class="addbtn" bind:tap="onShowTihuodian">
+                            <t-icon name="add" />
+                            <text>添加提货点</text>
+                        </view>
+                    </block>
+                </block>				
             </view>
         </view>
     </view>

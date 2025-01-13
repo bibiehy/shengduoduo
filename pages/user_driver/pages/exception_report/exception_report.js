@@ -7,7 +7,8 @@ let actionSheetHandler = '';
 
 Page({
 	data: {
-		dataList: [],
+        dataList: [], // true 表示已添加要上报的提货点
+        tabValue: 1, // 1: 继续配置; 2: 终止配送;
 	},
 	// 添加要上报的提货点
 	onShowTihuodian() {
@@ -36,7 +37,12 @@ Page({
 		dataList[thisIndex]['disabled'] = false;
 		dataList[thisIndex]['color'] = 'rgba(0, 0, 0, 0.85)';
 		this.setData({ dataList });
-	},
+    },
+    // Tabs
+    onTabsClick(e) {
+        const tabValue = e.currentTarget.dataset.value;
+        this.setData({ tabValue });
+    },
 	// 点击卡板
 	onCardClick(e) {
 		const { dataList } = this.data;
@@ -47,7 +53,26 @@ Page({
 		const kabanIndex = kabanList.findIndex((item) => item['number'] == subItem['number']);
 		kabanList[kabanIndex]['checked'] = !subItem['checked'];
 		this.setData({ dataList });
-	},
+    },
+    // 提交
+    getParams_1() { // 继续配送
+        const formValues = form.validateFields(this);
+        if(formValues) {
+            const { dataList } = this.data;
+            const params = {};
+            dataList.forEach((item) => {
+                if(item['disabled']) {
+                    const cardList = item['kabanList'].filter((kabanItem) => kabanItem['checked']);
+                    const cardNumber = cardList.map((cardItem) => cardItem['number']);
+                    params.push({ id: item['id'], point_id: item['pointId'], card_list: cardNumber, img: formValues[`img__${item['id']}`], remark: formValues[`remark__${item['id']}`] });
+                }
+            });
+
+            return params;
+        } 
+        
+        return false;
+    },
 	async onSubmit() {
         // const driverId = form.getFieldValue(this, 'diaoduDriver');
 		// const result = await useRequest(() => fetchTaskReport(params));
@@ -67,7 +92,7 @@ Page({
 				pointId: item['point_id'],
 				kabanList,
 				label: item['point_name'], // 用于添加提货点
-				disabled: index == 0, // 用于添加提货点
+				disabled: index == 0, // 用于添加提货点，true 表示已添加要上报的提货点
 				color: index == 0 ? 'rgba(0, 0, 0, 0.45)' : 'rgba(0, 0, 0, 0.85)',
 			};
 
