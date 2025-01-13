@@ -59,28 +59,47 @@ Page({
         const formValues = form.validateFields(this);
         if(formValues) {
             const { dataList } = this.data;
-            const params = {};
+            const paramList = [];
             dataList.forEach((item) => {
                 if(item['disabled']) {
                     const cardList = item['kabanList'].filter((kabanItem) => kabanItem['checked']);
                     const cardNumber = cardList.map((cardItem) => cardItem['number']);
-                    params.push({ id: item['id'], point_id: item['pointId'], card_list: cardNumber, img: formValues[`img__${item['id']}`], remark: formValues[`remark__${item['id']}`] });
+                    paramList.push({ id: item['id'], point_id: item['pointId'], card_list: cardNumber, img: formValues[`img__${item['id']}`], remark: formValues[`remark__${item['id']}`] });
                 }
-            });
+			});
 
-            return params;
+            return paramList;
         } 
         
         return false;
-    },
+	},
+	getParams_2() { // 终止配送
+		const formValues = form.validateFields(this);
+        if(formValues) {
+            const { dataList } = this.data;
+            const paramList = [];
+            dataList.forEach((item) => {
+				const cardNumber = item['kabanList'].map((kabanItem) => kabanItem['number']);
+				paramList.push({ id: item['id'], point_id: item['pointId'], card_list: cardNumber, img: formValues['img'], remark: formValues['remark'] });
+			});
+
+            return paramList;
+        } 
+        
+        return false;
+	},
 	async onSubmit() {
-        // const driverId = form.getFieldValue(this, 'diaoduDriver');
-		// const result = await useRequest(() => fetchTaskReport(params));
-        // if(result) {
-        //     wx.showToast({ title: '上报成功', icon: 'success' });
-        //     await delay(500);
-        //     wx.navigateBack({ delta: 1 });
-        // }
+		const { tabValue } = this.data;
+		const paramList = tabValue == 1 ? this.getParams_1() : this.getParams_2();
+		if(paramList) {
+			const params = { type: tabValue, report_info: paramList };
+			const result = await useRequest(() => fetchExceptionReport(params));
+			if(result) {
+				wx.showToast({ title: '上报成功', icon: 'success' });
+				await delay(500);
+				wx.navigateBack({ delta: 1 });
+			}
+		}        
 	},
 	onLoad({ jsonStr }) {
 		const dataList = JSON.parse(jsonStr);

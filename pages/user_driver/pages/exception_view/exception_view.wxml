@@ -2,25 +2,23 @@
     <navigation-bar title="查看商品异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
-            <view class="reportbox">
-                <view class="tname">司机基本信息</view>
-                <view class="myFormViewbox">
-					<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
-                    <view class="formItem required"><text class="labelText">上报时间</text>2024-12-21 08:30:30</view>
-					<view class="formItem required"><text class="labelText">姓名</text>王德龙(18069881234)</view>
-                    <view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
-                    <view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
-                    <view class="formItem required"><text class="labelText">所属集货中心</text>集货中心名字</view>
-				</view>
-            </view>
+            <view class="myFormViewbox">
+				<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
+				<view class="formItem required"><text class="labelText">上报时间</text>2024-12-21 08:30:30</view>
+				<view class="formItem required"><text class="labelText">上报人</text>王德龙(18069881234)</view>
+				<view class="formItem required"><text class="labelText">车牌号</text>浙A12345</view>
+				<view class="formItem required"><text class="labelText">车辆类型</text>大型货车，共18个卡板位</view>
+				<view class="formItem required"><text class="labelText">所属集货中心</text>集货中心名字</view>
+			</view>
+			<view class="reportitle">异常上报信息</view>
             <view class="reportbox">
                 <view class="tname">粤西农批7号仓</view>
                 <view class="myFormViewbox">
-                    <view class="formItem required">入库卡位：<text class="special">1、2/3</text></view>
+					<view class="formItem required"><text class="labelText">入库卡位</text>1、2、3</view>
                     <view class="formItem required"><text class="labelText">提货点负责人</text>王德龙(18069881234)</view>
                     <view class="formItem required"><text class="labelText">详细地址</text>提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址提货点详细地址</view>
                     <view class="myFormVertical myFormSelect">
-                        <view class="myLabel required">已损坏的入库卡位</view>
+                        <view class="myLabel required">上报的入库卡位</view>
                         <view class="kabanbox">
                             <block wx:for="{{kabanList}}">
                                 <block wx:if="{{item['checked']}}">

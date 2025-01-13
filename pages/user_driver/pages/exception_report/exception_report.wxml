@@ -2,6 +2,7 @@
     <navigation-bar title="司机异常上报" placement="left" showBack="{{true}}" background="#fff"></navigation-bar>
     <view class="mainbox">
         <view class="innerbox">
+			<view class="reportips">注：只能上报一次，请谨慎操作。</view>
             <view class="myFormViewbox">
 				<view class="formItem required"><text class="labelText">发车时间</text>2024-12-20 08:30:30</view>
 				<view class="formItem required"><text class="labelText">司机姓名</text>王德龙(18069881234)</view>

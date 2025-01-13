@@ -21,7 +21,10 @@ Page({
 	onClose() {
 		this.setData({ visible: false });
 	},
-	onLoad(options) {
-		
+	async onLoad(options) {
+		const result = await useRequest(() => fetchExceptionView({ id: options['id'] }));
+		if(result) {
+			
+		}
 	}
 })

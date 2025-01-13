@@ -37,7 +37,7 @@
                         <view class="psinfo">提货点：{{item['point_name']}}</view>
                         <view class="psinfo">负责人：{{item['head_user']}}({{item['head_phone']}})</view>
                         <view class="psinfo">{{item['addressStr']}}</view>
-						<t-tag wx:if="{{item['is_exception'] == 1}}" t-class="psbtn" theme="danger">查看异常</t-tag>
+						<t-tag wx:if="{{item['is_exception'] == 1}}" bind:tap="onViewReport" data-id="{{item['id']}}" t-class="psbtn" theme="danger">查看异常</t-tag>
 					</view>
 				</view>
 			</block>

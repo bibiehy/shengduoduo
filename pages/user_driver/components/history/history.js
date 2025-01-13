@@ -87,6 +87,11 @@ Component({
             this.setData({ pointSelected: eventDetail });
             this.onAjaxList(1);
 		},
+		// 查看异常
+		onViewReport(e) {
+			const thisId = e.currentTarget.dataset.id;
+			wx.navigateTo({ url: `/pages/user_driver/pages/exception_view/exception_view?id=${thisId}` });
+		}
     },
     lifetimes: {
         attached() { // 组件完全初始化完毕
